@@ -1,5 +1,7 @@
 {
     "description": "A comprehensive payment processing and business management API that enables seamless integration of cryptocurrency and traditional payment methods.",
+    "name": "devdraftengineer/php",
+    "version": "1.0.0",
     "keywords": [
         "Devdraft",
         "php",
