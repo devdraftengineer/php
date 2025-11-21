@@ -77,6 +77,35 @@ try {
 
 ```
 
+
+## Examples
+
+This SDK includes comprehensive examples demonstrating common use cases. Each example includes simple usage, advanced workflows, and error handling scenarios.
+
+### Quick Start Example
+
+```php
+<?php
+// PHP quick start example
+// See examples directory for full implementation
+```
+
+### Available Example Files
+
+- [Health Examples](./examples/HealthCheckExample.php)
+- [Payments Examples](./examples/PaymentsExample.php)
+- [Customers Examples](./examples/CustomersExample.php)
+- [Invoices Examples](./examples/InvoicesExample.php)
+- [Webhooks Examples](./examples/WebhooksExample.php)
+
+### Example Structure
+
+Each example file contains:
+- **Simple Examples**: Basic usage with minimal code
+- **Advanced Examples**: Complex workflows and best practices  
+- **Error Scenarios**: How to handle errors and edge cases
+
+For detailed examples, see the [examples directory](./examples/README.md).
 ## API Endpoints
 
 All URIs are relative to *https://api.devdraft.ai*
