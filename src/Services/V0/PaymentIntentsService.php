@@ -71,7 +71,7 @@ final class PaymentIntentsService implements PaymentIntentsContract
      * @param array{
      *   destinationCurrency: 'usdc'|'eurc',
      *   destinationNetwork: value-of<BridgePaymentRail>,
-     *   sourceCurrency: 'usd'|'eur'|'mxn',
+     *   sourceCurrency?: 'usd'|'eur'|'mxn',
      *   sourcePaymentRail: value-of<BridgePaymentRail>,
      *   ach_reference?: string,
      *   amount?: string,

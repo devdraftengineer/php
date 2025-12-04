@@ -27,8 +27,8 @@ final class WebhooksService implements WebhooksContract
      * Creates a new webhook endpoint for receiving event notifications. Requires webhook:create scope.
      *
      * @param array{
-     *   encrypted: bool,
-     *   isActive: bool,
+     *   encrypted?: bool,
+     *   isActive?: bool,
      *   name: string,
      *   url: string,
      *   signing_secret?: string,
