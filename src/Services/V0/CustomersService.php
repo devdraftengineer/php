@@ -83,7 +83,7 @@ final class CustomersService implements CustomersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/customers',
@@ -134,7 +134,7 @@ final class CustomersService implements CustomersContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['api/v0/customers/%1$s', $id],
@@ -197,7 +197,7 @@ final class CustomersService implements CustomersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['api/v0/customers/%1$s', $id],
@@ -271,7 +271,7 @@ final class CustomersService implements CustomersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/customers',

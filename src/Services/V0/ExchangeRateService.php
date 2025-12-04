@@ -46,7 +46,7 @@ final class ExchangeRateService implements ExchangeRateContract
     public function getEurToUsd(
         ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/exchange-rate/eur-to-usd',
@@ -95,7 +95,7 @@ final class ExchangeRateService implements ExchangeRateContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/exchange-rate',
@@ -133,7 +133,7 @@ final class ExchangeRateService implements ExchangeRateContract
     public function getUsdToEur(
         ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/exchange-rate/usd-to-eur',

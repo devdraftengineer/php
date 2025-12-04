@@ -30,7 +30,7 @@ final class TestPaymentService implements TestPaymentContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PaymentResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['api/v0/test-payment/%1$s', $id],
@@ -111,7 +111,7 @@ final class TestPaymentService implements TestPaymentContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/test-payment',
@@ -173,7 +173,7 @@ final class TestPaymentService implements TestPaymentContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TestPaymentRefundResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['api/v0/test-payment/%1$s/refund', $id],

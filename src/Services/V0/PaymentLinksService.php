@@ -57,7 +57,7 @@ final class PaymentLinksService implements PaymentLinksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/payment-links',
@@ -78,7 +78,7 @@ final class PaymentLinksService implements PaymentLinksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['api/v0/payment-links/%1$s', $id],
@@ -98,7 +98,7 @@ final class PaymentLinksService implements PaymentLinksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['api/v0/payment-links/%1$s', $id],
@@ -125,7 +125,7 @@ final class PaymentLinksService implements PaymentLinksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/payment-links',

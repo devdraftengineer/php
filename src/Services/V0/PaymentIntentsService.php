@@ -100,7 +100,7 @@ final class PaymentIntentsService implements PaymentIntentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/payment-intents/bank',
@@ -173,7 +173,7 @@ final class PaymentIntentsService implements PaymentIntentsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/payment-intents/stablecoin',

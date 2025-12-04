@@ -28,7 +28,7 @@ final class HealthService implements HealthContract
     public function check(
         ?RequestOptions $requestOptions = null
     ): HealthCheckResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/health',
@@ -47,7 +47,7 @@ final class HealthService implements HealthContract
     public function checkPublic(
         ?RequestOptions $requestOptions = null
     ): HealthCheckPublicResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/health/public',
