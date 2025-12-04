@@ -44,7 +44,7 @@ final class BalanceService implements BalanceContract
     public function getAllStablecoinBalances(
         ?RequestOptions $requestOptions = null
     ): BalanceGetAllStablecoinBalancesResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/balance',
@@ -78,7 +78,7 @@ final class BalanceService implements BalanceContract
     public function getEurc(
         ?RequestOptions $requestOptions = null
     ): AggregatedBalance {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/balance/eurc',
@@ -112,7 +112,7 @@ final class BalanceService implements BalanceContract
     public function getUsdc(
         ?RequestOptions $requestOptions = null
     ): AggregatedBalance {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/balance/usdc',

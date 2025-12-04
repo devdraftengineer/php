@@ -45,7 +45,7 @@ final class WebhooksService implements WebhooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/webhooks',
@@ -66,7 +66,7 @@ final class WebhooksService implements WebhooksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WebhookResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['api/v0/webhooks/%1$s', $id],
@@ -100,7 +100,7 @@ final class WebhooksService implements WebhooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
             path: ['api/v0/webhooks/%1$s', $id],
@@ -130,7 +130,7 @@ final class WebhooksService implements WebhooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/webhooks',
@@ -151,7 +151,7 @@ final class WebhooksService implements WebhooksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): WebhookResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['api/v0/webhooks/%1$s', $id],

@@ -111,7 +111,7 @@ final class V0Service implements V0Contract
      */
     public function getWallets(?RequestOptions $requestOptions = null): mixed
     {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/wallets',

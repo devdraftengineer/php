@@ -69,7 +69,7 @@ final class TaxesService implements TaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/taxes',
@@ -114,7 +114,7 @@ final class TaxesService implements TaxesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['api/v0/taxes/%1$s', $id],
@@ -175,7 +175,7 @@ final class TaxesService implements TaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: ['api/v0/taxes/%1$s', $id],
@@ -235,7 +235,7 @@ final class TaxesService implements TaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'api/v0/taxes',
@@ -270,7 +270,7 @@ final class TaxesService implements TaxesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: ['api/v0/taxes/%1$s', $id],
@@ -288,7 +288,7 @@ final class TaxesService implements TaxesContract
      */
     public function deleteAll(?RequestOptions $requestOptions = null): mixed
     {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'delete',
             path: 'api/v0/taxes',
@@ -306,7 +306,7 @@ final class TaxesService implements TaxesContract
      */
     public function updateAll(?RequestOptions $requestOptions = null): mixed
     {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
             path: 'api/v0/taxes',

@@ -48,7 +48,7 @@ final class TransfersService implements TransfersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/transfers/direct-bank',
@@ -78,7 +78,7 @@ final class TransfersService implements TransfersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/transfers/direct-wallet',
@@ -119,7 +119,7 @@ final class TransfersService implements TransfersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/transfers/external-bank-transfer',
@@ -154,7 +154,7 @@ final class TransfersService implements TransfersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/transfers/external-stablecoin-transfer',
@@ -188,7 +188,7 @@ final class TransfersService implements TransfersContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'api/v0/transfers/stablecoin-conversion',

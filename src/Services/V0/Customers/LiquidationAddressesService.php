@@ -55,7 +55,7 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['api/v0/customers/%1$s/liquidation_addresses', $customerID],
@@ -86,7 +86,7 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
         $customerID = $parsed['customerId'];
         unset($parsed['customerId']);
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: [
@@ -112,7 +112,7 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
         string $customerID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['api/v0/customers/%1$s/liquidation_addresses', $customerID],
