@@ -24,11 +24,11 @@ final class PaymentLinksService implements PaymentLinksContract
      * Creates a new payment link with the provided details. Supports both simple one-time payments and complex product bundles.
      *
      * @param array{
-     *   allowMobilePayment: bool,
-     *   allowQuantityAdjustment: bool,
-     *   collectAddress: bool,
-     *   collectTax: bool,
-     *   currency: 'usdc'|'eurc',
+     *   allowMobilePayment?: bool,
+     *   allowQuantityAdjustment?: bool,
+     *   collectAddress?: bool,
+     *   collectTax?: bool,
+     *   currency?: 'usdc'|'eurc',
      *   linkType: 'INVOICE'|'PRODUCT'|'COLLECTION'|'DONATION',
      *   title: string,
      *   url: string,
