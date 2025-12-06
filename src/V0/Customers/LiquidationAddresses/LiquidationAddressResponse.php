@@ -178,21 +178,21 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->address = $address;
-        $obj->chain = $chain;
-        $obj->created_at = $created_at;
-        $obj->currency = $currency;
-        $obj->customer_id = $customer_id;
-        $obj->state = $state;
-        $obj->updated_at = $updated_at;
+        $obj['id'] = $id;
+        $obj['address'] = $address;
+        $obj['chain'] = $chain;
+        $obj['created_at'] = $created_at;
+        $obj['currency'] = $currency;
+        $obj['customer_id'] = $customer_id;
+        $obj['state'] = $state;
+        $obj['updated_at'] = $updated_at;
 
-        null !== $bridge_wallet_id && $obj->bridge_wallet_id = $bridge_wallet_id;
-        null !== $custom_developer_fee_percent && $obj->custom_developer_fee_percent = $custom_developer_fee_percent;
-        null !== $destination_currency && $obj->destination_currency = $destination_currency;
-        null !== $destination_payment_rail && $obj->destination_payment_rail = $destination_payment_rail;
-        null !== $external_account_id && $obj->external_account_id = $external_account_id;
-        null !== $prefunded_account_id && $obj->prefunded_account_id = $prefunded_account_id;
+        null !== $bridge_wallet_id && $obj['bridge_wallet_id'] = $bridge_wallet_id;
+        null !== $custom_developer_fee_percent && $obj['custom_developer_fee_percent'] = $custom_developer_fee_percent;
+        null !== $destination_currency && $obj['destination_currency'] = $destination_currency;
+        null !== $destination_payment_rail && $obj['destination_payment_rail'] = $destination_payment_rail;
+        null !== $external_account_id && $obj['external_account_id'] = $external_account_id;
+        null !== $prefunded_account_id && $obj['prefunded_account_id'] = $prefunded_account_id;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withAddress(string $address): self
     {
         $obj = clone $this;
-        $obj->address = $address;
+        $obj['address'] = $address;
 
         return $obj;
     }
@@ -225,7 +225,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withChain(string $chain): self
     {
         $obj = clone $this;
-        $obj->chain = $chain;
+        $obj['chain'] = $chain;
 
         return $obj;
     }
@@ -236,7 +236,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -247,7 +247,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -258,7 +258,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj->customer_id = $customerID;
+        $obj['customer_id'] = $customerID;
 
         return $obj;
     }
@@ -269,7 +269,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withState(string $state): self
     {
         $obj = clone $this;
-        $obj->state = $state;
+        $obj['state'] = $state;
 
         return $obj;
     }
@@ -280,7 +280,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -291,7 +291,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withBridgeWalletID(string $bridgeWalletID): self
     {
         $obj = clone $this;
-        $obj->bridge_wallet_id = $bridgeWalletID;
+        $obj['bridge_wallet_id'] = $bridgeWalletID;
 
         return $obj;
     }
@@ -303,7 +303,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
         string $customDeveloperFeePercent
     ): self {
         $obj = clone $this;
-        $obj->custom_developer_fee_percent = $customDeveloperFeePercent;
+        $obj['custom_developer_fee_percent'] = $customDeveloperFeePercent;
 
         return $obj;
     }
@@ -314,7 +314,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withDestinationCurrency(string $destinationCurrency): self
     {
         $obj = clone $this;
-        $obj->destination_currency = $destinationCurrency;
+        $obj['destination_currency'] = $destinationCurrency;
 
         return $obj;
     }
@@ -326,7 +326,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
         string $destinationPaymentRail
     ): self {
         $obj = clone $this;
-        $obj->destination_payment_rail = $destinationPaymentRail;
+        $obj['destination_payment_rail'] = $destinationPaymentRail;
 
         return $obj;
     }
@@ -337,7 +337,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withExternalAccountID(string $externalAccountID): self
     {
         $obj = clone $this;
-        $obj->external_account_id = $externalAccountID;
+        $obj['external_account_id'] = $externalAccountID;
 
         return $obj;
     }
@@ -348,7 +348,7 @@ final class LiquidationAddressResponse implements BaseModel, ResponseConverter
     public function withPrefundedAccountID(string $prefundedAccountID): self
     {
         $obj = clone $this;
-        $obj->prefunded_account_id = $prefundedAccountID;
+        $obj['prefunded_account_id'] = $prefundedAccountID;
 
         return $obj;
     }

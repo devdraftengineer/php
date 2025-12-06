@@ -80,8 +80,8 @@ final class HealthCheckPublicResponse implements BaseModel, ResponseConverter
         $obj = new self;
 
         $obj['status'] = $status;
-        $obj->timestamp = $timestamp;
-        $obj->version = $version;
+        $obj['timestamp'] = $timestamp;
+        $obj['version'] = $version;
 
         return $obj;
     }
@@ -105,7 +105,7 @@ final class HealthCheckPublicResponse implements BaseModel, ResponseConverter
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class HealthCheckPublicResponse implements BaseModel, ResponseConverter
     public function withVersion(string $version): self
     {
         $obj = clone $this;
-        $obj->version = $version;
+        $obj['version'] = $version;
 
         return $obj;
     }

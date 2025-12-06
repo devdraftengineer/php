@@ -77,11 +77,11 @@ final class WebhookUpdateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $encrypted && $obj->encrypted = $encrypted;
-        null !== $isActive && $obj->isActive = $isActive;
-        null !== $name && $obj->name = $name;
-        null !== $signing_secret && $obj->signing_secret = $signing_secret;
-        null !== $url && $obj->url = $url;
+        null !== $encrypted && $obj['encrypted'] = $encrypted;
+        null !== $isActive && $obj['isActive'] = $isActive;
+        null !== $name && $obj['name'] = $name;
+        null !== $signing_secret && $obj['signing_secret'] = $signing_secret;
+        null !== $url && $obj['url'] = $url;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class WebhookUpdateParams implements BaseModel
     public function withEncrypted(bool $encrypted): self
     {
         $obj = clone $this;
-        $obj->encrypted = $encrypted;
+        $obj['encrypted'] = $encrypted;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class WebhookUpdateParams implements BaseModel
     public function withIsActive(bool $isActive): self
     {
         $obj = clone $this;
-        $obj->isActive = $isActive;
+        $obj['isActive'] = $isActive;
 
         return $obj;
     }
@@ -114,7 +114,7 @@ final class WebhookUpdateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class WebhookUpdateParams implements BaseModel
     public function withSigningSecret(string $signingSecret): self
     {
         $obj = clone $this;
-        $obj->signing_secret = $signingSecret;
+        $obj['signing_secret'] = $signingSecret;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class WebhookUpdateParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }

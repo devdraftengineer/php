@@ -92,11 +92,11 @@ final class PaymentResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->amount = $amount;
-        $obj->currency = $currency;
-        $obj->status = $status;
-        $obj->timestamp = $timestamp;
+        $obj['id'] = $id;
+        $obj['amount'] = $amount;
+        $obj['currency'] = $currency;
+        $obj['status'] = $status;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -107,7 +107,7 @@ final class PaymentResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -118,7 +118,7 @@ final class PaymentResponse implements BaseModel, ResponseConverter
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -129,7 +129,7 @@ final class PaymentResponse implements BaseModel, ResponseConverter
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class PaymentResponse implements BaseModel, ResponseConverter
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class PaymentResponse implements BaseModel, ResponseConverter
     public function withTimestamp(string $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }

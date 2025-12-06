@@ -36,7 +36,9 @@ use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\PaymentLinkProduct;
  *   limitPayments?: bool,
  *   maxPayments?: float,
  *   paymentForId?: string,
- *   paymentLinkProducts?: list<PaymentLinkProduct>,
+ *   paymentLinkProducts?: list<PaymentLinkProduct|array{
+ *     productId: string, quantity: int
+ *   }>,
  *   taxId?: string,
  * }
  */
@@ -215,7 +217,9 @@ final class PaymentLinkCreateParams implements BaseModel
      *
      * @param LinkType|value-of<LinkType> $linkType
      * @param Currency|value-of<Currency> $currency
-     * @param list<PaymentLinkProduct> $paymentLinkProducts
+     * @param list<PaymentLinkProduct|array{
+     *   productId: string, quantity: int
+     * }> $paymentLinkProducts
      */
     public static function with(
         LinkType|string $linkType,
@@ -241,27 +245,27 @@ final class PaymentLinkCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->allowMobilePayment = $allowMobilePayment;
-        $obj->allowQuantityAdjustment = $allowQuantityAdjustment;
-        $obj->collectAddress = $collectAddress;
-        $obj->collectTax = $collectTax;
+        $obj['allowMobilePayment'] = $allowMobilePayment;
+        $obj['allowQuantityAdjustment'] = $allowQuantityAdjustment;
+        $obj['collectAddress'] = $collectAddress;
+        $obj['collectTax'] = $collectTax;
         $obj['currency'] = $currency;
         $obj['linkType'] = $linkType;
-        $obj->title = $title;
-        $obj->url = $url;
+        $obj['title'] = $title;
+        $obj['url'] = $url;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $coverImage && $obj->coverImage = $coverImage;
-        null !== $customerId && $obj->customerId = $customerId;
-        null !== $customFields && $obj->customFields = $customFields;
-        null !== $description && $obj->description = $description;
-        null !== $expiration_date && $obj->expiration_date = $expiration_date;
-        null !== $isForAllProduct && $obj->isForAllProduct = $isForAllProduct;
-        null !== $limitPayments && $obj->limitPayments = $limitPayments;
-        null !== $maxPayments && $obj->maxPayments = $maxPayments;
-        null !== $paymentForId && $obj->paymentForId = $paymentForId;
-        null !== $paymentLinkProducts && $obj->paymentLinkProducts = $paymentLinkProducts;
-        null !== $taxId && $obj->taxId = $taxId;
+        null !== $amount && $obj['amount'] = $amount;
+        null !== $coverImage && $obj['coverImage'] = $coverImage;
+        null !== $customerId && $obj['customerId'] = $customerId;
+        null !== $customFields && $obj['customFields'] = $customFields;
+        null !== $description && $obj['description'] = $description;
+        null !== $expiration_date && $obj['expiration_date'] = $expiration_date;
+        null !== $isForAllProduct && $obj['isForAllProduct'] = $isForAllProduct;
+        null !== $limitPayments && $obj['limitPayments'] = $limitPayments;
+        null !== $maxPayments && $obj['maxPayments'] = $maxPayments;
+        null !== $paymentForId && $obj['paymentForId'] = $paymentForId;
+        null !== $paymentLinkProducts && $obj['paymentLinkProducts'] = $paymentLinkProducts;
+        null !== $taxId && $obj['taxId'] = $taxId;
 
         return $obj;
     }
@@ -272,7 +276,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withAllowMobilePayment(bool $allowMobilePayment): self
     {
         $obj = clone $this;
-        $obj->allowMobilePayment = $allowMobilePayment;
+        $obj['allowMobilePayment'] = $allowMobilePayment;
 
         return $obj;
     }
@@ -284,7 +288,7 @@ final class PaymentLinkCreateParams implements BaseModel
         bool $allowQuantityAdjustment
     ): self {
         $obj = clone $this;
-        $obj->allowQuantityAdjustment = $allowQuantityAdjustment;
+        $obj['allowQuantityAdjustment'] = $allowQuantityAdjustment;
 
         return $obj;
     }
@@ -295,7 +299,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withCollectAddress(bool $collectAddress): self
     {
         $obj = clone $this;
-        $obj->collectAddress = $collectAddress;
+        $obj['collectAddress'] = $collectAddress;
 
         return $obj;
     }
@@ -306,7 +310,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withCollectTax(bool $collectTax): self
     {
         $obj = clone $this;
-        $obj->collectTax = $collectTax;
+        $obj['collectTax'] = $collectTax;
 
         return $obj;
     }
@@ -343,7 +347,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withTitle(string $title): self
     {
         $obj = clone $this;
-        $obj->title = $title;
+        $obj['title'] = $title;
 
         return $obj;
     }
@@ -354,7 +358,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -365,7 +369,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -376,7 +380,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withCoverImage(string $coverImage): self
     {
         $obj = clone $this;
-        $obj->coverImage = $coverImage;
+        $obj['coverImage'] = $coverImage;
 
         return $obj;
     }
@@ -387,7 +391,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj->customerId = $customerID;
+        $obj['customerId'] = $customerID;
 
         return $obj;
     }
@@ -398,7 +402,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withCustomFields(mixed $customFields): self
     {
         $obj = clone $this;
-        $obj->customFields = $customFields;
+        $obj['customFields'] = $customFields;
 
         return $obj;
     }
@@ -409,7 +413,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -420,7 +424,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withExpirationDate(\DateTimeInterface $expirationDate): self
     {
         $obj = clone $this;
-        $obj->expiration_date = $expirationDate;
+        $obj['expiration_date'] = $expirationDate;
 
         return $obj;
     }
@@ -431,7 +435,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withIsForAllProduct(bool $isForAllProduct): self
     {
         $obj = clone $this;
-        $obj->isForAllProduct = $isForAllProduct;
+        $obj['isForAllProduct'] = $isForAllProduct;
 
         return $obj;
     }
@@ -442,7 +446,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withLimitPayments(bool $limitPayments): self
     {
         $obj = clone $this;
-        $obj->limitPayments = $limitPayments;
+        $obj['limitPayments'] = $limitPayments;
 
         return $obj;
     }
@@ -453,7 +457,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withMaxPayments(float $maxPayments): self
     {
         $obj = clone $this;
-        $obj->maxPayments = $maxPayments;
+        $obj['maxPayments'] = $maxPayments;
 
         return $obj;
     }
@@ -464,7 +468,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withPaymentForID(string $paymentForID): self
     {
         $obj = clone $this;
-        $obj->paymentForId = $paymentForID;
+        $obj['paymentForId'] = $paymentForID;
 
         return $obj;
     }
@@ -472,12 +476,14 @@ final class PaymentLinkCreateParams implements BaseModel
     /**
      * Array of products in the payment link.
      *
-     * @param list<PaymentLinkProduct> $paymentLinkProducts
+     * @param list<PaymentLinkProduct|array{
+     *   productId: string, quantity: int
+     * }> $paymentLinkProducts
      */
     public function withPaymentLinkProducts(array $paymentLinkProducts): self
     {
         $obj = clone $this;
-        $obj->paymentLinkProducts = $paymentLinkProducts;
+        $obj['paymentLinkProducts'] = $paymentLinkProducts;
 
         return $obj;
     }
@@ -488,7 +494,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withTaxID(string $taxID): self
     {
         $obj = clone $this;
-        $obj->taxId = $taxID;
+        $obj['taxId'] = $taxID;
 
         return $obj;
     }

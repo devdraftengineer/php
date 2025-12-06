@@ -96,11 +96,11 @@ final class TestPaymentRefundResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->amount = $amount;
-        $obj->paymentId = $paymentId;
-        $obj->status = $status;
-        $obj->timestamp = $timestamp;
+        $obj['id'] = $id;
+        $obj['amount'] = $amount;
+        $obj['paymentId'] = $paymentId;
+        $obj['status'] = $status;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class TestPaymentRefundResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class TestPaymentRefundResponse implements BaseModel, ResponseConverter
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class TestPaymentRefundResponse implements BaseModel, ResponseConverter
     public function withPaymentID(string $paymentID): self
     {
         $obj = clone $this;
-        $obj->paymentId = $paymentID;
+        $obj['paymentId'] = $paymentID;
 
         return $obj;
     }
@@ -144,7 +144,7 @@ final class TestPaymentRefundResponse implements BaseModel, ResponseConverter
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -155,7 +155,7 @@ final class TestPaymentRefundResponse implements BaseModel, ResponseConverter
     public function withTimestamp(string $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }

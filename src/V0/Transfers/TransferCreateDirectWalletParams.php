@@ -86,10 +86,10 @@ final class TransferCreateDirectWalletParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->amount = $amount;
-        $obj->network = $network;
-        $obj->stableCoinCurrency = $stableCoinCurrency;
-        $obj->walletId = $walletId;
+        $obj['amount'] = $amount;
+        $obj['network'] = $network;
+        $obj['stableCoinCurrency'] = $stableCoinCurrency;
+        $obj['walletId'] = $walletId;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class TransferCreateDirectWalletParams implements BaseModel
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class TransferCreateDirectWalletParams implements BaseModel
     public function withNetwork(string $network): self
     {
         $obj = clone $this;
-        $obj->network = $network;
+        $obj['network'] = $network;
 
         return $obj;
     }
@@ -122,7 +122,7 @@ final class TransferCreateDirectWalletParams implements BaseModel
     public function withStableCoinCurrency(string $stableCoinCurrency): self
     {
         $obj = clone $this;
-        $obj->stableCoinCurrency = $stableCoinCurrency;
+        $obj['stableCoinCurrency'] = $stableCoinCurrency;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class TransferCreateDirectWalletParams implements BaseModel
     public function withWalletID(string $walletID): self
     {
         $obj = clone $this;
-        $obj->walletId = $walletID;
+        $obj['walletId'] = $walletID;
 
         return $obj;
     }

@@ -138,12 +138,12 @@ final class CustomerCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->first_name = $first_name;
-        $obj->last_name = $last_name;
-        $obj->phone_number = $phone_number;
+        $obj['first_name'] = $first_name;
+        $obj['last_name'] = $last_name;
+        $obj['phone_number'] = $phone_number;
 
         null !== $customer_type && $obj['customer_type'] = $customer_type;
-        null !== $email && $obj->email = $email;
+        null !== $email && $obj['email'] = $email;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -155,7 +155,7 @@ final class CustomerCreateParams implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj->first_name = $firstName;
+        $obj['first_name'] = $firstName;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class CustomerCreateParams implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj->last_name = $lastName;
+        $obj['last_name'] = $lastName;
 
         return $obj;
     }
@@ -177,7 +177,7 @@ final class CustomerCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class CustomerCreateParams implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }

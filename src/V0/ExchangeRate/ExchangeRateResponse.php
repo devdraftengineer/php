@@ -104,13 +104,13 @@ final class ExchangeRateResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->buy_rate = $buy_rate;
-        $obj->from = $from;
-        $obj->midmarket_rate = $midmarket_rate;
-        $obj->sell_rate = $sell_rate;
-        $obj->to = $to;
+        $obj['buy_rate'] = $buy_rate;
+        $obj['from'] = $from;
+        $obj['midmarket_rate'] = $midmarket_rate;
+        $obj['sell_rate'] = $sell_rate;
+        $obj['to'] = $to;
 
-        null !== $timestamp && $obj->timestamp = $timestamp;
+        null !== $timestamp && $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class ExchangeRateResponse implements BaseModel, ResponseConverter
     public function withBuyRate(string $buyRate): self
     {
         $obj = clone $this;
-        $obj->buy_rate = $buyRate;
+        $obj['buy_rate'] = $buyRate;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class ExchangeRateResponse implements BaseModel, ResponseConverter
     public function withFrom(string $from): self
     {
         $obj = clone $this;
-        $obj->from = $from;
+        $obj['from'] = $from;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class ExchangeRateResponse implements BaseModel, ResponseConverter
     public function withMidmarketRate(string $midmarketRate): self
     {
         $obj = clone $this;
-        $obj->midmarket_rate = $midmarketRate;
+        $obj['midmarket_rate'] = $midmarketRate;
 
         return $obj;
     }
@@ -154,7 +154,7 @@ final class ExchangeRateResponse implements BaseModel, ResponseConverter
     public function withSellRate(string $sellRate): self
     {
         $obj = clone $this;
-        $obj->sell_rate = $sellRate;
+        $obj['sell_rate'] = $sellRate;
 
         return $obj;
     }
@@ -165,7 +165,7 @@ final class ExchangeRateResponse implements BaseModel, ResponseConverter
     public function withTo(string $to): self
     {
         $obj = clone $this;
-        $obj->to = $to;
+        $obj['to'] = $to;
 
         return $obj;
     }
@@ -176,7 +176,7 @@ final class ExchangeRateResponse implements BaseModel, ResponseConverter
     public function withTimestamp(string $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }

@@ -130,14 +130,14 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->created_at = $created_at;
-        $obj->delivery_stats = $delivery_stats;
-        $obj->encrypted = $encrypted;
-        $obj->isActive = $isActive;
-        $obj->name = $name;
-        $obj->updated_at = $updated_at;
-        $obj->url = $url;
+        $obj['id'] = $id;
+        $obj['created_at'] = $created_at;
+        $obj['delivery_stats'] = $delivery_stats;
+        $obj['encrypted'] = $encrypted;
+        $obj['isActive'] = $isActive;
+        $obj['name'] = $name;
+        $obj['updated_at'] = $updated_at;
+        $obj['url'] = $url;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -170,7 +170,7 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     public function withDeliveryStats(mixed $deliveryStats): self
     {
         $obj = clone $this;
-        $obj->delivery_stats = $deliveryStats;
+        $obj['delivery_stats'] = $deliveryStats;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     public function withEncrypted(bool $encrypted): self
     {
         $obj = clone $this;
-        $obj->encrypted = $encrypted;
+        $obj['encrypted'] = $encrypted;
 
         return $obj;
     }
@@ -192,7 +192,7 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     public function withIsActive(bool $isActive): self
     {
         $obj = clone $this;
-        $obj->isActive = $isActive;
+        $obj['isActive'] = $isActive;
 
         return $obj;
     }
@@ -203,7 +203,7 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -214,7 +214,7 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }
@@ -225,7 +225,7 @@ final class WebhookResponse implements BaseModel, ResponseConverter
     public function withURL(string $url): self
     {
         $obj = clone $this;
-        $obj->url = $url;
+        $obj['url'] = $url;
 
         return $obj;
     }

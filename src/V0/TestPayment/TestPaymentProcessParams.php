@@ -135,11 +135,11 @@ final class TestPaymentProcessParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->amount = $amount;
-        $obj->currency = $currency;
-        $obj->description = $description;
+        $obj['amount'] = $amount;
+        $obj['currency'] = $currency;
+        $obj['description'] = $description;
 
-        null !== $customerId && $obj->customerId = $customerId;
+        null !== $customerId && $obj['customerId'] = $customerId;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class TestPaymentProcessParams implements BaseModel
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class TestPaymentProcessParams implements BaseModel
     public function withCurrency(string $currency): self
     {
         $obj = clone $this;
-        $obj->currency = $currency;
+        $obj['currency'] = $currency;
 
         return $obj;
     }
@@ -172,7 +172,7 @@ final class TestPaymentProcessParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class TestPaymentProcessParams implements BaseModel
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj->customerId = $customerID;
+        $obj['customerId'] = $customerID;
 
         return $obj;
     }

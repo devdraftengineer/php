@@ -70,13 +70,13 @@ final class TaxNewResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $active && $obj->active = $active;
-        null !== $created_at && $obj->created_at = $created_at;
-        null !== $description && $obj->description = $description;
-        null !== $name && $obj->name = $name;
-        null !== $percentage && $obj->percentage = $percentage;
-        null !== $updated_at && $obj->updated_at = $updated_at;
+        null !== $id && $obj['id'] = $id;
+        null !== $active && $obj['active'] = $active;
+        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $description && $obj['description'] = $description;
+        null !== $name && $obj['name'] = $name;
+        null !== $percentage && $obj['percentage'] = $percentage;
+        null !== $updated_at && $obj['updated_at'] = $updated_at;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class TaxNewResponse implements BaseModel, ResponseConverter
     public function withID(string $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class TaxNewResponse implements BaseModel, ResponseConverter
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class TaxNewResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
@@ -108,7 +108,7 @@ final class TaxNewResponse implements BaseModel, ResponseConverter
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class TaxNewResponse implements BaseModel, ResponseConverter
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class TaxNewResponse implements BaseModel, ResponseConverter
     public function withPercentage(float $percentage): self
     {
         $obj = clone $this;
-        $obj->percentage = $percentage;
+        $obj['percentage'] = $percentage;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class TaxNewResponse implements BaseModel, ResponseConverter
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj->updated_at = $updatedAt;
+        $obj['updated_at'] = $updatedAt;
 
         return $obj;
     }

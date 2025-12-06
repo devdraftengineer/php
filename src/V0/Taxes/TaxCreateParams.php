@@ -120,12 +120,12 @@ final class TaxCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->name = $name;
-        $obj->percentage = $percentage;
+        $obj['name'] = $name;
+        $obj['percentage'] = $percentage;
 
-        null !== $active && $obj->active = $active;
-        null !== $appIds && $obj->appIds = $appIds;
-        null !== $description && $obj->description = $description;
+        null !== $active && $obj['active'] = $active;
+        null !== $appIds && $obj['appIds'] = $appIds;
+        null !== $description && $obj['description'] = $description;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class TaxCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class TaxCreateParams implements BaseModel
     public function withPercentage(float $percentage): self
     {
         $obj = clone $this;
-        $obj->percentage = $percentage;
+        $obj['percentage'] = $percentage;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class TaxCreateParams implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class TaxCreateParams implements BaseModel
     public function withAppIDs(array $appIDs): self
     {
         $obj = clone $this;
-        $obj->appIds = $appIDs;
+        $obj['appIds'] = $appIDs;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class TaxCreateParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }

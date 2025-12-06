@@ -96,10 +96,10 @@ final class TaxListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $active && $obj->active = $active;
-        null !== $name && $obj->name = $name;
-        null !== $skip && $obj->skip = $skip;
-        null !== $take && $obj->take = $take;
+        null !== $active && $obj['active'] = $active;
+        null !== $name && $obj['name'] = $name;
+        null !== $skip && $obj['skip'] = $skip;
+        null !== $take && $obj['take'] = $take;
 
         return $obj;
     }
@@ -110,7 +110,7 @@ final class TaxListParams implements BaseModel
     public function withActive(bool $active): self
     {
         $obj = clone $this;
-        $obj->active = $active;
+        $obj['active'] = $active;
 
         return $obj;
     }
@@ -121,7 +121,7 @@ final class TaxListParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -132,7 +132,7 @@ final class TaxListParams implements BaseModel
     public function withSkip(float $skip): self
     {
         $obj = clone $this;
-        $obj->skip = $skip;
+        $obj['skip'] = $skip;
 
         return $obj;
     }
@@ -143,7 +143,7 @@ final class TaxListParams implements BaseModel
     public function withTake(float $take): self
     {
         $obj = clone $this;
-        $obj->take = $take;
+        $obj['take'] = $take;
 
         return $obj;
     }

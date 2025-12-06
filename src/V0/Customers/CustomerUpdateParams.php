@@ -121,10 +121,10 @@ final class CustomerUpdateParams implements BaseModel
         $obj = new self;
 
         null !== $customer_type && $obj['customer_type'] = $customer_type;
-        null !== $email && $obj->email = $email;
-        null !== $first_name && $obj->first_name = $first_name;
-        null !== $last_name && $obj->last_name = $last_name;
-        null !== $phone_number && $obj->phone_number = $phone_number;
+        null !== $email && $obj['email'] = $email;
+        null !== $first_name && $obj['first_name'] = $first_name;
+        null !== $last_name && $obj['last_name'] = $last_name;
+        null !== $phone_number && $obj['phone_number'] = $phone_number;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -149,7 +149,7 @@ final class CustomerUpdateParams implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class CustomerUpdateParams implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj->first_name = $firstName;
+        $obj['first_name'] = $firstName;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class CustomerUpdateParams implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj->last_name = $lastName;
+        $obj['last_name'] = $lastName;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class CustomerUpdateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }

@@ -185,19 +185,19 @@ final class ProductCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->description = $description;
-        $obj->name = $name;
-        $obj->price = $price;
+        $obj['description'] = $description;
+        $obj['name'] = $name;
+        $obj['price'] = $price;
 
         null !== $currency && $obj['currency'] = $currency;
-        null !== $images && $obj->images = $images;
-        null !== $productType && $obj->productType = $productType;
-        null !== $quantity && $obj->quantity = $quantity;
-        null !== $status && $obj->status = $status;
-        null !== $stockCount && $obj->stockCount = $stockCount;
-        null !== $type && $obj->type = $type;
-        null !== $unit && $obj->unit = $unit;
-        null !== $weight && $obj->weight = $weight;
+        null !== $images && $obj['images'] = $images;
+        null !== $productType && $obj['productType'] = $productType;
+        null !== $quantity && $obj['quantity'] = $quantity;
+        null !== $status && $obj['status'] = $status;
+        null !== $stockCount && $obj['stockCount'] = $stockCount;
+        null !== $type && $obj['type'] = $type;
+        null !== $unit && $obj['unit'] = $unit;
+        null !== $weight && $obj['weight'] = $weight;
 
         return $obj;
     }
@@ -208,7 +208,7 @@ final class ProductCreateParams implements BaseModel
     public function withDescription(string $description): self
     {
         $obj = clone $this;
-        $obj->description = $description;
+        $obj['description'] = $description;
 
         return $obj;
     }
@@ -219,7 +219,7 @@ final class ProductCreateParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class ProductCreateParams implements BaseModel
     public function withPrice(float $price): self
     {
         $obj = clone $this;
-        $obj->price = $price;
+        $obj['price'] = $price;
 
         return $obj;
     }
@@ -256,7 +256,7 @@ final class ProductCreateParams implements BaseModel
     public function withImages(array $images): self
     {
         $obj = clone $this;
-        $obj->images = $images;
+        $obj['images'] = $images;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class ProductCreateParams implements BaseModel
     public function withProductType(string $productType): self
     {
         $obj = clone $this;
-        $obj->productType = $productType;
+        $obj['productType'] = $productType;
 
         return $obj;
     }
@@ -278,7 +278,7 @@ final class ProductCreateParams implements BaseModel
     public function withQuantity(float $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class ProductCreateParams implements BaseModel
     public function withStatus(string $status): self
     {
         $obj = clone $this;
-        $obj->status = $status;
+        $obj['status'] = $status;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class ProductCreateParams implements BaseModel
     public function withStockCount(float $stockCount): self
     {
         $obj = clone $this;
-        $obj->stockCount = $stockCount;
+        $obj['stockCount'] = $stockCount;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class ProductCreateParams implements BaseModel
     public function withType(string $type): self
     {
         $obj = clone $this;
-        $obj->type = $type;
+        $obj['type'] = $type;
 
         return $obj;
     }
@@ -322,7 +322,7 @@ final class ProductCreateParams implements BaseModel
     public function withUnit(string $unit): self
     {
         $obj = clone $this;
-        $obj->unit = $unit;
+        $obj['unit'] = $unit;
 
         return $obj;
     }
@@ -333,7 +333,7 @@ final class ProductCreateParams implements BaseModel
     public function withWeight(float $weight): self
     {
         $obj = clone $this;
-        $obj->weight = $weight;
+        $obj['weight'] = $weight;
 
         return $obj;
     }
