@@ -126,15 +126,15 @@ final class TransferCreateDirectBankParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->amount = $amount;
-        $obj->destinationCurrency = $destinationCurrency;
-        $obj->paymentRail = $paymentRail;
-        $obj->sourceCurrency = $sourceCurrency;
-        $obj->walletId = $walletId;
+        $obj['amount'] = $amount;
+        $obj['destinationCurrency'] = $destinationCurrency;
+        $obj['paymentRail'] = $paymentRail;
+        $obj['sourceCurrency'] = $sourceCurrency;
+        $obj['walletId'] = $walletId;
 
-        null !== $ach_reference && $obj->ach_reference = $ach_reference;
-        null !== $sepa_reference && $obj->sepa_reference = $sepa_reference;
-        null !== $wire_message && $obj->wire_message = $wire_message;
+        null !== $ach_reference && $obj['ach_reference'] = $ach_reference;
+        null !== $sepa_reference && $obj['sepa_reference'] = $sepa_reference;
+        null !== $wire_message && $obj['wire_message'] = $wire_message;
 
         return $obj;
     }
@@ -145,7 +145,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -156,7 +156,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withDestinationCurrency(string $destinationCurrency): self
     {
         $obj = clone $this;
-        $obj->destinationCurrency = $destinationCurrency;
+        $obj['destinationCurrency'] = $destinationCurrency;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withPaymentRail(string $paymentRail): self
     {
         $obj = clone $this;
-        $obj->paymentRail = $paymentRail;
+        $obj['paymentRail'] = $paymentRail;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withSourceCurrency(string $sourceCurrency): self
     {
         $obj = clone $this;
-        $obj->sourceCurrency = $sourceCurrency;
+        $obj['sourceCurrency'] = $sourceCurrency;
 
         return $obj;
     }
@@ -189,7 +189,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withWalletID(string $walletID): self
     {
         $obj = clone $this;
-        $obj->walletId = $walletID;
+        $obj['walletId'] = $walletID;
 
         return $obj;
     }
@@ -200,7 +200,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withACHReference(string $achReference): self
     {
         $obj = clone $this;
-        $obj->ach_reference = $achReference;
+        $obj['ach_reference'] = $achReference;
 
         return $obj;
     }
@@ -211,7 +211,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withSepaReference(string $sepaReference): self
     {
         $obj = clone $this;
-        $obj->sepa_reference = $sepaReference;
+        $obj['sepa_reference'] = $sepaReference;
 
         return $obj;
     }
@@ -222,7 +222,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withWireMessage(string $wireMessage): self
     {
         $obj = clone $this;
-        $obj->wire_message = $wireMessage;
+        $obj['wire_message'] = $wireMessage;
 
         return $obj;
     }

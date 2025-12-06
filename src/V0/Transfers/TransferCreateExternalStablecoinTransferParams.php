@@ -108,13 +108,13 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->beneficiaryId = $beneficiaryId;
-        $obj->destinationCurrency = $destinationCurrency;
-        $obj->sourceCurrency = $sourceCurrency;
-        $obj->sourceWalletId = $sourceWalletId;
+        $obj['beneficiaryId'] = $beneficiaryId;
+        $obj['destinationCurrency'] = $destinationCurrency;
+        $obj['sourceCurrency'] = $sourceCurrency;
+        $obj['sourceWalletId'] = $sourceWalletId;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $blockchain_memo && $obj->blockchain_memo = $blockchain_memo;
+        null !== $amount && $obj['amount'] = $amount;
+        null !== $blockchain_memo && $obj['blockchain_memo'] = $blockchain_memo;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withBeneficiaryID(string $beneficiaryID): self
     {
         $obj = clone $this;
-        $obj->beneficiaryId = $beneficiaryID;
+        $obj['beneficiaryId'] = $beneficiaryID;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withDestinationCurrency(string $destinationCurrency): self
     {
         $obj = clone $this;
-        $obj->destinationCurrency = $destinationCurrency;
+        $obj['destinationCurrency'] = $destinationCurrency;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withSourceCurrency(string $sourceCurrency): self
     {
         $obj = clone $this;
-        $obj->sourceCurrency = $sourceCurrency;
+        $obj['sourceCurrency'] = $sourceCurrency;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withSourceWalletID(string $sourceWalletID): self
     {
         $obj = clone $this;
-        $obj->sourceWalletId = $sourceWalletID;
+        $obj['sourceWalletId'] = $sourceWalletID;
 
         return $obj;
     }
@@ -169,7 +169,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -180,7 +180,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withBlockchainMemo(string $blockchainMemo): self
     {
         $obj = clone $this;
-        $obj->blockchain_memo = $blockchainMemo;
+        $obj['blockchain_memo'] = $blockchainMemo;
 
         return $obj;
     }

@@ -56,8 +56,8 @@ final class PaymentLinkProduct implements BaseModel
     {
         $obj = new self;
 
-        $obj->productId = $productId;
-        $obj->quantity = $quantity;
+        $obj['productId'] = $productId;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class PaymentLinkProduct implements BaseModel
     public function withProductID(string $productID): self
     {
         $obj = clone $this;
-        $obj->productId = $productID;
+        $obj['productId'] = $productID;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class PaymentLinkProduct implements BaseModel
     public function withQuantity(int $quantity): self
     {
         $obj = clone $this;
-        $obj->quantity = $quantity;
+        $obj['quantity'] = $quantity;
 
         return $obj;
     }

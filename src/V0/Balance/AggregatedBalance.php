@@ -85,9 +85,9 @@ final class AggregatedBalance implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->balances = $balances;
+        $obj['balances'] = $balances;
         $obj['currency'] = $currency;
-        $obj->total_balance = $total_balance;
+        $obj['total_balance'] = $total_balance;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class AggregatedBalance implements BaseModel, ResponseConverter
     public function withBalances(array $balances): self
     {
         $obj = clone $this;
-        $obj->balances = $balances;
+        $obj['balances'] = $balances;
 
         return $obj;
     }
@@ -124,7 +124,7 @@ final class AggregatedBalance implements BaseModel, ResponseConverter
     public function withTotalBalance(string $totalBalance): self
     {
         $obj = clone $this;
-        $obj->total_balance = $totalBalance;
+        $obj['total_balance'] = $totalBalance;
 
         return $obj;
     }

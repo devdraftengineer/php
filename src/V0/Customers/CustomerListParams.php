@@ -121,11 +121,11 @@ final class CustomerListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        null !== $email && $obj->email = $email;
-        null !== $name && $obj->name = $name;
-        null !== $skip && $obj->skip = $skip;
+        null !== $email && $obj['email'] = $email;
+        null !== $name && $obj['name'] = $name;
+        null !== $skip && $obj['skip'] = $skip;
         null !== $status && $obj['status'] = $status;
-        null !== $take && $obj->take = $take;
+        null !== $take && $obj['take'] = $take;
 
         return $obj;
     }
@@ -136,7 +136,7 @@ final class CustomerListParams implements BaseModel
     public function withEmail(string $email): self
     {
         $obj = clone $this;
-        $obj->email = $email;
+        $obj['email'] = $email;
 
         return $obj;
     }
@@ -147,7 +147,7 @@ final class CustomerListParams implements BaseModel
     public function withName(string $name): self
     {
         $obj = clone $this;
-        $obj->name = $name;
+        $obj['name'] = $name;
 
         return $obj;
     }
@@ -158,7 +158,7 @@ final class CustomerListParams implements BaseModel
     public function withSkip(float $skip): self
     {
         $obj = clone $this;
-        $obj->skip = $skip;
+        $obj['skip'] = $skip;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class CustomerListParams implements BaseModel
     public function withTake(float $take): self
     {
         $obj = clone $this;
-        $obj->take = $take;
+        $obj['take'] = $take;
 
         return $obj;
     }

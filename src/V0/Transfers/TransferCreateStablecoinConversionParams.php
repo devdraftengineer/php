@@ -102,11 +102,11 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->amount = $amount;
-        $obj->destinationCurrency = $destinationCurrency;
-        $obj->sourceCurrency = $sourceCurrency;
-        $obj->sourceNetwork = $sourceNetwork;
-        $obj->walletId = $walletId;
+        $obj['amount'] = $amount;
+        $obj['destinationCurrency'] = $destinationCurrency;
+        $obj['sourceCurrency'] = $sourceCurrency;
+        $obj['sourceNetwork'] = $sourceNetwork;
+        $obj['walletId'] = $walletId;
 
         return $obj;
     }
@@ -117,7 +117,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
     public function withAmount(float $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
     public function withDestinationCurrency(string $destinationCurrency): self
     {
         $obj = clone $this;
-        $obj->destinationCurrency = $destinationCurrency;
+        $obj['destinationCurrency'] = $destinationCurrency;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
     public function withSourceCurrency(string $sourceCurrency): self
     {
         $obj = clone $this;
-        $obj->sourceCurrency = $sourceCurrency;
+        $obj['sourceCurrency'] = $sourceCurrency;
 
         return $obj;
     }
@@ -150,7 +150,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
     public function withSourceNetwork(string $sourceNetwork): self
     {
         $obj = clone $this;
-        $obj->sourceNetwork = $sourceNetwork;
+        $obj['sourceNetwork'] = $sourceNetwork;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
     public function withWalletID(string $walletID): self
     {
         $obj = clone $this;
-        $obj->walletId = $walletID;
+        $obj['walletId'] = $walletID;
 
         return $obj;
     }

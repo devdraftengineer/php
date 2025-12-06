@@ -211,22 +211,22 @@ final class LiquidationAddressCreateParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->address = $address;
+        $obj['address'] = $address;
         $obj['chain'] = $chain;
         $obj['currency'] = $currency;
 
-        null !== $bridge_wallet_id && $obj->bridge_wallet_id = $bridge_wallet_id;
-        null !== $custom_developer_fee_percent && $obj->custom_developer_fee_percent = $custom_developer_fee_percent;
-        null !== $destination_ach_reference && $obj->destination_ach_reference = $destination_ach_reference;
-        null !== $destination_address && $obj->destination_address = $destination_address;
-        null !== $destination_blockchain_memo && $obj->destination_blockchain_memo = $destination_blockchain_memo;
+        null !== $bridge_wallet_id && $obj['bridge_wallet_id'] = $bridge_wallet_id;
+        null !== $custom_developer_fee_percent && $obj['custom_developer_fee_percent'] = $custom_developer_fee_percent;
+        null !== $destination_ach_reference && $obj['destination_ach_reference'] = $destination_ach_reference;
+        null !== $destination_address && $obj['destination_address'] = $destination_address;
+        null !== $destination_blockchain_memo && $obj['destination_blockchain_memo'] = $destination_blockchain_memo;
         null !== $destination_currency && $obj['destination_currency'] = $destination_currency;
         null !== $destination_payment_rail && $obj['destination_payment_rail'] = $destination_payment_rail;
-        null !== $destination_sepa_reference && $obj->destination_sepa_reference = $destination_sepa_reference;
-        null !== $destination_wire_message && $obj->destination_wire_message = $destination_wire_message;
-        null !== $external_account_id && $obj->external_account_id = $external_account_id;
-        null !== $prefunded_account_id && $obj->prefunded_account_id = $prefunded_account_id;
-        null !== $return_address && $obj->return_address = $return_address;
+        null !== $destination_sepa_reference && $obj['destination_sepa_reference'] = $destination_sepa_reference;
+        null !== $destination_wire_message && $obj['destination_wire_message'] = $destination_wire_message;
+        null !== $external_account_id && $obj['external_account_id'] = $external_account_id;
+        null !== $prefunded_account_id && $obj['prefunded_account_id'] = $prefunded_account_id;
+        null !== $return_address && $obj['return_address'] = $return_address;
 
         return $obj;
     }
@@ -237,7 +237,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withAddress(string $address): self
     {
         $obj = clone $this;
-        $obj->address = $address;
+        $obj['address'] = $address;
 
         return $obj;
     }
@@ -274,7 +274,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withBridgeWalletID(string $bridgeWalletID): self
     {
         $obj = clone $this;
-        $obj->bridge_wallet_id = $bridgeWalletID;
+        $obj['bridge_wallet_id'] = $bridgeWalletID;
 
         return $obj;
     }
@@ -286,7 +286,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $customDeveloperFeePercent
     ): self {
         $obj = clone $this;
-        $obj->custom_developer_fee_percent = $customDeveloperFeePercent;
+        $obj['custom_developer_fee_percent'] = $customDeveloperFeePercent;
 
         return $obj;
     }
@@ -298,7 +298,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $destinationACHReference
     ): self {
         $obj = clone $this;
-        $obj->destination_ach_reference = $destinationACHReference;
+        $obj['destination_ach_reference'] = $destinationACHReference;
 
         return $obj;
     }
@@ -309,7 +309,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withDestinationAddress(string $destinationAddress): self
     {
         $obj = clone $this;
-        $obj->destination_address = $destinationAddress;
+        $obj['destination_address'] = $destinationAddress;
 
         return $obj;
     }
@@ -321,7 +321,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $destinationBlockchainMemo
     ): self {
         $obj = clone $this;
-        $obj->destination_blockchain_memo = $destinationBlockchainMemo;
+        $obj['destination_blockchain_memo'] = $destinationBlockchainMemo;
 
         return $obj;
     }
@@ -361,7 +361,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $destinationSepaReference
     ): self {
         $obj = clone $this;
-        $obj->destination_sepa_reference = $destinationSepaReference;
+        $obj['destination_sepa_reference'] = $destinationSepaReference;
 
         return $obj;
     }
@@ -373,7 +373,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $destinationWireMessage
     ): self {
         $obj = clone $this;
-        $obj->destination_wire_message = $destinationWireMessage;
+        $obj['destination_wire_message'] = $destinationWireMessage;
 
         return $obj;
     }
@@ -384,7 +384,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withExternalAccountID(string $externalAccountID): self
     {
         $obj = clone $this;
-        $obj->external_account_id = $externalAccountID;
+        $obj['external_account_id'] = $externalAccountID;
 
         return $obj;
     }
@@ -395,7 +395,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withPrefundedAccountID(string $prefundedAccountID): self
     {
         $obj = clone $this;
-        $obj->prefunded_account_id = $prefundedAccountID;
+        $obj['prefunded_account_id'] = $prefundedAccountID;
 
         return $obj;
     }
@@ -406,7 +406,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withReturnAddress(string $returnAddress): self
     {
         $obj = clone $this;
-        $obj->return_address = $returnAddress;
+        $obj['return_address'] = $returnAddress;
 
         return $obj;
     }

@@ -222,18 +222,18 @@ final class PaymentIntentCreateStableParams implements BaseModel
         $obj['sourceCurrency'] = $sourceCurrency;
         $obj['sourceNetwork'] = $sourceNetwork;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $customer_address && $obj->customer_address = $customer_address;
-        null !== $customer_country && $obj->customer_country = $customer_country;
-        null !== $customer_countryISO && $obj->customer_countryISO = $customer_countryISO;
-        null !== $customer_email && $obj->customer_email = $customer_email;
-        null !== $customer_first_name && $obj->customer_first_name = $customer_first_name;
-        null !== $customer_last_name && $obj->customer_last_name = $customer_last_name;
-        null !== $customer_province && $obj->customer_province = $customer_province;
-        null !== $customer_provinceISO && $obj->customer_provinceISO = $customer_provinceISO;
-        null !== $destinationAddress && $obj->destinationAddress = $destinationAddress;
+        null !== $amount && $obj['amount'] = $amount;
+        null !== $customer_address && $obj['customer_address'] = $customer_address;
+        null !== $customer_country && $obj['customer_country'] = $customer_country;
+        null !== $customer_countryISO && $obj['customer_countryISO'] = $customer_countryISO;
+        null !== $customer_email && $obj['customer_email'] = $customer_email;
+        null !== $customer_first_name && $obj['customer_first_name'] = $customer_first_name;
+        null !== $customer_last_name && $obj['customer_last_name'] = $customer_last_name;
+        null !== $customer_province && $obj['customer_province'] = $customer_province;
+        null !== $customer_provinceISO && $obj['customer_provinceISO'] = $customer_provinceISO;
+        null !== $destinationAddress && $obj['destinationAddress'] = $destinationAddress;
         null !== $destinationCurrency && $obj['destinationCurrency'] = $destinationCurrency;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -286,7 +286,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withAmount(string $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -297,7 +297,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerAddress(string $customerAddress): self
     {
         $obj = clone $this;
-        $obj->customer_address = $customerAddress;
+        $obj['customer_address'] = $customerAddress;
 
         return $obj;
     }
@@ -308,7 +308,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerCountry(string $customerCountry): self
     {
         $obj = clone $this;
-        $obj->customer_country = $customerCountry;
+        $obj['customer_country'] = $customerCountry;
 
         return $obj;
     }
@@ -319,7 +319,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerCountryISO(string $customerCountryISO): self
     {
         $obj = clone $this;
-        $obj->customer_countryISO = $customerCountryISO;
+        $obj['customer_countryISO'] = $customerCountryISO;
 
         return $obj;
     }
@@ -330,7 +330,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerEmail(string $customerEmail): self
     {
         $obj = clone $this;
-        $obj->customer_email = $customerEmail;
+        $obj['customer_email'] = $customerEmail;
 
         return $obj;
     }
@@ -341,7 +341,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerFirstName(string $customerFirstName): self
     {
         $obj = clone $this;
-        $obj->customer_first_name = $customerFirstName;
+        $obj['customer_first_name'] = $customerFirstName;
 
         return $obj;
     }
@@ -352,7 +352,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerLastName(string $customerLastName): self
     {
         $obj = clone $this;
-        $obj->customer_last_name = $customerLastName;
+        $obj['customer_last_name'] = $customerLastName;
 
         return $obj;
     }
@@ -363,7 +363,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerProvince(string $customerProvince): self
     {
         $obj = clone $this;
-        $obj->customer_province = $customerProvince;
+        $obj['customer_province'] = $customerProvince;
 
         return $obj;
     }
@@ -374,7 +374,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerProvinceISO(string $customerProvinceISO): self
     {
         $obj = clone $this;
-        $obj->customer_provinceISO = $customerProvinceISO;
+        $obj['customer_provinceISO'] = $customerProvinceISO;
 
         return $obj;
     }
@@ -385,7 +385,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withDestinationAddress(string $destinationAddress): self
     {
         $obj = clone $this;
-        $obj->destinationAddress = $destinationAddress;
+        $obj['destinationAddress'] = $destinationAddress;
 
         return $obj;
     }
@@ -410,7 +410,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

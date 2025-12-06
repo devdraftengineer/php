@@ -48,8 +48,8 @@ final class InvoiceListParams implements BaseModel
     {
         $obj = new self;
 
-        null !== $skip && $obj->skip = $skip;
-        null !== $take && $obj->take = $take;
+        null !== $skip && $obj['skip'] = $skip;
+        null !== $take && $obj['take'] = $take;
 
         return $obj;
     }
@@ -60,7 +60,7 @@ final class InvoiceListParams implements BaseModel
     public function withSkip(float $skip): self
     {
         $obj = clone $this;
-        $obj->skip = $skip;
+        $obj['skip'] = $skip;
 
         return $obj;
     }
@@ -71,7 +71,7 @@ final class InvoiceListParams implements BaseModel
     public function withTake(float $take): self
     {
         $obj = clone $this;
-        $obj->take = $take;
+        $obj['take'] = $take;
 
         return $obj;
     }

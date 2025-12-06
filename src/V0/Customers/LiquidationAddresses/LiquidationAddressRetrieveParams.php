@@ -53,7 +53,7 @@ final class LiquidationAddressRetrieveParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->customerId = $customerId;
+        $obj['customerId'] = $customerId;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class LiquidationAddressRetrieveParams implements BaseModel
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj->customerId = $customerID;
+        $obj['customerId'] = $customerID;
 
         return $obj;
     }

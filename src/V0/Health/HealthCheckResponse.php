@@ -119,12 +119,12 @@ final class HealthCheckResponse implements BaseModel, ResponseConverter
     ): self {
         $obj = new self;
 
-        $obj->authenticated = $authenticated;
+        $obj['authenticated'] = $authenticated;
         $obj['database'] = $database;
-        $obj->message = $message;
+        $obj['message'] = $message;
         $obj['status'] = $status;
-        $obj->timestamp = $timestamp;
-        $obj->version = $version;
+        $obj['timestamp'] = $timestamp;
+        $obj['version'] = $version;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class HealthCheckResponse implements BaseModel, ResponseConverter
     public function withAuthenticated(bool $authenticated): self
     {
         $obj = clone $this;
-        $obj->authenticated = $authenticated;
+        $obj['authenticated'] = $authenticated;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class HealthCheckResponse implements BaseModel, ResponseConverter
     public function withMessage(string $message): self
     {
         $obj = clone $this;
-        $obj->message = $message;
+        $obj['message'] = $message;
 
         return $obj;
     }
@@ -183,7 +183,7 @@ final class HealthCheckResponse implements BaseModel, ResponseConverter
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
         $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $obj['timestamp'] = $timestamp;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class HealthCheckResponse implements BaseModel, ResponseConverter
     public function withVersion(string $version): self
     {
         $obj = clone $this;
-        $obj->version = $version;
+        $obj['version'] = $version;
 
         return $obj;
     }
