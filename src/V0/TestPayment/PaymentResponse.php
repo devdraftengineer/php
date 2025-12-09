@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\TestPayment;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
@@ -21,31 +21,31 @@ final class PaymentResponse implements BaseModel
     /**
      * Payment ID.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The amount charged.
      */
-    #[Api]
+    #[Required]
     public float $amount;
 
     /**
      * The currency code.
      */
-    #[Api]
+    #[Required]
     public string $currency;
 
     /**
      * Payment status.
      */
-    #[Api]
+    #[Required]
     public string $status;
 
     /**
      * Timestamp of the payment.
      */
-    #[Api]
+    #[Required]
     public string $timestamp;
 
     /**

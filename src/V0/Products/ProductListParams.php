@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Products;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -58,13 +58,13 @@ final class ProductListParams implements BaseModel
     /**
      * Number of records to skip.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $skip;
 
     /**
      * Number of records to take.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $take;
 
     public function __construct()

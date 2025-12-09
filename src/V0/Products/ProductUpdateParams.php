@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Products;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -63,13 +63,13 @@ final class ProductUpdateParams implements BaseModel
      *
      * @var value-of<Currency>|null $currency
      */
-    #[Api(enum: Currency::class, optional: true)]
+    #[Optional(enum: Currency::class)]
     public ?string $currency;
 
     /**
      * Detailed description of the product. Supports markdown formatting for rich text display.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
@@ -77,61 +77,61 @@ final class ProductUpdateParams implements BaseModel
      *
      * @var list<string>|null $images
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $images;
 
     /**
      * Product name as it will appear to customers. Should be clear and descriptive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Product price in the specified currency. Must be greater than 0.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $price;
 
     /**
      * Product type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $productType;
 
     /**
      * Quantity available.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $quantity;
 
     /**
      * Product status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
      * Stock count.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $stockCount;
 
     /**
      * Product type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     /**
      * Unit of measurement.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unit;
 
     /**
      * Weight of the product.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $weight;
 
     public function __construct()

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Balance;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 use Devdraft\Core\Conversion\ListOf;
@@ -27,7 +27,7 @@ final class AggregatedBalance implements BaseModel
      *
      * @var list<list<mixed>> $balances
      */
-    #[Api(list: new ListOf('mixed'))]
+    #[Required(list: new ListOf('mixed'))]
     public array $balances;
 
     /**
@@ -35,13 +35,13 @@ final class AggregatedBalance implements BaseModel
      *
      * @var value-of<Currency> $currency
      */
-    #[Api(enum: Currency::class)]
+    #[Required(enum: Currency::class)]
     public string $currency;
 
     /**
      * The total aggregated balance across all wallets and chains.
      */
-    #[Api]
+    #[Required]
     public string $total_balance;
 
     /**

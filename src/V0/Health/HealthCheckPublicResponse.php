@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Health;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 use Devdraft\V0\Health\HealthCheckPublicResponse\Status;
@@ -24,19 +24,19 @@ final class HealthCheckPublicResponse implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * ISO 8601 timestamp when the health check was performed.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $timestamp;
 
     /**
      * Current version of the API service.
      */
-    #[Api]
+    #[Required]
     public string $version;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Transfers;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -27,25 +27,25 @@ final class TransferCreateDirectWalletParams implements BaseModel
     /**
      * The amount to transfer.
      */
-    #[Api]
+    #[Required]
     public float $amount;
 
     /**
      * The network to use for the transfer.
      */
-    #[Api]
+    #[Required]
     public string $network;
 
     /**
      * The stablecoin currency to use.
      */
-    #[Api]
+    #[Required]
     public string $stableCoinCurrency;
 
     /**
      * The ID of the bridge wallet to transfer from.
      */
-    #[Api]
+    #[Required]
     public string $walletId;
 
     /**

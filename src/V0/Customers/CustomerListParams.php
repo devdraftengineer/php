@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Customers;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -71,19 +71,19 @@ final class CustomerListParams implements BaseModel
     /**
      * Filter customers by email (exact match, case-insensitive).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $email;
 
     /**
      * Filter customers by name (partial match, case-insensitive).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Number of records to skip for pagination.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $skip;
 
     /**
@@ -91,13 +91,13 @@ final class CustomerListParams implements BaseModel
      *
      * @var value-of<CustomerStatus>|null $status
      */
-    #[Api(enum: CustomerStatus::class, optional: true)]
+    #[Optional(enum: CustomerStatus::class)]
     public ?string $status;
 
     /**
      * Number of records to return (max 100).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $take;
 
     public function __construct()

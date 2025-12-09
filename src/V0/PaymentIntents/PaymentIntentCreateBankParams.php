@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\PaymentIntents;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -91,7 +92,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
      *
      * @var value-of<StableCoinCurrency> $destinationCurrency
      */
-    #[Api(enum: StableCoinCurrency::class)]
+    #[Required(enum: StableCoinCurrency::class)]
     public string $destinationCurrency;
 
     /**
@@ -99,7 +100,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
      *
      * @var value-of<BridgePaymentRail> $destinationNetwork
      */
-    #[Api(enum: BridgePaymentRail::class)]
+    #[Required(enum: BridgePaymentRail::class)]
     public string $destinationNetwork;
 
     /**
@@ -107,7 +108,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
      *
      * @var value-of<SourceCurrency> $sourceCurrency
      */
-    #[Api(enum: SourceCurrency::class)]
+    #[Required(enum: SourceCurrency::class)]
     public string $sourceCurrency;
 
     /**
@@ -115,91 +116,91 @@ final class PaymentIntentCreateBankParams implements BaseModel
      *
      * @var value-of<BridgePaymentRail> $sourcePaymentRail
      */
-    #[Api(enum: BridgePaymentRail::class)]
+    #[Required(enum: BridgePaymentRail::class)]
     public string $sourcePaymentRail;
 
     /**
      * ACH reference (for ACH transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ach_reference;
 
     /**
      * Payment amount (optional for flexible amount).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /**
      * Customer address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_address;
 
     /**
      * Customer country.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_country;
 
     /**
      * Customer country ISO code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_countryISO;
 
     /**
      * Customer email address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_email;
 
     /**
      * Customer first name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_first_name;
 
     /**
      * Customer last name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_last_name;
 
     /**
      * Customer province/state.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_province;
 
     /**
      * Customer province/state ISO code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_provinceISO;
 
     /**
      * Destination wallet address. Supports Ethereum (0x...) and Solana address formats.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destinationAddress;
 
     /**
      * Customer phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phoneNumber;
 
     /**
      * SEPA reference (for SEPA transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sepa_reference;
 
     /**
      * Wire transfer message (for WIRE transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wire_message;
 
     /**

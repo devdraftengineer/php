@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Transfers;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -32,37 +33,37 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     /**
      * Beneficiary ID for the stablecoin transfer.
      */
-    #[Api]
+    #[Required]
     public string $beneficiaryId;
 
     /**
      * The destination currency.
      */
-    #[Api]
+    #[Required]
     public string $destinationCurrency;
 
     /**
      * The source currency.
      */
-    #[Api]
+    #[Required]
     public string $sourceCurrency;
 
     /**
      * The ID of the source bridge wallet.
      */
-    #[Api]
+    #[Required]
     public string $sourceWalletId;
 
     /**
      * The amount to transfer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $amount;
 
     /**
      * Blockchain memo for the transfer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $blockchain_memo;
 
     /**

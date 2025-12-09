@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\ExchangeRate;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -49,13 +49,13 @@ final class ExchangeRateGetExchangeRateParams implements BaseModel
     /**
      * Source currency code (e.g., usd).
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
      * Target currency code (e.g., eur).
      */
-    #[Api]
+    #[Required]
     public string $to;
 
     /**

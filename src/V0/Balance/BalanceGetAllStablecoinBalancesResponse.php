@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Balance;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 use Devdraft\V0\Balance\AggregatedBalance\Currency;
@@ -22,19 +22,19 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
     /**
      * EURC balance aggregation.
      */
-    #[Api]
+    #[Required]
     public AggregatedBalance $eurc;
 
     /**
      * Total value in USD equivalent.
      */
-    #[Api]
+    #[Required]
     public string $total_usd_value;
 
     /**
      * USDC balance aggregation.
      */
-    #[Api]
+    #[Required]
     public AggregatedBalance $usdc;
 
     /**
