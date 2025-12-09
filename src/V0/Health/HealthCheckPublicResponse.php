@@ -6,9 +6,7 @@ namespace Devdraft\V0\Health;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 use Devdraft\V0\Health\HealthCheckPublicResponse\Status;
 
 /**
@@ -16,12 +14,10 @@ use Devdraft\V0\Health\HealthCheckPublicResponse\Status;
  *   status: value-of<Status>, timestamp: \DateTimeInterface, version: string
  * }
  */
-final class HealthCheckPublicResponse implements BaseModel, ResponseConverter
+final class HealthCheckPublicResponse implements BaseModel
 {
     /** @use SdkModel<HealthCheckPublicResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Basic health status of the service. Returns "ok" when the service is responding.

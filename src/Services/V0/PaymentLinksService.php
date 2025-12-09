@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
+use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\PaymentLinksContract;
@@ -57,14 +58,16 @@ final class PaymentLinksService implements PaymentLinksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'post',
             path: 'api/v0/payment-links',
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,13 +81,15 @@ final class PaymentLinksService implements PaymentLinksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'get',
             path: ['api/v0/payment-links/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -98,13 +103,15 @@ final class PaymentLinksService implements PaymentLinksContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: ['api/v0/payment-links/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -125,13 +132,15 @@ final class PaymentLinksService implements PaymentLinksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/payment-links',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

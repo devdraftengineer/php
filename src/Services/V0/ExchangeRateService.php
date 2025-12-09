@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
+use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\ExchangeRateContract;
@@ -46,13 +47,15 @@ final class ExchangeRateService implements ExchangeRateContract
     public function getEurToUsd(
         ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExchangeRateResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/exchange-rate/eur-to-usd',
             options: $requestOptions,
             convert: ExchangeRateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -95,14 +98,16 @@ final class ExchangeRateService implements ExchangeRateContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExchangeRateResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/exchange-rate',
             query: $parsed,
             options: $options,
             convert: ExchangeRateResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -133,12 +138,14 @@ final class ExchangeRateService implements ExchangeRateContract
     public function getUsdToEur(
         ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ExchangeRateResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/exchange-rate/usd-to-eur',
             options: $requestOptions,
             convert: ExchangeRateResponse::class,
         );
+
+        return $response->parse();
     }
 }

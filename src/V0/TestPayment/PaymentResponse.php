@@ -6,21 +6,17 @@ namespace Devdraft\V0\TestPayment;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type PaymentResponseShape = array{
  *   id: string, amount: float, currency: string, status: string, timestamp: string
  * }
  */
-final class PaymentResponse implements BaseModel, ResponseConverter
+final class PaymentResponse implements BaseModel
 {
     /** @use SdkModel<PaymentResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Payment ID.

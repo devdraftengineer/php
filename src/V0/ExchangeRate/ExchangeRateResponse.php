@@ -6,9 +6,7 @@ namespace Devdraft\V0\ExchangeRate;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type ExchangeRateResponseShape = array{
@@ -20,12 +18,10 @@ use Devdraft\Core\Conversion\Contracts\ResponseConverter;
  *   timestamp?: string|null,
  * }
  */
-final class ExchangeRateResponse implements BaseModel, ResponseConverter
+final class ExchangeRateResponse implements BaseModel
 {
     /** @use SdkModel<ExchangeRateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Rate for buying target currency (what you get when converting from source to target).

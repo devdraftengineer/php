@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
+use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TestPaymentContract;
@@ -30,13 +31,15 @@ final class TestPaymentService implements TestPaymentContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PaymentResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PaymentResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['api/v0/test-payment/%1$s', $id],
             options: $requestOptions,
             convert: PaymentResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -111,14 +114,16 @@ final class TestPaymentService implements TestPaymentContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PaymentResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'api/v0/test-payment',
             body: (object) $parsed,
             options: $options,
             convert: PaymentResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -173,12 +178,14 @@ final class TestPaymentService implements TestPaymentContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): TestPaymentRefundResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TestPaymentRefundResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['api/v0/test-payment/%1$s/refund', $id],
             options: $requestOptions,
             convert: TestPaymentRefundResponse::class,
         );
+
+        return $response->parse();
     }
 }

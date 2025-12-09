@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0\Customers;
 
 use Devdraft\Client;
+use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Conversion\ListOf;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
@@ -55,14 +56,16 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LiquidationAddressResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['api/v0/customers/%1$s/liquidation_addresses', $customerID],
             body: (object) $parsed,
             options: $options,
             convert: LiquidationAddressResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -86,8 +89,8 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
         $customerID = $parsed['customerId'];
         unset($parsed['customerId']);
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<LiquidationAddressResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: [
                 'api/v0/customers/%1$s/liquidation_addresses/%2$s',
@@ -97,6 +100,8 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
             options: $options,
             convert: LiquidationAddressResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -112,12 +117,14 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
         string $customerID,
         ?RequestOptions $requestOptions = null
     ): array {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<list<LiquidationAddressResponse>> */
+        $response = $this->client->request(
             method: 'get',
             path: ['api/v0/customers/%1$s/liquidation_addresses', $customerID],
             options: $requestOptions,
             convert: new ListOf(LiquidationAddressResponse::class),
         );
+
+        return $response->parse();
     }
 }

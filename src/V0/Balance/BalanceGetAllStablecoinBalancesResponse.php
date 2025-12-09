@@ -6,9 +6,7 @@ namespace Devdraft\V0\Balance;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 use Devdraft\V0\Balance\AggregatedBalance\Currency;
 
 /**
@@ -16,12 +14,10 @@ use Devdraft\V0\Balance\AggregatedBalance\Currency;
  *   eurc: AggregatedBalance, total_usd_value: string, usdc: AggregatedBalance
  * }
  */
-final class BalanceGetAllStablecoinBalancesResponse implements BaseModel, ResponseConverter
+final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
 {
     /** @use SdkModel<BalanceGetAllStablecoinBalancesResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * EURC balance aggregation.

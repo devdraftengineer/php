@@ -6,9 +6,7 @@ namespace Devdraft\V0\Webhooks;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type WebhookResponseShape = array{
@@ -22,12 +20,10 @@ use Devdraft\Core\Conversion\Contracts\ResponseConverter;
  *   url: string,
  * }
  */
-final class WebhookResponse implements BaseModel, ResponseConverter
+final class WebhookResponse implements BaseModel
 {
     /** @use SdkModel<WebhookResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Unique identifier for the webhook.

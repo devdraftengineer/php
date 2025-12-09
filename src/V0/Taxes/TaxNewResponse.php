@@ -6,9 +6,7 @@ namespace Devdraft\V0\Taxes;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type TaxNewResponseShape = array{
@@ -21,12 +19,10 @@ use Devdraft\Core\Conversion\Contracts\ResponseConverter;
  *   updated_at?: \DateTimeInterface|null,
  * }
  */
-final class TaxNewResponse implements BaseModel, ResponseConverter
+final class TaxNewResponse implements BaseModel
 {
     /** @use SdkModel<TaxNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api(optional: true)]
     public ?string $id;
