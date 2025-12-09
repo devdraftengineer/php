@@ -76,7 +76,7 @@ final class PaymentLinksTest extends TestCase
                 'customField1' => 'value1', 'customField2' => 'value2',
             ],
             'description' => 'Get access to all premium features with our monthly subscription plan.',
-            'expiration_date' => '2024-12-31T23:59:59Z',
+            'expiration_date' => new \DateTimeImmutable('2024-12-31T23:59:59Z'),
             'isForAllProduct' => false,
             'limitPayments' => true,
             'maxPayments' => 100,

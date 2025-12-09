@@ -12,6 +12,8 @@ use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\Customers\LiquidationAddressesContract;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams\Chain;
+use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams\Currency;
+use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams\DestinationCurrency;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressResponse;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressRetrieveParams;
 use Devdraft\V0\PaymentIntents\BridgePaymentRail;
@@ -29,13 +31,13 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      * @param array{
      *   address: string,
      *   chain: value-of<Chain>,
-     *   currency: 'usdc'|'eurc'|'dai'|'pyusd'|'usdt',
+     *   currency: 'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|Currency,
      *   bridge_wallet_id?: string,
      *   custom_developer_fee_percent?: string,
      *   destination_ach_reference?: string,
      *   destination_address?: string,
      *   destination_blockchain_memo?: string,
-     *   destination_currency?: 'usd'|'eur'|'mxn'|'usdc'|'eurc'|'dai'|'pyusd'|'usdt',
+     *   destination_currency?: 'usd'|'eur'|'mxn'|'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|DestinationCurrency,
      *   destination_payment_rail?: value-of<BridgePaymentRail>,
      *   destination_sepa_reference?: string,
      *   destination_wire_message?: string,
