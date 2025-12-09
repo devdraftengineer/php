@@ -16,12 +16,12 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\TransfersService::createExternalStablecoinTransfer()
  *
  * @phpstan-type TransferCreateExternalStablecoinTransferParamsShape = array{
- *   beneficiaryId: string,
+ *   beneficiaryID: string,
  *   destinationCurrency: string,
  *   sourceCurrency: string,
- *   sourceWalletId: string,
+ *   sourceWalletID: string,
  *   amount?: float,
- *   blockchain_memo?: string,
+ *   blockchainMemo?: string,
  * }
  */
 final class TransferCreateExternalStablecoinTransferParams implements BaseModel
@@ -33,8 +33,8 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     /**
      * Beneficiary ID for the stablecoin transfer.
      */
-    #[Required]
-    public string $beneficiaryId;
+    #[Required('beneficiaryId')]
+    public string $beneficiaryID;
 
     /**
      * The destination currency.
@@ -51,8 +51,8 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     /**
      * The ID of the source bridge wallet.
      */
-    #[Required]
-    public string $sourceWalletId;
+    #[Required('sourceWalletId')]
+    public string $sourceWalletID;
 
     /**
      * The amount to transfer.
@@ -63,8 +63,8 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     /**
      * Blockchain memo for the transfer.
      */
-    #[Optional]
-    public ?string $blockchain_memo;
+    #[Optional('blockchain_memo')]
+    public ?string $blockchainMemo;
 
     /**
      * `new TransferCreateExternalStablecoinTransferParams()` is missing required properties by the API.
@@ -72,10 +72,10 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
      * To enforce required parameters use
      * ```
      * TransferCreateExternalStablecoinTransferParams::with(
-     *   beneficiaryId: ...,
+     *   beneficiaryID: ...,
      *   destinationCurrency: ...,
      *   sourceCurrency: ...,
-     *   sourceWalletId: ...,
+     *   sourceWalletID: ...,
      * )
      * ```
      *
@@ -100,22 +100,22 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $beneficiaryId,
+        string $beneficiaryID,
         string $destinationCurrency,
         string $sourceCurrency,
-        string $sourceWalletId,
+        string $sourceWalletID,
         ?float $amount = null,
-        ?string $blockchain_memo = null,
+        ?string $blockchainMemo = null,
     ): self {
         $obj = new self;
 
-        $obj['beneficiaryId'] = $beneficiaryId;
+        $obj['beneficiaryID'] = $beneficiaryID;
         $obj['destinationCurrency'] = $destinationCurrency;
         $obj['sourceCurrency'] = $sourceCurrency;
-        $obj['sourceWalletId'] = $sourceWalletId;
+        $obj['sourceWalletID'] = $sourceWalletID;
 
         null !== $amount && $obj['amount'] = $amount;
-        null !== $blockchain_memo && $obj['blockchain_memo'] = $blockchain_memo;
+        null !== $blockchainMemo && $obj['blockchainMemo'] = $blockchainMemo;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withBeneficiaryID(string $beneficiaryID): self
     {
         $obj = clone $this;
-        $obj['beneficiaryId'] = $beneficiaryID;
+        $obj['beneficiaryID'] = $beneficiaryID;
 
         return $obj;
     }
@@ -159,7 +159,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withSourceWalletID(string $sourceWalletID): self
     {
         $obj = clone $this;
-        $obj['sourceWalletId'] = $sourceWalletID;
+        $obj['sourceWalletID'] = $sourceWalletID;
 
         return $obj;
     }
@@ -181,7 +181,7 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
     public function withBlockchainMemo(string $blockchainMemo): self
     {
         $obj = clone $this;
-        $obj['blockchain_memo'] = $blockchainMemo;
+        $obj['blockchainMemo'] = $blockchainMemo;
 
         return $obj;
     }

@@ -9,7 +9,7 @@ use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PaymentLinkProductShape = array{productId: string, quantity: int}
+ * @phpstan-type PaymentLinkProductShape = array{productID: string, quantity: int}
  */
 final class PaymentLinkProduct implements BaseModel
 {
@@ -19,8 +19,8 @@ final class PaymentLinkProduct implements BaseModel
     /**
      * UUID of the product to include in this payment link. Must be a valid product from your catalog.
      */
-    #[Required]
-    public string $productId;
+    #[Required('productId')]
+    public string $productID;
 
     /**
      * Quantity of this product to include. Must be at least 1.
@@ -33,7 +33,7 @@ final class PaymentLinkProduct implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PaymentLinkProduct::with(productId: ..., quantity: ...)
+     * PaymentLinkProduct::with(productID: ..., quantity: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,11 +52,11 @@ final class PaymentLinkProduct implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $productId, int $quantity = 1): self
+    public static function with(string $productID, int $quantity = 1): self
     {
         $obj = new self;
 
-        $obj['productId'] = $productId;
+        $obj['productID'] = $productID;
         $obj['quantity'] = $quantity;
 
         return $obj;
@@ -68,7 +68,7 @@ final class PaymentLinkProduct implements BaseModel
     public function withProductID(string $productID): self
     {
         $obj = clone $this;
-        $obj['productId'] = $productID;
+        $obj['productID'] = $productID;
 
         return $obj;
     }

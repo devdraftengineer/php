@@ -32,7 +32,7 @@ final class WebhooksService implements WebhooksContract
      *   isActive: bool,
      *   name: string,
      *   url: string,
-     *   signing_secret?: string,
+     *   signingSecret?: string,
      * }|WebhookCreateParams $params
      *
      * @throws APIException
@@ -89,7 +89,7 @@ final class WebhooksService implements WebhooksContract
      *   encrypted?: bool,
      *   isActive?: bool,
      *   name?: string,
-     *   signing_secret?: string,
+     *   signingSecret?: string,
      *   url?: string,
      * }|WebhookUpdateParams $params
      *

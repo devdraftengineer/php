@@ -22,21 +22,21 @@ use Devdraft\V0\Invoices\InvoiceCreateParams\Status;
  *
  * @phpstan-type InvoiceCreateParamsShape = array{
  *   currency: Currency|value-of<Currency>,
- *   customer_id: string,
+ *   customerID: string,
  *   delivery: Delivery|value-of<Delivery>,
- *   due_date: \DateTimeInterface,
+ *   dueDate: \DateTimeInterface,
  *   email: string,
- *   items: list<Item|array{product_id: string, quantity: float}>,
+ *   items: list<Item|array{productID: string, quantity: float}>,
  *   name: string,
- *   partial_payment: bool,
- *   payment_link: bool,
- *   payment_methods: list<PaymentMethod|value-of<PaymentMethod>>,
+ *   partialPayment: bool,
+ *   paymentLink: bool,
+ *   paymentMethods: list<PaymentMethod|value-of<PaymentMethod>>,
  *   status: Status|value-of<Status>,
  *   address?: string,
  *   logo?: string,
- *   phone_number?: string,
- *   send_date?: \DateTimeInterface,
- *   taxId?: string,
+ *   phoneNumber?: string,
+ *   sendDate?: \DateTimeInterface,
+ *   taxID?: string,
  * }
  */
 final class InvoiceCreateParams implements BaseModel
@@ -56,8 +56,8 @@ final class InvoiceCreateParams implements BaseModel
     /**
      * Customer ID.
      */
-    #[Required]
-    public string $customer_id;
+    #[Required('customer_id')]
+    public string $customerID;
 
     /**
      * Delivery method.
@@ -70,8 +70,8 @@ final class InvoiceCreateParams implements BaseModel
     /**
      * Due date of the invoice.
      */
-    #[Required]
-    public \DateTimeInterface $due_date;
+    #[Required('due_date')]
+    public \DateTimeInterface $dueDate;
 
     /**
      * Email address.
@@ -96,22 +96,22 @@ final class InvoiceCreateParams implements BaseModel
     /**
      * Allow partial payments.
      */
-    #[Required]
-    public bool $partial_payment;
+    #[Required('partial_payment')]
+    public bool $partialPayment;
 
     /**
      * Whether to generate a payment link.
      */
-    #[Required]
-    public bool $payment_link;
+    #[Required('payment_link')]
+    public bool $paymentLink;
 
     /**
      * Array of accepted payment methods.
      *
-     * @var list<value-of<PaymentMethod>> $payment_methods
+     * @var list<value-of<PaymentMethod>> $paymentMethods
      */
-    #[Required(list: PaymentMethod::class)]
-    public array $payment_methods;
+    #[Required('payment_methods', list: PaymentMethod::class)]
+    public array $paymentMethods;
 
     /**
      * Invoice status.
@@ -136,20 +136,20 @@ final class InvoiceCreateParams implements BaseModel
     /**
      * Phone number.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Send date.
      */
-    #[Optional]
-    public ?\DateTimeInterface $send_date;
+    #[Optional('send_date')]
+    public ?\DateTimeInterface $sendDate;
 
     /**
      * Tax ID.
      */
-    #[Optional]
-    public ?string $taxId;
+    #[Optional('taxId')]
+    public ?string $taxID;
 
     /**
      * `new InvoiceCreateParams()` is missing required properties by the API.
@@ -158,15 +158,15 @@ final class InvoiceCreateParams implements BaseModel
      * ```
      * InvoiceCreateParams::with(
      *   currency: ...,
-     *   customer_id: ...,
+     *   customerID: ...,
      *   delivery: ...,
-     *   due_date: ...,
+     *   dueDate: ...,
      *   email: ...,
      *   items: ...,
      *   name: ...,
-     *   partial_payment: ...,
-     *   payment_link: ...,
-     *   payment_methods: ...,
+     *   partialPayment: ...,
+     *   paymentLink: ...,
+     *   paymentMethods: ...,
      *   status: ...,
      * )
      * ```
@@ -200,47 +200,47 @@ final class InvoiceCreateParams implements BaseModel
      *
      * @param Currency|value-of<Currency> $currency
      * @param Delivery|value-of<Delivery> $delivery
-     * @param list<Item|array{product_id: string, quantity: float}> $items
-     * @param list<PaymentMethod|value-of<PaymentMethod>> $payment_methods
+     * @param list<Item|array{productID: string, quantity: float}> $items
+     * @param list<PaymentMethod|value-of<PaymentMethod>> $paymentMethods
      * @param Status|value-of<Status> $status
      */
     public static function with(
         Currency|string $currency,
-        string $customer_id,
+        string $customerID,
         Delivery|string $delivery,
-        \DateTimeInterface $due_date,
+        \DateTimeInterface $dueDate,
         string $email,
         array $items,
         string $name,
-        bool $partial_payment,
-        bool $payment_link,
-        array $payment_methods,
+        bool $partialPayment,
+        bool $paymentLink,
+        array $paymentMethods,
         Status|string $status,
         ?string $address = null,
         ?string $logo = null,
-        ?string $phone_number = null,
-        ?\DateTimeInterface $send_date = null,
-        ?string $taxId = null,
+        ?string $phoneNumber = null,
+        ?\DateTimeInterface $sendDate = null,
+        ?string $taxID = null,
     ): self {
         $obj = new self;
 
         $obj['currency'] = $currency;
-        $obj['customer_id'] = $customer_id;
+        $obj['customerID'] = $customerID;
         $obj['delivery'] = $delivery;
-        $obj['due_date'] = $due_date;
+        $obj['dueDate'] = $dueDate;
         $obj['email'] = $email;
         $obj['items'] = $items;
         $obj['name'] = $name;
-        $obj['partial_payment'] = $partial_payment;
-        $obj['payment_link'] = $payment_link;
-        $obj['payment_methods'] = $payment_methods;
+        $obj['partialPayment'] = $partialPayment;
+        $obj['paymentLink'] = $paymentLink;
+        $obj['paymentMethods'] = $paymentMethods;
         $obj['status'] = $status;
 
         null !== $address && $obj['address'] = $address;
         null !== $logo && $obj['logo'] = $logo;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
-        null !== $send_date && $obj['send_date'] = $send_date;
-        null !== $taxId && $obj['taxId'] = $taxId;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
+        null !== $sendDate && $obj['sendDate'] = $sendDate;
+        null !== $taxID && $obj['taxID'] = $taxID;
 
         return $obj;
     }
@@ -264,7 +264,7 @@ final class InvoiceCreateParams implements BaseModel
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj['customer_id'] = $customerID;
+        $obj['customerID'] = $customerID;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class InvoiceCreateParams implements BaseModel
     public function withDueDate(\DateTimeInterface $dueDate): self
     {
         $obj = clone $this;
-        $obj['due_date'] = $dueDate;
+        $obj['dueDate'] = $dueDate;
 
         return $obj;
     }
@@ -307,7 +307,7 @@ final class InvoiceCreateParams implements BaseModel
     /**
      * Array of products in the invoice.
      *
-     * @param list<Item|array{product_id: string, quantity: float}> $items
+     * @param list<Item|array{productID: string, quantity: float}> $items
      */
     public function withItems(array $items): self
     {
@@ -334,7 +334,7 @@ final class InvoiceCreateParams implements BaseModel
     public function withPartialPayment(bool $partialPayment): self
     {
         $obj = clone $this;
-        $obj['partial_payment'] = $partialPayment;
+        $obj['partialPayment'] = $partialPayment;
 
         return $obj;
     }
@@ -345,7 +345,7 @@ final class InvoiceCreateParams implements BaseModel
     public function withPaymentLink(bool $paymentLink): self
     {
         $obj = clone $this;
-        $obj['payment_link'] = $paymentLink;
+        $obj['paymentLink'] = $paymentLink;
 
         return $obj;
     }
@@ -358,7 +358,7 @@ final class InvoiceCreateParams implements BaseModel
     public function withPaymentMethods(array $paymentMethods): self
     {
         $obj = clone $this;
-        $obj['payment_methods'] = $paymentMethods;
+        $obj['paymentMethods'] = $paymentMethods;
 
         return $obj;
     }
@@ -404,7 +404,7 @@ final class InvoiceCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -415,7 +415,7 @@ final class InvoiceCreateParams implements BaseModel
     public function withSendDate(\DateTimeInterface $sendDate): self
     {
         $obj = clone $this;
-        $obj['send_date'] = $sendDate;
+        $obj['sendDate'] = $sendDate;
 
         return $obj;
     }
@@ -426,7 +426,7 @@ final class InvoiceCreateParams implements BaseModel
     public function withTaxID(string $taxID): self
     {
         $obj = clone $this;
-        $obj['taxId'] = $taxID;
+        $obj['taxID'] = $taxID;
 
         return $obj;
     }

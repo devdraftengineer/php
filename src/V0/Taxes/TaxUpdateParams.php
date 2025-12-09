@@ -43,7 +43,7 @@ use Devdraft\Core\Contracts\BaseModel;
  *
  * @phpstan-type TaxUpdateParamsShape = array{
  *   active?: bool,
- *   appIds?: list<string>,
+ *   appIDs?: list<string>,
  *   description?: string,
  *   name?: string,
  *   percentage?: float,
@@ -64,10 +64,10 @@ final class TaxUpdateParams implements BaseModel
     /**
      * Array of app IDs where this tax should be available.
      *
-     * @var list<string>|null $appIds
+     * @var list<string>|null $appIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $appIds;
+    #[Optional('appIds', list: 'string')]
+    public ?array $appIDs;
 
     /**
      * Detailed description of what this tax covers.
@@ -97,11 +97,11 @@ final class TaxUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $appIds
+     * @param list<string> $appIDs
      */
     public static function with(
         ?bool $active = null,
-        ?array $appIds = null,
+        ?array $appIDs = null,
         ?string $description = null,
         ?string $name = null,
         ?float $percentage = null,
@@ -109,7 +109,7 @@ final class TaxUpdateParams implements BaseModel
         $obj = new self;
 
         null !== $active && $obj['active'] = $active;
-        null !== $appIds && $obj['appIds'] = $appIds;
+        null !== $appIDs && $obj['appIDs'] = $appIDs;
         null !== $description && $obj['description'] = $description;
         null !== $name && $obj['name'] = $name;
         null !== $percentage && $obj['percentage'] = $percentage;
@@ -136,7 +136,7 @@ final class TaxUpdateParams implements BaseModel
     public function withAppIDs(array $appIDs): self
     {
         $obj = clone $this;
-        $obj['appIds'] = $appIDs;
+        $obj['appIDs'] = $appIDs;
 
         return $obj;
     }

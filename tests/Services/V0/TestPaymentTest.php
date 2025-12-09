@@ -74,7 +74,7 @@ final class TestPaymentTest extends TestCase
             'amount' => 100.5,
             'currency' => 'USD',
             'description' => 'Test payment for API',
-            'customerId' => 'cus_12345',
+            'customerID' => 'cus_12345',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -71,25 +71,25 @@ final class PaymentLinksTest extends TestCase
             'url' => 'https://checkout.example.com/pay/123',
             'amount' => 29.99,
             'coverImage' => 'https://example.com/images/premium-subscription.jpg',
-            'customerId' => '123e4567-e89b-12d3-a456-426614174002',
+            'customerID' => '123e4567-e89b-12d3-a456-426614174002',
             'customFields' => [
                 'customField1' => 'value1', 'customField2' => 'value2',
             ],
             'description' => 'Get access to all premium features with our monthly subscription plan.',
-            'expiration_date' => new \DateTimeImmutable('2024-12-31T23:59:59Z'),
+            'expirationDate' => new \DateTimeImmutable('2024-12-31T23:59:59Z'),
             'isForAllProduct' => false,
             'limitPayments' => true,
             'maxPayments' => 100,
-            'paymentForId' => 'sub_123456789',
+            'paymentForID' => 'sub_123456789',
             'paymentLinkProducts' => [
                 [
-                    'productId' => '123e4567-e89b-12d3-a456-426614174003', 'quantity' => 1,
+                    'productID' => '123e4567-e89b-12d3-a456-426614174003', 'quantity' => 1,
                 ],
                 [
-                    'productId' => '123e4567-e89b-12d3-a456-426614174004', 'quantity' => 2,
+                    'productID' => '123e4567-e89b-12d3-a456-426614174004', 'quantity' => 2,
                 ],
             ],
-            'taxId' => '123e4567-e89b-12d3-a456-426614174005',
+            'taxID' => '123e4567-e89b-12d3-a456-426614174005',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

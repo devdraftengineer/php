@@ -66,18 +66,18 @@ final class LiquidationAddressesTest extends TestCase
                 'address' => '0x4d0280da2f2fDA5103914bCc5aad114743152A9c',
                 'chain' => 'ethereum',
                 'currency' => 'usdc',
-                'bridge_wallet_id' => 'bw_123',
-                'custom_developer_fee_percent' => '2.5',
-                'destination_ach_reference' => 'ACH123',
-                'destination_address' => '0x1234567890abcdef1234567890abcdef12345678',
-                'destination_blockchain_memo' => 'liquidation-memo-123',
-                'destination_currency' => 'eur',
-                'destination_payment_rail' => BridgePaymentRail::SEPA,
-                'destination_sepa_reference' => 'SEPA-REF-123456',
-                'destination_wire_message' => 'Liquidation payment for customer',
-                'external_account_id' => 'ext_123',
-                'prefunded_account_id' => 'pf_acc_123',
-                'return_address' => '0xabcdefabcdefabcdefabcdefabcdefabcdef',
+                'bridgeWalletID' => 'bw_123',
+                'customDeveloperFeePercent' => '2.5',
+                'destinationACHReference' => 'ACH123',
+                'destinationAddress' => '0x1234567890abcdef1234567890abcdef12345678',
+                'destinationBlockchainMemo' => 'liquidation-memo-123',
+                'destinationCurrency' => 'eur',
+                'destinationPaymentRail' => BridgePaymentRail::SEPA,
+                'destinationSepaReference' => 'SEPA-REF-123456',
+                'destinationWireMessage' => 'Liquidation payment for customer',
+                'externalAccountID' => 'ext_123',
+                'prefundedAccountID' => 'pf_acc_123',
+                'returnAddress' => '0xabcdefabcdefabcdefabcdefabcdefabcdef',
             ],
         );
 
@@ -94,7 +94,7 @@ final class LiquidationAddressesTest extends TestCase
 
         $result = $this->client->v0->customers->liquidationAddresses->retrieve(
             'la_generated_id_123',
-            ['customerId' => 'cust_123']
+            ['customerID' => 'cust_123']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -110,7 +110,7 @@ final class LiquidationAddressesTest extends TestCase
 
         $result = $this->client->v0->customers->liquidationAddresses->retrieve(
             'la_generated_id_123',
-            ['customerId' => 'cust_123']
+            ['customerID' => 'cust_123']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

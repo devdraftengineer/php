@@ -44,7 +44,7 @@ use Devdraft\Core\Contracts\BaseModel;
  *   name: string,
  *   percentage: float,
  *   active?: bool,
- *   appIds?: list<string>,
+ *   appIDs?: list<string>,
  *   description?: string,
  * }
  */
@@ -75,10 +75,10 @@ final class TaxCreateParams implements BaseModel
     /**
      * Array of app IDs where this tax should be available. If not provided, tax will be available for the current app.
      *
-     * @var list<string>|null $appIds
+     * @var list<string>|null $appIDs
      */
-    #[Optional(list: 'string')]
-    public ?array $appIds;
+    #[Optional('appIds', list: 'string')]
+    public ?array $appIDs;
 
     /**
      * Optional description explaining what this tax covers.
@@ -110,13 +110,13 @@ final class TaxCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $appIds
+     * @param list<string> $appIDs
      */
     public static function with(
         string $name,
         float $percentage,
         ?bool $active = null,
-        ?array $appIds = null,
+        ?array $appIDs = null,
         ?string $description = null,
     ): self {
         $obj = new self;
@@ -125,7 +125,7 @@ final class TaxCreateParams implements BaseModel
         $obj['percentage'] = $percentage;
 
         null !== $active && $obj['active'] = $active;
-        null !== $appIds && $obj['appIds'] = $appIds;
+        null !== $appIDs && $obj['appIDs'] = $appIDs;
         null !== $description && $obj['description'] = $description;
 
         return $obj;
@@ -172,7 +172,7 @@ final class TaxCreateParams implements BaseModel
     public function withAppIDs(array $appIDs): self
     {
         $obj = clone $this;
-        $obj['appIds'] = $appIDs;
+        $obj['appIDs'] = $appIDs;
 
         return $obj;
     }

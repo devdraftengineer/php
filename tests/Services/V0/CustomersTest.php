@@ -41,9 +41,9 @@ final class CustomersTest extends TestCase
         }
 
         $result = $this->client->v0->customers->create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'phone_number' => '+1-555-123-4567',
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'phoneNumber' => '+1-555-123-4567',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -58,10 +58,10 @@ final class CustomersTest extends TestCase
         }
 
         $result = $this->client->v0->customers->create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'phone_number' => '+1-555-123-4567',
-            'customer_type' => CustomerType::INDIVIDUAL,
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'phoneNumber' => '+1-555-123-4567',
+            'customerType' => CustomerType::INDIVIDUAL,
             'email' => 'john.doe@example.com',
             'status' => CustomerStatus::ACTIVE,
         ]);

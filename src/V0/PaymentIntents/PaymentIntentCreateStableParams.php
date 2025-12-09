@@ -49,14 +49,14 @@ use Devdraft\Core\Contracts\BaseModel;
  *   sourceCurrency: StableCoinCurrency|value-of<StableCoinCurrency>,
  *   sourceNetwork: BridgePaymentRail|value-of<BridgePaymentRail>,
  *   amount?: string,
- *   customer_address?: string,
- *   customer_country?: string,
- *   customer_countryISO?: string,
- *   customer_email?: string,
- *   customer_first_name?: string,
- *   customer_last_name?: string,
- *   customer_province?: string,
- *   customer_provinceISO?: string,
+ *   customerAddress?: string,
+ *   customerCountry?: string,
+ *   customerCountryISO?: string,
+ *   customerEmail?: string,
+ *   customerFirstName?: string,
+ *   customerLastName?: string,
+ *   customerProvince?: string,
+ *   customerProvinceISO?: string,
  *   destinationAddress?: string,
  *   destinationCurrency?: StableCoinCurrency|value-of<StableCoinCurrency>,
  *   phoneNumber?: string,
@@ -101,50 +101,50 @@ final class PaymentIntentCreateStableParams implements BaseModel
     /**
      * Customer's full address. Required for compliance in certain jurisdictions and high-value transactions.
      */
-    #[Optional]
-    public ?string $customer_address;
+    #[Optional('customer_address')]
+    public ?string $customerAddress;
 
     /**
      * Customer's country of residence. Used for compliance and tax reporting.
      */
-    #[Optional]
-    public ?string $customer_country;
+    #[Optional('customer_country')]
+    public ?string $customerCountry;
 
     /**
      * Customer's country ISO 3166-1 alpha-2 code. Used for automated compliance checks.
      */
-    #[Optional]
-    public ?string $customer_countryISO;
+    #[Optional('customer_countryISO')]
+    public ?string $customerCountryISO;
 
     /**
      * Customer's email address. Used for transaction notifications and receipts. Highly recommended for all transactions.
      */
-    #[Optional]
-    public ?string $customer_email;
+    #[Optional('customer_email')]
+    public ?string $customerEmail;
 
     /**
      * Customer's first name. Used for transaction records and compliance. Required for amounts over $1000.
      */
-    #[Optional]
-    public ?string $customer_first_name;
+    #[Optional('customer_first_name')]
+    public ?string $customerFirstName;
 
     /**
      * Customer's last name. Used for transaction records and compliance. Required for amounts over $1000.
      */
-    #[Optional]
-    public ?string $customer_last_name;
+    #[Optional('customer_last_name')]
+    public ?string $customerLastName;
 
     /**
      * Customer's state or province. Required for US and Canadian customers.
      */
-    #[Optional]
-    public ?string $customer_province;
+    #[Optional('customer_province')]
+    public ?string $customerProvince;
 
     /**
      * Customer's state or province ISO code. Used for automated tax calculations.
      */
-    #[Optional]
-    public ?string $customer_provinceISO;
+    #[Optional('customer_provinceISO')]
+    public ?string $customerProvinceISO;
 
     /**
      * The wallet address where converted funds will be sent. Supports Ethereum (0x...) and Solana address formats.
@@ -205,14 +205,14 @@ final class PaymentIntentCreateStableParams implements BaseModel
         StableCoinCurrency|string $sourceCurrency,
         BridgePaymentRail|string $sourceNetwork,
         ?string $amount = null,
-        ?string $customer_address = null,
-        ?string $customer_country = null,
-        ?string $customer_countryISO = null,
-        ?string $customer_email = null,
-        ?string $customer_first_name = null,
-        ?string $customer_last_name = null,
-        ?string $customer_province = null,
-        ?string $customer_provinceISO = null,
+        ?string $customerAddress = null,
+        ?string $customerCountry = null,
+        ?string $customerCountryISO = null,
+        ?string $customerEmail = null,
+        ?string $customerFirstName = null,
+        ?string $customerLastName = null,
+        ?string $customerProvince = null,
+        ?string $customerProvinceISO = null,
         ?string $destinationAddress = null,
         StableCoinCurrency|string|null $destinationCurrency = null,
         ?string $phoneNumber = null,
@@ -224,14 +224,14 @@ final class PaymentIntentCreateStableParams implements BaseModel
         $obj['sourceNetwork'] = $sourceNetwork;
 
         null !== $amount && $obj['amount'] = $amount;
-        null !== $customer_address && $obj['customer_address'] = $customer_address;
-        null !== $customer_country && $obj['customer_country'] = $customer_country;
-        null !== $customer_countryISO && $obj['customer_countryISO'] = $customer_countryISO;
-        null !== $customer_email && $obj['customer_email'] = $customer_email;
-        null !== $customer_first_name && $obj['customer_first_name'] = $customer_first_name;
-        null !== $customer_last_name && $obj['customer_last_name'] = $customer_last_name;
-        null !== $customer_province && $obj['customer_province'] = $customer_province;
-        null !== $customer_provinceISO && $obj['customer_provinceISO'] = $customer_provinceISO;
+        null !== $customerAddress && $obj['customerAddress'] = $customerAddress;
+        null !== $customerCountry && $obj['customerCountry'] = $customerCountry;
+        null !== $customerCountryISO && $obj['customerCountryISO'] = $customerCountryISO;
+        null !== $customerEmail && $obj['customerEmail'] = $customerEmail;
+        null !== $customerFirstName && $obj['customerFirstName'] = $customerFirstName;
+        null !== $customerLastName && $obj['customerLastName'] = $customerLastName;
+        null !== $customerProvince && $obj['customerProvince'] = $customerProvince;
+        null !== $customerProvinceISO && $obj['customerProvinceISO'] = $customerProvinceISO;
         null !== $destinationAddress && $obj['destinationAddress'] = $destinationAddress;
         null !== $destinationCurrency && $obj['destinationCurrency'] = $destinationCurrency;
         null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
@@ -298,7 +298,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerAddress(string $customerAddress): self
     {
         $obj = clone $this;
-        $obj['customer_address'] = $customerAddress;
+        $obj['customerAddress'] = $customerAddress;
 
         return $obj;
     }
@@ -309,7 +309,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerCountry(string $customerCountry): self
     {
         $obj = clone $this;
-        $obj['customer_country'] = $customerCountry;
+        $obj['customerCountry'] = $customerCountry;
 
         return $obj;
     }
@@ -320,7 +320,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerCountryISO(string $customerCountryISO): self
     {
         $obj = clone $this;
-        $obj['customer_countryISO'] = $customerCountryISO;
+        $obj['customerCountryISO'] = $customerCountryISO;
 
         return $obj;
     }
@@ -331,7 +331,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerEmail(string $customerEmail): self
     {
         $obj = clone $this;
-        $obj['customer_email'] = $customerEmail;
+        $obj['customerEmail'] = $customerEmail;
 
         return $obj;
     }
@@ -342,7 +342,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerFirstName(string $customerFirstName): self
     {
         $obj = clone $this;
-        $obj['customer_first_name'] = $customerFirstName;
+        $obj['customerFirstName'] = $customerFirstName;
 
         return $obj;
     }
@@ -353,7 +353,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerLastName(string $customerLastName): self
     {
         $obj = clone $this;
-        $obj['customer_last_name'] = $customerLastName;
+        $obj['customerLastName'] = $customerLastName;
 
         return $obj;
     }
@@ -364,7 +364,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerProvince(string $customerProvince): self
     {
         $obj = clone $this;
-        $obj['customer_province'] = $customerProvince;
+        $obj['customerProvince'] = $customerProvince;
 
         return $obj;
     }
@@ -375,7 +375,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
     public function withCustomerProvinceISO(string $customerProvinceISO): self
     {
         $obj = clone $this;
-        $obj['customer_provinceISO'] = $customerProvinceISO;
+        $obj['customerProvinceISO'] = $customerProvinceISO;
 
         return $obj;
     }

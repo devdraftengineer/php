@@ -43,7 +43,7 @@ final class TransfersTest extends TestCase
             'destinationCurrency' => 'destinationCurrency',
             'paymentRail' => 'paymentRail',
             'sourceCurrency' => 'sourceCurrency',
-            'walletId' => 'walletId',
+            'walletID' => 'walletId',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -62,10 +62,10 @@ final class TransfersTest extends TestCase
             'destinationCurrency' => 'destinationCurrency',
             'paymentRail' => 'paymentRail',
             'sourceCurrency' => 'sourceCurrency',
-            'walletId' => 'walletId',
-            'ach_reference' => 'ach_reference',
-            'sepa_reference' => 'sepa_reference',
-            'wire_message' => 'wire_message',
+            'walletID' => 'walletId',
+            'achReference' => 'ach_reference',
+            'sepaReference' => 'sepa_reference',
+            'wireMessage' => 'wire_message',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -83,7 +83,7 @@ final class TransfersTest extends TestCase
             'amount' => 0,
             'network' => 'network',
             'stableCoinCurrency' => 'stableCoinCurrency',
-            'walletId' => 'walletId',
+            'walletID' => 'walletId',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -101,7 +101,7 @@ final class TransfersTest extends TestCase
             'amount' => 0,
             'network' => 'network',
             'stableCoinCurrency' => 'stableCoinCurrency',
-            'walletId' => 'walletId',
+            'walletID' => 'walletId',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -118,9 +118,9 @@ final class TransfersTest extends TestCase
         $result = $this->client->v0->transfers->createExternalBankTransfer([
             'destinationCurrency' => 'destinationCurrency',
             'destinationPaymentRail' => 'ach',
-            'external_account_id' => 'external_account_id',
+            'externalAccountID' => 'external_account_id',
             'sourceCurrency' => 'sourceCurrency',
-            'sourceWalletId' => 'sourceWalletId',
+            'sourceWalletID' => 'sourceWalletId',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -137,16 +137,16 @@ final class TransfersTest extends TestCase
         $result = $this->client->v0->transfers->createExternalBankTransfer([
             'destinationCurrency' => 'destinationCurrency',
             'destinationPaymentRail' => 'ach',
-            'external_account_id' => 'external_account_id',
+            'externalAccountID' => 'external_account_id',
             'sourceCurrency' => 'sourceCurrency',
-            'sourceWalletId' => 'sourceWalletId',
-            'ach_reference' => 'x',
+            'sourceWalletID' => 'sourceWalletId',
+            'achReference' => 'x',
             'amount' => 0,
-            'sepa_reference' => 'xxxxxx',
-            'spei_reference' => 'x',
-            'swift_charges' => 'swift_charges',
-            'swift_reference' => 'x',
-            'wire_message' => 'x',
+            'sepaReference' => 'xxxxxx',
+            'speiReference' => 'x',
+            'swiftCharges' => 'swift_charges',
+            'swiftReference' => 'x',
+            'wireMessage' => 'x',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -161,10 +161,10 @@ final class TransfersTest extends TestCase
         }
 
         $result = $this->client->v0->transfers->createExternalStablecoinTransfer([
-            'beneficiaryId' => 'beneficiary_12345',
+            'beneficiaryID' => 'beneficiary_12345',
             'destinationCurrency' => 'destinationCurrency',
             'sourceCurrency' => 'sourceCurrency',
-            'sourceWalletId' => 'sourceWalletId',
+            'sourceWalletID' => 'sourceWalletId',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -179,12 +179,12 @@ final class TransfersTest extends TestCase
         }
 
         $result = $this->client->v0->transfers->createExternalStablecoinTransfer([
-            'beneficiaryId' => 'beneficiary_12345',
+            'beneficiaryID' => 'beneficiary_12345',
             'destinationCurrency' => 'destinationCurrency',
             'sourceCurrency' => 'sourceCurrency',
-            'sourceWalletId' => 'sourceWalletId',
+            'sourceWalletID' => 'sourceWalletId',
             'amount' => 0,
-            'blockchain_memo' => 'blockchain_memo',
+            'blockchainMemo' => 'blockchain_memo',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -203,7 +203,7 @@ final class TransfersTest extends TestCase
             'destinationCurrency' => 'destinationCurrency',
             'sourceCurrency' => 'sourceCurrency',
             'sourceNetwork' => 'sourceNetwork',
-            'walletId' => 'walletId',
+            'walletID' => 'walletId',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -222,7 +222,7 @@ final class TransfersTest extends TestCase
             'destinationCurrency' => 'destinationCurrency',
             'sourceCurrency' => 'sourceCurrency',
             'sourceNetwork' => 'sourceNetwork',
-            'walletId' => 'walletId',
+            'walletID' => 'walletId',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -11,12 +11,12 @@ use Devdraft\Core\Contracts\BaseModel;
 /**
  * @phpstan-type WebhookResponseShape = array{
  *   id: string,
- *   created_at: string,
- *   delivery_stats: mixed,
+ *   createdAt: string,
+ *   deliveryStats: mixed,
  *   encrypted: bool,
  *   isActive: bool,
  *   name: string,
- *   updated_at: string,
+ *   updatedAt: string,
  *   url: string,
  * }
  */
@@ -34,14 +34,14 @@ final class WebhookResponse implements BaseModel
     /**
      * Timestamp when the webhook was created.
      */
-    #[Required]
-    public string $created_at;
+    #[Required('created_at')]
+    public string $createdAt;
 
     /**
      * Webhook delivery statistics.
      */
-    #[Required]
-    public mixed $delivery_stats;
+    #[Required('delivery_stats')]
+    public mixed $deliveryStats;
 
     /**
      * Whether webhook payloads are encrypted.
@@ -64,8 +64,8 @@ final class WebhookResponse implements BaseModel
     /**
      * Timestamp when the webhook was last updated.
      */
-    #[Required]
-    public string $updated_at;
+    #[Required('updated_at')]
+    public string $updatedAt;
 
     /**
      * URL where webhook events are sent.
@@ -80,12 +80,12 @@ final class WebhookResponse implements BaseModel
      * ```
      * WebhookResponse::with(
      *   id: ...,
-     *   created_at: ...,
-     *   delivery_stats: ...,
+     *   createdAt: ...,
+     *   deliveryStats: ...,
      *   encrypted: ...,
      *   isActive: ...,
      *   name: ...,
-     *   updated_at: ...,
+     *   updatedAt: ...,
      *   url: ...,
      * )
      * ```
@@ -116,23 +116,23 @@ final class WebhookResponse implements BaseModel
      */
     public static function with(
         string $id,
-        string $created_at,
-        mixed $delivery_stats,
+        string $createdAt,
+        mixed $deliveryStats,
         bool $encrypted,
         bool $isActive,
         string $name,
-        string $updated_at,
+        string $updatedAt,
         string $url,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['created_at'] = $created_at;
-        $obj['delivery_stats'] = $delivery_stats;
+        $obj['createdAt'] = $createdAt;
+        $obj['deliveryStats'] = $deliveryStats;
         $obj['encrypted'] = $encrypted;
         $obj['isActive'] = $isActive;
         $obj['name'] = $name;
-        $obj['updated_at'] = $updated_at;
+        $obj['updatedAt'] = $updatedAt;
         $obj['url'] = $url;
 
         return $obj;
@@ -155,7 +155,7 @@ final class WebhookResponse implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -166,7 +166,7 @@ final class WebhookResponse implements BaseModel
     public function withDeliveryStats(mixed $deliveryStats): self
     {
         $obj = clone $this;
-        $obj['delivery_stats'] = $deliveryStats;
+        $obj['deliveryStats'] = $deliveryStats;
 
         return $obj;
     }
@@ -210,7 +210,7 @@ final class WebhookResponse implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

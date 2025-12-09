@@ -14,17 +14,17 @@ use Devdraft\Core\Contracts\BaseModel;
  *   id: string,
  *   address: string,
  *   chain: string,
- *   created_at: string,
+ *   createdAt: string,
  *   currency: string,
- *   customer_id: string,
+ *   customerID: string,
  *   state: string,
- *   updated_at: string,
- *   bridge_wallet_id?: string|null,
- *   custom_developer_fee_percent?: string|null,
- *   destination_currency?: string|null,
- *   destination_payment_rail?: string|null,
- *   external_account_id?: string|null,
- *   prefunded_account_id?: string|null,
+ *   updatedAt: string,
+ *   bridgeWalletID?: string|null,
+ *   customDeveloperFeePercent?: string|null,
+ *   destinationCurrency?: string|null,
+ *   destinationPaymentRail?: string|null,
+ *   externalAccountID?: string|null,
+ *   prefundedAccountID?: string|null,
  * }
  */
 final class LiquidationAddressResponse implements BaseModel
@@ -53,8 +53,8 @@ final class LiquidationAddressResponse implements BaseModel
     /**
      * Creation timestamp.
      */
-    #[Required]
-    public string $created_at;
+    #[Required('created_at')]
+    public string $createdAt;
 
     /**
      * Currency.
@@ -65,8 +65,8 @@ final class LiquidationAddressResponse implements BaseModel
     /**
      * Customer ID this liquidation address belongs to.
      */
-    #[Required]
-    public string $customer_id;
+    #[Required('customer_id')]
+    public string $customerID;
 
     /**
      * Current state of the liquidation address.
@@ -77,44 +77,44 @@ final class LiquidationAddressResponse implements BaseModel
     /**
      * Last update timestamp.
      */
-    #[Required]
-    public string $updated_at;
+    #[Required('updated_at')]
+    public string $updatedAt;
 
     /**
      * Bridge wallet ID.
      */
-    #[Optional]
-    public ?string $bridge_wallet_id;
+    #[Optional('bridge_wallet_id')]
+    public ?string $bridgeWalletID;
 
     /**
      * Custom developer fee percent.
      */
-    #[Optional]
-    public ?string $custom_developer_fee_percent;
+    #[Optional('custom_developer_fee_percent')]
+    public ?string $customDeveloperFeePercent;
 
     /**
      * Destination currency.
      */
-    #[Optional]
-    public ?string $destination_currency;
+    #[Optional('destination_currency')]
+    public ?string $destinationCurrency;
 
     /**
      * Destination payment rail.
      */
-    #[Optional]
-    public ?string $destination_payment_rail;
+    #[Optional('destination_payment_rail')]
+    public ?string $destinationPaymentRail;
 
     /**
      * External account ID.
      */
-    #[Optional]
-    public ?string $external_account_id;
+    #[Optional('external_account_id')]
+    public ?string $externalAccountID;
 
     /**
      * Prefunded account ID.
      */
-    #[Optional]
-    public ?string $prefunded_account_id;
+    #[Optional('prefunded_account_id')]
+    public ?string $prefundedAccountID;
 
     /**
      * `new LiquidationAddressResponse()` is missing required properties by the API.
@@ -125,11 +125,11 @@ final class LiquidationAddressResponse implements BaseModel
      *   id: ...,
      *   address: ...,
      *   chain: ...,
-     *   created_at: ...,
+     *   createdAt: ...,
      *   currency: ...,
-     *   customer_id: ...,
+     *   customerID: ...,
      *   state: ...,
-     *   updated_at: ...,
+     *   updatedAt: ...,
      * )
      * ```
      *
@@ -161,35 +161,35 @@ final class LiquidationAddressResponse implements BaseModel
         string $id,
         string $address,
         string $chain,
-        string $created_at,
+        string $createdAt,
         string $currency,
-        string $customer_id,
+        string $customerID,
         string $state,
-        string $updated_at,
-        ?string $bridge_wallet_id = null,
-        ?string $custom_developer_fee_percent = null,
-        ?string $destination_currency = null,
-        ?string $destination_payment_rail = null,
-        ?string $external_account_id = null,
-        ?string $prefunded_account_id = null,
+        string $updatedAt,
+        ?string $bridgeWalletID = null,
+        ?string $customDeveloperFeePercent = null,
+        ?string $destinationCurrency = null,
+        ?string $destinationPaymentRail = null,
+        ?string $externalAccountID = null,
+        ?string $prefundedAccountID = null,
     ): self {
         $obj = new self;
 
         $obj['id'] = $id;
         $obj['address'] = $address;
         $obj['chain'] = $chain;
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['currency'] = $currency;
-        $obj['customer_id'] = $customer_id;
+        $obj['customerID'] = $customerID;
         $obj['state'] = $state;
-        $obj['updated_at'] = $updated_at;
+        $obj['updatedAt'] = $updatedAt;
 
-        null !== $bridge_wallet_id && $obj['bridge_wallet_id'] = $bridge_wallet_id;
-        null !== $custom_developer_fee_percent && $obj['custom_developer_fee_percent'] = $custom_developer_fee_percent;
-        null !== $destination_currency && $obj['destination_currency'] = $destination_currency;
-        null !== $destination_payment_rail && $obj['destination_payment_rail'] = $destination_payment_rail;
-        null !== $external_account_id && $obj['external_account_id'] = $external_account_id;
-        null !== $prefunded_account_id && $obj['prefunded_account_id'] = $prefunded_account_id;
+        null !== $bridgeWalletID && $obj['bridgeWalletID'] = $bridgeWalletID;
+        null !== $customDeveloperFeePercent && $obj['customDeveloperFeePercent'] = $customDeveloperFeePercent;
+        null !== $destinationCurrency && $obj['destinationCurrency'] = $destinationCurrency;
+        null !== $destinationPaymentRail && $obj['destinationPaymentRail'] = $destinationPaymentRail;
+        null !== $externalAccountID && $obj['externalAccountID'] = $externalAccountID;
+        null !== $prefundedAccountID && $obj['prefundedAccountID'] = $prefundedAccountID;
 
         return $obj;
     }
@@ -233,7 +233,7 @@ final class LiquidationAddressResponse implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -255,7 +255,7 @@ final class LiquidationAddressResponse implements BaseModel
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj['customer_id'] = $customerID;
+        $obj['customerID'] = $customerID;
 
         return $obj;
     }
@@ -277,7 +277,7 @@ final class LiquidationAddressResponse implements BaseModel
     public function withUpdatedAt(string $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -288,7 +288,7 @@ final class LiquidationAddressResponse implements BaseModel
     public function withBridgeWalletID(string $bridgeWalletID): self
     {
         $obj = clone $this;
-        $obj['bridge_wallet_id'] = $bridgeWalletID;
+        $obj['bridgeWalletID'] = $bridgeWalletID;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class LiquidationAddressResponse implements BaseModel
         string $customDeveloperFeePercent
     ): self {
         $obj = clone $this;
-        $obj['custom_developer_fee_percent'] = $customDeveloperFeePercent;
+        $obj['customDeveloperFeePercent'] = $customDeveloperFeePercent;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class LiquidationAddressResponse implements BaseModel
     public function withDestinationCurrency(string $destinationCurrency): self
     {
         $obj = clone $this;
-        $obj['destination_currency'] = $destinationCurrency;
+        $obj['destinationCurrency'] = $destinationCurrency;
 
         return $obj;
     }
@@ -323,7 +323,7 @@ final class LiquidationAddressResponse implements BaseModel
         string $destinationPaymentRail
     ): self {
         $obj = clone $this;
-        $obj['destination_payment_rail'] = $destinationPaymentRail;
+        $obj['destinationPaymentRail'] = $destinationPaymentRail;
 
         return $obj;
     }
@@ -334,7 +334,7 @@ final class LiquidationAddressResponse implements BaseModel
     public function withExternalAccountID(string $externalAccountID): self
     {
         $obj = clone $this;
-        $obj['external_account_id'] = $externalAccountID;
+        $obj['externalAccountID'] = $externalAccountID;
 
         return $obj;
     }
@@ -345,7 +345,7 @@ final class LiquidationAddressResponse implements BaseModel
     public function withPrefundedAccountID(string $prefundedAccountID): self
     {
         $obj = clone $this;
-        $obj['prefunded_account_id'] = $prefundedAccountID;
+        $obj['prefundedAccountID'] = $prefundedAccountID;
 
         return $obj;
     }

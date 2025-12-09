@@ -18,7 +18,7 @@ use Devdraft\Core\Contracts\BaseModel;
  *   encrypted?: bool,
  *   isActive?: bool,
  *   name?: string,
- *   signing_secret?: string,
+ *   signingSecret?: string,
  *   url?: string,
  * }
  */
@@ -49,8 +49,8 @@ final class WebhookUpdateParams implements BaseModel
     /**
      * Secret key used to sign webhook payloads for verification.
      */
-    #[Optional]
-    public ?string $signing_secret;
+    #[Optional('signing_secret')]
+    public ?string $signingSecret;
 
     /**
      * URL where webhook events will be sent.
@@ -72,7 +72,7 @@ final class WebhookUpdateParams implements BaseModel
         ?bool $encrypted = null,
         ?bool $isActive = null,
         ?string $name = null,
-        ?string $signing_secret = null,
+        ?string $signingSecret = null,
         ?string $url = null,
     ): self {
         $obj = new self;
@@ -80,7 +80,7 @@ final class WebhookUpdateParams implements BaseModel
         null !== $encrypted && $obj['encrypted'] = $encrypted;
         null !== $isActive && $obj['isActive'] = $isActive;
         null !== $name && $obj['name'] = $name;
-        null !== $signing_secret && $obj['signing_secret'] = $signing_secret;
+        null !== $signingSecret && $obj['signingSecret'] = $signingSecret;
         null !== $url && $obj['url'] = $url;
 
         return $obj;
@@ -125,7 +125,7 @@ final class WebhookUpdateParams implements BaseModel
     public function withSigningSecret(string $signingSecret): self
     {
         $obj = clone $this;
-        $obj['signing_secret'] = $signingSecret;
+        $obj['signingSecret'] = $signingSecret;
 
         return $obj;
     }

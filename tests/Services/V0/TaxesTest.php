@@ -58,7 +58,7 @@ final class TaxesTest extends TestCase
             'name' => 'Sales Tax',
             'percentage' => 8.5,
             'active' => true,
-            'appIds' => ['app_123e4567-e89b-12d3-a456-426614174000'],
+            'appIDs' => ['app_123e4567-e89b-12d3-a456-426614174000'],
             'description' => 'Standard sales tax for retail transactions',
         ]);
 

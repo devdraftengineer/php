@@ -12,11 +12,11 @@ use Devdraft\Core\Contracts\BaseModel;
  * @phpstan-type TaxNewResponseShape = array{
  *   id?: string|null,
  *   active?: bool|null,
- *   created_at?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
  *   description?: string|null,
  *   name?: string|null,
  *   percentage?: float|null,
- *   updated_at?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class TaxNewResponse implements BaseModel
@@ -30,8 +30,8 @@ final class TaxNewResponse implements BaseModel
     #[Optional]
     public ?bool $active;
 
-    #[Optional]
-    public ?\DateTimeInterface $created_at;
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
     #[Optional]
     public ?string $description;
@@ -42,8 +42,8 @@ final class TaxNewResponse implements BaseModel
     #[Optional]
     public ?float $percentage;
 
-    #[Optional]
-    public ?\DateTimeInterface $updated_at;
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -58,21 +58,21 @@ final class TaxNewResponse implements BaseModel
     public static function with(
         ?string $id = null,
         ?bool $active = null,
-        ?\DateTimeInterface $created_at = null,
+        ?\DateTimeInterface $createdAt = null,
         ?string $description = null,
         ?string $name = null,
         ?float $percentage = null,
-        ?\DateTimeInterface $updated_at = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
         $obj = new self;
 
         null !== $id && $obj['id'] = $id;
         null !== $active && $obj['active'] = $active;
-        null !== $created_at && $obj['created_at'] = $created_at;
+        null !== $createdAt && $obj['createdAt'] = $createdAt;
         null !== $description && $obj['description'] = $description;
         null !== $name && $obj['name'] = $name;
         null !== $percentage && $obj['percentage'] = $percentage;
-        null !== $updated_at && $obj['updated_at'] = $updated_at;
+        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }
@@ -96,7 +96,7 @@ final class TaxNewResponse implements BaseModel
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -128,7 +128,7 @@ final class TaxNewResponse implements BaseModel
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $obj = clone $this;
-        $obj['updated_at'] = $updatedAt;
+        $obj['updatedAt'] = $updatedAt;
 
         return $obj;
     }

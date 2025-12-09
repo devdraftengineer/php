@@ -65,20 +65,20 @@ use Devdraft\V0\PaymentIntents\PaymentIntentCreateBankParams\SourceCurrency;
  *   destinationNetwork: BridgePaymentRail|value-of<BridgePaymentRail>,
  *   sourceCurrency: SourceCurrency|value-of<SourceCurrency>,
  *   sourcePaymentRail: BridgePaymentRail|value-of<BridgePaymentRail>,
- *   ach_reference?: string,
+ *   achReference?: string,
  *   amount?: string,
- *   customer_address?: string,
- *   customer_country?: string,
- *   customer_countryISO?: string,
- *   customer_email?: string,
- *   customer_first_name?: string,
- *   customer_last_name?: string,
- *   customer_province?: string,
- *   customer_provinceISO?: string,
+ *   customerAddress?: string,
+ *   customerCountry?: string,
+ *   customerCountryISO?: string,
+ *   customerEmail?: string,
+ *   customerFirstName?: string,
+ *   customerLastName?: string,
+ *   customerProvince?: string,
+ *   customerProvinceISO?: string,
  *   destinationAddress?: string,
  *   phoneNumber?: string,
- *   sepa_reference?: string,
- *   wire_message?: string,
+ *   sepaReference?: string,
+ *   wireMessage?: string,
  * }
  */
 final class PaymentIntentCreateBankParams implements BaseModel
@@ -122,8 +122,8 @@ final class PaymentIntentCreateBankParams implements BaseModel
     /**
      * ACH reference (for ACH transfers).
      */
-    #[Optional]
-    public ?string $ach_reference;
+    #[Optional('ach_reference')]
+    public ?string $achReference;
 
     /**
      * Payment amount (optional for flexible amount).
@@ -134,50 +134,50 @@ final class PaymentIntentCreateBankParams implements BaseModel
     /**
      * Customer address.
      */
-    #[Optional]
-    public ?string $customer_address;
+    #[Optional('customer_address')]
+    public ?string $customerAddress;
 
     /**
      * Customer country.
      */
-    #[Optional]
-    public ?string $customer_country;
+    #[Optional('customer_country')]
+    public ?string $customerCountry;
 
     /**
      * Customer country ISO code.
      */
-    #[Optional]
-    public ?string $customer_countryISO;
+    #[Optional('customer_countryISO')]
+    public ?string $customerCountryISO;
 
     /**
      * Customer email address.
      */
-    #[Optional]
-    public ?string $customer_email;
+    #[Optional('customer_email')]
+    public ?string $customerEmail;
 
     /**
      * Customer first name.
      */
-    #[Optional]
-    public ?string $customer_first_name;
+    #[Optional('customer_first_name')]
+    public ?string $customerFirstName;
 
     /**
      * Customer last name.
      */
-    #[Optional]
-    public ?string $customer_last_name;
+    #[Optional('customer_last_name')]
+    public ?string $customerLastName;
 
     /**
      * Customer province/state.
      */
-    #[Optional]
-    public ?string $customer_province;
+    #[Optional('customer_province')]
+    public ?string $customerProvince;
 
     /**
      * Customer province/state ISO code.
      */
-    #[Optional]
-    public ?string $customer_provinceISO;
+    #[Optional('customer_provinceISO')]
+    public ?string $customerProvinceISO;
 
     /**
      * Destination wallet address. Supports Ethereum (0x...) and Solana address formats.
@@ -194,14 +194,14 @@ final class PaymentIntentCreateBankParams implements BaseModel
     /**
      * SEPA reference (for SEPA transfers).
      */
-    #[Optional]
-    public ?string $sepa_reference;
+    #[Optional('sepa_reference')]
+    public ?string $sepaReference;
 
     /**
      * Wire transfer message (for WIRE transfers).
      */
-    #[Optional]
-    public ?string $wire_message;
+    #[Optional('wire_message')]
+    public ?string $wireMessage;
 
     /**
      * `new PaymentIntentCreateBankParams()` is missing required properties by the API.
@@ -246,20 +246,20 @@ final class PaymentIntentCreateBankParams implements BaseModel
         BridgePaymentRail|string $destinationNetwork,
         BridgePaymentRail|string $sourcePaymentRail,
         SourceCurrency|string $sourceCurrency = 'usd',
-        ?string $ach_reference = null,
+        ?string $achReference = null,
         ?string $amount = null,
-        ?string $customer_address = null,
-        ?string $customer_country = null,
-        ?string $customer_countryISO = null,
-        ?string $customer_email = null,
-        ?string $customer_first_name = null,
-        ?string $customer_last_name = null,
-        ?string $customer_province = null,
-        ?string $customer_provinceISO = null,
+        ?string $customerAddress = null,
+        ?string $customerCountry = null,
+        ?string $customerCountryISO = null,
+        ?string $customerEmail = null,
+        ?string $customerFirstName = null,
+        ?string $customerLastName = null,
+        ?string $customerProvince = null,
+        ?string $customerProvinceISO = null,
         ?string $destinationAddress = null,
         ?string $phoneNumber = null,
-        ?string $sepa_reference = null,
-        ?string $wire_message = null,
+        ?string $sepaReference = null,
+        ?string $wireMessage = null,
     ): self {
         $obj = new self;
 
@@ -268,20 +268,20 @@ final class PaymentIntentCreateBankParams implements BaseModel
         $obj['sourceCurrency'] = $sourceCurrency;
         $obj['sourcePaymentRail'] = $sourcePaymentRail;
 
-        null !== $ach_reference && $obj['ach_reference'] = $ach_reference;
+        null !== $achReference && $obj['achReference'] = $achReference;
         null !== $amount && $obj['amount'] = $amount;
-        null !== $customer_address && $obj['customer_address'] = $customer_address;
-        null !== $customer_country && $obj['customer_country'] = $customer_country;
-        null !== $customer_countryISO && $obj['customer_countryISO'] = $customer_countryISO;
-        null !== $customer_email && $obj['customer_email'] = $customer_email;
-        null !== $customer_first_name && $obj['customer_first_name'] = $customer_first_name;
-        null !== $customer_last_name && $obj['customer_last_name'] = $customer_last_name;
-        null !== $customer_province && $obj['customer_province'] = $customer_province;
-        null !== $customer_provinceISO && $obj['customer_provinceISO'] = $customer_provinceISO;
+        null !== $customerAddress && $obj['customerAddress'] = $customerAddress;
+        null !== $customerCountry && $obj['customerCountry'] = $customerCountry;
+        null !== $customerCountryISO && $obj['customerCountryISO'] = $customerCountryISO;
+        null !== $customerEmail && $obj['customerEmail'] = $customerEmail;
+        null !== $customerFirstName && $obj['customerFirstName'] = $customerFirstName;
+        null !== $customerLastName && $obj['customerLastName'] = $customerLastName;
+        null !== $customerProvince && $obj['customerProvince'] = $customerProvince;
+        null !== $customerProvinceISO && $obj['customerProvinceISO'] = $customerProvinceISO;
         null !== $destinationAddress && $obj['destinationAddress'] = $destinationAddress;
         null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $sepa_reference && $obj['sepa_reference'] = $sepa_reference;
-        null !== $wire_message && $obj['wire_message'] = $wire_message;
+        null !== $sepaReference && $obj['sepaReference'] = $sepaReference;
+        null !== $wireMessage && $obj['wireMessage'] = $wireMessage;
 
         return $obj;
     }
@@ -348,7 +348,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withACHReference(string $achReference): self
     {
         $obj = clone $this;
-        $obj['ach_reference'] = $achReference;
+        $obj['achReference'] = $achReference;
 
         return $obj;
     }
@@ -370,7 +370,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withCustomerAddress(string $customerAddress): self
     {
         $obj = clone $this;
-        $obj['customer_address'] = $customerAddress;
+        $obj['customerAddress'] = $customerAddress;
 
         return $obj;
     }
@@ -381,7 +381,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withCustomerCountry(string $customerCountry): self
     {
         $obj = clone $this;
-        $obj['customer_country'] = $customerCountry;
+        $obj['customerCountry'] = $customerCountry;
 
         return $obj;
     }
@@ -392,7 +392,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withCustomerCountryISO(string $customerCountryISO): self
     {
         $obj = clone $this;
-        $obj['customer_countryISO'] = $customerCountryISO;
+        $obj['customerCountryISO'] = $customerCountryISO;
 
         return $obj;
     }
@@ -403,7 +403,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withCustomerEmail(string $customerEmail): self
     {
         $obj = clone $this;
-        $obj['customer_email'] = $customerEmail;
+        $obj['customerEmail'] = $customerEmail;
 
         return $obj;
     }
@@ -414,7 +414,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withCustomerFirstName(string $customerFirstName): self
     {
         $obj = clone $this;
-        $obj['customer_first_name'] = $customerFirstName;
+        $obj['customerFirstName'] = $customerFirstName;
 
         return $obj;
     }
@@ -425,7 +425,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withCustomerLastName(string $customerLastName): self
     {
         $obj = clone $this;
-        $obj['customer_last_name'] = $customerLastName;
+        $obj['customerLastName'] = $customerLastName;
 
         return $obj;
     }
@@ -436,7 +436,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withCustomerProvince(string $customerProvince): self
     {
         $obj = clone $this;
-        $obj['customer_province'] = $customerProvince;
+        $obj['customerProvince'] = $customerProvince;
 
         return $obj;
     }
@@ -447,7 +447,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withCustomerProvinceISO(string $customerProvinceISO): self
     {
         $obj = clone $this;
-        $obj['customer_provinceISO'] = $customerProvinceISO;
+        $obj['customerProvinceISO'] = $customerProvinceISO;
 
         return $obj;
     }
@@ -480,7 +480,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withSepaReference(string $sepaReference): self
     {
         $obj = clone $this;
-        $obj['sepa_reference'] = $sepaReference;
+        $obj['sepaReference'] = $sepaReference;
 
         return $obj;
     }
@@ -491,7 +491,7 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withWireMessage(string $wireMessage): self
     {
         $obj = clone $this;
-        $obj['wire_message'] = $wireMessage;
+        $obj['wireMessage'] = $wireMessage;
 
         return $obj;
     }

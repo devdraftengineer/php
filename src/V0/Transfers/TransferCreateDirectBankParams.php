@@ -20,10 +20,10 @@ use Devdraft\Core\Contracts\BaseModel;
  *   destinationCurrency: string,
  *   paymentRail: string,
  *   sourceCurrency: string,
- *   walletId: string,
- *   ach_reference?: string,
- *   sepa_reference?: string,
- *   wire_message?: string,
+ *   walletID: string,
+ *   achReference?: string,
+ *   sepaReference?: string,
+ *   wireMessage?: string,
  * }
  */
 final class TransferCreateDirectBankParams implements BaseModel
@@ -59,26 +59,26 @@ final class TransferCreateDirectBankParams implements BaseModel
     /**
      * The ID of the bridge wallet to transfer from.
      */
-    #[Required]
-    public string $walletId;
+    #[Required('walletId')]
+    public string $walletID;
 
     /**
      * ACH transfer reference.
      */
-    #[Optional]
-    public ?string $ach_reference;
+    #[Optional('ach_reference')]
+    public ?string $achReference;
 
     /**
      * SEPA transfer reference.
      */
-    #[Optional]
-    public ?string $sepa_reference;
+    #[Optional('sepa_reference')]
+    public ?string $sepaReference;
 
     /**
      * Wire transfer message.
      */
-    #[Optional]
-    public ?string $wire_message;
+    #[Optional('wire_message')]
+    public ?string $wireMessage;
 
     /**
      * `new TransferCreateDirectBankParams()` is missing required properties by the API.
@@ -90,7 +90,7 @@ final class TransferCreateDirectBankParams implements BaseModel
      *   destinationCurrency: ...,
      *   paymentRail: ...,
      *   sourceCurrency: ...,
-     *   walletId: ...,
+     *   walletID: ...,
      * )
      * ```
      *
@@ -120,10 +120,10 @@ final class TransferCreateDirectBankParams implements BaseModel
         string $destinationCurrency,
         string $paymentRail,
         string $sourceCurrency,
-        string $walletId,
-        ?string $ach_reference = null,
-        ?string $sepa_reference = null,
-        ?string $wire_message = null,
+        string $walletID,
+        ?string $achReference = null,
+        ?string $sepaReference = null,
+        ?string $wireMessage = null,
     ): self {
         $obj = new self;
 
@@ -131,11 +131,11 @@ final class TransferCreateDirectBankParams implements BaseModel
         $obj['destinationCurrency'] = $destinationCurrency;
         $obj['paymentRail'] = $paymentRail;
         $obj['sourceCurrency'] = $sourceCurrency;
-        $obj['walletId'] = $walletId;
+        $obj['walletID'] = $walletID;
 
-        null !== $ach_reference && $obj['ach_reference'] = $ach_reference;
-        null !== $sepa_reference && $obj['sepa_reference'] = $sepa_reference;
-        null !== $wire_message && $obj['wire_message'] = $wire_message;
+        null !== $achReference && $obj['achReference'] = $achReference;
+        null !== $sepaReference && $obj['sepaReference'] = $sepaReference;
+        null !== $wireMessage && $obj['wireMessage'] = $wireMessage;
 
         return $obj;
     }
@@ -190,7 +190,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withWalletID(string $walletID): self
     {
         $obj = clone $this;
-        $obj['walletId'] = $walletID;
+        $obj['walletID'] = $walletID;
 
         return $obj;
     }
@@ -201,7 +201,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withACHReference(string $achReference): self
     {
         $obj = clone $this;
-        $obj['ach_reference'] = $achReference;
+        $obj['achReference'] = $achReference;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withSepaReference(string $sepaReference): self
     {
         $obj = clone $this;
-        $obj['sepa_reference'] = $sepaReference;
+        $obj['sepaReference'] = $sepaReference;
 
         return $obj;
     }
@@ -223,7 +223,7 @@ final class TransferCreateDirectBankParams implements BaseModel
     public function withWireMessage(string $wireMessage): self
     {
         $obj = clone $this;
-        $obj['wire_message'] = $wireMessage;
+        $obj['wireMessage'] = $wireMessage;
 
         return $obj;
     }

@@ -29,18 +29,18 @@ use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\PaymentLinkProduct;
  *   url: string,
  *   amount?: float,
  *   coverImage?: string,
- *   customerId?: string,
+ *   customerID?: string,
  *   customFields?: mixed,
  *   description?: string,
- *   expiration_date?: \DateTimeInterface,
+ *   expirationDate?: \DateTimeInterface,
  *   isForAllProduct?: bool,
  *   limitPayments?: bool,
  *   maxPayments?: float,
- *   paymentForId?: string,
+ *   paymentForID?: string,
  *   paymentLinkProducts?: list<PaymentLinkProduct|array{
- *     productId: string, quantity: int
+ *     productID: string, quantity: int
  *   }>,
- *   taxId?: string,
+ *   taxID?: string,
  * }
  */
 final class PaymentLinkCreateParams implements BaseModel
@@ -116,8 +116,8 @@ final class PaymentLinkCreateParams implements BaseModel
     /**
      * Customer ID.
      */
-    #[Optional]
-    public ?string $customerId;
+    #[Optional('customerId')]
+    public ?string $customerID;
 
     /**
      * Custom fields.
@@ -134,8 +134,8 @@ final class PaymentLinkCreateParams implements BaseModel
     /**
      * Expiration date.
      */
-    #[Optional]
-    public ?\DateTimeInterface $expiration_date;
+    #[Optional('expiration_date')]
+    public ?\DateTimeInterface $expirationDate;
 
     /**
      * Whether the payment link is for all products.
@@ -158,8 +158,8 @@ final class PaymentLinkCreateParams implements BaseModel
     /**
      * Payment for ID.
      */
-    #[Optional]
-    public ?string $paymentForId;
+    #[Optional('paymentForId')]
+    public ?string $paymentForID;
 
     /**
      * Array of products in the payment link.
@@ -172,8 +172,8 @@ final class PaymentLinkCreateParams implements BaseModel
     /**
      * Tax ID.
      */
-    #[Optional]
-    public ?string $taxId;
+    #[Optional('taxId')]
+    public ?string $taxID;
 
     /**
      * `new PaymentLinkCreateParams()` is missing required properties by the API.
@@ -219,7 +219,7 @@ final class PaymentLinkCreateParams implements BaseModel
      * @param LinkType|value-of<LinkType> $linkType
      * @param Currency|value-of<Currency> $currency
      * @param list<PaymentLinkProduct|array{
-     *   productId: string, quantity: int
+     *   productID: string, quantity: int
      * }> $paymentLinkProducts
      */
     public static function with(
@@ -233,16 +233,16 @@ final class PaymentLinkCreateParams implements BaseModel
         Currency|string $currency = 'usdc',
         ?float $amount = null,
         ?string $coverImage = null,
-        ?string $customerId = null,
+        ?string $customerID = null,
         mixed $customFields = null,
         ?string $description = null,
-        ?\DateTimeInterface $expiration_date = null,
+        ?\DateTimeInterface $expirationDate = null,
         ?bool $isForAllProduct = null,
         ?bool $limitPayments = null,
         ?float $maxPayments = null,
-        ?string $paymentForId = null,
+        ?string $paymentForID = null,
         ?array $paymentLinkProducts = null,
-        ?string $taxId = null,
+        ?string $taxID = null,
     ): self {
         $obj = new self;
 
@@ -257,16 +257,16 @@ final class PaymentLinkCreateParams implements BaseModel
 
         null !== $amount && $obj['amount'] = $amount;
         null !== $coverImage && $obj['coverImage'] = $coverImage;
-        null !== $customerId && $obj['customerId'] = $customerId;
+        null !== $customerID && $obj['customerID'] = $customerID;
         null !== $customFields && $obj['customFields'] = $customFields;
         null !== $description && $obj['description'] = $description;
-        null !== $expiration_date && $obj['expiration_date'] = $expiration_date;
+        null !== $expirationDate && $obj['expirationDate'] = $expirationDate;
         null !== $isForAllProduct && $obj['isForAllProduct'] = $isForAllProduct;
         null !== $limitPayments && $obj['limitPayments'] = $limitPayments;
         null !== $maxPayments && $obj['maxPayments'] = $maxPayments;
-        null !== $paymentForId && $obj['paymentForId'] = $paymentForId;
+        null !== $paymentForID && $obj['paymentForID'] = $paymentForID;
         null !== $paymentLinkProducts && $obj['paymentLinkProducts'] = $paymentLinkProducts;
-        null !== $taxId && $obj['taxId'] = $taxId;
+        null !== $taxID && $obj['taxID'] = $taxID;
 
         return $obj;
     }
@@ -392,7 +392,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj['customerId'] = $customerID;
+        $obj['customerID'] = $customerID;
 
         return $obj;
     }
@@ -425,7 +425,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withExpirationDate(\DateTimeInterface $expirationDate): self
     {
         $obj = clone $this;
-        $obj['expiration_date'] = $expirationDate;
+        $obj['expirationDate'] = $expirationDate;
 
         return $obj;
     }
@@ -469,7 +469,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withPaymentForID(string $paymentForID): self
     {
         $obj = clone $this;
-        $obj['paymentForId'] = $paymentForID;
+        $obj['paymentForID'] = $paymentForID;
 
         return $obj;
     }
@@ -478,7 +478,7 @@ final class PaymentLinkCreateParams implements BaseModel
      * Array of products in the payment link.
      *
      * @param list<PaymentLinkProduct|array{
-     *   productId: string, quantity: int
+     *   productID: string, quantity: int
      * }> $paymentLinkProducts
      */
     public function withPaymentLinkProducts(array $paymentLinkProducts): self
@@ -495,7 +495,7 @@ final class PaymentLinkCreateParams implements BaseModel
     public function withTaxID(string $taxID): self
     {
         $obj = clone $this;
-        $obj['taxId'] = $taxID;
+        $obj['taxID'] = $taxID;
 
         return $obj;
     }

@@ -19,16 +19,16 @@ use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams\DestinationPa
  * @phpstan-type TransferCreateExternalBankTransferParamsShape = array{
  *   destinationCurrency: string,
  *   destinationPaymentRail: DestinationPaymentRail|value-of<DestinationPaymentRail>,
- *   external_account_id: string,
+ *   externalAccountID: string,
  *   sourceCurrency: string,
- *   sourceWalletId: string,
- *   ach_reference?: string,
+ *   sourceWalletID: string,
+ *   achReference?: string,
  *   amount?: float,
- *   sepa_reference?: string,
- *   spei_reference?: string,
- *   swift_charges?: string,
- *   swift_reference?: string,
- *   wire_message?: string,
+ *   sepaReference?: string,
+ *   speiReference?: string,
+ *   swiftCharges?: string,
+ *   swiftReference?: string,
+ *   wireMessage?: string,
  * }
  */
 final class TransferCreateExternalBankTransferParams implements BaseModel
@@ -54,8 +54,8 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     /**
      * The external account ID for the bank transfer.
      */
-    #[Required]
-    public string $external_account_id;
+    #[Required('external_account_id')]
+    public string $externalAccountID;
 
     /**
      * The source currency.
@@ -66,14 +66,14 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     /**
      * The ID of the source bridge wallet.
      */
-    #[Required]
-    public string $sourceWalletId;
+    #[Required('sourceWalletId')]
+    public string $sourceWalletID;
 
     /**
      * ACH reference message (1-10 characters, only for ACH transfers).
      */
-    #[Optional]
-    public ?string $ach_reference;
+    #[Optional('ach_reference')]
+    public ?string $achReference;
 
     /**
      * The amount to transfer.
@@ -84,32 +84,32 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     /**
      * SEPA reference message (6-140 characters, only for SEPA transfers).
      */
-    #[Optional]
-    public ?string $sepa_reference;
+    #[Optional('sepa_reference')]
+    public ?string $sepaReference;
 
     /**
      * SPEI reference message (1-40 characters, only for SPEI transfers).
      */
-    #[Optional]
-    public ?string $spei_reference;
+    #[Optional('spei_reference')]
+    public ?string $speiReference;
 
     /**
      * SWIFT charges bearer (only for SWIFT transfers).
      */
-    #[Optional]
-    public ?string $swift_charges;
+    #[Optional('swift_charges')]
+    public ?string $swiftCharges;
 
     /**
      * SWIFT reference message (1-190 characters, only for SWIFT transfers).
      */
-    #[Optional]
-    public ?string $swift_reference;
+    #[Optional('swift_reference')]
+    public ?string $swiftReference;
 
     /**
      * Wire transfer message (1-256 characters, only for wire transfers).
      */
-    #[Optional]
-    public ?string $wire_message;
+    #[Optional('wire_message')]
+    public ?string $wireMessage;
 
     /**
      * `new TransferCreateExternalBankTransferParams()` is missing required properties by the API.
@@ -119,9 +119,9 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      * TransferCreateExternalBankTransferParams::with(
      *   destinationCurrency: ...,
      *   destinationPaymentRail: ...,
-     *   external_account_id: ...,
+     *   externalAccountID: ...,
      *   sourceCurrency: ...,
-     *   sourceWalletId: ...,
+     *   sourceWalletID: ...,
      * )
      * ```
      *
@@ -151,32 +151,32 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public static function with(
         string $destinationCurrency,
         DestinationPaymentRail|string $destinationPaymentRail,
-        string $external_account_id,
+        string $externalAccountID,
         string $sourceCurrency,
-        string $sourceWalletId,
-        ?string $ach_reference = null,
+        string $sourceWalletID,
+        ?string $achReference = null,
         ?float $amount = null,
-        ?string $sepa_reference = null,
-        ?string $spei_reference = null,
-        ?string $swift_charges = null,
-        ?string $swift_reference = null,
-        ?string $wire_message = null,
+        ?string $sepaReference = null,
+        ?string $speiReference = null,
+        ?string $swiftCharges = null,
+        ?string $swiftReference = null,
+        ?string $wireMessage = null,
     ): self {
         $obj = new self;
 
         $obj['destinationCurrency'] = $destinationCurrency;
         $obj['destinationPaymentRail'] = $destinationPaymentRail;
-        $obj['external_account_id'] = $external_account_id;
+        $obj['externalAccountID'] = $externalAccountID;
         $obj['sourceCurrency'] = $sourceCurrency;
-        $obj['sourceWalletId'] = $sourceWalletId;
+        $obj['sourceWalletID'] = $sourceWalletID;
 
-        null !== $ach_reference && $obj['ach_reference'] = $ach_reference;
+        null !== $achReference && $obj['achReference'] = $achReference;
         null !== $amount && $obj['amount'] = $amount;
-        null !== $sepa_reference && $obj['sepa_reference'] = $sepa_reference;
-        null !== $spei_reference && $obj['spei_reference'] = $spei_reference;
-        null !== $swift_charges && $obj['swift_charges'] = $swift_charges;
-        null !== $swift_reference && $obj['swift_reference'] = $swift_reference;
-        null !== $wire_message && $obj['wire_message'] = $wire_message;
+        null !== $sepaReference && $obj['sepaReference'] = $sepaReference;
+        null !== $speiReference && $obj['speiReference'] = $speiReference;
+        null !== $swiftCharges && $obj['swiftCharges'] = $swiftCharges;
+        null !== $swiftReference && $obj['swiftReference'] = $swiftReference;
+        null !== $wireMessage && $obj['wireMessage'] = $wireMessage;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withExternalAccountID(string $externalAccountID): self
     {
         $obj = clone $this;
-        $obj['external_account_id'] = $externalAccountID;
+        $obj['externalAccountID'] = $externalAccountID;
 
         return $obj;
     }
@@ -234,7 +234,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withSourceWalletID(string $sourceWalletID): self
     {
         $obj = clone $this;
-        $obj['sourceWalletId'] = $sourceWalletID;
+        $obj['sourceWalletID'] = $sourceWalletID;
 
         return $obj;
     }
@@ -245,7 +245,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withACHReference(string $achReference): self
     {
         $obj = clone $this;
-        $obj['ach_reference'] = $achReference;
+        $obj['achReference'] = $achReference;
 
         return $obj;
     }
@@ -267,7 +267,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withSepaReference(string $sepaReference): self
     {
         $obj = clone $this;
-        $obj['sepa_reference'] = $sepaReference;
+        $obj['sepaReference'] = $sepaReference;
 
         return $obj;
     }
@@ -278,7 +278,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withSpeiReference(string $speiReference): self
     {
         $obj = clone $this;
-        $obj['spei_reference'] = $speiReference;
+        $obj['speiReference'] = $speiReference;
 
         return $obj;
     }
@@ -289,7 +289,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withSwiftCharges(string $swiftCharges): self
     {
         $obj = clone $this;
-        $obj['swift_charges'] = $swiftCharges;
+        $obj['swiftCharges'] = $swiftCharges;
 
         return $obj;
     }
@@ -300,7 +300,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withSwiftReference(string $swiftReference): self
     {
         $obj = clone $this;
-        $obj['swift_reference'] = $swiftReference;
+        $obj['swiftReference'] = $swiftReference;
 
         return $obj;
     }
@@ -311,7 +311,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withWireMessage(string $wireMessage): self
     {
         $obj = clone $this;
-        $obj['wire_message'] = $wireMessage;
+        $obj['wireMessage'] = $wireMessage;
 
         return $obj;
     }

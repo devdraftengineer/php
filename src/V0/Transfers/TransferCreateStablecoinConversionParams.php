@@ -19,7 +19,7 @@ use Devdraft\Core\Contracts\BaseModel;
  *   destinationCurrency: string,
  *   sourceCurrency: string,
  *   sourceNetwork: string,
- *   walletId: string,
+ *   walletID: string,
  * }
  */
 final class TransferCreateStablecoinConversionParams implements BaseModel
@@ -55,8 +55,8 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
     /**
      * The ID of the bridge wallet to use.
      */
-    #[Required]
-    public string $walletId;
+    #[Required('walletId')]
+    public string $walletID;
 
     /**
      * `new TransferCreateStablecoinConversionParams()` is missing required properties by the API.
@@ -68,7 +68,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
      *   destinationCurrency: ...,
      *   sourceCurrency: ...,
      *   sourceNetwork: ...,
-     *   walletId: ...,
+     *   walletID: ...,
      * )
      * ```
      *
@@ -98,7 +98,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
         string $destinationCurrency,
         string $sourceCurrency,
         string $sourceNetwork,
-        string $walletId,
+        string $walletID,
     ): self {
         $obj = new self;
 
@@ -106,7 +106,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
         $obj['destinationCurrency'] = $destinationCurrency;
         $obj['sourceCurrency'] = $sourceCurrency;
         $obj['sourceNetwork'] = $sourceNetwork;
-        $obj['walletId'] = $walletId;
+        $obj['walletID'] = $walletID;
 
         return $obj;
     }
@@ -161,7 +161,7 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
     public function withWalletID(string $walletID): self
     {
         $obj = clone $this;
-        $obj['walletId'] = $walletID;
+        $obj['walletID'] = $walletID;
 
         return $obj;
     }
