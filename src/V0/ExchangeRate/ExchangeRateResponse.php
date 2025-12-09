@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\ExchangeRate;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
@@ -26,37 +27,37 @@ final class ExchangeRateResponse implements BaseModel
     /**
      * Rate for buying target currency (what you get when converting from source to target).
      */
-    #[Api]
+    #[Required]
     public string $buy_rate;
 
     /**
      * Source currency code (USD for USDC).
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
      * Mid-market exchange rate from source to target currency.
      */
-    #[Api]
+    #[Required]
     public string $midmarket_rate;
 
     /**
      * Rate for selling target currency (what you pay when converting from target to source).
      */
-    #[Api]
+    #[Required]
     public string $sell_rate;
 
     /**
      * Target currency code (EUR for EURC).
      */
-    #[Api]
+    #[Required]
     public string $to;
 
     /**
      * Timestamp when the exchange rate was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $timestamp;
 
     /**

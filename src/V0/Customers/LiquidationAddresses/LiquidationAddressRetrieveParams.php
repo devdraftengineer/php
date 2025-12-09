@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Customers\LiquidationAddresses;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -22,7 +22,7 @@ final class LiquidationAddressRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $customerId;
 
     /**

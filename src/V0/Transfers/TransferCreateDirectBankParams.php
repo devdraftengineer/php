@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Transfers;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -34,49 +35,49 @@ final class TransferCreateDirectBankParams implements BaseModel
     /**
      * The amount to transfer.
      */
-    #[Api]
+    #[Required]
     public float $amount;
 
     /**
      * The destination currency.
      */
-    #[Api]
+    #[Required]
     public string $destinationCurrency;
 
     /**
      * The payment rail to use.
      */
-    #[Api]
+    #[Required]
     public string $paymentRail;
 
     /**
      * The source currency.
      */
-    #[Api]
+    #[Required]
     public string $sourceCurrency;
 
     /**
      * The ID of the bridge wallet to transfer from.
      */
-    #[Api]
+    #[Required]
     public string $walletId;
 
     /**
      * ACH transfer reference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ach_reference;
 
     /**
      * SEPA transfer reference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sepa_reference;
 
     /**
      * Wire transfer message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wire_message;
 
     /**

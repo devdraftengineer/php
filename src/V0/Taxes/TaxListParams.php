@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Taxes;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -57,25 +57,25 @@ final class TaxListParams implements BaseModel
     /**
      * Filter by active status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
      * Filter taxes by name (partial match, case-insensitive).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Number of records to skip for pagination.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $skip;
 
     /**
      * Number of records to return (max 100).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $take;
 
     public function __construct()

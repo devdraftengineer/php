@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Taxes;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -58,7 +58,7 @@ final class TaxUpdateParams implements BaseModel
     /**
      * Whether this tax is currently active and can be applied.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
@@ -66,25 +66,25 @@ final class TaxUpdateParams implements BaseModel
      *
      * @var list<string>|null $appIds
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $appIds;
 
     /**
      * Detailed description of what this tax covers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Tax name for identification and display purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Tax rate as a percentage (0-100).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $percentage;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\TestPayment;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -79,25 +80,25 @@ final class TestPaymentProcessParams implements BaseModel
     /**
      * The amount to charge.
      */
-    #[Api]
+    #[Required]
     public float $amount;
 
     /**
      * The currency code.
      */
-    #[Api]
+    #[Required]
     public string $currency;
 
     /**
      * Description of the payment.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * Customer reference ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customerId;
 
     /**

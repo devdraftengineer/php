@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Customers\LiquidationAddresses;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -65,7 +66,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     /**
      * The liquidation address on the blockchain.
      */
-    #[Api]
+    #[Required]
     public string $address;
 
     /**
@@ -73,7 +74,7 @@ final class LiquidationAddressCreateParams implements BaseModel
      *
      * @var value-of<Chain> $chain
      */
-    #[Api(enum: Chain::class)]
+    #[Required(enum: Chain::class)]
     public string $chain;
 
     /**
@@ -81,37 +82,37 @@ final class LiquidationAddressCreateParams implements BaseModel
      *
      * @var value-of<Currency> $currency
      */
-    #[Api(enum: Currency::class)]
+    #[Required(enum: Currency::class)]
     public string $currency;
 
     /**
      * Bridge Wallet to send funds to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bridge_wallet_id;
 
     /**
      * Custom developer fee percentage (Base 100 percentage: 10.2% = "10.2").
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $custom_developer_fee_percent;
 
     /**
      * Reference for ACH transactions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_ach_reference;
 
     /**
      * Crypto wallet address for crypto transfers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_address;
 
     /**
      * Memo for blockchain transactions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_blockchain_memo;
 
     /**
@@ -119,7 +120,7 @@ final class LiquidationAddressCreateParams implements BaseModel
      *
      * @var value-of<DestinationCurrency>|null $destination_currency
      */
-    #[Api(enum: DestinationCurrency::class, optional: true)]
+    #[Optional(enum: DestinationCurrency::class)]
     public ?string $destination_currency;
 
     /**
@@ -127,37 +128,37 @@ final class LiquidationAddressCreateParams implements BaseModel
      *
      * @var value-of<BridgePaymentRail>|null $destination_payment_rail
      */
-    #[Api(enum: BridgePaymentRail::class, optional: true)]
+    #[Optional(enum: BridgePaymentRail::class)]
     public ?string $destination_payment_rail;
 
     /**
      * Reference for SEPA transactions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_sepa_reference;
 
     /**
      * Message for wire transfers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_wire_message;
 
     /**
      * External bank account to send funds to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $external_account_id;
 
     /**
      * Developer's prefunded account id.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $prefunded_account_id;
 
     /**
      * Address to return funds on failed transactions (Not supported on Stellar).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $return_address;
 
     /**

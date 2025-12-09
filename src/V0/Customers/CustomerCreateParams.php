@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Customers;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -61,19 +62,19 @@ final class CustomerCreateParams implements BaseModel
     /**
      * Customer's first name. Used for personalization and legal documentation.
      */
-    #[Api]
+    #[Required]
     public string $first_name;
 
     /**
      * Customer's last name. Used for personalization and legal documentation.
      */
-    #[Api]
+    #[Required]
     public string $last_name;
 
     /**
      * Customer's phone number. Used for SMS notifications and verification. Include country code for international numbers.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**
@@ -81,13 +82,13 @@ final class CustomerCreateParams implements BaseModel
      *
      * @var value-of<CustomerType>|null $customer_type
      */
-    #[Api(enum: CustomerType::class, optional: true)]
+    #[Optional(enum: CustomerType::class)]
     public ?string $customer_type;
 
     /**
      * Customer's email address. Used for notifications, receipts, and account management. Must be a valid email format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $email;
 
     /**
@@ -95,7 +96,7 @@ final class CustomerCreateParams implements BaseModel
      *
      * @var value-of<CustomerStatus>|null $status
      */
-    #[Api(enum: CustomerStatus::class, optional: true)]
+    #[Optional(enum: CustomerStatus::class)]
     public ?string $status;
 
     /**

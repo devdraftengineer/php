@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Invoices\InvoiceCreateParams;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Item implements BaseModel
     /**
      * Product ID.
      */
-    #[Api]
+    #[Required]
     public string $product_id;
 
     /**
      * Quantity of the product.
      */
-    #[Api]
+    #[Required]
     public float $quantity;
 
     /**

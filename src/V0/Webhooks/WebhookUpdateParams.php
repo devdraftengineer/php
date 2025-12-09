@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Webhooks;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -31,31 +31,31 @@ final class WebhookUpdateParams implements BaseModel
     /**
      * Whether webhook payloads should be encrypted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $encrypted;
 
     /**
      * Whether the webhook is active and will receive events.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $isActive;
 
     /**
      * Name of the webhook for identification purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Secret key used to sign webhook payloads for verification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $signing_secret;
 
     /**
      * URL where webhook events will be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\PaymentLinks;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -51,25 +52,25 @@ final class PaymentLinkCreateParams implements BaseModel
     /**
      * Whether to allow mobile payment.
      */
-    #[Api]
+    #[Required]
     public bool $allowMobilePayment;
 
     /**
      * Whether to allow quantity adjustment.
      */
-    #[Api]
+    #[Required]
     public bool $allowQuantityAdjustment;
 
     /**
      * Whether to collect address.
      */
-    #[Api]
+    #[Required]
     public bool $collectAddress;
 
     /**
      * Whether to collect tax.
      */
-    #[Api]
+    #[Required]
     public bool $collectTax;
 
     /**
@@ -77,7 +78,7 @@ final class PaymentLinkCreateParams implements BaseModel
      *
      * @var value-of<Currency> $currency
      */
-    #[Api(enum: Currency::class)]
+    #[Required(enum: Currency::class)]
     public string $currency;
 
     /**
@@ -85,79 +86,79 @@ final class PaymentLinkCreateParams implements BaseModel
      *
      * @var value-of<LinkType> $linkType
      */
-    #[Api(enum: LinkType::class)]
+    #[Required(enum: LinkType::class)]
     public string $linkType;
 
     /**
      * Display title for the payment link. This appears on the checkout page and in customer communications.
      */
-    #[Api]
+    #[Required]
     public string $title;
 
     /**
      * Unique URL slug for the payment link. Can be a full URL or just the path segment. Must be unique within your account.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
      * Amount for the payment link.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $amount;
 
     /**
      * Cover image URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $coverImage;
 
     /**
      * Customer ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customerId;
 
     /**
      * Custom fields.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public mixed $customFields;
 
     /**
      * Detailed description of what the customer is purchasing. Supports markdown formatting.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Expiration date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $expiration_date;
 
     /**
      * Whether the payment link is for all products.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $isForAllProduct;
 
     /**
      * Whether to limit payments.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $limitPayments;
 
     /**
      * Maximum number of payments.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $maxPayments;
 
     /**
      * Payment for ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $paymentForId;
 
     /**
@@ -165,13 +166,13 @@ final class PaymentLinkCreateParams implements BaseModel
      *
      * @var list<PaymentLinkProduct>|null $paymentLinkProducts
      */
-    #[Api(list: PaymentLinkProduct::class, optional: true)]
+    #[Optional(list: PaymentLinkProduct::class)]
     public ?array $paymentLinkProducts;
 
     /**
      * Tax ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $taxId;
 
     /**

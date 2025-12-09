@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Webhooks;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
@@ -28,49 +28,49 @@ final class WebhookResponse implements BaseModel
     /**
      * Unique identifier for the webhook.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Timestamp when the webhook was created.
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
     /**
      * Webhook delivery statistics.
      */
-    #[Api]
+    #[Required]
     public mixed $delivery_stats;
 
     /**
      * Whether webhook payloads are encrypted.
      */
-    #[Api]
+    #[Required]
     public bool $encrypted;
 
     /**
      * Whether the webhook is currently active.
      */
-    #[Api]
+    #[Required]
     public bool $isActive;
 
     /**
      * Name of the webhook.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Timestamp when the webhook was last updated.
      */
-    #[Api]
+    #[Required]
     public string $updated_at;
 
     /**
      * URL where webhook events are sent.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**

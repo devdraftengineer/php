@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Taxes;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
@@ -24,25 +24,25 @@ final class TaxNewResponse implements BaseModel
     /** @use SdkModel<TaxNewResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $created_at;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $percentage;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $updated_at;
 
     public function __construct()

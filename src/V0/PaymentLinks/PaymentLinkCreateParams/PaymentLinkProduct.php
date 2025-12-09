@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\PaymentLinks\PaymentLinkCreateParams;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class PaymentLinkProduct implements BaseModel
     /**
      * UUID of the product to include in this payment link. Must be a valid product from your catalog.
      */
-    #[Api]
+    #[Required]
     public string $productId;
 
     /**
      * Quantity of this product to include. Must be at least 1.
      */
-    #[Api]
+    #[Required]
     public int $quantity;
 
     /**

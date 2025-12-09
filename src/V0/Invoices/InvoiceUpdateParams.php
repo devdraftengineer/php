@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Invoices;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -49,13 +50,13 @@ final class InvoiceUpdateParams implements BaseModel
      *
      * @var value-of<Currency> $currency
      */
-    #[Api(enum: Currency::class)]
+    #[Required(enum: Currency::class)]
     public string $currency;
 
     /**
      * Customer ID.
      */
-    #[Api]
+    #[Required]
     public string $customer_id;
 
     /**
@@ -63,19 +64,19 @@ final class InvoiceUpdateParams implements BaseModel
      *
      * @var value-of<Delivery> $delivery
      */
-    #[Api(enum: Delivery::class)]
+    #[Required(enum: Delivery::class)]
     public string $delivery;
 
     /**
      * Due date of the invoice.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $due_date;
 
     /**
      * Email address.
      */
-    #[Api]
+    #[Required]
     public string $email;
 
     /**
@@ -83,25 +84,25 @@ final class InvoiceUpdateParams implements BaseModel
      *
      * @var list<Item> $items
      */
-    #[Api(list: Item::class)]
+    #[Required(list: Item::class)]
     public array $items;
 
     /**
      * Name of the invoice.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Allow partial payments.
      */
-    #[Api]
+    #[Required]
     public bool $partial_payment;
 
     /**
      * Whether to generate a payment link.
      */
-    #[Api]
+    #[Required]
     public bool $payment_link;
 
     /**
@@ -109,7 +110,7 @@ final class InvoiceUpdateParams implements BaseModel
      *
      * @var list<value-of<PaymentMethod>> $payment_methods
      */
-    #[Api(list: PaymentMethod::class)]
+    #[Required(list: PaymentMethod::class)]
     public array $payment_methods;
 
     /**
@@ -117,37 +118,37 @@ final class InvoiceUpdateParams implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * Address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $address;
 
     /**
      * Logo URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $logo;
 
     /**
      * Phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phone_number;
 
     /**
      * Send date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $send_date;
 
     /**
      * Tax ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $taxId;
 
     /**

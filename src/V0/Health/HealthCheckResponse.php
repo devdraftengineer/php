@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Health;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 use Devdraft\V0\Health\HealthCheckResponse\Database;
@@ -28,7 +28,7 @@ final class HealthCheckResponse implements BaseModel
     /**
      * Indicates whether the request was properly authenticated. Always true for this endpoint since authentication is required.
      */
-    #[Api]
+    #[Required]
     public bool $authenticated;
 
     /**
@@ -36,13 +36,13 @@ final class HealthCheckResponse implements BaseModel
      *
      * @var value-of<Database> $database
      */
-    #[Api(enum: Database::class)]
+    #[Required(enum: Database::class)]
     public string $database;
 
     /**
      * Human-readable message describing the current health status and any issues.
      */
-    #[Api]
+    #[Required]
     public string $message;
 
     /**
@@ -50,19 +50,19 @@ final class HealthCheckResponse implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * ISO 8601 timestamp when the health check was performed.
      */
-    #[Api]
+    #[Required]
     public \DateTimeInterface $timestamp;
 
     /**
      * Current version of the API service. Useful for debugging and compatibility checks.
      */
-    #[Api]
+    #[Required]
     public string $version;
 
     /**

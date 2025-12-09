@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Transfers;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -39,7 +40,7 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     /**
      * The destination currency.
      */
-    #[Api]
+    #[Required]
     public string $destinationCurrency;
 
     /**
@@ -47,67 +48,67 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      *
      * @var value-of<DestinationPaymentRail> $destinationPaymentRail
      */
-    #[Api(enum: DestinationPaymentRail::class)]
+    #[Required(enum: DestinationPaymentRail::class)]
     public string $destinationPaymentRail;
 
     /**
      * The external account ID for the bank transfer.
      */
-    #[Api]
+    #[Required]
     public string $external_account_id;
 
     /**
      * The source currency.
      */
-    #[Api]
+    #[Required]
     public string $sourceCurrency;
 
     /**
      * The ID of the source bridge wallet.
      */
-    #[Api]
+    #[Required]
     public string $sourceWalletId;
 
     /**
      * ACH reference message (1-10 characters, only for ACH transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ach_reference;
 
     /**
      * The amount to transfer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $amount;
 
     /**
      * SEPA reference message (6-140 characters, only for SEPA transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sepa_reference;
 
     /**
      * SPEI reference message (1-40 characters, only for SPEI transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spei_reference;
 
     /**
      * SWIFT charges bearer (only for SWIFT transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $swift_charges;
 
     /**
      * SWIFT reference message (1-190 characters, only for SWIFT transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $swift_reference;
 
     /**
      * Wire transfer message (1-256 characters, only for wire transfers).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $wire_message;
 
     /**

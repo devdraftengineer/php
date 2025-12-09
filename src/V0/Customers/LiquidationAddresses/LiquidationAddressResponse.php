@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\Customers\LiquidationAddresses;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
@@ -34,85 +35,85 @@ final class LiquidationAddressResponse implements BaseModel
     /**
      * Unique identifier for the liquidation address.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Liquidation address.
      */
-    #[Api]
+    #[Required]
     public string $address;
 
     /**
      * Blockchain chain.
      */
-    #[Api]
+    #[Required]
     public string $chain;
 
     /**
      * Creation timestamp.
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
     /**
      * Currency.
      */
-    #[Api]
+    #[Required]
     public string $currency;
 
     /**
      * Customer ID this liquidation address belongs to.
      */
-    #[Api]
+    #[Required]
     public string $customer_id;
 
     /**
      * Current state of the liquidation address.
      */
-    #[Api]
+    #[Required]
     public string $state;
 
     /**
      * Last update timestamp.
      */
-    #[Api]
+    #[Required]
     public string $updated_at;
 
     /**
      * Bridge wallet ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bridge_wallet_id;
 
     /**
      * Custom developer fee percent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $custom_developer_fee_percent;
 
     /**
      * Destination currency.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_currency;
 
     /**
      * Destination payment rail.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination_payment_rail;
 
     /**
      * External account ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $external_account_id;
 
     /**
      * Prefunded account ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $prefunded_account_id;
 
     /**

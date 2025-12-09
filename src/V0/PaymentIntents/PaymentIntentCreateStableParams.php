@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\PaymentIntents;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
+use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -72,7 +73,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
      *
      * @var value-of<BridgePaymentRail> $destinationNetwork
      */
-    #[Api(enum: BridgePaymentRail::class)]
+    #[Required(enum: BridgePaymentRail::class)]
     public string $destinationNetwork;
 
     /**
@@ -80,7 +81,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
      *
      * @var value-of<StableCoinCurrency> $sourceCurrency
      */
-    #[Api(enum: StableCoinCurrency::class)]
+    #[Required(enum: StableCoinCurrency::class)]
     public string $sourceCurrency;
 
     /**
@@ -88,67 +89,67 @@ final class PaymentIntentCreateStableParams implements BaseModel
      *
      * @var value-of<BridgePaymentRail> $sourceNetwork
      */
-    #[Api(enum: BridgePaymentRail::class)]
+    #[Required(enum: BridgePaymentRail::class)]
     public string $sourceNetwork;
 
     /**
      * Payment amount in the source currency. Omit for flexible amount payments where users specify the amount during checkout.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /**
      * Customer's full address. Required for compliance in certain jurisdictions and high-value transactions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_address;
 
     /**
      * Customer's country of residence. Used for compliance and tax reporting.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_country;
 
     /**
      * Customer's country ISO 3166-1 alpha-2 code. Used for automated compliance checks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_countryISO;
 
     /**
      * Customer's email address. Used for transaction notifications and receipts. Highly recommended for all transactions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_email;
 
     /**
      * Customer's first name. Used for transaction records and compliance. Required for amounts over $1000.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_first_name;
 
     /**
      * Customer's last name. Used for transaction records and compliance. Required for amounts over $1000.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_last_name;
 
     /**
      * Customer's state or province. Required for US and Canadian customers.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_province;
 
     /**
      * Customer's state or province ISO code. Used for automated tax calculations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $customer_provinceISO;
 
     /**
      * The wallet address where converted funds will be sent. Supports Ethereum (0x...) and Solana address formats.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destinationAddress;
 
     /**
@@ -156,13 +157,13 @@ final class PaymentIntentCreateStableParams implements BaseModel
      *
      * @var value-of<StableCoinCurrency>|null $destinationCurrency
      */
-    #[Api(enum: StableCoinCurrency::class, optional: true)]
+    #[Optional(enum: StableCoinCurrency::class)]
     public ?string $destinationCurrency;
 
     /**
      * Customer's phone number with country code. Used for SMS notifications and verification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phoneNumber;
 
     /**

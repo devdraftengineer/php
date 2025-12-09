@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Devdraft\V0\PaymentLinks;
 
-use Devdraft\Core\Attributes\Api;
+use Devdraft\Core\Attributes\Optional;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Concerns\SdkParams;
 use Devdraft\Core\Contracts\BaseModel;
@@ -25,13 +25,13 @@ final class PaymentLinkListParams implements BaseModel
     /**
      * Number of records to skip (must be non-negative).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $skip;
 
     /**
      * Number of records to take (must be positive).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $take;
 
     public function __construct()
