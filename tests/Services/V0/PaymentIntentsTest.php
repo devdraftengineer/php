@@ -3,6 +3,8 @@
 namespace Tests\Services\V0;
 
 use Devdraft\Client;
+use Devdraft\V0\PaymentIntents\BridgePaymentRail;
+use Devdraft\V0\PaymentIntents\StableCoinCurrency;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -39,10 +41,10 @@ final class PaymentIntentsTest extends TestCase
         }
 
         $result = $this->client->v0->paymentIntents->createBank([
-            'destinationCurrency' => 'usdc',
-            'destinationNetwork' => 'ethereum',
+            'destinationCurrency' => StableCoinCurrency::USDC,
+            'destinationNetwork' => BridgePaymentRail::ETHEREUM,
             'sourceCurrency' => 'usd',
-            'sourcePaymentRail' => 'ach_push',
+            'sourcePaymentRail' => BridgePaymentRail::ACH_PUSH,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -57,10 +59,10 @@ final class PaymentIntentsTest extends TestCase
         }
 
         $result = $this->client->v0->paymentIntents->createBank([
-            'destinationCurrency' => 'usdc',
-            'destinationNetwork' => 'ethereum',
+            'destinationCurrency' => StableCoinCurrency::USDC,
+            'destinationNetwork' => BridgePaymentRail::ETHEREUM,
             'sourceCurrency' => 'usd',
-            'sourcePaymentRail' => 'ach_push',
+            'sourcePaymentRail' => BridgePaymentRail::ACH_PUSH,
             'ach_reference' => 'INV12345',
             'amount' => '1000.00',
             'customer_address' => '123 Main St, New York, NY 10001',
@@ -89,9 +91,9 @@ final class PaymentIntentsTest extends TestCase
         }
 
         $result = $this->client->v0->paymentIntents->createStable([
-            'destinationNetwork' => 'polygon',
-            'sourceCurrency' => 'usdc',
-            'sourceNetwork' => 'ethereum',
+            'destinationNetwork' => BridgePaymentRail::POLYGON,
+            'sourceCurrency' => StableCoinCurrency::USDC,
+            'sourceNetwork' => BridgePaymentRail::ETHEREUM,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -106,9 +108,9 @@ final class PaymentIntentsTest extends TestCase
         }
 
         $result = $this->client->v0->paymentIntents->createStable([
-            'destinationNetwork' => 'polygon',
-            'sourceCurrency' => 'usdc',
-            'sourceNetwork' => 'ethereum',
+            'destinationNetwork' => BridgePaymentRail::POLYGON,
+            'sourceCurrency' => StableCoinCurrency::USDC,
+            'sourceNetwork' => BridgePaymentRail::ETHEREUM,
             'amount' => '100.00',
             'customer_address' => '123 Main St, New York, NY 10001',
             'customer_country' => 'United States',
@@ -119,7 +121,7 @@ final class PaymentIntentsTest extends TestCase
             'customer_province' => 'New York',
             'customer_provinceISO' => 'NY',
             'destinationAddress' => '0x742d35Cc6634C0532925a3b8D4C9db96c4b4d8e1',
-            'destinationCurrency' => 'eurc',
+            'destinationCurrency' => StableCoinCurrency::EURC,
             'phoneNumber' => '+1-555-123-4567',
         ]);
 

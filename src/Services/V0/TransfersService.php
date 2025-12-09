@@ -12,6 +12,7 @@ use Devdraft\ServiceContracts\V0\TransfersContract;
 use Devdraft\V0\Transfers\TransferCreateDirectBankParams;
 use Devdraft\V0\Transfers\TransferCreateDirectWalletParams;
 use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams;
+use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams\DestinationPaymentRail;
 use Devdraft\V0\Transfers\TransferCreateExternalStablecoinTransferParams;
 use Devdraft\V0\Transfers\TransferCreateStablecoinConversionParams;
 
@@ -100,7 +101,7 @@ final class TransfersService implements TransfersContract
      *
      * @param array{
      *   destinationCurrency: string,
-     *   destinationPaymentRail: 'ach'|'ach_push'|'ach_same_day'|'wire'|'sepa'|'swift'|'spei',
+     *   destinationPaymentRail: 'ach'|'ach_push'|'ach_same_day'|'wire'|'sepa'|'swift'|'spei'|DestinationPaymentRail,
      *   external_account_id: string,
      *   sourceCurrency: string,
      *   sourceWalletId: string,

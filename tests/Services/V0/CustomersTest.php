@@ -3,6 +3,8 @@
 namespace Tests\Services\V0;
 
 use Devdraft\Client;
+use Devdraft\V0\Customers\CustomerStatus;
+use Devdraft\V0\Customers\CustomerType;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -59,9 +61,9 @@ final class CustomersTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'phone_number' => '+1-555-123-4567',
-            'customer_type' => 'Individual',
+            'customer_type' => CustomerType::INDIVIDUAL,
             'email' => 'john.doe@example.com',
-            'status' => 'ACTIVE',
+            'status' => CustomerStatus::ACTIVE,
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -12,6 +12,7 @@ use Devdraft\ServiceContracts\V0\CustomersContract;
 use Devdraft\Services\V0\Customers\LiquidationAddressesService;
 use Devdraft\V0\Customers\CustomerCreateParams;
 use Devdraft\V0\Customers\CustomerListParams;
+use Devdraft\V0\Customers\CustomerStatus;
 use Devdraft\V0\Customers\CustomerType;
 use Devdraft\V0\Customers\CustomerUpdateParams;
 
@@ -70,7 +71,7 @@ final class CustomersService implements CustomersContract
      *   phone_number: string,
      *   customer_type?: value-of<CustomerType>,
      *   email?: string,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED',
+     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
      * }|CustomerCreateParams $params
      *
      * @throws APIException
@@ -187,7 +188,7 @@ final class CustomersService implements CustomersContract
      *   first_name?: string,
      *   last_name?: string,
      *   phone_number?: string,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED',
+     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
      * }|CustomerUpdateParams $params
      *
      * @throws APIException
@@ -263,7 +264,7 @@ final class CustomersService implements CustomersContract
      *   email?: string,
      *   name?: string,
      *   skip?: float,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED',
+     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
      *   take?: float,
      * }|CustomerListParams $params
      *

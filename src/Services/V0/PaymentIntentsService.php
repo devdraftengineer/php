@@ -11,7 +11,9 @@ use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\PaymentIntentsContract;
 use Devdraft\V0\PaymentIntents\BridgePaymentRail;
 use Devdraft\V0\PaymentIntents\PaymentIntentCreateBankParams;
+use Devdraft\V0\PaymentIntents\PaymentIntentCreateBankParams\SourceCurrency;
 use Devdraft\V0\PaymentIntents\PaymentIntentCreateStableParams;
+use Devdraft\V0\PaymentIntents\StableCoinCurrency;
 
 final class PaymentIntentsService implements PaymentIntentsContract
 {
@@ -70,9 +72,9 @@ final class PaymentIntentsService implements PaymentIntentsContract
      * Include an `idempotency-key` header with a unique UUID v4 to prevent duplicate payments. Subsequent requests with the same key will return the original response.
      *
      * @param array{
-     *   destinationCurrency: 'usdc'|'eurc',
+     *   destinationCurrency: 'usdc'|'eurc'|StableCoinCurrency,
      *   destinationNetwork: value-of<BridgePaymentRail>,
-     *   sourceCurrency?: 'usd'|'eur'|'mxn',
+     *   sourceCurrency: 'usd'|'eur'|'mxn'|SourceCurrency,
      *   sourcePaymentRail: value-of<BridgePaymentRail>,
      *   ach_reference?: string,
      *   amount?: string,
@@ -149,7 +151,7 @@ final class PaymentIntentsService implements PaymentIntentsContract
      *
      * @param array{
      *   destinationNetwork: value-of<BridgePaymentRail>,
-     *   sourceCurrency: 'usdc'|'eurc',
+     *   sourceCurrency: 'usdc'|'eurc'|StableCoinCurrency,
      *   sourceNetwork: value-of<BridgePaymentRail>,
      *   amount?: string,
      *   customer_address?: string,
@@ -161,7 +163,7 @@ final class PaymentIntentsService implements PaymentIntentsContract
      *   customer_province?: string,
      *   customer_provinceISO?: string,
      *   destinationAddress?: string,
-     *   destinationCurrency?: 'usdc'|'eurc',
+     *   destinationCurrency?: 'usdc'|'eurc'|StableCoinCurrency,
      *   phoneNumber?: string,
      * }|PaymentIntentCreateStableParams $params
      *

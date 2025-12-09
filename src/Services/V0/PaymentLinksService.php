@@ -10,6 +10,8 @@ use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\PaymentLinksContract;
 use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams;
+use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\Currency;
+use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\LinkType;
 use Devdraft\V0\PaymentLinks\PaymentLinkListParams;
 
 final class PaymentLinksService implements PaymentLinksContract
@@ -25,12 +27,12 @@ final class PaymentLinksService implements PaymentLinksContract
      * Creates a new payment link with the provided details. Supports both simple one-time payments and complex product bundles.
      *
      * @param array{
-     *   allowMobilePayment?: bool,
-     *   allowQuantityAdjustment?: bool,
-     *   collectAddress?: bool,
-     *   collectTax?: bool,
-     *   currency?: 'usdc'|'eurc',
-     *   linkType: 'INVOICE'|'PRODUCT'|'COLLECTION'|'DONATION',
+     *   allowMobilePayment: bool,
+     *   allowQuantityAdjustment: bool,
+     *   collectAddress: bool,
+     *   collectTax: bool,
+     *   currency: 'usdc'|'eurc'|Currency,
+     *   linkType: 'INVOICE'|'PRODUCT'|'COLLECTION'|'DONATION'|LinkType,
      *   title: string,
      *   url: string,
      *   amount?: float,

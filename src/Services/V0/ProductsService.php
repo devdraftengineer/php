@@ -10,6 +10,7 @@ use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\ProductsContract;
 use Devdraft\V0\Products\ProductCreateParams;
+use Devdraft\V0\Products\ProductCreateParams\Currency;
 use Devdraft\V0\Products\ProductListParams;
 use Devdraft\V0\Products\ProductUpdateParams;
 
@@ -59,7 +60,7 @@ final class ProductsService implements ProductsContract
      *   description: string,
      *   name: string,
      *   price: float,
-     *   currency?: 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY',
+     *   currency?: 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY'|Currency,
      *   images?: list<string>,
      *   productType?: string,
      *   quantity?: float,
@@ -167,7 +168,7 @@ final class ProductsService implements ProductsContract
      * - Images are automatically optimized
      *
      * @param array{
-     *   currency?: 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY',
+     *   currency?: 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY'|ProductUpdateParams\Currency,
      *   description?: string,
      *   images?: list<string>,
      *   name?: string,

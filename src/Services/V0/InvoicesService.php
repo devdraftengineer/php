@@ -10,6 +10,10 @@ use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\InvoicesContract;
 use Devdraft\V0\Invoices\InvoiceCreateParams;
+use Devdraft\V0\Invoices\InvoiceCreateParams\Currency;
+use Devdraft\V0\Invoices\InvoiceCreateParams\Delivery;
+use Devdraft\V0\Invoices\InvoiceCreateParams\PaymentMethod;
+use Devdraft\V0\Invoices\InvoiceCreateParams\Status;
 use Devdraft\V0\Invoices\InvoiceListParams;
 use Devdraft\V0\Invoices\InvoiceUpdateParams;
 
@@ -26,17 +30,17 @@ final class InvoicesService implements InvoicesContract
      * Create a new invoice
      *
      * @param array{
-     *   currency: 'usdc'|'eurc',
+     *   currency: 'usdc'|'eurc'|Currency,
      *   customer_id: string,
-     *   delivery: 'EMAIL'|'MANUALLY',
+     *   delivery: 'EMAIL'|'MANUALLY'|Delivery,
      *   due_date: string|\DateTimeInterface,
      *   email: string,
      *   items: list<array{product_id: string, quantity: float}>,
      *   name: string,
      *   partial_payment: bool,
      *   payment_link: bool,
-     *   payment_methods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'>,
-     *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID',
+     *   payment_methods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|PaymentMethod>,
+     *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|Status,
      *   address?: string,
      *   logo?: string,
      *   phone_number?: string,
@@ -95,17 +99,17 @@ final class InvoicesService implements InvoicesContract
      * Update an invoice
      *
      * @param array{
-     *   currency: 'usdc'|'eurc',
+     *   currency: 'usdc'|'eurc'|InvoiceUpdateParams\Currency,
      *   customer_id: string,
-     *   delivery: 'EMAIL'|'MANUALLY',
+     *   delivery: 'EMAIL'|'MANUALLY'|InvoiceUpdateParams\Delivery,
      *   due_date: string|\DateTimeInterface,
      *   email: string,
      *   items: list<array{product_id: string, quantity: float}>,
      *   name: string,
      *   partial_payment: bool,
      *   payment_link: bool,
-     *   payment_methods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'>,
-     *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID',
+     *   payment_methods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|InvoiceUpdateParams\PaymentMethod>,
+     *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|InvoiceUpdateParams\Status,
      *   address?: string,
      *   logo?: string,
      *   phone_number?: string,

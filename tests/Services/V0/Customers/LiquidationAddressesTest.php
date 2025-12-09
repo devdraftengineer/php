@@ -4,6 +4,7 @@ namespace Tests\Services\V0\Customers;
 
 use Devdraft\Client;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressResponse;
+use Devdraft\V0\PaymentIntents\BridgePaymentRail;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -71,7 +72,7 @@ final class LiquidationAddressesTest extends TestCase
                 'destination_address' => '0x1234567890abcdef1234567890abcdef12345678',
                 'destination_blockchain_memo' => 'liquidation-memo-123',
                 'destination_currency' => 'eur',
-                'destination_payment_rail' => 'sepa',
+                'destination_payment_rail' => BridgePaymentRail::SEPA,
                 'destination_sepa_reference' => 'SEPA-REF-123456',
                 'destination_wire_message' => 'Liquidation payment for customer',
                 'external_account_id' => 'ext_123',
