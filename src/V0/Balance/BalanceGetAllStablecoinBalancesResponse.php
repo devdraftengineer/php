@@ -11,7 +11,7 @@ use Devdraft\V0\Balance\AggregatedBalance\Currency;
 
 /**
  * @phpstan-type BalanceGetAllStablecoinBalancesResponseShape = array{
- *   eurc: AggregatedBalance, total_usd_value: string, usdc: AggregatedBalance
+ *   eurc: AggregatedBalance, totalUsdValue: string, usdc: AggregatedBalance
  * }
  */
 final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
@@ -28,8 +28,8 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
     /**
      * Total value in USD equivalent.
      */
-    #[Required]
-    public string $total_usd_value;
+    #[Required('total_usd_value')]
+    public string $totalUsdValue;
 
     /**
      * USDC balance aggregation.
@@ -43,7 +43,7 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * BalanceGetAllStablecoinBalancesResponse::with(
-     *   eurc: ..., total_usd_value: ..., usdc: ...
+     *   eurc: ..., totalUsdValue: ..., usdc: ...
      * )
      * ```
      *
@@ -69,23 +69,23 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      * @param AggregatedBalance|array{
      *   balances: list<list<mixed>>,
      *   currency: value-of<Currency>,
-     *   total_balance: string,
+     *   totalBalance: string,
      * } $eurc
      * @param AggregatedBalance|array{
      *   balances: list<list<mixed>>,
      *   currency: value-of<Currency>,
-     *   total_balance: string,
+     *   totalBalance: string,
      * } $usdc
      */
     public static function with(
         AggregatedBalance|array $eurc,
-        string $total_usd_value,
+        string $totalUsdValue,
         AggregatedBalance|array $usdc,
     ): self {
         $obj = new self;
 
         $obj['eurc'] = $eurc;
-        $obj['total_usd_value'] = $total_usd_value;
+        $obj['totalUsdValue'] = $totalUsdValue;
         $obj['usdc'] = $usdc;
 
         return $obj;
@@ -97,7 +97,7 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      * @param AggregatedBalance|array{
      *   balances: list<list<mixed>>,
      *   currency: value-of<Currency>,
-     *   total_balance: string,
+     *   totalBalance: string,
      * } $eurc
      */
     public function withEurc(AggregatedBalance|array $eurc): self
@@ -114,7 +114,7 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
     public function withTotalUsdValue(string $totalUsdValue): self
     {
         $obj = clone $this;
-        $obj['total_usd_value'] = $totalUsdValue;
+        $obj['totalUsdValue'] = $totalUsdValue;
 
         return $obj;
     }
@@ -125,7 +125,7 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      * @param AggregatedBalance|array{
      *   balances: list<list<mixed>>,
      *   currency: value-of<Currency>,
-     *   total_balance: string,
+     *   totalBalance: string,
      * } $usdc
      */
     public function withUsdc(AggregatedBalance|array $usdc): self

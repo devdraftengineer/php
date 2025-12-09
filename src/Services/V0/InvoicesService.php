@@ -31,21 +31,21 @@ final class InvoicesService implements InvoicesContract
      *
      * @param array{
      *   currency: 'usdc'|'eurc'|Currency,
-     *   customer_id: string,
+     *   customerID: string,
      *   delivery: 'EMAIL'|'MANUALLY'|Delivery,
-     *   due_date: string|\DateTimeInterface,
+     *   dueDate: string|\DateTimeInterface,
      *   email: string,
-     *   items: list<array{product_id: string, quantity: float}>,
+     *   items: list<array{productID: string, quantity: float}>,
      *   name: string,
-     *   partial_payment: bool,
-     *   payment_link: bool,
-     *   payment_methods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|PaymentMethod>,
+     *   partialPayment: bool,
+     *   paymentLink: bool,
+     *   paymentMethods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|PaymentMethod>,
      *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|Status,
      *   address?: string,
      *   logo?: string,
-     *   phone_number?: string,
-     *   send_date?: string|\DateTimeInterface,
-     *   taxId?: string,
+     *   phoneNumber?: string,
+     *   sendDate?: string|\DateTimeInterface,
+     *   taxID?: string,
      * }|InvoiceCreateParams $params
      *
      * @throws APIException
@@ -100,21 +100,21 @@ final class InvoicesService implements InvoicesContract
      *
      * @param array{
      *   currency: 'usdc'|'eurc'|InvoiceUpdateParams\Currency,
-     *   customer_id: string,
+     *   customerID: string,
      *   delivery: 'EMAIL'|'MANUALLY'|InvoiceUpdateParams\Delivery,
-     *   due_date: string|\DateTimeInterface,
+     *   dueDate: string|\DateTimeInterface,
      *   email: string,
-     *   items: list<array{product_id: string, quantity: float}>,
+     *   items: list<array{productID: string, quantity: float}>,
      *   name: string,
-     *   partial_payment: bool,
-     *   payment_link: bool,
-     *   payment_methods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|InvoiceUpdateParams\PaymentMethod>,
+     *   partialPayment: bool,
+     *   paymentLink: bool,
+     *   paymentMethods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|InvoiceUpdateParams\PaymentMethod>,
      *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|InvoiceUpdateParams\Status,
      *   address?: string,
      *   logo?: string,
-     *   phone_number?: string,
-     *   send_date?: string|\DateTimeInterface,
-     *   taxId?: string,
+     *   phoneNumber?: string,
+     *   sendDate?: string|\DateTimeInterface,
+     *   taxID?: string,
      * }|InvoiceUpdateParams $params
      *
      * @throws APIException

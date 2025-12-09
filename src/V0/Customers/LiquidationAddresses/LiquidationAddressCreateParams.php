@@ -43,18 +43,18 @@ use Devdraft\V0\PaymentIntents\BridgePaymentRail;
  *   address: string,
  *   chain: Chain|value-of<Chain>,
  *   currency: Currency|value-of<Currency>,
- *   bridge_wallet_id?: string,
- *   custom_developer_fee_percent?: string,
- *   destination_ach_reference?: string,
- *   destination_address?: string,
- *   destination_blockchain_memo?: string,
- *   destination_currency?: DestinationCurrency|value-of<DestinationCurrency>,
- *   destination_payment_rail?: BridgePaymentRail|value-of<BridgePaymentRail>,
- *   destination_sepa_reference?: string,
- *   destination_wire_message?: string,
- *   external_account_id?: string,
- *   prefunded_account_id?: string,
- *   return_address?: string,
+ *   bridgeWalletID?: string,
+ *   customDeveloperFeePercent?: string,
+ *   destinationACHReference?: string,
+ *   destinationAddress?: string,
+ *   destinationBlockchainMemo?: string,
+ *   destinationCurrency?: DestinationCurrency|value-of<DestinationCurrency>,
+ *   destinationPaymentRail?: BridgePaymentRail|value-of<BridgePaymentRail>,
+ *   destinationSepaReference?: string,
+ *   destinationWireMessage?: string,
+ *   externalAccountID?: string,
+ *   prefundedAccountID?: string,
+ *   returnAddress?: string,
  * }
  */
 final class LiquidationAddressCreateParams implements BaseModel
@@ -88,78 +88,78 @@ final class LiquidationAddressCreateParams implements BaseModel
     /**
      * Bridge Wallet to send funds to.
      */
-    #[Optional]
-    public ?string $bridge_wallet_id;
+    #[Optional('bridge_wallet_id')]
+    public ?string $bridgeWalletID;
 
     /**
      * Custom developer fee percentage (Base 100 percentage: 10.2% = "10.2").
      */
-    #[Optional]
-    public ?string $custom_developer_fee_percent;
+    #[Optional('custom_developer_fee_percent')]
+    public ?string $customDeveloperFeePercent;
 
     /**
      * Reference for ACH transactions.
      */
-    #[Optional]
-    public ?string $destination_ach_reference;
+    #[Optional('destination_ach_reference')]
+    public ?string $destinationACHReference;
 
     /**
      * Crypto wallet address for crypto transfers.
      */
-    #[Optional]
-    public ?string $destination_address;
+    #[Optional('destination_address')]
+    public ?string $destinationAddress;
 
     /**
      * Memo for blockchain transactions.
      */
-    #[Optional]
-    public ?string $destination_blockchain_memo;
+    #[Optional('destination_blockchain_memo')]
+    public ?string $destinationBlockchainMemo;
 
     /**
      * Currency for sending funds.
      *
-     * @var value-of<DestinationCurrency>|null $destination_currency
+     * @var value-of<DestinationCurrency>|null $destinationCurrency
      */
-    #[Optional(enum: DestinationCurrency::class)]
-    public ?string $destination_currency;
+    #[Optional('destination_currency', enum: DestinationCurrency::class)]
+    public ?string $destinationCurrency;
 
     /**
      * The blockchain network where the source currency resides. Determines gas fees and transaction speed.
      *
-     * @var value-of<BridgePaymentRail>|null $destination_payment_rail
+     * @var value-of<BridgePaymentRail>|null $destinationPaymentRail
      */
-    #[Optional(enum: BridgePaymentRail::class)]
-    public ?string $destination_payment_rail;
+    #[Optional('destination_payment_rail', enum: BridgePaymentRail::class)]
+    public ?string $destinationPaymentRail;
 
     /**
      * Reference for SEPA transactions.
      */
-    #[Optional]
-    public ?string $destination_sepa_reference;
+    #[Optional('destination_sepa_reference')]
+    public ?string $destinationSepaReference;
 
     /**
      * Message for wire transfers.
      */
-    #[Optional]
-    public ?string $destination_wire_message;
+    #[Optional('destination_wire_message')]
+    public ?string $destinationWireMessage;
 
     /**
      * External bank account to send funds to.
      */
-    #[Optional]
-    public ?string $external_account_id;
+    #[Optional('external_account_id')]
+    public ?string $externalAccountID;
 
     /**
      * Developer's prefunded account id.
      */
-    #[Optional]
-    public ?string $prefunded_account_id;
+    #[Optional('prefunded_account_id')]
+    public ?string $prefundedAccountID;
 
     /**
      * Address to return funds on failed transactions (Not supported on Stellar).
      */
-    #[Optional]
-    public ?string $return_address;
+    #[Optional('return_address')]
+    public ?string $returnAddress;
 
     /**
      * `new LiquidationAddressCreateParams()` is missing required properties by the API.
@@ -190,25 +190,25 @@ final class LiquidationAddressCreateParams implements BaseModel
      *
      * @param Chain|value-of<Chain> $chain
      * @param Currency|value-of<Currency> $currency
-     * @param DestinationCurrency|value-of<DestinationCurrency> $destination_currency
-     * @param BridgePaymentRail|value-of<BridgePaymentRail> $destination_payment_rail
+     * @param DestinationCurrency|value-of<DestinationCurrency> $destinationCurrency
+     * @param BridgePaymentRail|value-of<BridgePaymentRail> $destinationPaymentRail
      */
     public static function with(
         string $address,
         Chain|string $chain,
         Currency|string $currency,
-        ?string $bridge_wallet_id = null,
-        ?string $custom_developer_fee_percent = null,
-        ?string $destination_ach_reference = null,
-        ?string $destination_address = null,
-        ?string $destination_blockchain_memo = null,
-        DestinationCurrency|string|null $destination_currency = null,
-        BridgePaymentRail|string|null $destination_payment_rail = null,
-        ?string $destination_sepa_reference = null,
-        ?string $destination_wire_message = null,
-        ?string $external_account_id = null,
-        ?string $prefunded_account_id = null,
-        ?string $return_address = null,
+        ?string $bridgeWalletID = null,
+        ?string $customDeveloperFeePercent = null,
+        ?string $destinationACHReference = null,
+        ?string $destinationAddress = null,
+        ?string $destinationBlockchainMemo = null,
+        DestinationCurrency|string|null $destinationCurrency = null,
+        BridgePaymentRail|string|null $destinationPaymentRail = null,
+        ?string $destinationSepaReference = null,
+        ?string $destinationWireMessage = null,
+        ?string $externalAccountID = null,
+        ?string $prefundedAccountID = null,
+        ?string $returnAddress = null,
     ): self {
         $obj = new self;
 
@@ -216,18 +216,18 @@ final class LiquidationAddressCreateParams implements BaseModel
         $obj['chain'] = $chain;
         $obj['currency'] = $currency;
 
-        null !== $bridge_wallet_id && $obj['bridge_wallet_id'] = $bridge_wallet_id;
-        null !== $custom_developer_fee_percent && $obj['custom_developer_fee_percent'] = $custom_developer_fee_percent;
-        null !== $destination_ach_reference && $obj['destination_ach_reference'] = $destination_ach_reference;
-        null !== $destination_address && $obj['destination_address'] = $destination_address;
-        null !== $destination_blockchain_memo && $obj['destination_blockchain_memo'] = $destination_blockchain_memo;
-        null !== $destination_currency && $obj['destination_currency'] = $destination_currency;
-        null !== $destination_payment_rail && $obj['destination_payment_rail'] = $destination_payment_rail;
-        null !== $destination_sepa_reference && $obj['destination_sepa_reference'] = $destination_sepa_reference;
-        null !== $destination_wire_message && $obj['destination_wire_message'] = $destination_wire_message;
-        null !== $external_account_id && $obj['external_account_id'] = $external_account_id;
-        null !== $prefunded_account_id && $obj['prefunded_account_id'] = $prefunded_account_id;
-        null !== $return_address && $obj['return_address'] = $return_address;
+        null !== $bridgeWalletID && $obj['bridgeWalletID'] = $bridgeWalletID;
+        null !== $customDeveloperFeePercent && $obj['customDeveloperFeePercent'] = $customDeveloperFeePercent;
+        null !== $destinationACHReference && $obj['destinationACHReference'] = $destinationACHReference;
+        null !== $destinationAddress && $obj['destinationAddress'] = $destinationAddress;
+        null !== $destinationBlockchainMemo && $obj['destinationBlockchainMemo'] = $destinationBlockchainMemo;
+        null !== $destinationCurrency && $obj['destinationCurrency'] = $destinationCurrency;
+        null !== $destinationPaymentRail && $obj['destinationPaymentRail'] = $destinationPaymentRail;
+        null !== $destinationSepaReference && $obj['destinationSepaReference'] = $destinationSepaReference;
+        null !== $destinationWireMessage && $obj['destinationWireMessage'] = $destinationWireMessage;
+        null !== $externalAccountID && $obj['externalAccountID'] = $externalAccountID;
+        null !== $prefundedAccountID && $obj['prefundedAccountID'] = $prefundedAccountID;
+        null !== $returnAddress && $obj['returnAddress'] = $returnAddress;
 
         return $obj;
     }
@@ -275,7 +275,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withBridgeWalletID(string $bridgeWalletID): self
     {
         $obj = clone $this;
-        $obj['bridge_wallet_id'] = $bridgeWalletID;
+        $obj['bridgeWalletID'] = $bridgeWalletID;
 
         return $obj;
     }
@@ -287,7 +287,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $customDeveloperFeePercent
     ): self {
         $obj = clone $this;
-        $obj['custom_developer_fee_percent'] = $customDeveloperFeePercent;
+        $obj['customDeveloperFeePercent'] = $customDeveloperFeePercent;
 
         return $obj;
     }
@@ -299,7 +299,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $destinationACHReference
     ): self {
         $obj = clone $this;
-        $obj['destination_ach_reference'] = $destinationACHReference;
+        $obj['destinationACHReference'] = $destinationACHReference;
 
         return $obj;
     }
@@ -310,7 +310,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withDestinationAddress(string $destinationAddress): self
     {
         $obj = clone $this;
-        $obj['destination_address'] = $destinationAddress;
+        $obj['destinationAddress'] = $destinationAddress;
 
         return $obj;
     }
@@ -322,7 +322,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $destinationBlockchainMemo
     ): self {
         $obj = clone $this;
-        $obj['destination_blockchain_memo'] = $destinationBlockchainMemo;
+        $obj['destinationBlockchainMemo'] = $destinationBlockchainMemo;
 
         return $obj;
     }
@@ -336,7 +336,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         DestinationCurrency|string $destinationCurrency
     ): self {
         $obj = clone $this;
-        $obj['destination_currency'] = $destinationCurrency;
+        $obj['destinationCurrency'] = $destinationCurrency;
 
         return $obj;
     }
@@ -350,7 +350,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         BridgePaymentRail|string $destinationPaymentRail
     ): self {
         $obj = clone $this;
-        $obj['destination_payment_rail'] = $destinationPaymentRail;
+        $obj['destinationPaymentRail'] = $destinationPaymentRail;
 
         return $obj;
     }
@@ -362,7 +362,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $destinationSepaReference
     ): self {
         $obj = clone $this;
-        $obj['destination_sepa_reference'] = $destinationSepaReference;
+        $obj['destinationSepaReference'] = $destinationSepaReference;
 
         return $obj;
     }
@@ -374,7 +374,7 @@ final class LiquidationAddressCreateParams implements BaseModel
         string $destinationWireMessage
     ): self {
         $obj = clone $this;
-        $obj['destination_wire_message'] = $destinationWireMessage;
+        $obj['destinationWireMessage'] = $destinationWireMessage;
 
         return $obj;
     }
@@ -385,7 +385,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withExternalAccountID(string $externalAccountID): self
     {
         $obj = clone $this;
-        $obj['external_account_id'] = $externalAccountID;
+        $obj['externalAccountID'] = $externalAccountID;
 
         return $obj;
     }
@@ -396,7 +396,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withPrefundedAccountID(string $prefundedAccountID): self
     {
         $obj = clone $this;
-        $obj['prefunded_account_id'] = $prefundedAccountID;
+        $obj['prefundedAccountID'] = $prefundedAccountID;
 
         return $obj;
     }
@@ -407,7 +407,7 @@ final class LiquidationAddressCreateParams implements BaseModel
     public function withReturnAddress(string $returnAddress): self
     {
         $obj = clone $this;
-        $obj['return_address'] = $returnAddress;
+        $obj['returnAddress'] = $returnAddress;
 
         return $obj;
     }

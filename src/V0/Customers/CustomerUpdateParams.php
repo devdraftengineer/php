@@ -43,11 +43,11 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\CustomersService::update()
  *
  * @phpstan-type CustomerUpdateParamsShape = array{
- *   customer_type?: CustomerType|value-of<CustomerType>,
+ *   customerType?: CustomerType|value-of<CustomerType>,
  *   email?: string,
- *   first_name?: string,
- *   last_name?: string,
- *   phone_number?: string,
+ *   firstName?: string,
+ *   lastName?: string,
+ *   phoneNumber?: string,
  *   status?: CustomerStatus|value-of<CustomerStatus>,
  * }
  */
@@ -60,10 +60,10 @@ final class CustomerUpdateParams implements BaseModel
     /**
      * Type of customer account. Determines available features and compliance requirements.
      *
-     * @var value-of<CustomerType>|null $customer_type
+     * @var value-of<CustomerType>|null $customerType
      */
-    #[Optional(enum: CustomerType::class)]
-    public ?string $customer_type;
+    #[Optional('customer_type', enum: CustomerType::class)]
+    public ?string $customerType;
 
     /**
      * Customer's email address. Used for notifications, receipts, and account management. Must be a valid email format.
@@ -74,20 +74,20 @@ final class CustomerUpdateParams implements BaseModel
     /**
      * Customer's first name. Used for personalization and legal documentation.
      */
-    #[Optional]
-    public ?string $first_name;
+    #[Optional('first_name')]
+    public ?string $firstName;
 
     /**
      * Customer's last name. Used for personalization and legal documentation.
      */
-    #[Optional]
-    public ?string $last_name;
+    #[Optional('last_name')]
+    public ?string $lastName;
 
     /**
      * Customer's phone number. Used for SMS notifications and verification. Include country code for international numbers.
      */
-    #[Optional]
-    public ?string $phone_number;
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
     /**
      * Current status of the customer account. Controls access to services and features.
@@ -107,24 +107,24 @@ final class CustomerUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CustomerType|value-of<CustomerType> $customer_type
+     * @param CustomerType|value-of<CustomerType> $customerType
      * @param CustomerStatus|value-of<CustomerStatus> $status
      */
     public static function with(
-        CustomerType|string|null $customer_type = null,
+        CustomerType|string|null $customerType = null,
         ?string $email = null,
-        ?string $first_name = null,
-        ?string $last_name = null,
-        ?string $phone_number = null,
+        ?string $firstName = null,
+        ?string $lastName = null,
+        ?string $phoneNumber = null,
         CustomerStatus|string|null $status = null,
     ): self {
         $obj = new self;
 
-        null !== $customer_type && $obj['customer_type'] = $customer_type;
+        null !== $customerType && $obj['customerType'] = $customerType;
         null !== $email && $obj['email'] = $email;
-        null !== $first_name && $obj['first_name'] = $first_name;
-        null !== $last_name && $obj['last_name'] = $last_name;
-        null !== $phone_number && $obj['phone_number'] = $phone_number;
+        null !== $firstName && $obj['firstName'] = $firstName;
+        null !== $lastName && $obj['lastName'] = $lastName;
+        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
         null !== $status && $obj['status'] = $status;
 
         return $obj;
@@ -138,7 +138,7 @@ final class CustomerUpdateParams implements BaseModel
     public function withCustomerType(CustomerType|string $customerType): self
     {
         $obj = clone $this;
-        $obj['customer_type'] = $customerType;
+        $obj['customerType'] = $customerType;
 
         return $obj;
     }
@@ -160,7 +160,7 @@ final class CustomerUpdateParams implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj['first_name'] = $firstName;
+        $obj['firstName'] = $firstName;
 
         return $obj;
     }
@@ -171,7 +171,7 @@ final class CustomerUpdateParams implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj['last_name'] = $lastName;
+        $obj['lastName'] = $lastName;
 
         return $obj;
     }
@@ -182,7 +182,7 @@ final class CustomerUpdateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }

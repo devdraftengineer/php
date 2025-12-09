@@ -12,7 +12,7 @@ use Devdraft\Core\Contracts\BaseModel;
  * @phpstan-type TestPaymentRefundResponseShape = array{
  *   id: string,
  *   amount: float,
- *   paymentId: string,
+ *   paymentID: string,
  *   status: string,
  *   timestamp: string,
  * }
@@ -37,8 +37,8 @@ final class TestPaymentRefundResponse implements BaseModel
     /**
      * Original payment ID.
      */
-    #[Required]
-    public string $paymentId;
+    #[Required('paymentId')]
+    public string $paymentID;
 
     /**
      * Refund status.
@@ -58,7 +58,7 @@ final class TestPaymentRefundResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * TestPaymentRefundResponse::with(
-     *   id: ..., amount: ..., paymentId: ..., status: ..., timestamp: ...
+     *   id: ..., amount: ..., paymentID: ..., status: ..., timestamp: ...
      * )
      * ```
      *
@@ -86,7 +86,7 @@ final class TestPaymentRefundResponse implements BaseModel
     public static function with(
         string $id,
         float $amount,
-        string $paymentId,
+        string $paymentID,
         string $status,
         string $timestamp,
     ): self {
@@ -94,7 +94,7 @@ final class TestPaymentRefundResponse implements BaseModel
 
         $obj['id'] = $id;
         $obj['amount'] = $amount;
-        $obj['paymentId'] = $paymentId;
+        $obj['paymentID'] = $paymentID;
         $obj['status'] = $status;
         $obj['timestamp'] = $timestamp;
 
@@ -129,7 +129,7 @@ final class TestPaymentRefundResponse implements BaseModel
     public function withPaymentID(string $paymentID): self
     {
         $obj = clone $this;
-        $obj['paymentId'] = $paymentID;
+        $obj['paymentID'] = $paymentID;
 
         return $obj;
     }

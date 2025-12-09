@@ -100,7 +100,7 @@ final class TestPaymentService implements TestPaymentContract
      * If you retry with same key but different parameters (e.g., different amount), you'll receive a 409 Conflict error.
      *
      * @param array{
-     *   amount: float, currency: string, description: string, customerId?: string
+     *   amount: float, currency: string, description: string, customerID?: string
      * }|TestPaymentProcessParams $params
      *
      * @throws APIException

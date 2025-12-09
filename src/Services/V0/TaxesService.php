@@ -55,7 +55,7 @@ final class TaxesService implements TaxesContract
      *   name: string,
      *   percentage: float,
      *   active?: bool,
-     *   appIds?: list<string>,
+     *   appIDs?: list<string>,
      *   description?: string,
      * }|TaxCreateParams $params
      *
@@ -162,7 +162,7 @@ final class TaxesService implements TaxesContract
      *
      * @param array{
      *   active?: bool,
-     *   appIds?: list<string>,
+     *   appIDs?: list<string>,
      *   description?: string,
      *   name?: string,
      *   percentage?: float,

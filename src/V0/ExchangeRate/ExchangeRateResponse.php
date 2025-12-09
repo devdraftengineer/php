@@ -11,10 +11,10 @@ use Devdraft\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ExchangeRateResponseShape = array{
- *   buy_rate: string,
+ *   buyRate: string,
  *   from: string,
- *   midmarket_rate: string,
- *   sell_rate: string,
+ *   midmarketRate: string,
+ *   sellRate: string,
  *   to: string,
  *   timestamp?: string|null,
  * }
@@ -27,8 +27,8 @@ final class ExchangeRateResponse implements BaseModel
     /**
      * Rate for buying target currency (what you get when converting from source to target).
      */
-    #[Required]
-    public string $buy_rate;
+    #[Required('buy_rate')]
+    public string $buyRate;
 
     /**
      * Source currency code (USD for USDC).
@@ -39,14 +39,14 @@ final class ExchangeRateResponse implements BaseModel
     /**
      * Mid-market exchange rate from source to target currency.
      */
-    #[Required]
-    public string $midmarket_rate;
+    #[Required('midmarket_rate')]
+    public string $midmarketRate;
 
     /**
      * Rate for selling target currency (what you pay when converting from target to source).
      */
-    #[Required]
-    public string $sell_rate;
+    #[Required('sell_rate')]
+    public string $sellRate;
 
     /**
      * Target currency code (EUR for EURC).
@@ -66,7 +66,7 @@ final class ExchangeRateResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * ExchangeRateResponse::with(
-     *   buy_rate: ..., from: ..., midmarket_rate: ..., sell_rate: ..., to: ...
+     *   buyRate: ..., from: ..., midmarketRate: ..., sellRate: ..., to: ...
      * )
      * ```
      *
@@ -92,19 +92,19 @@ final class ExchangeRateResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $buy_rate,
+        string $buyRate,
         string $from,
-        string $midmarket_rate,
-        string $sell_rate,
+        string $midmarketRate,
+        string $sellRate,
         string $to,
         ?string $timestamp = null,
     ): self {
         $obj = new self;
 
-        $obj['buy_rate'] = $buy_rate;
+        $obj['buyRate'] = $buyRate;
         $obj['from'] = $from;
-        $obj['midmarket_rate'] = $midmarket_rate;
-        $obj['sell_rate'] = $sell_rate;
+        $obj['midmarketRate'] = $midmarketRate;
+        $obj['sellRate'] = $sellRate;
         $obj['to'] = $to;
 
         null !== $timestamp && $obj['timestamp'] = $timestamp;
@@ -118,7 +118,7 @@ final class ExchangeRateResponse implements BaseModel
     public function withBuyRate(string $buyRate): self
     {
         $obj = clone $this;
-        $obj['buy_rate'] = $buyRate;
+        $obj['buyRate'] = $buyRate;
 
         return $obj;
     }
@@ -140,7 +140,7 @@ final class ExchangeRateResponse implements BaseModel
     public function withMidmarketRate(string $midmarketRate): self
     {
         $obj = clone $this;
-        $obj['midmarket_rate'] = $midmarketRate;
+        $obj['midmarketRate'] = $midmarketRate;
 
         return $obj;
     }
@@ -151,7 +151,7 @@ final class ExchangeRateResponse implements BaseModel
     public function withSellRate(string $sellRate): self
     {
         $obj = clone $this;
-        $obj['sell_rate'] = $sellRate;
+        $obj['sellRate'] = $sellRate;
 
         return $obj;
     }

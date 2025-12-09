@@ -66,10 +66,10 @@ final class CustomersService implements CustomersContract
      * - `status`: Customer status (ACTIVE, BLACKLISTED, DEACTIVATED)
      *
      * @param array{
-     *   first_name: string,
-     *   last_name: string,
-     *   phone_number: string,
-     *   customer_type?: value-of<CustomerType>,
+     *   firstName: string,
+     *   lastName: string,
+     *   phoneNumber: string,
+     *   customerType?: value-of<CustomerType>,
      *   email?: string,
      *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
      * }|CustomerCreateParams $params
@@ -183,11 +183,11 @@ final class CustomersService implements CustomersContract
      * - Status changes may require additional verification
      *
      * @param array{
-     *   customer_type?: value-of<CustomerType>,
+     *   customerType?: value-of<CustomerType>,
      *   email?: string,
-     *   first_name?: string,
-     *   last_name?: string,
-     *   phone_number?: string,
+     *   firstName?: string,
+     *   lastName?: string,
+     *   phoneNumber?: string,
      *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
      * }|CustomerUpdateParams $params
      *

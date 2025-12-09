@@ -37,16 +37,16 @@ final class PaymentLinksService implements PaymentLinksContract
      *   url: string,
      *   amount?: float,
      *   coverImage?: string,
-     *   customerId?: string,
+     *   customerID?: string,
      *   customFields?: mixed,
      *   description?: string,
-     *   expiration_date?: string|\DateTimeInterface,
+     *   expirationDate?: string|\DateTimeInterface,
      *   isForAllProduct?: bool,
      *   limitPayments?: bool,
      *   maxPayments?: float,
-     *   paymentForId?: string,
-     *   paymentLinkProducts?: list<array{productId: string, quantity: int}>,
-     *   taxId?: string,
+     *   paymentForID?: string,
+     *   paymentLinkProducts?: list<array{productID: string, quantity: int}>,
+     *   taxID?: string,
      * }|PaymentLinkCreateParams $params
      *
      * @throws APIException

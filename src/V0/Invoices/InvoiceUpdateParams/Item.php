@@ -9,7 +9,7 @@ use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ItemShape = array{product_id: string, quantity: float}
+ * @phpstan-type ItemShape = array{productID: string, quantity: float}
  */
 final class Item implements BaseModel
 {
@@ -19,8 +19,8 @@ final class Item implements BaseModel
     /**
      * Product ID.
      */
-    #[Required]
-    public string $product_id;
+    #[Required('product_id')]
+    public string $productID;
 
     /**
      * Quantity of the product.
@@ -33,7 +33,7 @@ final class Item implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Item::with(product_id: ..., quantity: ...)
+     * Item::with(productID: ..., quantity: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,11 +52,11 @@ final class Item implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $product_id, float $quantity): self
+    public static function with(string $productID, float $quantity): self
     {
         $obj = new self;
 
-        $obj['product_id'] = $product_id;
+        $obj['productID'] = $productID;
         $obj['quantity'] = $quantity;
 
         return $obj;
@@ -68,7 +68,7 @@ final class Item implements BaseModel
     public function withProductID(string $productID): self
     {
         $obj = clone $this;
-        $obj['product_id'] = $productID;
+        $obj['productID'] = $productID;
 
         return $obj;
     }

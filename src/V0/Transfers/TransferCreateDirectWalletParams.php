@@ -15,7 +15,7 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\TransfersService::createDirectWallet()
  *
  * @phpstan-type TransferCreateDirectWalletParamsShape = array{
- *   amount: float, network: string, stableCoinCurrency: string, walletId: string
+ *   amount: float, network: string, stableCoinCurrency: string, walletID: string
  * }
  */
 final class TransferCreateDirectWalletParams implements BaseModel
@@ -45,8 +45,8 @@ final class TransferCreateDirectWalletParams implements BaseModel
     /**
      * The ID of the bridge wallet to transfer from.
      */
-    #[Required]
-    public string $walletId;
+    #[Required('walletId')]
+    public string $walletID;
 
     /**
      * `new TransferCreateDirectWalletParams()` is missing required properties by the API.
@@ -54,7 +54,7 @@ final class TransferCreateDirectWalletParams implements BaseModel
      * To enforce required parameters use
      * ```
      * TransferCreateDirectWalletParams::with(
-     *   amount: ..., network: ..., stableCoinCurrency: ..., walletId: ...
+     *   amount: ..., network: ..., stableCoinCurrency: ..., walletID: ...
      * )
      * ```
      *
@@ -82,14 +82,14 @@ final class TransferCreateDirectWalletParams implements BaseModel
         float $amount,
         string $network,
         string $stableCoinCurrency,
-        string $walletId
+        string $walletID
     ): self {
         $obj = new self;
 
         $obj['amount'] = $amount;
         $obj['network'] = $network;
         $obj['stableCoinCurrency'] = $stableCoinCurrency;
-        $obj['walletId'] = $walletId;
+        $obj['walletID'] = $walletID;
 
         return $obj;
     }
@@ -133,7 +133,7 @@ final class TransferCreateDirectWalletParams implements BaseModel
     public function withWalletID(string $walletID): self
     {
         $obj = clone $this;
-        $obj['walletId'] = $walletID;
+        $obj['walletID'] = $walletID;
 
         return $obj;
     }

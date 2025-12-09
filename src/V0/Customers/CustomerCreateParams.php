@@ -45,10 +45,10 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\CustomersService::create()
  *
  * @phpstan-type CustomerCreateParamsShape = array{
- *   first_name: string,
- *   last_name: string,
- *   phone_number: string,
- *   customer_type?: CustomerType|value-of<CustomerType>,
+ *   firstName: string,
+ *   lastName: string,
+ *   phoneNumber: string,
+ *   customerType?: CustomerType|value-of<CustomerType>,
  *   email?: string,
  *   status?: CustomerStatus|value-of<CustomerStatus>,
  * }
@@ -62,28 +62,28 @@ final class CustomerCreateParams implements BaseModel
     /**
      * Customer's first name. Used for personalization and legal documentation.
      */
-    #[Required]
-    public string $first_name;
+    #[Required('first_name')]
+    public string $firstName;
 
     /**
      * Customer's last name. Used for personalization and legal documentation.
      */
-    #[Required]
-    public string $last_name;
+    #[Required('last_name')]
+    public string $lastName;
 
     /**
      * Customer's phone number. Used for SMS notifications and verification. Include country code for international numbers.
      */
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * Type of customer account. Determines available features and compliance requirements.
      *
-     * @var value-of<CustomerType>|null $customer_type
+     * @var value-of<CustomerType>|null $customerType
      */
-    #[Optional(enum: CustomerType::class)]
-    public ?string $customer_type;
+    #[Optional('customer_type', enum: CustomerType::class)]
+    public ?string $customerType;
 
     /**
      * Customer's email address. Used for notifications, receipts, and account management. Must be a valid email format.
@@ -104,7 +104,7 @@ final class CustomerCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * CustomerCreateParams::with(first_name: ..., last_name: ..., phone_number: ...)
+     * CustomerCreateParams::with(firstName: ..., lastName: ..., phoneNumber: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -126,24 +126,24 @@ final class CustomerCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CustomerType|value-of<CustomerType> $customer_type
+     * @param CustomerType|value-of<CustomerType> $customerType
      * @param CustomerStatus|value-of<CustomerStatus> $status
      */
     public static function with(
-        string $first_name,
-        string $last_name,
-        string $phone_number,
-        CustomerType|string|null $customer_type = null,
+        string $firstName,
+        string $lastName,
+        string $phoneNumber,
+        CustomerType|string|null $customerType = null,
         ?string $email = null,
         CustomerStatus|string|null $status = null,
     ): self {
         $obj = new self;
 
-        $obj['first_name'] = $first_name;
-        $obj['last_name'] = $last_name;
-        $obj['phone_number'] = $phone_number;
+        $obj['firstName'] = $firstName;
+        $obj['lastName'] = $lastName;
+        $obj['phoneNumber'] = $phoneNumber;
 
-        null !== $customer_type && $obj['customer_type'] = $customer_type;
+        null !== $customerType && $obj['customerType'] = $customerType;
         null !== $email && $obj['email'] = $email;
         null !== $status && $obj['status'] = $status;
 
@@ -156,7 +156,7 @@ final class CustomerCreateParams implements BaseModel
     public function withFirstName(string $firstName): self
     {
         $obj = clone $this;
-        $obj['first_name'] = $firstName;
+        $obj['firstName'] = $firstName;
 
         return $obj;
     }
@@ -167,7 +167,7 @@ final class CustomerCreateParams implements BaseModel
     public function withLastName(string $lastName): self
     {
         $obj = clone $this;
-        $obj['last_name'] = $lastName;
+        $obj['lastName'] = $lastName;
 
         return $obj;
     }
@@ -178,7 +178,7 @@ final class CustomerCreateParams implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -191,7 +191,7 @@ final class CustomerCreateParams implements BaseModel
     public function withCustomerType(CustomerType|string $customerType): self
     {
         $obj = clone $this;
-        $obj['customer_type'] = $customerType;
+        $obj['customerType'] = $customerType;
 
         return $obj;
     }

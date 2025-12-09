@@ -32,18 +32,18 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      *   address: string,
      *   chain: value-of<Chain>,
      *   currency: 'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|Currency,
-     *   bridge_wallet_id?: string,
-     *   custom_developer_fee_percent?: string,
-     *   destination_ach_reference?: string,
-     *   destination_address?: string,
-     *   destination_blockchain_memo?: string,
-     *   destination_currency?: 'usd'|'eur'|'mxn'|'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|DestinationCurrency,
-     *   destination_payment_rail?: value-of<BridgePaymentRail>,
-     *   destination_sepa_reference?: string,
-     *   destination_wire_message?: string,
-     *   external_account_id?: string,
-     *   prefunded_account_id?: string,
-     *   return_address?: string,
+     *   bridgeWalletID?: string,
+     *   customDeveloperFeePercent?: string,
+     *   destinationACHReference?: string,
+     *   destinationAddress?: string,
+     *   destinationBlockchainMemo?: string,
+     *   destinationCurrency?: 'usd'|'eur'|'mxn'|'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|DestinationCurrency,
+     *   destinationPaymentRail?: value-of<BridgePaymentRail>,
+     *   destinationSepaReference?: string,
+     *   destinationWireMessage?: string,
+     *   externalAccountID?: string,
+     *   prefundedAccountID?: string,
+     *   returnAddress?: string,
      * }|LiquidationAddressCreateParams $params
      *
      * @throws APIException
@@ -75,7 +75,7 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      *
      * Retrieve a specific liquidation address by its ID for a given customer.
      *
-     * @param array{customerId: string}|LiquidationAddressRetrieveParams $params
+     * @param array{customerID: string}|LiquidationAddressRetrieveParams $params
      *
      * @throws APIException
      */
@@ -88,8 +88,8 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
             $params,
             $requestOptions,
         );
-        $customerID = $parsed['customerId'];
-        unset($parsed['customerId']);
+        $customerID = $parsed['customerID'];
+        unset($parsed['customerID']);
 
         /** @var BaseResponse<LiquidationAddressResponse> */
         $response = $this->client->request(

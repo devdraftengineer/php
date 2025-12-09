@@ -68,7 +68,7 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\TestPaymentService::process()
  *
  * @phpstan-type TestPaymentProcessParamsShape = array{
- *   amount: float, currency: string, description: string, customerId?: string
+ *   amount: float, currency: string, description: string, customerID?: string
  * }
  */
 final class TestPaymentProcessParams implements BaseModel
@@ -98,8 +98,8 @@ final class TestPaymentProcessParams implements BaseModel
     /**
      * Customer reference ID.
      */
-    #[Optional]
-    public ?string $customerId;
+    #[Optional('customerId')]
+    public ?string $customerID;
 
     /**
      * `new TestPaymentProcessParams()` is missing required properties by the API.
@@ -132,7 +132,7 @@ final class TestPaymentProcessParams implements BaseModel
         float $amount,
         string $currency,
         string $description,
-        ?string $customerId = null,
+        ?string $customerID = null,
     ): self {
         $obj = new self;
 
@@ -140,7 +140,7 @@ final class TestPaymentProcessParams implements BaseModel
         $obj['currency'] = $currency;
         $obj['description'] = $description;
 
-        null !== $customerId && $obj['customerId'] = $customerId;
+        null !== $customerID && $obj['customerID'] = $customerID;
 
         return $obj;
     }
@@ -184,7 +184,7 @@ final class TestPaymentProcessParams implements BaseModel
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj['customerId'] = $customerID;
+        $obj['customerID'] = $customerID;
 
         return $obj;
     }

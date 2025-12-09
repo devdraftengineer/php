@@ -33,10 +33,10 @@ final class TransfersService implements TransfersContract
      *   destinationCurrency: string,
      *   paymentRail: string,
      *   sourceCurrency: string,
-     *   walletId: string,
-     *   ach_reference?: string,
-     *   sepa_reference?: string,
-     *   wire_message?: string,
+     *   walletID: string,
+     *   achReference?: string,
+     *   sepaReference?: string,
+     *   wireMessage?: string,
      * }|TransferCreateDirectBankParams $params
      *
      * @throws APIException
@@ -68,7 +68,7 @@ final class TransfersService implements TransfersContract
      * Create a direct wallet transfer
      *
      * @param array{
-     *   amount: float, network: string, stableCoinCurrency: string, walletId: string
+     *   amount: float, network: string, stableCoinCurrency: string, walletID: string
      * }|TransferCreateDirectWalletParams $params
      *
      * @throws APIException
@@ -102,16 +102,16 @@ final class TransfersService implements TransfersContract
      * @param array{
      *   destinationCurrency: string,
      *   destinationPaymentRail: 'ach'|'ach_push'|'ach_same_day'|'wire'|'sepa'|'swift'|'spei'|DestinationPaymentRail,
-     *   external_account_id: string,
+     *   externalAccountID: string,
      *   sourceCurrency: string,
-     *   sourceWalletId: string,
-     *   ach_reference?: string,
+     *   sourceWalletID: string,
+     *   achReference?: string,
      *   amount?: float,
-     *   sepa_reference?: string,
-     *   spei_reference?: string,
-     *   swift_charges?: string,
-     *   swift_reference?: string,
-     *   wire_message?: string,
+     *   sepaReference?: string,
+     *   speiReference?: string,
+     *   swiftCharges?: string,
+     *   swiftReference?: string,
+     *   wireMessage?: string,
      * }|TransferCreateExternalBankTransferParams $params
      *
      * @throws APIException
@@ -143,12 +143,12 @@ final class TransfersService implements TransfersContract
      * Create an external stablecoin transfer
      *
      * @param array{
-     *   beneficiaryId: string,
+     *   beneficiaryID: string,
      *   destinationCurrency: string,
      *   sourceCurrency: string,
-     *   sourceWalletId: string,
+     *   sourceWalletID: string,
      *   amount?: float,
-     *   blockchain_memo?: string,
+     *   blockchainMemo?: string,
      * }|TransferCreateExternalStablecoinTransferParams $params
      *
      * @throws APIException
@@ -184,7 +184,7 @@ final class TransfersService implements TransfersContract
      *   destinationCurrency: string,
      *   sourceCurrency: string,
      *   sourceNetwork: string,
-     *   walletId: string,
+     *   walletID: string,
      * }|TransferCreateStablecoinConversionParams $params
      *
      * @throws APIException

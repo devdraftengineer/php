@@ -14,7 +14,7 @@ use Devdraft\V0\Balance\AggregatedBalance\Currency;
  * @phpstan-type AggregatedBalanceShape = array{
  *   balances: list<list<mixed>>,
  *   currency: value-of<Currency>,
- *   total_balance: string,
+ *   totalBalance: string,
  * }
  */
 final class AggregatedBalance implements BaseModel
@@ -41,15 +41,15 @@ final class AggregatedBalance implements BaseModel
     /**
      * The total aggregated balance across all wallets and chains.
      */
-    #[Required]
-    public string $total_balance;
+    #[Required('total_balance')]
+    public string $totalBalance;
 
     /**
      * `new AggregatedBalance()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AggregatedBalance::with(balances: ..., currency: ..., total_balance: ...)
+     * AggregatedBalance::with(balances: ..., currency: ..., totalBalance: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -77,13 +77,13 @@ final class AggregatedBalance implements BaseModel
     public static function with(
         array $balances,
         Currency|string $currency,
-        string $total_balance
+        string $totalBalance
     ): self {
         $obj = new self;
 
         $obj['balances'] = $balances;
         $obj['currency'] = $currency;
-        $obj['total_balance'] = $total_balance;
+        $obj['totalBalance'] = $totalBalance;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class AggregatedBalance implements BaseModel
     public function withTotalBalance(string $totalBalance): self
     {
         $obj = clone $this;
-        $obj['total_balance'] = $totalBalance;
+        $obj['totalBalance'] = $totalBalance;
 
         return $obj;
     }

@@ -14,7 +14,7 @@ use Devdraft\Core\Contracts\BaseModel;
  *
  * @see Devdraft\Services\V0\Customers\LiquidationAddressesService::retrieve()
  *
- * @phpstan-type LiquidationAddressRetrieveParamsShape = array{customerId: string}
+ * @phpstan-type LiquidationAddressRetrieveParamsShape = array{customerID: string}
  */
 final class LiquidationAddressRetrieveParams implements BaseModel
 {
@@ -23,14 +23,14 @@ final class LiquidationAddressRetrieveParams implements BaseModel
     use SdkParams;
 
     #[Required]
-    public string $customerId;
+    public string $customerID;
 
     /**
      * `new LiquidationAddressRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * LiquidationAddressRetrieveParams::with(customerId: ...)
+     * LiquidationAddressRetrieveParams::with(customerID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -49,11 +49,11 @@ final class LiquidationAddressRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $customerId): self
+    public static function with(string $customerID): self
     {
         $obj = new self;
 
-        $obj['customerId'] = $customerId;
+        $obj['customerID'] = $customerID;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class LiquidationAddressRetrieveParams implements BaseModel
     public function withCustomerID(string $customerID): self
     {
         $obj = clone $this;
-        $obj['customerId'] = $customerID;
+        $obj['customerID'] = $customerID;
 
         return $obj;
     }

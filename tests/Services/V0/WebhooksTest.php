@@ -62,7 +62,7 @@ final class WebhooksTest extends TestCase
             'isActive' => true,
             'name' => 'Payment Notifications',
             'url' => 'https://api.example.com/webhooks/payments',
-            'signing_secret' => 'whsec_123456789',
+            'signingSecret' => 'whsec_123456789',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
