@@ -6,9 +6,7 @@ namespace Devdraft\V0\Health;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 use Devdraft\V0\Health\HealthCheckResponse\Database;
 use Devdraft\V0\Health\HealthCheckResponse\Status;
 
@@ -22,12 +20,10 @@ use Devdraft\V0\Health\HealthCheckResponse\Status;
  *   version: string,
  * }
  */
-final class HealthCheckResponse implements BaseModel, ResponseConverter
+final class HealthCheckResponse implements BaseModel
 {
     /** @use SdkModel<HealthCheckResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Indicates whether the request was properly authenticated. Always true for this endpoint since authentication is required.

@@ -6,9 +6,7 @@ namespace Devdraft\V0\Balance;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 use Devdraft\Core\Conversion\ListOf;
 use Devdraft\V0\Balance\AggregatedBalance\Currency;
 
@@ -19,12 +17,10 @@ use Devdraft\V0\Balance\AggregatedBalance\Currency;
  *   total_balance: string,
  * }
  */
-final class AggregatedBalance implements BaseModel, ResponseConverter
+final class AggregatedBalance implements BaseModel
 {
     /** @use SdkModel<AggregatedBalanceShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Detailed breakdown of balances by wallet and chain.

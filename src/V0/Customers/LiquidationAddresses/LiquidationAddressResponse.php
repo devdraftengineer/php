@@ -6,9 +6,7 @@ namespace Devdraft\V0\Customers\LiquidationAddresses;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type LiquidationAddressResponseShape = array{
@@ -28,12 +26,10 @@ use Devdraft\Core\Conversion\Contracts\ResponseConverter;
  *   prefunded_account_id?: string|null,
  * }
  */
-final class LiquidationAddressResponse implements BaseModel, ResponseConverter
+final class LiquidationAddressResponse implements BaseModel
 {
     /** @use SdkModel<LiquidationAddressResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Unique identifier for the liquidation address.

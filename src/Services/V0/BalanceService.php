@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
+use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\BalanceContract;
@@ -44,13 +45,15 @@ final class BalanceService implements BalanceContract
     public function getAllStablecoinBalances(
         ?RequestOptions $requestOptions = null
     ): BalanceGetAllStablecoinBalancesResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<BalanceGetAllStablecoinBalancesResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/balance',
             options: $requestOptions,
             convert: BalanceGetAllStablecoinBalancesResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -78,13 +81,15 @@ final class BalanceService implements BalanceContract
     public function getEurc(
         ?RequestOptions $requestOptions = null
     ): AggregatedBalance {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AggregatedBalance> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/balance/eurc',
             options: $requestOptions,
             convert: AggregatedBalance::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -112,12 +117,14 @@ final class BalanceService implements BalanceContract
     public function getUsdc(
         ?RequestOptions $requestOptions = null
     ): AggregatedBalance {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AggregatedBalance> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/balance/usdc',
             options: $requestOptions,
             convert: AggregatedBalance::class,
         );
+
+        return $response->parse();
     }
 }

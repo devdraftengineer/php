@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
+use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TaxesContract;
@@ -69,14 +70,16 @@ final class TaxesService implements TaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<TaxNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'api/v0/taxes',
             body: (object) $parsed,
             options: $options,
             convert: TaxNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -114,13 +117,15 @@ final class TaxesService implements TaxesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'get',
             path: ['api/v0/taxes/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -175,14 +180,16 @@ final class TaxesService implements TaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: ['api/v0/taxes/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -235,14 +242,16 @@ final class TaxesService implements TaxesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/taxes',
             query: $parsed,
             options: $options,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -270,13 +279,15 @@ final class TaxesService implements TaxesContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: ['api/v0/taxes/%1$s', $id],
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -288,13 +299,15 @@ final class TaxesService implements TaxesContract
      */
     public function deleteAll(?RequestOptions $requestOptions = null): mixed
     {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'delete',
             path: 'api/v0/taxes',
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -306,12 +319,14 @@ final class TaxesService implements TaxesContract
      */
     public function updateAll(?RequestOptions $requestOptions = null): mixed
     {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'put',
             path: 'api/v0/taxes',
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Devdraft\Services;
 
 use Devdraft\Client;
+use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0Contract;
@@ -111,12 +112,14 @@ final class V0Service implements V0Contract
      */
     public function getWallets(?RequestOptions $requestOptions = null): mixed
     {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<mixed> */
+        $response = $this->client->request(
             method: 'get',
             path: 'api/v0/wallets',
             options: $requestOptions,
             convert: null,
         );
+
+        return $response->parse();
     }
 }

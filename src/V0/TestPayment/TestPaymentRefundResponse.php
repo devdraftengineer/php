@@ -6,9 +6,7 @@ namespace Devdraft\V0\TestPayment;
 
 use Devdraft\Core\Attributes\Api;
 use Devdraft\Core\Concerns\SdkModel;
-use Devdraft\Core\Concerns\SdkResponse;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type TestPaymentRefundResponseShape = array{
@@ -19,12 +17,10 @@ use Devdraft\Core\Conversion\Contracts\ResponseConverter;
  *   timestamp: string,
  * }
  */
-final class TestPaymentRefundResponse implements BaseModel, ResponseConverter
+final class TestPaymentRefundResponse implements BaseModel
 {
     /** @use SdkModel<TestPaymentRefundResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Refund ID.
