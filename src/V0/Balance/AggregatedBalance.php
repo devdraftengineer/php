@@ -79,13 +79,13 @@ final class AggregatedBalance implements BaseModel
         Currency|string $currency,
         string $totalBalance
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['balances'] = $balances;
-        $obj['currency'] = $currency;
-        $obj['totalBalance'] = $totalBalance;
+        $self['balances'] = $balances;
+        $self['currency'] = $currency;
+        $self['totalBalance'] = $totalBalance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class AggregatedBalance implements BaseModel
      */
     public function withBalances(array $balances): self
     {
-        $obj = clone $this;
-        $obj['balances'] = $balances;
+        $self = clone $this;
+        $self['balances'] = $balances;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +108,10 @@ final class AggregatedBalance implements BaseModel
      */
     public function withCurrency(Currency|string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,9 +119,9 @@ final class AggregatedBalance implements BaseModel
      */
     public function withTotalBalance(string $totalBalance): self
     {
-        $obj = clone $this;
-        $obj['totalBalance'] = $totalBalance;
+        $self = clone $this;
+        $self['totalBalance'] = $totalBalance;
 
-        return $obj;
+        return $self;
     }
 }

@@ -173,25 +173,25 @@ final class LiquidationAddressResponse implements BaseModel
         ?string $externalAccountID = null,
         ?string $prefundedAccountID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['address'] = $address;
-        $obj['chain'] = $chain;
-        $obj['createdAt'] = $createdAt;
-        $obj['currency'] = $currency;
-        $obj['customerID'] = $customerID;
-        $obj['state'] = $state;
-        $obj['updatedAt'] = $updatedAt;
+        $self['id'] = $id;
+        $self['address'] = $address;
+        $self['chain'] = $chain;
+        $self['createdAt'] = $createdAt;
+        $self['currency'] = $currency;
+        $self['customerID'] = $customerID;
+        $self['state'] = $state;
+        $self['updatedAt'] = $updatedAt;
 
-        null !== $bridgeWalletID && $obj['bridgeWalletID'] = $bridgeWalletID;
-        null !== $customDeveloperFeePercent && $obj['customDeveloperFeePercent'] = $customDeveloperFeePercent;
-        null !== $destinationCurrency && $obj['destinationCurrency'] = $destinationCurrency;
-        null !== $destinationPaymentRail && $obj['destinationPaymentRail'] = $destinationPaymentRail;
-        null !== $externalAccountID && $obj['externalAccountID'] = $externalAccountID;
-        null !== $prefundedAccountID && $obj['prefundedAccountID'] = $prefundedAccountID;
+        null !== $bridgeWalletID && $self['bridgeWalletID'] = $bridgeWalletID;
+        null !== $customDeveloperFeePercent && $self['customDeveloperFeePercent'] = $customDeveloperFeePercent;
+        null !== $destinationCurrency && $self['destinationCurrency'] = $destinationCurrency;
+        null !== $destinationPaymentRail && $self['destinationPaymentRail'] = $destinationPaymentRail;
+        null !== $externalAccountID && $self['externalAccountID'] = $externalAccountID;
+        null !== $prefundedAccountID && $self['prefundedAccountID'] = $prefundedAccountID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withAddress(string $address): self
     {
-        $obj = clone $this;
-        $obj['address'] = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withChain(string $chain): self
     {
-        $obj = clone $this;
-        $obj['chain'] = $chain;
+        $self = clone $this;
+        $self['chain'] = $chain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +232,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +243,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +254,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withCustomerID(string $customerID): self
     {
-        $obj = clone $this;
-        $obj['customerID'] = $customerID;
+        $self = clone $this;
+        $self['customerID'] = $customerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +265,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj['state'] = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withBridgeWalletID(string $bridgeWalletID): self
     {
-        $obj = clone $this;
-        $obj['bridgeWalletID'] = $bridgeWalletID;
+        $self = clone $this;
+        $self['bridgeWalletID'] = $bridgeWalletID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -299,10 +299,10 @@ final class LiquidationAddressResponse implements BaseModel
     public function withCustomDeveloperFeePercent(
         string $customDeveloperFeePercent
     ): self {
-        $obj = clone $this;
-        $obj['customDeveloperFeePercent'] = $customDeveloperFeePercent;
+        $self = clone $this;
+        $self['customDeveloperFeePercent'] = $customDeveloperFeePercent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -310,10 +310,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withDestinationCurrency(string $destinationCurrency): self
     {
-        $obj = clone $this;
-        $obj['destinationCurrency'] = $destinationCurrency;
+        $self = clone $this;
+        $self['destinationCurrency'] = $destinationCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -322,10 +322,10 @@ final class LiquidationAddressResponse implements BaseModel
     public function withDestinationPaymentRail(
         string $destinationPaymentRail
     ): self {
-        $obj = clone $this;
-        $obj['destinationPaymentRail'] = $destinationPaymentRail;
+        $self = clone $this;
+        $self['destinationPaymentRail'] = $destinationPaymentRail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -333,10 +333,10 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withExternalAccountID(string $externalAccountID): self
     {
-        $obj = clone $this;
-        $obj['externalAccountID'] = $externalAccountID;
+        $self = clone $this;
+        $self['externalAccountID'] = $externalAccountID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -344,9 +344,9 @@ final class LiquidationAddressResponse implements BaseModel
      */
     public function withPrefundedAccountID(string $prefundedAccountID): self
     {
-        $obj = clone $this;
-        $obj['prefundedAccountID'] = $prefundedAccountID;
+        $self = clone $this;
+        $self['prefundedAccountID'] = $prefundedAccountID;
 
-        return $obj;
+        return $self;
     }
 }

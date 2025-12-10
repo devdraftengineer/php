@@ -107,17 +107,17 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
         ?float $amount = null,
         ?string $blockchainMemo = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['beneficiaryID'] = $beneficiaryID;
-        $obj['destinationCurrency'] = $destinationCurrency;
-        $obj['sourceCurrency'] = $sourceCurrency;
-        $obj['sourceWalletID'] = $sourceWalletID;
+        $self['beneficiaryID'] = $beneficiaryID;
+        $self['destinationCurrency'] = $destinationCurrency;
+        $self['sourceCurrency'] = $sourceCurrency;
+        $self['sourceWalletID'] = $sourceWalletID;
 
-        null !== $amount && $obj['amount'] = $amount;
-        null !== $blockchainMemo && $obj['blockchainMemo'] = $blockchainMemo;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $blockchainMemo && $self['blockchainMemo'] = $blockchainMemo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
      */
     public function withBeneficiaryID(string $beneficiaryID): self
     {
-        $obj = clone $this;
-        $obj['beneficiaryID'] = $beneficiaryID;
+        $self = clone $this;
+        $self['beneficiaryID'] = $beneficiaryID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
      */
     public function withDestinationCurrency(string $destinationCurrency): self
     {
-        $obj = clone $this;
-        $obj['destinationCurrency'] = $destinationCurrency;
+        $self = clone $this;
+        $self['destinationCurrency'] = $destinationCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
      */
     public function withSourceCurrency(string $sourceCurrency): self
     {
-        $obj = clone $this;
-        $obj['sourceCurrency'] = $sourceCurrency;
+        $self = clone $this;
+        $self['sourceCurrency'] = $sourceCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
      */
     public function withSourceWalletID(string $sourceWalletID): self
     {
-        $obj = clone $this;
-        $obj['sourceWalletID'] = $sourceWalletID;
+        $self = clone $this;
+        $self['sourceWalletID'] = $sourceWalletID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
      */
     public function withAmount(float $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,9 +180,9 @@ final class TransferCreateExternalStablecoinTransferParams implements BaseModel
      */
     public function withBlockchainMemo(string $blockchainMemo): self
     {
-        $obj = clone $this;
-        $obj['blockchainMemo'] = $blockchainMemo;
+        $self = clone $this;
+        $self['blockchainMemo'] = $blockchainMemo;
 
-        return $obj;
+        return $self;
     }
 }

@@ -46,12 +46,12 @@ final class PaymentLinkListParams implements BaseModel
      */
     public static function with(?string $skip = null, ?string $take = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $skip && $obj['skip'] = $skip;
-        null !== $take && $obj['take'] = $take;
+        null !== $skip && $self['skip'] = $skip;
+        null !== $take && $self['take'] = $take;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class PaymentLinkListParams implements BaseModel
      */
     public function withSkip(string $skip): self
     {
-        $obj = clone $this;
-        $obj['skip'] = $skip;
+        $self = clone $this;
+        $self['skip'] = $skip;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class PaymentLinkListParams implements BaseModel
      */
     public function withTake(string $take): self
     {
-        $obj = clone $this;
-        $obj['take'] = $take;
+        $self = clone $this;
+        $self['take'] = $take;
 
-        return $obj;
+        return $self;
     }
 }

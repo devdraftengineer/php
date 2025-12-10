@@ -84,14 +84,14 @@ final class TransferCreateDirectWalletParams implements BaseModel
         string $stableCoinCurrency,
         string $walletID
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
-        $obj['network'] = $network;
-        $obj['stableCoinCurrency'] = $stableCoinCurrency;
-        $obj['walletID'] = $walletID;
+        $self['amount'] = $amount;
+        $self['network'] = $network;
+        $self['stableCoinCurrency'] = $stableCoinCurrency;
+        $self['walletID'] = $walletID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class TransferCreateDirectWalletParams implements BaseModel
      */
     public function withAmount(float $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class TransferCreateDirectWalletParams implements BaseModel
      */
     public function withNetwork(string $network): self
     {
-        $obj = clone $this;
-        $obj['network'] = $network;
+        $self = clone $this;
+        $self['network'] = $network;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +121,10 @@ final class TransferCreateDirectWalletParams implements BaseModel
      */
     public function withStableCoinCurrency(string $stableCoinCurrency): self
     {
-        $obj = clone $this;
-        $obj['stableCoinCurrency'] = $stableCoinCurrency;
+        $self = clone $this;
+        $self['stableCoinCurrency'] = $stableCoinCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +132,9 @@ final class TransferCreateDirectWalletParams implements BaseModel
      */
     public function withWalletID(string $walletID): self
     {
-        $obj = clone $this;
-        $obj['walletID'] = $walletID;
+        $self = clone $this;
+        $self['walletID'] = $walletID;
 
-        return $obj;
+        return $self;
     }
 }

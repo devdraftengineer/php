@@ -82,13 +82,13 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
         string $totalUsdValue,
         AggregatedBalance|array $usdc,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['eurc'] = $eurc;
-        $obj['totalUsdValue'] = $totalUsdValue;
-        $obj['usdc'] = $usdc;
+        $self['eurc'] = $eurc;
+        $self['totalUsdValue'] = $totalUsdValue;
+        $self['usdc'] = $usdc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +102,10 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      */
     public function withEurc(AggregatedBalance|array $eurc): self
     {
-        $obj = clone $this;
-        $obj['eurc'] = $eurc;
+        $self = clone $this;
+        $self['eurc'] = $eurc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      */
     public function withTotalUsdValue(string $totalUsdValue): self
     {
-        $obj = clone $this;
-        $obj['totalUsdValue'] = $totalUsdValue;
+        $self = clone $this;
+        $self['totalUsdValue'] = $totalUsdValue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,9 +130,9 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      */
     public function withUsdc(AggregatedBalance|array $usdc): self
     {
-        $obj = clone $this;
-        $obj['usdc'] = $usdc;
+        $self = clone $this;
+        $self['usdc'] = $usdc;
 
-        return $obj;
+        return $self;
     }
 }

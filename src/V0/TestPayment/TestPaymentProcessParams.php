@@ -134,15 +134,15 @@ final class TestPaymentProcessParams implements BaseModel
         string $description,
         ?string $customerID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
-        $obj['currency'] = $currency;
-        $obj['description'] = $description;
+        $self['amount'] = $amount;
+        $self['currency'] = $currency;
+        $self['description'] = $description;
 
-        null !== $customerID && $obj['customerID'] = $customerID;
+        null !== $customerID && $self['customerID'] = $customerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class TestPaymentProcessParams implements BaseModel
      */
     public function withAmount(float $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class TestPaymentProcessParams implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +172,10 @@ final class TestPaymentProcessParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,9 +183,9 @@ final class TestPaymentProcessParams implements BaseModel
      */
     public function withCustomerID(string $customerID): self
     {
-        $obj = clone $this;
-        $obj['customerID'] = $customerID;
+        $self = clone $this;
+        $self['customerID'] = $customerID;
 
-        return $obj;
+        return $self;
     }
 }

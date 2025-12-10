@@ -90,15 +90,15 @@ final class TestPaymentRefundResponse implements BaseModel
         string $status,
         string $timestamp,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['amount'] = $amount;
-        $obj['paymentID'] = $paymentID;
-        $obj['status'] = $status;
-        $obj['timestamp'] = $timestamp;
+        $self['id'] = $id;
+        $self['amount'] = $amount;
+        $self['paymentID'] = $paymentID;
+        $self['status'] = $status;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class TestPaymentRefundResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class TestPaymentRefundResponse implements BaseModel
      */
     public function withAmount(float $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class TestPaymentRefundResponse implements BaseModel
      */
     public function withPaymentID(string $paymentID): self
     {
-        $obj = clone $this;
-        $obj['paymentID'] = $paymentID;
+        $self = clone $this;
+        $self['paymentID'] = $paymentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class TestPaymentRefundResponse implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,9 +150,9 @@ final class TestPaymentRefundResponse implements BaseModel
      */
     public function withTimestamp(string $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

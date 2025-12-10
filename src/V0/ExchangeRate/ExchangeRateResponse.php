@@ -99,17 +99,17 @@ final class ExchangeRateResponse implements BaseModel
         string $to,
         ?string $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['buyRate'] = $buyRate;
-        $obj['from'] = $from;
-        $obj['midmarketRate'] = $midmarketRate;
-        $obj['sellRate'] = $sellRate;
-        $obj['to'] = $to;
+        $self['buyRate'] = $buyRate;
+        $self['from'] = $from;
+        $self['midmarketRate'] = $midmarketRate;
+        $self['sellRate'] = $sellRate;
+        $self['to'] = $to;
 
-        null !== $timestamp && $obj['timestamp'] = $timestamp;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class ExchangeRateResponse implements BaseModel
      */
     public function withBuyRate(string $buyRate): self
     {
-        $obj = clone $this;
-        $obj['buyRate'] = $buyRate;
+        $self = clone $this;
+        $self['buyRate'] = $buyRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class ExchangeRateResponse implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class ExchangeRateResponse implements BaseModel
      */
     public function withMidmarketRate(string $midmarketRate): self
     {
-        $obj = clone $this;
-        $obj['midmarketRate'] = $midmarketRate;
+        $self = clone $this;
+        $self['midmarketRate'] = $midmarketRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class ExchangeRateResponse implements BaseModel
      */
     public function withSellRate(string $sellRate): self
     {
-        $obj = clone $this;
-        $obj['sellRate'] = $sellRate;
+        $self = clone $this;
+        $self['sellRate'] = $sellRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class ExchangeRateResponse implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,9 +172,9 @@ final class ExchangeRateResponse implements BaseModel
      */
     public function withTimestamp(string $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

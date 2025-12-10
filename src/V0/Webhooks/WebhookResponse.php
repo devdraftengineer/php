@@ -124,18 +124,18 @@ final class WebhookResponse implements BaseModel
         string $updatedAt,
         string $url,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['createdAt'] = $createdAt;
-        $obj['deliveryStats'] = $deliveryStats;
-        $obj['encrypted'] = $encrypted;
-        $obj['isActive'] = $isActive;
-        $obj['name'] = $name;
-        $obj['updatedAt'] = $updatedAt;
-        $obj['url'] = $url;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['deliveryStats'] = $deliveryStats;
+        $self['encrypted'] = $encrypted;
+        $self['isActive'] = $isActive;
+        $self['name'] = $name;
+        $self['updatedAt'] = $updatedAt;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class WebhookResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class WebhookResponse implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class WebhookResponse implements BaseModel
      */
     public function withDeliveryStats(mixed $deliveryStats): self
     {
-        $obj = clone $this;
-        $obj['deliveryStats'] = $deliveryStats;
+        $self = clone $this;
+        $self['deliveryStats'] = $deliveryStats;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class WebhookResponse implements BaseModel
      */
     public function withEncrypted(bool $encrypted): self
     {
-        $obj = clone $this;
-        $obj['encrypted'] = $encrypted;
+        $self = clone $this;
+        $self['encrypted'] = $encrypted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class WebhookResponse implements BaseModel
      */
     public function withIsActive(bool $isActive): self
     {
-        $obj = clone $this;
-        $obj['isActive'] = $isActive;
+        $self = clone $this;
+        $self['isActive'] = $isActive;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class WebhookResponse implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +209,10 @@ final class WebhookResponse implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,9 +220,9 @@ final class WebhookResponse implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

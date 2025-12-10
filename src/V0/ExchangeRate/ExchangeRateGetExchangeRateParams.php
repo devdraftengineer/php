@@ -84,12 +84,12 @@ final class ExchangeRateGetExchangeRateParams implements BaseModel
      */
     public static function with(string $from, string $to): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['from'] = $from;
-        $obj['to'] = $to;
+        $self['from'] = $from;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class ExchangeRateGetExchangeRateParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj['from'] = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +108,9 @@ final class ExchangeRateGetExchangeRateParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj['to'] = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

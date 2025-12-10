@@ -54,12 +54,12 @@ final class PaymentLinkProduct implements BaseModel
      */
     public static function with(string $productID, int $quantity = 1): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['productID'] = $productID;
-        $obj['quantity'] = $quantity;
+        $self['productID'] = $productID;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class PaymentLinkProduct implements BaseModel
      */
     public function withProductID(string $productID): self
     {
-        $obj = clone $this;
-        $obj['productID'] = $productID;
+        $self = clone $this;
+        $self['productID'] = $productID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class PaymentLinkProduct implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 }

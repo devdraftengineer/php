@@ -75,15 +75,15 @@ final class WebhookUpdateParams implements BaseModel
         ?string $signingSecret = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $encrypted && $obj['encrypted'] = $encrypted;
-        null !== $isActive && $obj['isActive'] = $isActive;
-        null !== $name && $obj['name'] = $name;
-        null !== $signingSecret && $obj['signingSecret'] = $signingSecret;
-        null !== $url && $obj['url'] = $url;
+        null !== $encrypted && $self['encrypted'] = $encrypted;
+        null !== $isActive && $self['isActive'] = $isActive;
+        null !== $name && $self['name'] = $name;
+        null !== $signingSecret && $self['signingSecret'] = $signingSecret;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class WebhookUpdateParams implements BaseModel
      */
     public function withEncrypted(bool $encrypted): self
     {
-        $obj = clone $this;
-        $obj['encrypted'] = $encrypted;
+        $self = clone $this;
+        $self['encrypted'] = $encrypted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +102,10 @@ final class WebhookUpdateParams implements BaseModel
      */
     public function withIsActive(bool $isActive): self
     {
-        $obj = clone $this;
-        $obj['isActive'] = $isActive;
+        $self = clone $this;
+        $self['isActive'] = $isActive;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class WebhookUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class WebhookUpdateParams implements BaseModel
      */
     public function withSigningSecret(string $signingSecret): self
     {
-        $obj = clone $this;
-        $obj['signingSecret'] = $signingSecret;
+        $self = clone $this;
+        $self['signingSecret'] = $signingSecret;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,9 +135,9 @@ final class WebhookUpdateParams implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }
