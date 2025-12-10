@@ -5,68 +5,97 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\InvoicesContract;
-use Devdraft\V0\Invoices\InvoiceCreateParams;
 use Devdraft\V0\Invoices\InvoiceCreateParams\Currency;
 use Devdraft\V0\Invoices\InvoiceCreateParams\Delivery;
 use Devdraft\V0\Invoices\InvoiceCreateParams\PaymentMethod;
 use Devdraft\V0\Invoices\InvoiceCreateParams\Status;
-use Devdraft\V0\Invoices\InvoiceListParams;
-use Devdraft\V0\Invoices\InvoiceUpdateParams;
 
 final class InvoicesService implements InvoicesContract
 {
     /**
+     * @api
+     */
+    public InvoicesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new InvoicesRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a new invoice
      *
-     * @param array{
-     *   currency: 'usdc'|'eurc'|Currency,
-     *   customerID: string,
-     *   delivery: 'EMAIL'|'MANUALLY'|Delivery,
-     *   dueDate: string|\DateTimeInterface,
-     *   email: string,
-     *   items: list<array{productID: string, quantity: float}>,
-     *   name: string,
-     *   partialPayment: bool,
-     *   paymentLink: bool,
-     *   paymentMethods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|PaymentMethod>,
-     *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|Status,
-     *   address?: string,
-     *   logo?: string,
-     *   phoneNumber?: string,
-     *   sendDate?: string|\DateTimeInterface,
-     *   taxID?: string,
-     * }|InvoiceCreateParams $params
+     * @param 'usdc'|'eurc'|Currency $currency Currency for the invoice
+     * @param string $customerID Customer ID
+     * @param 'EMAIL'|'MANUALLY'|Delivery $delivery Delivery method
+     * @param string|\DateTimeInterface $dueDate Due date of the invoice
+     * @param string $email Email address
+     * @param list<array{
+     *   productID: string, quantity: float
+     * }> $items Array of products in the invoice
+     * @param string $name Name of the invoice
+     * @param bool $partialPayment Allow partial payments
+     * @param bool $paymentLink Whether to generate a payment link
+     * @param list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|PaymentMethod> $paymentMethods Array of accepted payment methods
+     * @param 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|Status $status Invoice status
+     * @param string $address Address
+     * @param string $logo Logo URL
+     * @param string $phoneNumber Phone number
+     * @param string|\DateTimeInterface $sendDate Send date
+     * @param string $taxID Tax ID
      *
      * @throws APIException
      */
     public function create(
-        array|InvoiceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string|Currency $currency,
+        string $customerID,
+        string|Delivery $delivery,
+        string|\DateTimeInterface $dueDate,
+        string $email,
+        array $items,
+        string $name,
+        bool $partialPayment,
+        bool $paymentLink,
+        array $paymentMethods,
+        string|Status $status,
+        ?string $address = null,
+        ?string $logo = null,
+        ?string $phoneNumber = null,
+        string|\DateTimeInterface|null $sendDate = null,
+        ?string $taxID = null,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = InvoiceCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'currency' => $currency,
+            'customerID' => $customerID,
+            'delivery' => $delivery,
+            'dueDate' => $dueDate,
+            'email' => $email,
+            'items' => $items,
+            'name' => $name,
+            'partialPayment' => $partialPayment,
+            'paymentLink' => $paymentLink,
+            'paymentMethods' => $paymentMethods,
+            'status' => $status,
+            'address' => $address,
+            'logo' => $logo,
+            'phoneNumber' => $phoneNumber,
+            'sendDate' => $sendDate,
+            'taxID' => $taxID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/invoices',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -76,19 +105,16 @@ final class InvoicesService implements InvoicesContract
      *
      * Get an invoice by ID
      *
+     * @param string $id Invoice ID
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['api/v0/invoices/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -98,45 +124,71 @@ final class InvoicesService implements InvoicesContract
      *
      * Update an invoice
      *
-     * @param array{
-     *   currency: 'usdc'|'eurc'|InvoiceUpdateParams\Currency,
-     *   customerID: string,
-     *   delivery: 'EMAIL'|'MANUALLY'|InvoiceUpdateParams\Delivery,
-     *   dueDate: string|\DateTimeInterface,
-     *   email: string,
-     *   items: list<array{productID: string, quantity: float}>,
-     *   name: string,
-     *   partialPayment: bool,
-     *   paymentLink: bool,
-     *   paymentMethods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|InvoiceUpdateParams\PaymentMethod>,
-     *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|InvoiceUpdateParams\Status,
-     *   address?: string,
-     *   logo?: string,
-     *   phoneNumber?: string,
-     *   sendDate?: string|\DateTimeInterface,
-     *   taxID?: string,
-     * }|InvoiceUpdateParams $params
+     * @param string $id Invoice ID
+     * @param 'usdc'|'eurc'|\Devdraft\V0\Invoices\InvoiceUpdateParams\Currency $currency Currency for the invoice
+     * @param string $customerID Customer ID
+     * @param 'EMAIL'|'MANUALLY'|\Devdraft\V0\Invoices\InvoiceUpdateParams\Delivery $delivery Delivery method
+     * @param string|\DateTimeInterface $dueDate Due date of the invoice
+     * @param string $email Email address
+     * @param list<array{
+     *   productID: string, quantity: float
+     * }> $items Array of products in the invoice
+     * @param string $name Name of the invoice
+     * @param bool $partialPayment Allow partial payments
+     * @param bool $paymentLink Whether to generate a payment link
+     * @param list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|\Devdraft\V0\Invoices\InvoiceUpdateParams\PaymentMethod> $paymentMethods Array of accepted payment methods
+     * @param 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|\Devdraft\V0\Invoices\InvoiceUpdateParams\Status $status Invoice status
+     * @param string $address Address
+     * @param string $logo Logo URL
+     * @param string $phoneNumber Phone number
+     * @param string|\DateTimeInterface $sendDate Send date
+     * @param string $taxID Tax ID
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|InvoiceUpdateParams $params,
+        string|\Devdraft\V0\Invoices\InvoiceUpdateParams\Currency $currency,
+        string $customerID,
+        string|\Devdraft\V0\Invoices\InvoiceUpdateParams\Delivery $delivery,
+        string|\DateTimeInterface $dueDate,
+        string $email,
+        array $items,
+        string $name,
+        bool $partialPayment,
+        bool $paymentLink,
+        array $paymentMethods,
+        string|\Devdraft\V0\Invoices\InvoiceUpdateParams\Status $status,
+        ?string $address = null,
+        ?string $logo = null,
+        ?string $phoneNumber = null,
+        string|\DateTimeInterface|null $sendDate = null,
+        ?string $taxID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = InvoiceUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'currency' => $currency,
+            'customerID' => $customerID,
+            'delivery' => $delivery,
+            'dueDate' => $dueDate,
+            'email' => $email,
+            'items' => $items,
+            'name' => $name,
+            'partialPayment' => $partialPayment,
+            'paymentLink' => $paymentLink,
+            'paymentMethods' => $paymentMethods,
+            'status' => $status,
+            'address' => $address,
+            'logo' => $logo,
+            'phoneNumber' => $phoneNumber,
+            'sendDate' => $sendDate,
+            'taxID' => $taxID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['api/v0/invoices/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -146,27 +198,22 @@ final class InvoicesService implements InvoicesContract
      *
      * Get all invoices
      *
-     * @param array{skip?: float, take?: float}|InvoiceListParams $params
+     * @param float $skip Number of records to skip
+     * @param float $take Number of records to take
      *
      * @throws APIException
      */
     public function list(
-        array|InvoiceListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?float $skip = null,
+        ?float $take = null,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = InvoiceListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['skip' => $skip, 'take' => $take];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/invoices',
-            query: $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

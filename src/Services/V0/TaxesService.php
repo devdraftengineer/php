@@ -5,21 +5,25 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TaxesContract;
-use Devdraft\V0\Taxes\TaxCreateParams;
-use Devdraft\V0\Taxes\TaxListParams;
 use Devdraft\V0\Taxes\TaxNewResponse;
-use Devdraft\V0\Taxes\TaxUpdateParams;
 
 final class TaxesService implements TaxesContract
 {
     /**
+     * @api
+     */
+    public TaxesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new TaxesRawService($client);
+    }
 
     /**
      * @api
@@ -51,33 +55,34 @@ final class TaxesService implements TaxesContract
      * - `active`: Whether this tax is currently active (default: true)
      * - `appIds`: Array of app IDs where this tax should be available
      *
-     * @param array{
-     *   name: string,
-     *   percentage: float,
-     *   active?: bool,
-     *   appIDs?: list<string>,
-     *   description?: string,
-     * }|TaxCreateParams $params
+     * @param string $name Tax name. Used to identify and reference this tax rate.
+     * @param float $percentage Tax percentage rate. Must be between 0 and 100.
+     * @param bool $active whether this tax is currently active and can be applied
+     * @param list<string> $appIDs Array of app IDs where this tax should be available. If not provided, tax will be available for the current app.
+     * @param string $description optional description explaining what this tax covers
      *
      * @throws APIException
      */
     public function create(
-        array|TaxCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $name,
+        float $percentage,
+        bool $active = true,
+        ?array $appIDs = null,
+        ?string $description = null,
+        ?RequestOptions $requestOptions = null,
     ): TaxNewResponse {
-        [$parsed, $options] = TaxCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'name' => $name,
+            'percentage' => $percentage,
+            'active' => $active,
+            'appIDs' => $appIDs,
+            'description' => $description,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<TaxNewResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/taxes',
-            body: (object) $parsed,
-            options: $options,
-            convert: TaxNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -111,19 +116,16 @@ final class TaxesService implements TaxesContract
      * }
      * ```
      *
+     * @param string $id Tax unique identifier (UUID)
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['api/v0/taxes/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -160,34 +162,36 @@ final class TaxesService implements TaxesContract
      * - All fields are optional in updates
      * - Percentage changes affect future calculations only
      *
-     * @param array{
-     *   active?: bool,
-     *   appIDs?: list<string>,
-     *   description?: string,
-     *   name?: string,
-     *   percentage?: float,
-     * }|TaxUpdateParams $params
+     * @param string $id Tax unique identifier (UUID)
+     * @param bool $active Whether this tax is currently active and can be applied
+     * @param list<string> $appIDs Array of app IDs where this tax should be available
+     * @param string $description Detailed description of what this tax covers
+     * @param string $name Tax name for identification and display purposes
+     * @param float $percentage Tax rate as a percentage (0-100)
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|TaxUpdateParams $params,
+        ?bool $active = null,
+        ?array $appIDs = null,
+        ?string $description = null,
+        ?string $name = null,
+        ?float $percentage = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TaxUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'active' => $active,
+            'appIDs' => $appIDs,
+            'description' => $description,
+            'name' => $name,
+            'percentage' => $percentage,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['api/v0/taxes/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -227,29 +231,28 @@ final class TaxesService implements TaxesContract
      * ]
      * ```
      *
-     * @param array{
-     *   active?: bool, name?: string, skip?: float, take?: float
-     * }|TaxListParams $params
+     * @param bool $active Filter by active status
+     * @param string $name Filter taxes by name (partial match, case-insensitive)
+     * @param float $skip Number of records to skip for pagination
+     * @param float $take Number of records to return (max 100)
      *
      * @throws APIException
      */
     public function list(
-        array|TaxListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?bool $active = null,
+        ?string $name = null,
+        float $skip = 0,
+        float $take = 10,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TaxListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'active' => $active, 'name' => $name, 'skip' => $skip, 'take' => $take,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/taxes',
-            query: $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -273,19 +276,16 @@ final class TaxesService implements TaxesContract
      * ## Warning
      * This action cannot be undone. Consider deactivating the tax instead of deleting it if it has been used in transactions.
      *
+     * @param string $id Tax unique identifier (UUID)
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['api/v0/taxes/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -299,13 +299,8 @@ final class TaxesService implements TaxesContract
      */
     public function deleteAll(?RequestOptions $requestOptions = null): mixed
     {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: 'api/v0/taxes',
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->deleteAll(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -319,13 +314,8 @@ final class TaxesService implements TaxesContract
      */
     public function updateAll(?RequestOptions $requestOptions = null): mixed
     {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: 'api/v0/taxes',
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateAll(requestOptions: $requestOptions);
 
         return $response->parse();
     }

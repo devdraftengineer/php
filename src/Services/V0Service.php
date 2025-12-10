@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Devdraft\Services;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0Contract;
@@ -24,6 +23,11 @@ use Devdraft\Services\V0\WebhooksService;
 
 final class V0Service implements V0Contract
 {
+    /**
+     * @api
+     */
+    public V0RawService $raw;
+
     /**
      * @api
      */
@@ -89,6 +93,7 @@ final class V0Service implements V0Contract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new V0RawService($client);
         $this->health = new HealthService($client);
         $this->testPayment = new TestPaymentService($client);
         $this->customers = new CustomersService($client);
@@ -112,13 +117,8 @@ final class V0Service implements V0Contract
      */
     public function getWallets(?RequestOptions $requestOptions = null): mixed
     {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/wallets',
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getWallets(requestOptions: $requestOptions);
 
         return $response->parse();
     }

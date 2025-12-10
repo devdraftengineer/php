@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\CustomersContract;
 use Devdraft\Services\V0\Customers\LiquidationAddressesService;
-use Devdraft\V0\Customers\CustomerCreateParams;
-use Devdraft\V0\Customers\CustomerListParams;
 use Devdraft\V0\Customers\CustomerStatus;
 use Devdraft\V0\Customers\CustomerType;
-use Devdraft\V0\Customers\CustomerUpdateParams;
 
 final class CustomersService implements CustomersContract
 {
+    /**
+     * @api
+     */
+    public CustomersRawService $raw;
+
     /**
      * @api
      */
@@ -28,6 +29,7 @@ final class CustomersService implements CustomersContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new CustomersRawService($client);
         $this->liquidationAddresses = new LiquidationAddressesService($client);
     }
 
@@ -65,34 +67,37 @@ final class CustomersService implements CustomersContract
      * - `customer_type`: Type of customer account (Individual, Startup, Small Business, Medium Business, Enterprise, Non-Profit, Government)
      * - `status`: Customer status (ACTIVE, BLACKLISTED, DEACTIVATED)
      *
-     * @param array{
-     *   firstName: string,
-     *   lastName: string,
-     *   phoneNumber: string,
-     *   customerType?: value-of<CustomerType>,
-     *   email?: string,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
-     * }|CustomerCreateParams $params
+     * @param string $firstName Customer's first name. Used for personalization and legal documentation.
+     * @param string $lastName Customer's last name. Used for personalization and legal documentation.
+     * @param string $phoneNumber Customer's phone number. Used for SMS notifications and verification. Include country code for international numbers.
+     * @param 'Individual'|'Startup'|'Small Business'|'Medium Business'|'Enterprise'|'Non-Profit'|'Government'|CustomerType $customerType Type of customer account. Determines available features and compliance requirements.
+     * @param string $email Customer's email address. Used for notifications, receipts, and account management. Must be a valid email format.
+     * @param 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus $status Current status of the customer account. Controls access to services and features.
      *
      * @throws APIException
      */
     public function create(
-        array|CustomerCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $firstName,
+        string $lastName,
+        string $phoneNumber,
+        string|CustomerType|null $customerType = null,
+        ?string $email = null,
+        string|CustomerStatus|null $status = null,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = CustomerCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'phoneNumber' => $phoneNumber,
+            'customerType' => $customerType,
+            'email' => $email,
+            'status' => $status,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/customers',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -132,19 +137,16 @@ final class CustomersService implements CustomersContract
      * }
      * ```
      *
+     * @param string $id Customer unique identifier (UUID)
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['api/v0/customers/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -182,35 +184,39 @@ final class CustomersService implements CustomersContract
      * - All fields are optional in updates
      * - Status changes may require additional verification
      *
-     * @param array{
-     *   customerType?: value-of<CustomerType>,
-     *   email?: string,
-     *   firstName?: string,
-     *   lastName?: string,
-     *   phoneNumber?: string,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
-     * }|CustomerUpdateParams $params
+     * @param string $id Customer unique identifier (UUID)
+     * @param 'Individual'|'Startup'|'Small Business'|'Medium Business'|'Enterprise'|'Non-Profit'|'Government'|CustomerType $customerType Type of customer account. Determines available features and compliance requirements.
+     * @param string $email Customer's email address. Used for notifications, receipts, and account management. Must be a valid email format.
+     * @param string $firstName Customer's first name. Used for personalization and legal documentation.
+     * @param string $lastName Customer's last name. Used for personalization and legal documentation.
+     * @param string $phoneNumber Customer's phone number. Used for SMS notifications and verification. Include country code for international numbers.
+     * @param 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus $status Current status of the customer account. Controls access to services and features.
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|CustomerUpdateParams $params,
+        string|CustomerType|null $customerType = null,
+        ?string $email = null,
+        ?string $firstName = null,
+        ?string $lastName = null,
+        ?string $phoneNumber = null,
+        string|CustomerStatus|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = CustomerUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'customerType' => $customerType,
+            'email' => $email,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'phoneNumber' => $phoneNumber,
+            'status' => $status,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'patch',
-            path: ['api/v0/customers/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -260,33 +266,34 @@ final class CustomersService implements CustomersContract
      * }
      * ```
      *
-     * @param array{
-     *   email?: string,
-     *   name?: string,
-     *   skip?: float,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
-     *   take?: float,
-     * }|CustomerListParams $params
+     * @param string $email Filter customers by email (exact match, case-insensitive)
+     * @param string $name Filter customers by name (partial match, case-insensitive)
+     * @param float $skip Number of records to skip for pagination
+     * @param 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus $status Filter customers by status
+     * @param float $take Number of records to return (max 100)
      *
      * @throws APIException
      */
     public function list(
-        array|CustomerListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?string $email = null,
+        ?string $name = null,
+        float $skip = 0,
+        string|CustomerStatus|null $status = null,
+        float $take = 10,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = CustomerListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'email' => $email,
+            'name' => $name,
+            'skip' => $skip,
+            'status' => $status,
+            'take' => $take,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/customers',
-            query: $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

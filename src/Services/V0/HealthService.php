@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\HealthContract;
@@ -15,9 +14,17 @@ use Devdraft\V0\Health\HealthCheckResponse;
 final class HealthService implements HealthContract
 {
     /**
+     * @api
+     */
+    public HealthRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new HealthRawService($client);
+    }
 
     /**
      * @api
@@ -29,13 +36,8 @@ final class HealthService implements HealthContract
     public function check(
         ?RequestOptions $requestOptions = null
     ): HealthCheckResponse {
-        /** @var BaseResponse<HealthCheckResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/health',
-            options: $requestOptions,
-            convert: HealthCheckResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->check(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -50,13 +52,8 @@ final class HealthService implements HealthContract
     public function checkPublic(
         ?RequestOptions $requestOptions = null
     ): HealthCheckPublicResponse {
-        /** @var BaseResponse<HealthCheckPublicResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/health/public',
-            options: $requestOptions,
-            convert: HealthCheckPublicResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->checkPublic(requestOptions: $requestOptions);
 
         return $response->parse();
     }

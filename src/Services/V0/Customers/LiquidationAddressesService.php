@@ -5,67 +5,93 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0\Customers;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
-use Devdraft\Core\Conversion\ListOf;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\Customers\LiquidationAddressesContract;
-use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams\Chain;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams\Currency;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams\DestinationCurrency;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressResponse;
-use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressRetrieveParams;
 use Devdraft\V0\PaymentIntents\BridgePaymentRail;
 
 final class LiquidationAddressesService implements LiquidationAddressesContract
 {
     /**
+     * @api
+     */
+    public LiquidationAddressesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new LiquidationAddressesRawService($client);
+    }
 
     /**
      * @api
      *
-     * @param array{
-     *   address: string,
-     *   chain: value-of<Chain>,
-     *   currency: 'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|Currency,
-     *   bridgeWalletID?: string,
-     *   customDeveloperFeePercent?: string,
-     *   destinationACHReference?: string,
-     *   destinationAddress?: string,
-     *   destinationBlockchainMemo?: string,
-     *   destinationCurrency?: 'usd'|'eur'|'mxn'|'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|DestinationCurrency,
-     *   destinationPaymentRail?: value-of<BridgePaymentRail>,
-     *   destinationSepaReference?: string,
-     *   destinationWireMessage?: string,
-     *   externalAccountID?: string,
-     *   prefundedAccountID?: string,
-     *   returnAddress?: string,
-     * }|LiquidationAddressCreateParams $params
+     * @param string $customerID Unique identifier for the customer
+     * @param string $address The liquidation address on the blockchain
+     * @param 'ethereum'|'solana'|'polygon'|'avalanche_c_chain'|'base'|'arbitrum'|'optimism'|'stellar'|'tron'|Chain $chain The blockchain chain for the liquidation address
+     * @param 'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|Currency $currency The currency for the liquidation address
+     * @param string $bridgeWalletID Bridge Wallet to send funds to
+     * @param string $customDeveloperFeePercent Custom developer fee percentage (Base 100 percentage: 10.2% = "10.2")
+     * @param string $destinationACHReference Reference for ACH transactions
+     * @param string $destinationAddress Crypto wallet address for crypto transfers
+     * @param string $destinationBlockchainMemo Memo for blockchain transactions
+     * @param 'usd'|'eur'|'mxn'|'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|DestinationCurrency $destinationCurrency Currency for sending funds
+     * @param 'ethereum'|'solana'|'polygon'|'avalanche_c_chain'|'base'|'arbitrum'|'optimism'|'stellar'|'tron'|'bridge_wallet'|'wire'|'ach'|'ach_push'|'ach_same_day'|'sepa'|'swift'|'spei'|BridgePaymentRail $destinationPaymentRail The blockchain network where the source currency resides. Determines gas fees and transaction speed.
+     * @param string $destinationSepaReference Reference for SEPA transactions
+     * @param string $destinationWireMessage Message for wire transfers
+     * @param string $externalAccountID External bank account to send funds to
+     * @param string $prefundedAccountID Developer's prefunded account id
+     * @param string $returnAddress Address to return funds on failed transactions (Not supported on Stellar)
      *
      * @throws APIException
      */
     public function create(
         string $customerID,
-        array|LiquidationAddressCreateParams $params,
+        string $address,
+        string|Chain $chain,
+        string|Currency $currency,
+        ?string $bridgeWalletID = null,
+        ?string $customDeveloperFeePercent = null,
+        ?string $destinationACHReference = null,
+        ?string $destinationAddress = null,
+        ?string $destinationBlockchainMemo = null,
+        string|DestinationCurrency $destinationCurrency = 'usd',
+        string|BridgePaymentRail|null $destinationPaymentRail = null,
+        ?string $destinationSepaReference = null,
+        ?string $destinationWireMessage = null,
+        ?string $externalAccountID = null,
+        ?string $prefundedAccountID = null,
+        ?string $returnAddress = null,
         ?RequestOptions $requestOptions = null,
     ): LiquidationAddressResponse {
-        [$parsed, $options] = LiquidationAddressCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'address' => $address,
+            'chain' => $chain,
+            'currency' => $currency,
+            'bridgeWalletID' => $bridgeWalletID,
+            'customDeveloperFeePercent' => $customDeveloperFeePercent,
+            'destinationACHReference' => $destinationACHReference,
+            'destinationAddress' => $destinationAddress,
+            'destinationBlockchainMemo' => $destinationBlockchainMemo,
+            'destinationCurrency' => $destinationCurrency,
+            'destinationPaymentRail' => $destinationPaymentRail,
+            'destinationSepaReference' => $destinationSepaReference,
+            'destinationWireMessage' => $destinationWireMessage,
+            'externalAccountID' => $externalAccountID,
+            'prefundedAccountID' => $prefundedAccountID,
+            'returnAddress' => $returnAddress,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<LiquidationAddressResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['api/v0/customers/%1$s/liquidation_addresses', $customerID],
-            body: (object) $parsed,
-            options: $options,
-            convert: LiquidationAddressResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($customerID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -75,33 +101,20 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      *
      * Retrieve a specific liquidation address by its ID for a given customer.
      *
-     * @param array{customerID: string}|LiquidationAddressRetrieveParams $params
+     * @param string $liquidationAddressID Unique identifier for the liquidation address
+     * @param string $customerID Unique identifier for the customer
      *
      * @throws APIException
      */
     public function retrieve(
         string $liquidationAddressID,
-        array|LiquidationAddressRetrieveParams $params,
+        string $customerID,
         ?RequestOptions $requestOptions = null,
     ): LiquidationAddressResponse {
-        [$parsed, $options] = LiquidationAddressRetrieveParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $customerID = $parsed['customerID'];
-        unset($parsed['customerID']);
+        $params = ['customerID' => $customerID];
 
-        /** @var BaseResponse<LiquidationAddressResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: [
-                'api/v0/customers/%1$s/liquidation_addresses/%2$s',
-                $customerID,
-                $liquidationAddressID,
-            ],
-            options: $options,
-            convert: LiquidationAddressResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($liquidationAddressID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -111,6 +124,8 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      *
      * Retrieve all liquidation addresses associated with a specific customer.
      *
+     * @param string $customerID Unique identifier for the customer
+     *
      * @return list<LiquidationAddressResponse>
      *
      * @throws APIException
@@ -119,13 +134,8 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
         string $customerID,
         ?RequestOptions $requestOptions = null
     ): array {
-        /** @var BaseResponse<list<LiquidationAddressResponse>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['api/v0/customers/%1$s/liquidation_addresses', $customerID],
-            options: $requestOptions,
-            convert: new ListOf(LiquidationAddressResponse::class),
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($customerID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -5,25 +5,33 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TestPaymentContract;
 use Devdraft\V0\TestPayment\PaymentResponse;
-use Devdraft\V0\TestPayment\TestPaymentProcessParams;
 use Devdraft\V0\TestPayment\TestPaymentRefundResponse;
 
 final class TestPaymentService implements TestPaymentContract
 {
     /**
+     * @api
+     */
+    public TestPaymentRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new TestPaymentRawService($client);
+    }
 
     /**
      * @api
      *
      * Get payment details by ID
+     *
+     * @param string $id Payment ID
      *
      * @throws APIException
      */
@@ -31,13 +39,8 @@ final class TestPaymentService implements TestPaymentContract
         string $id,
         ?RequestOptions $requestOptions = null
     ): PaymentResponse {
-        /** @var BaseResponse<PaymentResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['api/v0/test-payment/%1$s', $id],
-            options: $requestOptions,
-            convert: PaymentResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -99,29 +102,31 @@ final class TestPaymentService implements TestPaymentContract
      *
      * If you retry with same key but different parameters (e.g., different amount), you'll receive a 409 Conflict error.
      *
-     * @param array{
-     *   amount: float, currency: string, description: string, customerID?: string
-     * }|TestPaymentProcessParams $params
+     * @param float $amount The amount to charge
+     * @param string $currency The currency code
+     * @param string $description Description of the payment
+     * @param string $customerID Customer reference ID
      *
      * @throws APIException
      */
     public function process(
-        array|TestPaymentProcessParams $params,
+        float $amount,
+        string $currency,
+        string $description,
+        ?string $customerID = null,
         ?RequestOptions $requestOptions = null,
     ): PaymentResponse {
-        [$parsed, $options] = TestPaymentProcessParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'amount' => $amount,
+            'currency' => $currency,
+            'description' => $description,
+            'customerID' => $customerID,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PaymentResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/test-payment',
-            body: (object) $parsed,
-            options: $options,
-            convert: PaymentResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->process(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -172,19 +177,16 @@ final class TestPaymentService implements TestPaymentContract
      * - Store keys client-side to ensure you can retry with the same key if needed
      * - Keys expire after 24 hours by default
      *
+     * @param string $id Payment ID to refund
+     *
      * @throws APIException
      */
     public function refund(
         string $id,
         ?RequestOptions $requestOptions = null
     ): TestPaymentRefundResponse {
-        /** @var BaseResponse<TestPaymentRefundResponse> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['api/v0/test-payment/%1$s/refund', $id],
-            options: $requestOptions,
-            convert: TestPaymentRefundResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->refund($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -40,11 +40,11 @@ final class CustomersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->customers->create([
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'phoneNumber' => '+1-555-123-4567',
-        ]);
+        $result = $this->client->v0->customers->create(
+            firstName: 'John',
+            lastName: 'Doe',
+            phoneNumber: '+1-555-123-4567'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -57,14 +57,14 @@ final class CustomersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->customers->create([
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'phoneNumber' => '+1-555-123-4567',
-            'customerType' => CustomerType::INDIVIDUAL,
-            'email' => 'john.doe@example.com',
-            'status' => CustomerStatus::ACTIVE,
-        ]);
+        $result = $this->client->v0->customers->create(
+            firstName: 'John',
+            lastName: 'Doe',
+            phoneNumber: '+1-555-123-4567',
+            customerType: CustomerType::INDIVIDUAL,
+            email: 'john.doe@example.com',
+            status: CustomerStatus::ACTIVE,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -93,8 +93,7 @@ final class CustomersTest extends TestCase
         }
 
         $result = $this->client->v0->customers->update(
-            'cust_123e4567-e89b-12d3-a456-426614174000',
-            []
+            'cust_123e4567-e89b-12d3-a456-426614174000'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -108,7 +107,7 @@ final class CustomersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->customers->list([]);
+        $result = $this->client->v0->customers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

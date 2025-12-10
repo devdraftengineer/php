@@ -52,9 +52,10 @@ final class ExchangeRateTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->exchangeRate->getExchangeRate([
-            'from' => 'usd', 'to' => 'eur',
-        ]);
+        $result = $this->client->v0->exchangeRate->getExchangeRate(
+            from: 'usd',
+            to: 'eur'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExchangeRateResponse::class, $result);
@@ -67,9 +68,10 @@ final class ExchangeRateTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->exchangeRate->getExchangeRate([
-            'from' => 'usd', 'to' => 'eur',
-        ]);
+        $result = $this->client->v0->exchangeRate->getExchangeRate(
+            from: 'usd',
+            to: 'eur'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExchangeRateResponse::class, $result);

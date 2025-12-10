@@ -38,13 +38,13 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createDirectBank([
-            'amount' => 0,
-            'destinationCurrency' => 'destinationCurrency',
-            'paymentRail' => 'paymentRail',
-            'sourceCurrency' => 'sourceCurrency',
-            'walletID' => 'walletId',
-        ]);
+        $result = $this->client->v0->transfers->createDirectBank(
+            amount: 0,
+            destinationCurrency: 'destinationCurrency',
+            paymentRail: 'paymentRail',
+            sourceCurrency: 'sourceCurrency',
+            walletID: 'walletId',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -57,16 +57,16 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createDirectBank([
-            'amount' => 0,
-            'destinationCurrency' => 'destinationCurrency',
-            'paymentRail' => 'paymentRail',
-            'sourceCurrency' => 'sourceCurrency',
-            'walletID' => 'walletId',
-            'achReference' => 'ach_reference',
-            'sepaReference' => 'sepa_reference',
-            'wireMessage' => 'wire_message',
-        ]);
+        $result = $this->client->v0->transfers->createDirectBank(
+            amount: 0,
+            destinationCurrency: 'destinationCurrency',
+            paymentRail: 'paymentRail',
+            sourceCurrency: 'sourceCurrency',
+            walletID: 'walletId',
+            achReference: 'ach_reference',
+            sepaReference: 'sepa_reference',
+            wireMessage: 'wire_message',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -79,12 +79,12 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createDirectWallet([
-            'amount' => 0,
-            'network' => 'network',
-            'stableCoinCurrency' => 'stableCoinCurrency',
-            'walletID' => 'walletId',
-        ]);
+        $result = $this->client->v0->transfers->createDirectWallet(
+            amount: 0,
+            network: 'network',
+            stableCoinCurrency: 'stableCoinCurrency',
+            walletID: 'walletId',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -97,12 +97,12 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createDirectWallet([
-            'amount' => 0,
-            'network' => 'network',
-            'stableCoinCurrency' => 'stableCoinCurrency',
-            'walletID' => 'walletId',
-        ]);
+        $result = $this->client->v0->transfers->createDirectWallet(
+            amount: 0,
+            network: 'network',
+            stableCoinCurrency: 'stableCoinCurrency',
+            walletID: 'walletId',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -115,13 +115,13 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createExternalBankTransfer([
-            'destinationCurrency' => 'destinationCurrency',
-            'destinationPaymentRail' => 'ach',
-            'externalAccountID' => 'external_account_id',
-            'sourceCurrency' => 'sourceCurrency',
-            'sourceWalletID' => 'sourceWalletId',
-        ]);
+        $result = $this->client->v0->transfers->createExternalBankTransfer(
+            destinationCurrency: 'destinationCurrency',
+            destinationPaymentRail: 'ach',
+            externalAccountID: 'external_account_id',
+            sourceCurrency: 'sourceCurrency',
+            sourceWalletID: 'sourceWalletId',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -134,20 +134,20 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createExternalBankTransfer([
-            'destinationCurrency' => 'destinationCurrency',
-            'destinationPaymentRail' => 'ach',
-            'externalAccountID' => 'external_account_id',
-            'sourceCurrency' => 'sourceCurrency',
-            'sourceWalletID' => 'sourceWalletId',
-            'achReference' => 'x',
-            'amount' => 0,
-            'sepaReference' => 'xxxxxx',
-            'speiReference' => 'x',
-            'swiftCharges' => 'swift_charges',
-            'swiftReference' => 'x',
-            'wireMessage' => 'x',
-        ]);
+        $result = $this->client->v0->transfers->createExternalBankTransfer(
+            destinationCurrency: 'destinationCurrency',
+            destinationPaymentRail: 'ach',
+            externalAccountID: 'external_account_id',
+            sourceCurrency: 'sourceCurrency',
+            sourceWalletID: 'sourceWalletId',
+            achReference: 'x',
+            amount: 0,
+            sepaReference: 'xxxxxx',
+            speiReference: 'x',
+            swiftCharges: 'swift_charges',
+            swiftReference: 'x',
+            wireMessage: 'x',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -160,12 +160,12 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createExternalStablecoinTransfer([
-            'beneficiaryID' => 'beneficiary_12345',
-            'destinationCurrency' => 'destinationCurrency',
-            'sourceCurrency' => 'sourceCurrency',
-            'sourceWalletID' => 'sourceWalletId',
-        ]);
+        $result = $this->client->v0->transfers->createExternalStablecoinTransfer(
+            beneficiaryID: 'beneficiary_12345',
+            destinationCurrency: 'destinationCurrency',
+            sourceCurrency: 'sourceCurrency',
+            sourceWalletID: 'sourceWalletId',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -178,14 +178,14 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createExternalStablecoinTransfer([
-            'beneficiaryID' => 'beneficiary_12345',
-            'destinationCurrency' => 'destinationCurrency',
-            'sourceCurrency' => 'sourceCurrency',
-            'sourceWalletID' => 'sourceWalletId',
-            'amount' => 0,
-            'blockchainMemo' => 'blockchain_memo',
-        ]);
+        $result = $this->client->v0->transfers->createExternalStablecoinTransfer(
+            beneficiaryID: 'beneficiary_12345',
+            destinationCurrency: 'destinationCurrency',
+            sourceCurrency: 'sourceCurrency',
+            sourceWalletID: 'sourceWalletId',
+            amount: 0,
+            blockchainMemo: 'blockchain_memo',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -198,13 +198,13 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createStablecoinConversion([
-            'amount' => 0,
-            'destinationCurrency' => 'destinationCurrency',
-            'sourceCurrency' => 'sourceCurrency',
-            'sourceNetwork' => 'sourceNetwork',
-            'walletID' => 'walletId',
-        ]);
+        $result = $this->client->v0->transfers->createStablecoinConversion(
+            amount: 0,
+            destinationCurrency: 'destinationCurrency',
+            sourceCurrency: 'sourceCurrency',
+            sourceNetwork: 'sourceNetwork',
+            walletID: 'walletId',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -217,13 +217,13 @@ final class TransfersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->transfers->createStablecoinConversion([
-            'amount' => 0,
-            'destinationCurrency' => 'destinationCurrency',
-            'sourceCurrency' => 'sourceCurrency',
-            'sourceNetwork' => 'sourceNetwork',
-            'walletID' => 'walletId',
-        ]);
+        $result = $this->client->v0->transfers->createStablecoinConversion(
+            amount: 0,
+            destinationCurrency: 'destinationCurrency',
+            sourceCurrency: 'sourceCurrency',
+            sourceNetwork: 'sourceNetwork',
+            walletID: 'walletId',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

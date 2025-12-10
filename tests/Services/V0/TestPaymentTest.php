@@ -53,11 +53,11 @@ final class TestPaymentTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->testPayment->process([
-            'amount' => 100.5,
-            'currency' => 'USD',
-            'description' => 'Test payment for API',
-        ]);
+        $result = $this->client->v0->testPayment->process(
+            amount: 100.5,
+            currency: 'USD',
+            description: 'Test payment for API'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PaymentResponse::class, $result);
@@ -70,12 +70,12 @@ final class TestPaymentTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->testPayment->process([
-            'amount' => 100.5,
-            'currency' => 'USD',
-            'description' => 'Test payment for API',
-            'customerID' => 'cus_12345',
-        ]);
+        $result = $this->client->v0->testPayment->process(
+            amount: 100.5,
+            currency: 'USD',
+            description: 'Test payment for API',
+            customerID: 'cus_12345',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PaymentResponse::class, $result);

@@ -40,12 +40,12 @@ final class PaymentIntentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->paymentIntents->createBank([
-            'destinationCurrency' => StableCoinCurrency::USDC,
-            'destinationNetwork' => BridgePaymentRail::ETHEREUM,
-            'sourceCurrency' => 'usd',
-            'sourcePaymentRail' => BridgePaymentRail::ACH_PUSH,
-        ]);
+        $result = $this->client->v0->paymentIntents->createBank(
+            destinationCurrency: StableCoinCurrency::USDC,
+            destinationNetwork: BridgePaymentRail::ETHEREUM,
+            sourceCurrency: 'usd',
+            sourcePaymentRail: BridgePaymentRail::ACH_PUSH,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -58,26 +58,26 @@ final class PaymentIntentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->paymentIntents->createBank([
-            'destinationCurrency' => StableCoinCurrency::USDC,
-            'destinationNetwork' => BridgePaymentRail::ETHEREUM,
-            'sourceCurrency' => 'usd',
-            'sourcePaymentRail' => BridgePaymentRail::ACH_PUSH,
-            'achReference' => 'INV12345',
-            'amount' => '1000.00',
-            'customerAddress' => '123 Main St, New York, NY 10001',
-            'customerCountry' => 'United States',
-            'customerCountryISO' => 'US',
-            'customerEmail' => 'john.doe@example.com',
-            'customerFirstName' => 'John',
-            'customerLastName' => 'Doe',
-            'customerProvince' => 'New York',
-            'customerProvinceISO' => 'NY',
-            'destinationAddress' => '0x742d35Cc6634C0532925a3b8D4C9db96c4b4d8e1',
-            'phoneNumber' => '+1-555-123-4567',
-            'sepaReference' => 'REF-123456789',
-            'wireMessage' => 'Payment for invoice #12345',
-        ]);
+        $result = $this->client->v0->paymentIntents->createBank(
+            destinationCurrency: StableCoinCurrency::USDC,
+            destinationNetwork: BridgePaymentRail::ETHEREUM,
+            sourceCurrency: 'usd',
+            sourcePaymentRail: BridgePaymentRail::ACH_PUSH,
+            achReference: 'INV12345',
+            amount: '1000.00',
+            customerAddress: '123 Main St, New York, NY 10001',
+            customerCountry: 'United States',
+            customerCountryISO: 'US',
+            customerEmail: 'john.doe@example.com',
+            customerFirstName: 'John',
+            customerLastName: 'Doe',
+            customerProvince: 'New York',
+            customerProvinceISO: 'NY',
+            destinationAddress: '0x742d35Cc6634C0532925a3b8D4C9db96c4b4d8e1',
+            phoneNumber: '+1-555-123-4567',
+            sepaReference: 'REF-123456789',
+            wireMessage: 'Payment for invoice #12345',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -90,11 +90,11 @@ final class PaymentIntentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->paymentIntents->createStable([
-            'destinationNetwork' => BridgePaymentRail::POLYGON,
-            'sourceCurrency' => StableCoinCurrency::USDC,
-            'sourceNetwork' => BridgePaymentRail::ETHEREUM,
-        ]);
+        $result = $this->client->v0->paymentIntents->createStable(
+            destinationNetwork: BridgePaymentRail::POLYGON,
+            sourceCurrency: StableCoinCurrency::USDC,
+            sourceNetwork: BridgePaymentRail::ETHEREUM,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -107,23 +107,23 @@ final class PaymentIntentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->paymentIntents->createStable([
-            'destinationNetwork' => BridgePaymentRail::POLYGON,
-            'sourceCurrency' => StableCoinCurrency::USDC,
-            'sourceNetwork' => BridgePaymentRail::ETHEREUM,
-            'amount' => '100.00',
-            'customerAddress' => '123 Main St, New York, NY 10001',
-            'customerCountry' => 'United States',
-            'customerCountryISO' => 'US',
-            'customerEmail' => 'john.doe@example.com',
-            'customerFirstName' => 'John',
-            'customerLastName' => 'Doe',
-            'customerProvince' => 'New York',
-            'customerProvinceISO' => 'NY',
-            'destinationAddress' => '0x742d35Cc6634C0532925a3b8D4C9db96c4b4d8e1',
-            'destinationCurrency' => StableCoinCurrency::EURC,
-            'phoneNumber' => '+1-555-123-4567',
-        ]);
+        $result = $this->client->v0->paymentIntents->createStable(
+            destinationNetwork: BridgePaymentRail::POLYGON,
+            sourceCurrency: StableCoinCurrency::USDC,
+            sourceNetwork: BridgePaymentRail::ETHEREUM,
+            amount: '100.00',
+            customerAddress: '123 Main St, New York, NY 10001',
+            customerCountry: 'United States',
+            customerCountryISO: 'US',
+            customerEmail: 'john.doe@example.com',
+            customerFirstName: 'John',
+            customerLastName: 'Doe',
+            customerProvince: 'New York',
+            customerProvinceISO: 'NY',
+            destinationAddress: '0x742d35Cc6634C0532925a3b8D4C9db96c4b4d8e1',
+            destinationCurrency: StableCoinCurrency::EURC,
+            phoneNumber: '+1-555-123-4567',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
