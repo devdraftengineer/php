@@ -5,19 +5,25 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\ExchangeRateContract;
-use Devdraft\V0\ExchangeRate\ExchangeRateGetExchangeRateParams;
 use Devdraft\V0\ExchangeRate\ExchangeRateResponse;
 
 final class ExchangeRateService implements ExchangeRateContract
 {
     /**
+     * @api
+     */
+    public ExchangeRateRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ExchangeRateRawService($client);
+    }
 
     /**
      * @api
@@ -47,13 +53,8 @@ final class ExchangeRateService implements ExchangeRateContract
     public function getEurToUsd(
         ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse {
-        /** @var BaseResponse<ExchangeRateResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/exchange-rate/eur-to-usd',
-            options: $requestOptions,
-            convert: ExchangeRateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getEurToUsd(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -85,27 +86,20 @@ final class ExchangeRateService implements ExchangeRateContract
      * ## Rate Information
      * All rates are provided with full market context including mid-market, buy, and sell rates.
      *
-     * @param array{from: string, to: string}|ExchangeRateGetExchangeRateParams $params
+     * @param string $from Source currency code (e.g., usd)
+     * @param string $to Target currency code (e.g., eur)
      *
      * @throws APIException
      */
     public function getExchangeRate(
-        array|ExchangeRateGetExchangeRateParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $from,
+        string $to,
+        ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse {
-        [$parsed, $options] = ExchangeRateGetExchangeRateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['from' => $from, 'to' => $to];
 
-        /** @var BaseResponse<ExchangeRateResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/exchange-rate',
-            query: $parsed,
-            options: $options,
-            convert: ExchangeRateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getExchangeRate(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -138,13 +132,8 @@ final class ExchangeRateService implements ExchangeRateContract
     public function getUsdToEur(
         ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse {
-        /** @var BaseResponse<ExchangeRateResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/exchange-rate/usd-to-eur',
-            options: $requestOptions,
-            convert: ExchangeRateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getUsdToEur(requestOptions: $requestOptions);
 
         return $response->parse();
     }

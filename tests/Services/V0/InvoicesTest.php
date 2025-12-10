@@ -38,19 +38,19 @@ final class InvoicesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->invoices->create([
-            'currency' => 'usdc',
-            'customerID' => 'customer_id',
-            'delivery' => 'EMAIL',
-            'dueDate' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            'email' => 'email',
-            'items' => [['productID' => 'product_id', 'quantity' => 0]],
-            'name' => 'name',
-            'partialPayment' => true,
-            'paymentLink' => true,
-            'paymentMethods' => ['ACH'],
-            'status' => 'DRAFT',
-        ]);
+        $result = $this->client->v0->invoices->create(
+            currency: 'usdc',
+            customerID: 'customer_id',
+            delivery: 'EMAIL',
+            dueDate: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            email: 'email',
+            items: [['productID' => 'product_id', 'quantity' => 0]],
+            name: 'name',
+            partialPayment: true,
+            paymentLink: true,
+            paymentMethods: ['ACH'],
+            status: 'DRAFT',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -63,24 +63,24 @@ final class InvoicesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->invoices->create([
-            'currency' => 'usdc',
-            'customerID' => 'customer_id',
-            'delivery' => 'EMAIL',
-            'dueDate' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            'email' => 'email',
-            'items' => [['productID' => 'product_id', 'quantity' => 0]],
-            'name' => 'name',
-            'partialPayment' => true,
-            'paymentLink' => true,
-            'paymentMethods' => ['ACH'],
-            'status' => 'DRAFT',
-            'address' => 'address',
-            'logo' => 'logo',
-            'phoneNumber' => 'phone_number',
-            'sendDate' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-            'taxID' => 'taxId',
-        ]);
+        $result = $this->client->v0->invoices->create(
+            currency: 'usdc',
+            customerID: 'customer_id',
+            delivery: 'EMAIL',
+            dueDate: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            email: 'email',
+            items: [['productID' => 'product_id', 'quantity' => 0]],
+            name: 'name',
+            partialPayment: true,
+            paymentLink: true,
+            paymentMethods: ['ACH'],
+            status: 'DRAFT',
+            address: 'address',
+            logo: 'logo',
+            phoneNumber: 'phone_number',
+            sendDate: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            taxID: 'taxId',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -108,19 +108,17 @@ final class InvoicesTest extends TestCase
 
         $result = $this->client->v0->invoices->update(
             'id',
-            [
-                'currency' => 'usdc',
-                'customerID' => 'customer_id',
-                'delivery' => 'EMAIL',
-                'dueDate' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                'email' => 'email',
-                'items' => [['productID' => 'product_id', 'quantity' => 0]],
-                'name' => 'name',
-                'partialPayment' => true,
-                'paymentLink' => true,
-                'paymentMethods' => ['ACH'],
-                'status' => 'DRAFT',
-            ],
+            currency: 'usdc',
+            customerID: 'customer_id',
+            delivery: 'EMAIL',
+            dueDate: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            email: 'email',
+            items: [['productID' => 'product_id', 'quantity' => 0]],
+            name: 'name',
+            partialPayment: true,
+            paymentLink: true,
+            paymentMethods: ['ACH'],
+            status: 'DRAFT',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -136,24 +134,22 @@ final class InvoicesTest extends TestCase
 
         $result = $this->client->v0->invoices->update(
             'id',
-            [
-                'currency' => 'usdc',
-                'customerID' => 'customer_id',
-                'delivery' => 'EMAIL',
-                'dueDate' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                'email' => 'email',
-                'items' => [['productID' => 'product_id', 'quantity' => 0]],
-                'name' => 'name',
-                'partialPayment' => true,
-                'paymentLink' => true,
-                'paymentMethods' => ['ACH'],
-                'status' => 'DRAFT',
-                'address' => 'address',
-                'logo' => 'logo',
-                'phoneNumber' => 'phone_number',
-                'sendDate' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-                'taxID' => 'taxId',
-            ],
+            currency: 'usdc',
+            customerID: 'customer_id',
+            delivery: 'EMAIL',
+            dueDate: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            email: 'email',
+            items: [['productID' => 'product_id', 'quantity' => 0]],
+            name: 'name',
+            partialPayment: true,
+            paymentLink: true,
+            paymentMethods: ['ACH'],
+            status: 'DRAFT',
+            address: 'address',
+            logo: 'logo',
+            phoneNumber: 'phone_number',
+            sendDate: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+            taxID: 'taxId',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -167,7 +163,7 @@ final class InvoicesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->invoices->list([]);
+        $result = $this->client->v0->invoices->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

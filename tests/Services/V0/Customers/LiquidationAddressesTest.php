@@ -42,11 +42,9 @@ final class LiquidationAddressesTest extends TestCase
 
         $result = $this->client->v0->customers->liquidationAddresses->create(
             'cust_123',
-            [
-                'address' => '0x4d0280da2f2fDA5103914bCc5aad114743152A9c',
-                'chain' => 'ethereum',
-                'currency' => 'usdc',
-            ],
+            address: '0x4d0280da2f2fDA5103914bCc5aad114743152A9c',
+            chain: 'ethereum',
+            currency: 'usdc',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -62,23 +60,21 @@ final class LiquidationAddressesTest extends TestCase
 
         $result = $this->client->v0->customers->liquidationAddresses->create(
             'cust_123',
-            [
-                'address' => '0x4d0280da2f2fDA5103914bCc5aad114743152A9c',
-                'chain' => 'ethereum',
-                'currency' => 'usdc',
-                'bridgeWalletID' => 'bw_123',
-                'customDeveloperFeePercent' => '2.5',
-                'destinationACHReference' => 'ACH123',
-                'destinationAddress' => '0x1234567890abcdef1234567890abcdef12345678',
-                'destinationBlockchainMemo' => 'liquidation-memo-123',
-                'destinationCurrency' => 'eur',
-                'destinationPaymentRail' => BridgePaymentRail::SEPA,
-                'destinationSepaReference' => 'SEPA-REF-123456',
-                'destinationWireMessage' => 'Liquidation payment for customer',
-                'externalAccountID' => 'ext_123',
-                'prefundedAccountID' => 'pf_acc_123',
-                'returnAddress' => '0xabcdefabcdefabcdefabcdefabcdefabcdef',
-            ],
+            address: '0x4d0280da2f2fDA5103914bCc5aad114743152A9c',
+            chain: 'ethereum',
+            currency: 'usdc',
+            bridgeWalletID: 'bw_123',
+            customDeveloperFeePercent: '2.5',
+            destinationACHReference: 'ACH123',
+            destinationAddress: '0x1234567890abcdef1234567890abcdef12345678',
+            destinationBlockchainMemo: 'liquidation-memo-123',
+            destinationCurrency: 'eur',
+            destinationPaymentRail: BridgePaymentRail::SEPA,
+            destinationSepaReference: 'SEPA-REF-123456',
+            destinationWireMessage: 'Liquidation payment for customer',
+            externalAccountID: 'ext_123',
+            prefundedAccountID: 'pf_acc_123',
+            returnAddress: '0xabcdefabcdefabcdefabcdefabcdefabcdef',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -94,7 +90,7 @@ final class LiquidationAddressesTest extends TestCase
 
         $result = $this->client->v0->customers->liquidationAddresses->retrieve(
             'la_generated_id_123',
-            ['customerID' => 'cust_123']
+            customerID: 'cust_123'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -110,7 +106,7 @@ final class LiquidationAddressesTest extends TestCase
 
         $result = $this->client->v0->customers->liquidationAddresses->retrieve(
             'la_generated_id_123',
-            ['customerID' => 'cust_123']
+            customerID: 'cust_123'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

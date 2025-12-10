@@ -6,7 +6,6 @@ namespace Devdraft\ServiceContracts\V0;
 
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
-use Devdraft\V0\ExchangeRate\ExchangeRateGetExchangeRateParams;
 use Devdraft\V0\ExchangeRate\ExchangeRateResponse;
 
 interface ExchangeRateContract
@@ -23,13 +22,15 @@ interface ExchangeRateContract
     /**
      * @api
      *
-     * @param array<mixed>|ExchangeRateGetExchangeRateParams $params
+     * @param string $from Source currency code (e.g., usd)
+     * @param string $to Target currency code (e.g., eur)
      *
      * @throws APIException
      */
     public function getExchangeRate(
-        array|ExchangeRateGetExchangeRateParams $params,
-        ?RequestOptions $requestOptions = null,
+        string $from,
+        string $to,
+        ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse;
 
     /**

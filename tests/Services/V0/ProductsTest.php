@@ -38,11 +38,11 @@ final class ProductsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->products->create([
-            'description' => 'Annual license for our premium software suite with advanced features, priority support, and regular updates.',
-            'name' => 'Premium Software License',
-            'price' => 299.99,
-        ]);
+        $result = $this->client->v0->products->create(
+            description: 'Annual license for our premium software suite with advanced features, priority support, and regular updates.',
+            name: 'Premium Software License',
+            price: 299.99,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -55,20 +55,20 @@ final class ProductsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->products->create([
-            'description' => 'Annual license for our premium software suite with advanced features, priority support, and regular updates.',
-            'name' => 'Premium Software License',
-            'price' => 299.99,
-            'currency' => 'USD',
-            'images' => ['string'],
-            'productType' => 'PRODUCT',
-            'quantity' => 0,
-            'status' => 'ACTIVE',
-            'stockCount' => 0,
-            'type' => 'DIGITAL',
-            'unit' => 'unit',
-            'weight' => 0,
-        ]);
+        $result = $this->client->v0->products->create(
+            description: 'Annual license for our premium software suite with advanced features, priority support, and regular updates.',
+            name: 'Premium Software License',
+            price: 299.99,
+            currency: 'USD',
+            images: ['string'],
+            productType: 'PRODUCT',
+            quantity: 0,
+            status: 'ACTIVE',
+            stockCount: 0,
+            type: 'DIGITAL',
+            unit: 'unit',
+            weight: 0,
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -94,7 +94,7 @@ final class ProductsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->products->update('id', []);
+        $result = $this->client->v0->products->update('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -107,7 +107,7 @@ final class ProductsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->products->list([]);
+        $result = $this->client->v0->products->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

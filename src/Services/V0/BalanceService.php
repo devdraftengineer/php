@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\BalanceContract;
@@ -15,9 +14,17 @@ use Devdraft\V0\Balance\BalanceGetAllStablecoinBalancesResponse;
 final class BalanceService implements BalanceContract
 {
     /**
+     * @api
+     */
+    public BalanceRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new BalanceRawService($client);
+    }
 
     /**
      * @api
@@ -45,13 +52,8 @@ final class BalanceService implements BalanceContract
     public function getAllStablecoinBalances(
         ?RequestOptions $requestOptions = null
     ): BalanceGetAllStablecoinBalancesResponse {
-        /** @var BaseResponse<BalanceGetAllStablecoinBalancesResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/balance',
-            options: $requestOptions,
-            convert: BalanceGetAllStablecoinBalancesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getAllStablecoinBalances(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -81,13 +83,8 @@ final class BalanceService implements BalanceContract
     public function getEurc(
         ?RequestOptions $requestOptions = null
     ): AggregatedBalance {
-        /** @var BaseResponse<AggregatedBalance> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/balance/eurc',
-            options: $requestOptions,
-            convert: AggregatedBalance::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getEurc(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -117,13 +114,8 @@ final class BalanceService implements BalanceContract
     public function getUsdc(
         ?RequestOptions $requestOptions = null
     ): AggregatedBalance {
-        /** @var BaseResponse<AggregatedBalance> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/balance/usdc',
-            options: $requestOptions,
-            convert: AggregatedBalance::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getUsdc(requestOptions: $requestOptions);
 
         return $response->parse();
     }

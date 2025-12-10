@@ -39,12 +39,12 @@ final class WebhooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->webhooks->create([
-            'encrypted' => false,
-            'isActive' => true,
-            'name' => 'Payment Notifications',
-            'url' => 'https://api.example.com/webhooks/payments',
-        ]);
+        $result = $this->client->v0->webhooks->create(
+            encrypted: false,
+            isActive: true,
+            name: 'Payment Notifications',
+            url: 'https://api.example.com/webhooks/payments',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WebhookResponse::class, $result);
@@ -57,13 +57,13 @@ final class WebhooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->webhooks->create([
-            'encrypted' => false,
-            'isActive' => true,
-            'name' => 'Payment Notifications',
-            'url' => 'https://api.example.com/webhooks/payments',
-            'signingSecret' => 'whsec_123456789',
-        ]);
+        $result = $this->client->v0->webhooks->create(
+            encrypted: false,
+            isActive: true,
+            name: 'Payment Notifications',
+            url: 'https://api.example.com/webhooks/payments',
+            signingSecret: 'whsec_123456789',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WebhookResponse::class, $result);
@@ -92,8 +92,7 @@ final class WebhooksTest extends TestCase
         }
 
         $result = $this->client->v0->webhooks->update(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            []
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -107,7 +106,7 @@ final class WebhooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->webhooks->list([]);
+        $result = $this->client->v0->webhooks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsList($result);

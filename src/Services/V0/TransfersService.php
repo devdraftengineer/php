@@ -5,59 +5,68 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TransfersContract;
-use Devdraft\V0\Transfers\TransferCreateDirectBankParams;
-use Devdraft\V0\Transfers\TransferCreateDirectWalletParams;
-use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams;
 use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams\DestinationPaymentRail;
-use Devdraft\V0\Transfers\TransferCreateExternalStablecoinTransferParams;
-use Devdraft\V0\Transfers\TransferCreateStablecoinConversionParams;
 
 final class TransfersService implements TransfersContract
 {
     /**
+     * @api
+     */
+    public TransfersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new TransfersRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a direct bank transfer
      *
-     * @param array{
-     *   amount: float,
-     *   destinationCurrency: string,
-     *   paymentRail: string,
-     *   sourceCurrency: string,
-     *   walletID: string,
-     *   achReference?: string,
-     *   sepaReference?: string,
-     *   wireMessage?: string,
-     * }|TransferCreateDirectBankParams $params
+     * @param float $amount The amount to transfer
+     * @param string $destinationCurrency The destination currency
+     * @param string $paymentRail The payment rail to use
+     * @param string $sourceCurrency The source currency
+     * @param string $walletID The ID of the bridge wallet to transfer from
+     * @param string $achReference ACH transfer reference
+     * @param string $sepaReference SEPA transfer reference
+     * @param string $wireMessage Wire transfer message
      *
      * @throws APIException
      */
     public function createDirectBank(
-        array|TransferCreateDirectBankParams $params,
+        float $amount,
+        string $destinationCurrency,
+        string $paymentRail,
+        string $sourceCurrency,
+        string $walletID,
+        ?string $achReference = null,
+        ?string $sepaReference = null,
+        ?string $wireMessage = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TransferCreateDirectBankParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'amount' => $amount,
+            'destinationCurrency' => $destinationCurrency,
+            'paymentRail' => $paymentRail,
+            'sourceCurrency' => $sourceCurrency,
+            'walletID' => $walletID,
+            'achReference' => $achReference,
+            'sepaReference' => $sepaReference,
+            'wireMessage' => $wireMessage,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/transfers/direct-bank',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createDirectBank(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -67,29 +76,29 @@ final class TransfersService implements TransfersContract
      *
      * Create a direct wallet transfer
      *
-     * @param array{
-     *   amount: float, network: string, stableCoinCurrency: string, walletID: string
-     * }|TransferCreateDirectWalletParams $params
+     * @param float $amount The amount to transfer
+     * @param string $network The network to use for the transfer
+     * @param string $stableCoinCurrency The stablecoin currency to use
+     * @param string $walletID The ID of the bridge wallet to transfer from
      *
      * @throws APIException
      */
     public function createDirectWallet(
-        array|TransferCreateDirectWalletParams $params,
+        float $amount,
+        string $network,
+        string $stableCoinCurrency,
+        string $walletID,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TransferCreateDirectWalletParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'amount' => $amount,
+            'network' => $network,
+            'stableCoinCurrency' => $stableCoinCurrency,
+            'walletID' => $walletID,
+        ];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/transfers/direct-wallet',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createDirectWallet(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -99,40 +108,55 @@ final class TransfersService implements TransfersContract
      *
      * Create an external bank transfer
      *
-     * @param array{
-     *   destinationCurrency: string,
-     *   destinationPaymentRail: 'ach'|'ach_push'|'ach_same_day'|'wire'|'sepa'|'swift'|'spei'|DestinationPaymentRail,
-     *   externalAccountID: string,
-     *   sourceCurrency: string,
-     *   sourceWalletID: string,
-     *   achReference?: string,
-     *   amount?: float,
-     *   sepaReference?: string,
-     *   speiReference?: string,
-     *   swiftCharges?: string,
-     *   swiftReference?: string,
-     *   wireMessage?: string,
-     * }|TransferCreateExternalBankTransferParams $params
+     * @param string $destinationCurrency The destination currency
+     * @param 'ach'|'ach_push'|'ach_same_day'|'wire'|'sepa'|'swift'|'spei'|DestinationPaymentRail $destinationPaymentRail The destination payment rail (fiat payment method)
+     * @param string $externalAccountID The external account ID for the bank transfer
+     * @param string $sourceCurrency The source currency
+     * @param string $sourceWalletID The ID of the source bridge wallet
+     * @param string $achReference ACH reference message (1-10 characters, only for ACH transfers)
+     * @param float $amount The amount to transfer
+     * @param string $sepaReference SEPA reference message (6-140 characters, only for SEPA transfers)
+     * @param string $speiReference SPEI reference message (1-40 characters, only for SPEI transfers)
+     * @param string $swiftCharges SWIFT charges bearer (only for SWIFT transfers)
+     * @param string $swiftReference SWIFT reference message (1-190 characters, only for SWIFT transfers)
+     * @param string $wireMessage Wire transfer message (1-256 characters, only for wire transfers)
      *
      * @throws APIException
      */
     public function createExternalBankTransfer(
-        array|TransferCreateExternalBankTransferParams $params,
+        string $destinationCurrency,
+        string|DestinationPaymentRail $destinationPaymentRail,
+        string $externalAccountID,
+        string $sourceCurrency,
+        string $sourceWalletID,
+        ?string $achReference = null,
+        ?float $amount = null,
+        ?string $sepaReference = null,
+        ?string $speiReference = null,
+        ?string $swiftCharges = null,
+        ?string $swiftReference = null,
+        ?string $wireMessage = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TransferCreateExternalBankTransferParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'destinationCurrency' => $destinationCurrency,
+            'destinationPaymentRail' => $destinationPaymentRail,
+            'externalAccountID' => $externalAccountID,
+            'sourceCurrency' => $sourceCurrency,
+            'sourceWalletID' => $sourceWalletID,
+            'achReference' => $achReference,
+            'amount' => $amount,
+            'sepaReference' => $sepaReference,
+            'speiReference' => $speiReference,
+            'swiftCharges' => $swiftCharges,
+            'swiftReference' => $swiftReference,
+            'wireMessage' => $wireMessage,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/transfers/external-bank-transfer',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createExternalBankTransfer(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -142,34 +166,37 @@ final class TransfersService implements TransfersContract
      *
      * Create an external stablecoin transfer
      *
-     * @param array{
-     *   beneficiaryID: string,
-     *   destinationCurrency: string,
-     *   sourceCurrency: string,
-     *   sourceWalletID: string,
-     *   amount?: float,
-     *   blockchainMemo?: string,
-     * }|TransferCreateExternalStablecoinTransferParams $params
+     * @param string $beneficiaryID Beneficiary ID for the stablecoin transfer
+     * @param string $destinationCurrency The destination currency
+     * @param string $sourceCurrency The source currency
+     * @param string $sourceWalletID The ID of the source bridge wallet
+     * @param float $amount The amount to transfer
+     * @param string $blockchainMemo Blockchain memo for the transfer
      *
      * @throws APIException
      */
     public function createExternalStablecoinTransfer(
-        array|TransferCreateExternalStablecoinTransferParams $params,
+        string $beneficiaryID,
+        string $destinationCurrency,
+        string $sourceCurrency,
+        string $sourceWalletID,
+        ?float $amount = null,
+        ?string $blockchainMemo = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TransferCreateExternalStablecoinTransferParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'beneficiaryID' => $beneficiaryID,
+            'destinationCurrency' => $destinationCurrency,
+            'sourceCurrency' => $sourceCurrency,
+            'sourceWalletID' => $sourceWalletID,
+            'amount' => $amount,
+            'blockchainMemo' => $blockchainMemo,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/transfers/external-stablecoin-transfer',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createExternalStablecoinTransfer(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -179,33 +206,32 @@ final class TransfersService implements TransfersContract
      *
      * Create a stablecoin conversion
      *
-     * @param array{
-     *   amount: float,
-     *   destinationCurrency: string,
-     *   sourceCurrency: string,
-     *   sourceNetwork: string,
-     *   walletID: string,
-     * }|TransferCreateStablecoinConversionParams $params
+     * @param float $amount The amount to convert
+     * @param string $destinationCurrency The destination currency
+     * @param string $sourceCurrency The source currency
+     * @param string $sourceNetwork The source network
+     * @param string $walletID The ID of the bridge wallet to use
      *
      * @throws APIException
      */
     public function createStablecoinConversion(
-        array|TransferCreateStablecoinConversionParams $params,
+        float $amount,
+        string $destinationCurrency,
+        string $sourceCurrency,
+        string $sourceNetwork,
+        string $walletID,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = TransferCreateStablecoinConversionParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'amount' => $amount,
+            'destinationCurrency' => $destinationCurrency,
+            'sourceCurrency' => $sourceCurrency,
+            'sourceNetwork' => $sourceNetwork,
+            'walletID' => $walletID,
+        ];
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/transfers/stablecoin-conversion',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createStablecoinConversion(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

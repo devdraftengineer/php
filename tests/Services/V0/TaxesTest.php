@@ -39,9 +39,10 @@ final class TaxesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->taxes->create([
-            'name' => 'Sales Tax', 'percentage' => 8.5,
-        ]);
+        $result = $this->client->v0->taxes->create(
+            name: 'Sales Tax',
+            percentage: 8.5
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TaxNewResponse::class, $result);
@@ -54,13 +55,13 @@ final class TaxesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->taxes->create([
-            'name' => 'Sales Tax',
-            'percentage' => 8.5,
-            'active' => true,
-            'appIDs' => ['app_123e4567-e89b-12d3-a456-426614174000'],
-            'description' => 'Standard sales tax for retail transactions',
-        ]);
+        $result = $this->client->v0->taxes->create(
+            name: 'Sales Tax',
+            percentage: 8.5,
+            active: true,
+            appIDs: ['app_123e4567-e89b-12d3-a456-426614174000'],
+            description: 'Standard sales tax for retail transactions',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TaxNewResponse::class, $result);
@@ -89,8 +90,7 @@ final class TaxesTest extends TestCase
         }
 
         $result = $this->client->v0->taxes->update(
-            'tax_123e4567-e89b-12d3-a456-426614174000',
-            []
+            'tax_123e4567-e89b-12d3-a456-426614174000'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -104,7 +104,7 @@ final class TaxesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->taxes->list([]);
+        $result = $this->client->v0->taxes->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

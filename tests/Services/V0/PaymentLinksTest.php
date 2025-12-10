@@ -38,16 +38,16 @@ final class PaymentLinksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->paymentLinks->create([
-            'allowMobilePayment' => true,
-            'allowQuantityAdjustment' => true,
-            'collectAddress' => true,
-            'collectTax' => true,
-            'currency' => 'usdc',
-            'linkType' => 'PRODUCT',
-            'title' => 'Premium Subscription',
-            'url' => 'https://checkout.example.com/pay/123',
-        ]);
+        $result = $this->client->v0->paymentLinks->create(
+            allowMobilePayment: true,
+            allowQuantityAdjustment: true,
+            collectAddress: true,
+            collectTax: true,
+            currency: 'usdc',
+            linkType: 'PRODUCT',
+            title: 'Premium Subscription',
+            url: 'https://checkout.example.com/pay/123',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -60,28 +60,26 @@ final class PaymentLinksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->paymentLinks->create([
-            'allowMobilePayment' => true,
-            'allowQuantityAdjustment' => true,
-            'collectAddress' => true,
-            'collectTax' => true,
-            'currency' => 'usdc',
-            'linkType' => 'PRODUCT',
-            'title' => 'Premium Subscription',
-            'url' => 'https://checkout.example.com/pay/123',
-            'amount' => 29.99,
-            'coverImage' => 'https://example.com/images/premium-subscription.jpg',
-            'customerID' => '123e4567-e89b-12d3-a456-426614174002',
-            'customFields' => [
-                'customField1' => 'value1', 'customField2' => 'value2',
-            ],
-            'description' => 'Get access to all premium features with our monthly subscription plan.',
-            'expirationDate' => new \DateTimeImmutable('2024-12-31T23:59:59Z'),
-            'isForAllProduct' => false,
-            'limitPayments' => true,
-            'maxPayments' => 100,
-            'paymentForID' => 'sub_123456789',
-            'paymentLinkProducts' => [
+        $result = $this->client->v0->paymentLinks->create(
+            allowMobilePayment: true,
+            allowQuantityAdjustment: true,
+            collectAddress: true,
+            collectTax: true,
+            currency: 'usdc',
+            linkType: 'PRODUCT',
+            title: 'Premium Subscription',
+            url: 'https://checkout.example.com/pay/123',
+            amount: 29.99,
+            coverImage: 'https://example.com/images/premium-subscription.jpg',
+            customerID: '123e4567-e89b-12d3-a456-426614174002',
+            customFields: ['customField1' => 'value1', 'customField2' => 'value2'],
+            description: 'Get access to all premium features with our monthly subscription plan.',
+            expirationDate: new \DateTimeImmutable('2024-12-31T23:59:59Z'),
+            isForAllProduct: false,
+            limitPayments: true,
+            maxPayments: 100,
+            paymentForID: 'sub_123456789',
+            paymentLinkProducts: [
                 [
                     'productID' => '123e4567-e89b-12d3-a456-426614174003', 'quantity' => 1,
                 ],
@@ -89,8 +87,8 @@ final class PaymentLinksTest extends TestCase
                     'productID' => '123e4567-e89b-12d3-a456-426614174004', 'quantity' => 2,
                 ],
             ],
-            'taxID' => '123e4567-e89b-12d3-a456-426614174005',
-        ]);
+            taxID: '123e4567-e89b-12d3-a456-426614174005',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
@@ -129,7 +127,7 @@ final class PaymentLinksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->v0->paymentLinks->list([]);
+        $result = $this->client->v0->paymentLinks->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

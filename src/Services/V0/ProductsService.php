@@ -5,21 +5,25 @@ declare(strict_types=1);
 namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
-use Devdraft\Core\Contracts\BaseResponse;
 use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\ProductsContract;
-use Devdraft\V0\Products\ProductCreateParams;
 use Devdraft\V0\Products\ProductCreateParams\Currency;
-use Devdraft\V0\Products\ProductListParams;
-use Devdraft\V0\Products\ProductUpdateParams;
 
 final class ProductsService implements ProductsContract
 {
     /**
+     * @api
+     */
+    public ProductsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ProductsRawService($client);
+    }
 
     /**
      * @api
@@ -56,41 +60,55 @@ final class ProductsService implements ProductsContract
      * - `description`: Detailed product description
      * - `images`: Product images (up to 10 files)
      *
-     * @param array{
-     *   description: string,
-     *   name: string,
-     *   price: float,
-     *   currency?: 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY'|Currency,
-     *   images?: list<string>,
-     *   productType?: string,
-     *   quantity?: float,
-     *   status?: string,
-     *   stockCount?: float,
-     *   type?: string,
-     *   unit?: string,
-     *   weight?: float,
-     * }|ProductCreateParams $params
+     * @param string $description Detailed description of the product. Supports markdown formatting for rich text display.
+     * @param string $name Product name as it will appear to customers. Should be clear and descriptive.
+     * @param float $price Product price in the specified currency. Must be greater than 0.
+     * @param 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY'|Currency $currency Currency code for the price. Defaults to USD if not specified.
+     * @param list<string> $images Array of image URLs
+     * @param string $productType Product type
+     * @param float $quantity Quantity available
+     * @param string $status Product status
+     * @param float $stockCount Stock count
+     * @param string $type Product type
+     * @param string $unit Unit of measurement
+     * @param float $weight Weight of the product
      *
      * @throws APIException
      */
     public function create(
-        array|ProductCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        string $description,
+        string $name,
+        float $price,
+        string|Currency $currency = 'USD',
+        ?array $images = null,
+        ?string $productType = null,
+        ?float $quantity = null,
+        ?string $status = null,
+        ?float $stockCount = null,
+        ?string $type = null,
+        ?string $unit = null,
+        ?float $weight = null,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = ProductCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'description' => $description,
+            'name' => $name,
+            'price' => $price,
+            'currency' => $currency,
+            'images' => $images,
+            'productType' => $productType,
+            'quantity' => $quantity,
+            'status' => $status,
+            'stockCount' => $stockCount,
+            'type' => $type,
+            'unit' => $unit,
+            'weight' => $weight,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: 'api/v0/products',
-            headers: ['Content-Type' => 'multipart/form-data'],
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -123,19 +141,16 @@ final class ProductsService implements ProductsContract
      * }
      * ```
      *
+     * @param string $id Product ID
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['api/v0/products/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -167,42 +182,57 @@ final class ProductsService implements ProductsContract
      * - Maximum 10 images per product
      * - Images are automatically optimized
      *
-     * @param array{
-     *   currency?: 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY'|ProductUpdateParams\Currency,
-     *   description?: string,
-     *   images?: list<string>,
-     *   name?: string,
-     *   price?: float,
-     *   productType?: string,
-     *   quantity?: float,
-     *   status?: string,
-     *   stockCount?: float,
-     *   type?: string,
-     *   unit?: string,
-     *   weight?: float,
-     * }|ProductUpdateParams $params
+     * @param string $id Product ID
+     * @param 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY'|\Devdraft\V0\Products\ProductUpdateParams\Currency $currency Currency code for the price. Defaults to USD if not specified.
+     * @param string $description Detailed description of the product. Supports markdown formatting for rich text display.
+     * @param list<string> $images Array of image URLs
+     * @param string $name Product name as it will appear to customers. Should be clear and descriptive.
+     * @param float $price Product price in the specified currency. Must be greater than 0.
+     * @param string $productType Product type
+     * @param float $quantity Quantity available
+     * @param string $status Product status
+     * @param float $stockCount Stock count
+     * @param string $type Product type
+     * @param string $unit Unit of measurement
+     * @param float $weight Weight of the product
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        array|ProductUpdateParams $params,
+        string|\Devdraft\V0\Products\ProductUpdateParams\Currency $currency = 'USD',
+        ?string $description = null,
+        ?array $images = null,
+        ?string $name = null,
+        ?float $price = null,
+        ?string $productType = null,
+        ?float $quantity = null,
+        ?string $status = null,
+        ?float $stockCount = null,
+        ?string $type = null,
+        ?string $unit = null,
+        ?float $weight = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = ProductUpdateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'currency' => $currency,
+            'description' => $description,
+            'images' => $images,
+            'name' => $name,
+            'price' => $price,
+            'productType' => $productType,
+            'quantity' => $quantity,
+            'status' => $status,
+            'stockCount' => $stockCount,
+            'type' => $type,
+            'unit' => $unit,
+            'weight' => $weight,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'put',
-            path: ['api/v0/products/%1$s', $id],
-            headers: ['Content-Type' => 'multipart/form-data'],
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -245,27 +275,22 @@ final class ProductsService implements ProductsContract
      * }
      * ```
      *
-     * @param array{skip?: float, take?: float}|ProductListParams $params
+     * @param float $skip Number of records to skip
+     * @param float $take Number of records to take
      *
      * @throws APIException
      */
     public function list(
-        array|ProductListParams $params,
-        ?RequestOptions $requestOptions = null
+        ?float $skip = null,
+        ?float $take = null,
+        ?RequestOptions $requestOptions = null,
     ): mixed {
-        [$parsed, $options] = ProductListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = ['skip' => $skip, 'take' => $take];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'api/v0/products',
-            query: $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -287,19 +312,16 @@ final class ProductsService implements ProductsContract
      * - All product images will be deleted
      * - Associated data will be removed
      *
+     * @param string $id Product ID
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'delete',
-            path: ['api/v0/products/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -333,19 +355,16 @@ final class ProductsService implements ProductsContract
      * - Total images per product cannot exceed 10
      * - Images are automatically optimized and resized
      *
+     * @param string $id Product ID
+     *
      * @throws APIException
      */
     public function uploadImages(
         string $id,
         ?RequestOptions $requestOptions = null
     ): mixed {
-        /** @var BaseResponse<mixed> */
-        $response = $this->client->request(
-            method: 'post',
-            path: ['api/v0/products/%1$s/images', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->uploadImages($id, requestOptions: $requestOptions);
 
         return $response->parse();
     }
