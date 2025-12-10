@@ -64,72 +64,72 @@ final class TaxNewResponse implements BaseModel
         ?float $percentage = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj['id'] = $id;
-        null !== $active && $obj['active'] = $active;
-        null !== $createdAt && $obj['createdAt'] = $createdAt;
-        null !== $description && $obj['description'] = $description;
-        null !== $name && $obj['name'] = $name;
-        null !== $percentage && $obj['percentage'] = $percentage;
-        null !== $updatedAt && $obj['updatedAt'] = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $active && $self['active'] = $active;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $description && $self['description'] = $description;
+        null !== $name && $self['name'] = $name;
+        null !== $percentage && $self['percentage'] = $percentage;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withPercentage(float $percentage): self
     {
-        $obj = clone $this;
-        $obj['percentage'] = $percentage;
+        $self = clone $this;
+        $self['percentage'] = $percentage;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj['updatedAt'] = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

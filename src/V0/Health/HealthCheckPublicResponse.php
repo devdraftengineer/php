@@ -73,13 +73,13 @@ final class HealthCheckPublicResponse implements BaseModel
         \DateTimeInterface $timestamp,
         string $version
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['status'] = $status;
-        $obj['timestamp'] = $timestamp;
-        $obj['version'] = $version;
+        $self['status'] = $status;
+        $self['timestamp'] = $timestamp;
+        $self['version'] = $version;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class HealthCheckPublicResponse implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class HealthCheckPublicResponse implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj['timestamp'] = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class HealthCheckPublicResponse implements BaseModel
      */
     public function withVersion(string $version): self
     {
-        $obj = clone $this;
-        $obj['version'] = $version;
+        $self = clone $this;
+        $self['version'] = $version;
 
-        return $obj;
+        return $self;
     }
 }

@@ -100,15 +100,15 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
         string $sourceNetwork,
         string $walletID,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
-        $obj['destinationCurrency'] = $destinationCurrency;
-        $obj['sourceCurrency'] = $sourceCurrency;
-        $obj['sourceNetwork'] = $sourceNetwork;
-        $obj['walletID'] = $walletID;
+        $self['amount'] = $amount;
+        $self['destinationCurrency'] = $destinationCurrency;
+        $self['sourceCurrency'] = $sourceCurrency;
+        $self['sourceNetwork'] = $sourceNetwork;
+        $self['walletID'] = $walletID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
      */
     public function withAmount(float $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
      */
     public function withDestinationCurrency(string $destinationCurrency): self
     {
-        $obj = clone $this;
-        $obj['destinationCurrency'] = $destinationCurrency;
+        $self = clone $this;
+        $self['destinationCurrency'] = $destinationCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
      */
     public function withSourceCurrency(string $sourceCurrency): self
     {
-        $obj = clone $this;
-        $obj['sourceCurrency'] = $sourceCurrency;
+        $self = clone $this;
+        $self['sourceCurrency'] = $sourceCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
      */
     public function withSourceNetwork(string $sourceNetwork): self
     {
-        $obj = clone $this;
-        $obj['sourceNetwork'] = $sourceNetwork;
+        $self = clone $this;
+        $self['sourceNetwork'] = $sourceNetwork;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,9 +160,9 @@ final class TransferCreateStablecoinConversionParams implements BaseModel
      */
     public function withWalletID(string $walletID): self
     {
-        $obj = clone $this;
-        $obj['walletID'] = $walletID;
+        $self = clone $this;
+        $self['walletID'] = $walletID;
 
-        return $obj;
+        return $self;
     }
 }

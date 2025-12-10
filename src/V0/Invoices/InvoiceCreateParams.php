@@ -222,27 +222,27 @@ final class InvoiceCreateParams implements BaseModel
         ?\DateTimeInterface $sendDate = null,
         ?string $taxID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['currency'] = $currency;
-        $obj['customerID'] = $customerID;
-        $obj['delivery'] = $delivery;
-        $obj['dueDate'] = $dueDate;
-        $obj['email'] = $email;
-        $obj['items'] = $items;
-        $obj['name'] = $name;
-        $obj['partialPayment'] = $partialPayment;
-        $obj['paymentLink'] = $paymentLink;
-        $obj['paymentMethods'] = $paymentMethods;
-        $obj['status'] = $status;
+        $self['currency'] = $currency;
+        $self['customerID'] = $customerID;
+        $self['delivery'] = $delivery;
+        $self['dueDate'] = $dueDate;
+        $self['email'] = $email;
+        $self['items'] = $items;
+        $self['name'] = $name;
+        $self['partialPayment'] = $partialPayment;
+        $self['paymentLink'] = $paymentLink;
+        $self['paymentMethods'] = $paymentMethods;
+        $self['status'] = $status;
 
-        null !== $address && $obj['address'] = $address;
-        null !== $logo && $obj['logo'] = $logo;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $sendDate && $obj['sendDate'] = $sendDate;
-        null !== $taxID && $obj['taxID'] = $taxID;
+        null !== $address && $self['address'] = $address;
+        null !== $logo && $self['logo'] = $logo;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $sendDate && $self['sendDate'] = $sendDate;
+        null !== $taxID && $self['taxID'] = $taxID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,10 +252,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withCurrency(Currency|string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -263,10 +263,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withCustomerID(string $customerID): self
     {
-        $obj = clone $this;
-        $obj['customerID'] = $customerID;
+        $self = clone $this;
+        $self['customerID'] = $customerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +276,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withDelivery(Delivery|string $delivery): self
     {
-        $obj = clone $this;
-        $obj['delivery'] = $delivery;
+        $self = clone $this;
+        $self['delivery'] = $delivery;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,10 +287,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withDueDate(\DateTimeInterface $dueDate): self
     {
-        $obj = clone $this;
-        $obj['dueDate'] = $dueDate;
+        $self = clone $this;
+        $self['dueDate'] = $dueDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -298,10 +298,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -311,10 +311,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withItems(array $items): self
     {
-        $obj = clone $this;
-        $obj['items'] = $items;
+        $self = clone $this;
+        $self['items'] = $items;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -322,10 +322,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -333,10 +333,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withPartialPayment(bool $partialPayment): self
     {
-        $obj = clone $this;
-        $obj['partialPayment'] = $partialPayment;
+        $self = clone $this;
+        $self['partialPayment'] = $partialPayment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -344,10 +344,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withPaymentLink(bool $paymentLink): self
     {
-        $obj = clone $this;
-        $obj['paymentLink'] = $paymentLink;
+        $self = clone $this;
+        $self['paymentLink'] = $paymentLink;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -357,10 +357,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withPaymentMethods(array $paymentMethods): self
     {
-        $obj = clone $this;
-        $obj['paymentMethods'] = $paymentMethods;
+        $self = clone $this;
+        $self['paymentMethods'] = $paymentMethods;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -370,10 +370,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -381,10 +381,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withAddress(string $address): self
     {
-        $obj = clone $this;
-        $obj['address'] = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -392,10 +392,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withLogo(string $logo): self
     {
-        $obj = clone $this;
-        $obj['logo'] = $logo;
+        $self = clone $this;
+        $self['logo'] = $logo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -403,10 +403,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -414,10 +414,10 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withSendDate(\DateTimeInterface $sendDate): self
     {
-        $obj = clone $this;
-        $obj['sendDate'] = $sendDate;
+        $self = clone $this;
+        $self['sendDate'] = $sendDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -425,9 +425,9 @@ final class InvoiceCreateParams implements BaseModel
      */
     public function withTaxID(string $taxID): self
     {
-        $obj = clone $this;
-        $obj['taxID'] = $taxID;
+        $self = clone $this;
+        $self['taxID'] = $taxID;
 
-        return $obj;
+        return $self;
     }
 }

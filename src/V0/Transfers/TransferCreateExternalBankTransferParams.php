@@ -162,23 +162,23 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
         ?string $swiftReference = null,
         ?string $wireMessage = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['destinationCurrency'] = $destinationCurrency;
-        $obj['destinationPaymentRail'] = $destinationPaymentRail;
-        $obj['externalAccountID'] = $externalAccountID;
-        $obj['sourceCurrency'] = $sourceCurrency;
-        $obj['sourceWalletID'] = $sourceWalletID;
+        $self['destinationCurrency'] = $destinationCurrency;
+        $self['destinationPaymentRail'] = $destinationPaymentRail;
+        $self['externalAccountID'] = $externalAccountID;
+        $self['sourceCurrency'] = $sourceCurrency;
+        $self['sourceWalletID'] = $sourceWalletID;
 
-        null !== $achReference && $obj['achReference'] = $achReference;
-        null !== $amount && $obj['amount'] = $amount;
-        null !== $sepaReference && $obj['sepaReference'] = $sepaReference;
-        null !== $speiReference && $obj['speiReference'] = $speiReference;
-        null !== $swiftCharges && $obj['swiftCharges'] = $swiftCharges;
-        null !== $swiftReference && $obj['swiftReference'] = $swiftReference;
-        null !== $wireMessage && $obj['wireMessage'] = $wireMessage;
+        null !== $achReference && $self['achReference'] = $achReference;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $sepaReference && $self['sepaReference'] = $sepaReference;
+        null !== $speiReference && $self['speiReference'] = $speiReference;
+        null !== $swiftCharges && $self['swiftCharges'] = $swiftCharges;
+        null !== $swiftReference && $self['swiftReference'] = $swiftReference;
+        null !== $wireMessage && $self['wireMessage'] = $wireMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withDestinationCurrency(string $destinationCurrency): self
     {
-        $obj = clone $this;
-        $obj['destinationCurrency'] = $destinationCurrency;
+        $self = clone $this;
+        $self['destinationCurrency'] = $destinationCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
     public function withDestinationPaymentRail(
         DestinationPaymentRail|string $destinationPaymentRail
     ): self {
-        $obj = clone $this;
-        $obj['destinationPaymentRail'] = $destinationPaymentRail;
+        $self = clone $this;
+        $self['destinationPaymentRail'] = $destinationPaymentRail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withExternalAccountID(string $externalAccountID): self
     {
-        $obj = clone $this;
-        $obj['externalAccountID'] = $externalAccountID;
+        $self = clone $this;
+        $self['externalAccountID'] = $externalAccountID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withSourceCurrency(string $sourceCurrency): self
     {
-        $obj = clone $this;
-        $obj['sourceCurrency'] = $sourceCurrency;
+        $self = clone $this;
+        $self['sourceCurrency'] = $sourceCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withSourceWalletID(string $sourceWalletID): self
     {
-        $obj = clone $this;
-        $obj['sourceWalletID'] = $sourceWalletID;
+        $self = clone $this;
+        $self['sourceWalletID'] = $sourceWalletID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withACHReference(string $achReference): self
     {
-        $obj = clone $this;
-        $obj['achReference'] = $achReference;
+        $self = clone $this;
+        $self['achReference'] = $achReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withAmount(float $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -266,10 +266,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withSepaReference(string $sepaReference): self
     {
-        $obj = clone $this;
-        $obj['sepaReference'] = $sepaReference;
+        $self = clone $this;
+        $self['sepaReference'] = $sepaReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -277,10 +277,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withSpeiReference(string $speiReference): self
     {
-        $obj = clone $this;
-        $obj['speiReference'] = $speiReference;
+        $self = clone $this;
+        $self['speiReference'] = $speiReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -288,10 +288,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withSwiftCharges(string $swiftCharges): self
     {
-        $obj = clone $this;
-        $obj['swiftCharges'] = $swiftCharges;
+        $self = clone $this;
+        $self['swiftCharges'] = $swiftCharges;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -299,10 +299,10 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withSwiftReference(string $swiftReference): self
     {
-        $obj = clone $this;
-        $obj['swiftReference'] = $swiftReference;
+        $self = clone $this;
+        $self['swiftReference'] = $swiftReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -310,9 +310,9 @@ final class TransferCreateExternalBankTransferParams implements BaseModel
      */
     public function withWireMessage(string $wireMessage): self
     {
-        $obj = clone $this;
-        $obj['wireMessage'] = $wireMessage;
+        $self = clone $this;
+        $self['wireMessage'] = $wireMessage;
 
-        return $obj;
+        return $self;
     }
 }

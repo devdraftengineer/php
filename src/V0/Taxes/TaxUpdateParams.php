@@ -106,15 +106,15 @@ final class TaxUpdateParams implements BaseModel
         ?string $name = null,
         ?float $percentage = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $active && $obj['active'] = $active;
-        null !== $appIDs && $obj['appIDs'] = $appIDs;
-        null !== $description && $obj['description'] = $description;
-        null !== $name && $obj['name'] = $name;
-        null !== $percentage && $obj['percentage'] = $percentage;
+        null !== $active && $self['active'] = $active;
+        null !== $appIDs && $self['appIDs'] = $appIDs;
+        null !== $description && $self['description'] = $description;
+        null !== $name && $self['name'] = $name;
+        null !== $percentage && $self['percentage'] = $percentage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class TaxUpdateParams implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj['active'] = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class TaxUpdateParams implements BaseModel
      */
     public function withAppIDs(array $appIDs): self
     {
-        $obj = clone $this;
-        $obj['appIDs'] = $appIDs;
+        $self = clone $this;
+        $self['appIDs'] = $appIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class TaxUpdateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class TaxUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,9 +168,9 @@ final class TaxUpdateParams implements BaseModel
      */
     public function withPercentage(float $percentage): self
     {
-        $obj = clone $this;
-        $obj['percentage'] = $percentage;
+        $self = clone $this;
+        $self['percentage'] = $percentage;
 
-        return $obj;
+        return $self;
     }
 }

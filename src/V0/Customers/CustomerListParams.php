@@ -119,15 +119,15 @@ final class CustomerListParams implements BaseModel
         CustomerStatus|string|null $status = null,
         ?float $take = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $email && $obj['email'] = $email;
-        null !== $name && $obj['name'] = $name;
-        null !== $skip && $obj['skip'] = $skip;
-        null !== $status && $obj['status'] = $status;
-        null !== $take && $obj['take'] = $take;
+        null !== $email && $self['email'] = $email;
+        null !== $name && $self['name'] = $name;
+        null !== $skip && $self['skip'] = $skip;
+        null !== $status && $self['status'] = $status;
+        null !== $take && $self['take'] = $take;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class CustomerListParams implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class CustomerListParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class CustomerListParams implements BaseModel
      */
     public function withSkip(float $skip): self
     {
-        $obj = clone $this;
-        $obj['skip'] = $skip;
+        $self = clone $this;
+        $self['skip'] = $skip;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class CustomerListParams implements BaseModel
      */
     public function withStatus(CustomerStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,9 +181,9 @@ final class CustomerListParams implements BaseModel
      */
     public function withTake(float $take): self
     {
-        $obj = clone $this;
-        $obj['take'] = $take;
+        $self = clone $this;
+        $self['take'] = $take;
 
-        return $obj;
+        return $self;
     }
 }

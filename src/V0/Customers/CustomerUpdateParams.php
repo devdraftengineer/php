@@ -118,16 +118,16 @@ final class CustomerUpdateParams implements BaseModel
         ?string $phoneNumber = null,
         CustomerStatus|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $customerType && $obj['customerType'] = $customerType;
-        null !== $email && $obj['email'] = $email;
-        null !== $firstName && $obj['firstName'] = $firstName;
-        null !== $lastName && $obj['lastName'] = $lastName;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $customerType && $self['customerType'] = $customerType;
+        null !== $email && $self['email'] = $email;
+        null !== $firstName && $self['firstName'] = $firstName;
+        null !== $lastName && $self['lastName'] = $lastName;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class CustomerUpdateParams implements BaseModel
      */
     public function withCustomerType(CustomerType|string $customerType): self
     {
-        $obj = clone $this;
-        $obj['customerType'] = $customerType;
+        $self = clone $this;
+        $self['customerType'] = $customerType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class CustomerUpdateParams implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class CustomerUpdateParams implements BaseModel
      */
     public function withFirstName(string $firstName): self
     {
-        $obj = clone $this;
-        $obj['firstName'] = $firstName;
+        $self = clone $this;
+        $self['firstName'] = $firstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +170,10 @@ final class CustomerUpdateParams implements BaseModel
      */
     public function withLastName(string $lastName): self
     {
-        $obj = clone $this;
-        $obj['lastName'] = $lastName;
+        $self = clone $this;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class CustomerUpdateParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,9 +194,9 @@ final class CustomerUpdateParams implements BaseModel
      */
     public function withStatus(CustomerStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

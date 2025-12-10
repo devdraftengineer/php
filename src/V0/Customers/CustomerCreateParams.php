@@ -137,17 +137,17 @@ final class CustomerCreateParams implements BaseModel
         ?string $email = null,
         CustomerStatus|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['firstName'] = $firstName;
-        $obj['lastName'] = $lastName;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self['firstName'] = $firstName;
+        $self['lastName'] = $lastName;
+        $self['phoneNumber'] = $phoneNumber;
 
-        null !== $customerType && $obj['customerType'] = $customerType;
-        null !== $email && $obj['email'] = $email;
-        null !== $status && $obj['status'] = $status;
+        null !== $customerType && $self['customerType'] = $customerType;
+        null !== $email && $self['email'] = $email;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class CustomerCreateParams implements BaseModel
      */
     public function withFirstName(string $firstName): self
     {
-        $obj = clone $this;
-        $obj['firstName'] = $firstName;
+        $self = clone $this;
+        $self['firstName'] = $firstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class CustomerCreateParams implements BaseModel
      */
     public function withLastName(string $lastName): self
     {
-        $obj = clone $this;
-        $obj['lastName'] = $lastName;
+        $self = clone $this;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class CustomerCreateParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +190,10 @@ final class CustomerCreateParams implements BaseModel
      */
     public function withCustomerType(CustomerType|string $customerType): self
     {
-        $obj = clone $this;
-        $obj['customerType'] = $customerType;
+        $self = clone $this;
+        $self['customerType'] = $customerType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class CustomerCreateParams implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj['email'] = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,9 +214,9 @@ final class CustomerCreateParams implements BaseModel
      */
     public function withStatus(CustomerStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

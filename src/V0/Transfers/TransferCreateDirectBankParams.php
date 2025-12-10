@@ -125,19 +125,19 @@ final class TransferCreateDirectBankParams implements BaseModel
         ?string $sepaReference = null,
         ?string $wireMessage = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
-        $obj['destinationCurrency'] = $destinationCurrency;
-        $obj['paymentRail'] = $paymentRail;
-        $obj['sourceCurrency'] = $sourceCurrency;
-        $obj['walletID'] = $walletID;
+        $self['amount'] = $amount;
+        $self['destinationCurrency'] = $destinationCurrency;
+        $self['paymentRail'] = $paymentRail;
+        $self['sourceCurrency'] = $sourceCurrency;
+        $self['walletID'] = $walletID;
 
-        null !== $achReference && $obj['achReference'] = $achReference;
-        null !== $sepaReference && $obj['sepaReference'] = $sepaReference;
-        null !== $wireMessage && $obj['wireMessage'] = $wireMessage;
+        null !== $achReference && $self['achReference'] = $achReference;
+        null !== $sepaReference && $self['sepaReference'] = $sepaReference;
+        null !== $wireMessage && $self['wireMessage'] = $wireMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class TransferCreateDirectBankParams implements BaseModel
      */
     public function withAmount(float $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class TransferCreateDirectBankParams implements BaseModel
      */
     public function withDestinationCurrency(string $destinationCurrency): self
     {
-        $obj = clone $this;
-        $obj['destinationCurrency'] = $destinationCurrency;
+        $self = clone $this;
+        $self['destinationCurrency'] = $destinationCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class TransferCreateDirectBankParams implements BaseModel
      */
     public function withPaymentRail(string $paymentRail): self
     {
-        $obj = clone $this;
-        $obj['paymentRail'] = $paymentRail;
+        $self = clone $this;
+        $self['paymentRail'] = $paymentRail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class TransferCreateDirectBankParams implements BaseModel
      */
     public function withSourceCurrency(string $sourceCurrency): self
     {
-        $obj = clone $this;
-        $obj['sourceCurrency'] = $sourceCurrency;
+        $self = clone $this;
+        $self['sourceCurrency'] = $sourceCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class TransferCreateDirectBankParams implements BaseModel
      */
     public function withWalletID(string $walletID): self
     {
-        $obj = clone $this;
-        $obj['walletID'] = $walletID;
+        $self = clone $this;
+        $self['walletID'] = $walletID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class TransferCreateDirectBankParams implements BaseModel
      */
     public function withACHReference(string $achReference): self
     {
-        $obj = clone $this;
-        $obj['achReference'] = $achReference;
+        $self = clone $this;
+        $self['achReference'] = $achReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class TransferCreateDirectBankParams implements BaseModel
      */
     public function withSepaReference(string $sepaReference): self
     {
-        $obj = clone $this;
-        $obj['sepaReference'] = $sepaReference;
+        $self = clone $this;
+        $self['sepaReference'] = $sepaReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,9 +222,9 @@ final class TransferCreateDirectBankParams implements BaseModel
      */
     public function withWireMessage(string $wireMessage): self
     {
-        $obj = clone $this;
-        $obj['wireMessage'] = $wireMessage;
+        $self = clone $this;
+        $self['wireMessage'] = $wireMessage;
 
-        return $obj;
+        return $self;
     }
 }

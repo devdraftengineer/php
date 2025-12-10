@@ -184,23 +184,23 @@ final class ProductCreateParams implements BaseModel
         ?string $unit = null,
         ?float $weight = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['description'] = $description;
-        $obj['name'] = $name;
-        $obj['price'] = $price;
+        $self['description'] = $description;
+        $self['name'] = $name;
+        $self['price'] = $price;
 
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $images && $obj['images'] = $images;
-        null !== $productType && $obj['productType'] = $productType;
-        null !== $quantity && $obj['quantity'] = $quantity;
-        null !== $status && $obj['status'] = $status;
-        null !== $stockCount && $obj['stockCount'] = $stockCount;
-        null !== $type && $obj['type'] = $type;
-        null !== $unit && $obj['unit'] = $unit;
-        null !== $weight && $obj['weight'] = $weight;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $images && $self['images'] = $images;
+        null !== $productType && $self['productType'] = $productType;
+        null !== $quantity && $self['quantity'] = $quantity;
+        null !== $status && $self['status'] = $status;
+        null !== $stockCount && $self['stockCount'] = $stockCount;
+        null !== $type && $self['type'] = $type;
+        null !== $unit && $self['unit'] = $unit;
+        null !== $weight && $self['weight'] = $weight;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +208,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj['description'] = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +219,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +230,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withPrice(float $price): self
     {
-        $obj = clone $this;
-        $obj['price'] = $price;
+        $self = clone $this;
+        $self['price'] = $price;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +243,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withCurrency(Currency|string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +256,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withImages(array $images): self
     {
-        $obj = clone $this;
-        $obj['images'] = $images;
+        $self = clone $this;
+        $self['images'] = $images;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +267,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withProductType(string $productType): self
     {
-        $obj = clone $this;
-        $obj['productType'] = $productType;
+        $self = clone $this;
+        $self['productType'] = $productType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +278,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withQuantity(float $quantity): self
     {
-        $obj = clone $this;
-        $obj['quantity'] = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +289,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -300,10 +300,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withStockCount(float $stockCount): self
     {
-        $obj = clone $this;
-        $obj['stockCount'] = $stockCount;
+        $self = clone $this;
+        $self['stockCount'] = $stockCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -311,10 +311,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -322,10 +322,10 @@ final class ProductCreateParams implements BaseModel
      */
     public function withUnit(string $unit): self
     {
-        $obj = clone $this;
-        $obj['unit'] = $unit;
+        $self = clone $this;
+        $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -333,9 +333,9 @@ final class ProductCreateParams implements BaseModel
      */
     public function withWeight(float $weight): self
     {
-        $obj = clone $this;
-        $obj['weight'] = $weight;
+        $self = clone $this;
+        $self['weight'] = $weight;
 
-        return $obj;
+        return $self;
     }
 }

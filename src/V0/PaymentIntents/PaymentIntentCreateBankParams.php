@@ -261,29 +261,29 @@ final class PaymentIntentCreateBankParams implements BaseModel
         ?string $sepaReference = null,
         ?string $wireMessage = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['destinationCurrency'] = $destinationCurrency;
-        $obj['destinationNetwork'] = $destinationNetwork;
-        $obj['sourceCurrency'] = $sourceCurrency;
-        $obj['sourcePaymentRail'] = $sourcePaymentRail;
+        $self['destinationCurrency'] = $destinationCurrency;
+        $self['destinationNetwork'] = $destinationNetwork;
+        $self['sourceCurrency'] = $sourceCurrency;
+        $self['sourcePaymentRail'] = $sourcePaymentRail;
 
-        null !== $achReference && $obj['achReference'] = $achReference;
-        null !== $amount && $obj['amount'] = $amount;
-        null !== $customerAddress && $obj['customerAddress'] = $customerAddress;
-        null !== $customerCountry && $obj['customerCountry'] = $customerCountry;
-        null !== $customerCountryISO && $obj['customerCountryISO'] = $customerCountryISO;
-        null !== $customerEmail && $obj['customerEmail'] = $customerEmail;
-        null !== $customerFirstName && $obj['customerFirstName'] = $customerFirstName;
-        null !== $customerLastName && $obj['customerLastName'] = $customerLastName;
-        null !== $customerProvince && $obj['customerProvince'] = $customerProvince;
-        null !== $customerProvinceISO && $obj['customerProvinceISO'] = $customerProvinceISO;
-        null !== $destinationAddress && $obj['destinationAddress'] = $destinationAddress;
-        null !== $phoneNumber && $obj['phoneNumber'] = $phoneNumber;
-        null !== $sepaReference && $obj['sepaReference'] = $sepaReference;
-        null !== $wireMessage && $obj['wireMessage'] = $wireMessage;
+        null !== $achReference && $self['achReference'] = $achReference;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $customerAddress && $self['customerAddress'] = $customerAddress;
+        null !== $customerCountry && $self['customerCountry'] = $customerCountry;
+        null !== $customerCountryISO && $self['customerCountryISO'] = $customerCountryISO;
+        null !== $customerEmail && $self['customerEmail'] = $customerEmail;
+        null !== $customerFirstName && $self['customerFirstName'] = $customerFirstName;
+        null !== $customerLastName && $self['customerLastName'] = $customerLastName;
+        null !== $customerProvince && $self['customerProvince'] = $customerProvince;
+        null !== $customerProvinceISO && $self['customerProvinceISO'] = $customerProvinceISO;
+        null !== $destinationAddress && $self['destinationAddress'] = $destinationAddress;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $sepaReference && $self['sepaReference'] = $sepaReference;
+        null !== $wireMessage && $self['wireMessage'] = $wireMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +294,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withDestinationCurrency(
         StableCoinCurrency|string $destinationCurrency
     ): self {
-        $obj = clone $this;
-        $obj['destinationCurrency'] = $destinationCurrency;
+        $self = clone $this;
+        $self['destinationCurrency'] = $destinationCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withDestinationNetwork(
         BridgePaymentRail|string $destinationNetwork
     ): self {
-        $obj = clone $this;
-        $obj['destinationNetwork'] = $destinationNetwork;
+        $self = clone $this;
+        $self['destinationNetwork'] = $destinationNetwork;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -322,10 +322,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withSourceCurrency(
         SourceCurrency|string $sourceCurrency
     ): self {
-        $obj = clone $this;
-        $obj['sourceCurrency'] = $sourceCurrency;
+        $self = clone $this;
+        $self['sourceCurrency'] = $sourceCurrency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -336,10 +336,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
     public function withSourcePaymentRail(
         BridgePaymentRail|string $sourcePaymentRail
     ): self {
-        $obj = clone $this;
-        $obj['sourcePaymentRail'] = $sourcePaymentRail;
+        $self = clone $this;
+        $self['sourcePaymentRail'] = $sourcePaymentRail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -347,10 +347,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withACHReference(string $achReference): self
     {
-        $obj = clone $this;
-        $obj['achReference'] = $achReference;
+        $self = clone $this;
+        $self['achReference'] = $achReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -358,10 +358,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -369,10 +369,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withCustomerAddress(string $customerAddress): self
     {
-        $obj = clone $this;
-        $obj['customerAddress'] = $customerAddress;
+        $self = clone $this;
+        $self['customerAddress'] = $customerAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -380,10 +380,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withCustomerCountry(string $customerCountry): self
     {
-        $obj = clone $this;
-        $obj['customerCountry'] = $customerCountry;
+        $self = clone $this;
+        $self['customerCountry'] = $customerCountry;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -391,10 +391,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withCustomerCountryISO(string $customerCountryISO): self
     {
-        $obj = clone $this;
-        $obj['customerCountryISO'] = $customerCountryISO;
+        $self = clone $this;
+        $self['customerCountryISO'] = $customerCountryISO;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -402,10 +402,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withCustomerEmail(string $customerEmail): self
     {
-        $obj = clone $this;
-        $obj['customerEmail'] = $customerEmail;
+        $self = clone $this;
+        $self['customerEmail'] = $customerEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -413,10 +413,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withCustomerFirstName(string $customerFirstName): self
     {
-        $obj = clone $this;
-        $obj['customerFirstName'] = $customerFirstName;
+        $self = clone $this;
+        $self['customerFirstName'] = $customerFirstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -424,10 +424,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withCustomerLastName(string $customerLastName): self
     {
-        $obj = clone $this;
-        $obj['customerLastName'] = $customerLastName;
+        $self = clone $this;
+        $self['customerLastName'] = $customerLastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -435,10 +435,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withCustomerProvince(string $customerProvince): self
     {
-        $obj = clone $this;
-        $obj['customerProvince'] = $customerProvince;
+        $self = clone $this;
+        $self['customerProvince'] = $customerProvince;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -446,10 +446,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withCustomerProvinceISO(string $customerProvinceISO): self
     {
-        $obj = clone $this;
-        $obj['customerProvinceISO'] = $customerProvinceISO;
+        $self = clone $this;
+        $self['customerProvinceISO'] = $customerProvinceISO;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -457,10 +457,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withDestinationAddress(string $destinationAddress): self
     {
-        $obj = clone $this;
-        $obj['destinationAddress'] = $destinationAddress;
+        $self = clone $this;
+        $self['destinationAddress'] = $destinationAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -468,10 +468,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -479,10 +479,10 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withSepaReference(string $sepaReference): self
     {
-        $obj = clone $this;
-        $obj['sepaReference'] = $sepaReference;
+        $self = clone $this;
+        $self['sepaReference'] = $sepaReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -490,9 +490,9 @@ final class PaymentIntentCreateBankParams implements BaseModel
      */
     public function withWireMessage(string $wireMessage): self
     {
-        $obj = clone $this;
-        $obj['wireMessage'] = $wireMessage;
+        $self = clone $this;
+        $self['wireMessage'] = $wireMessage;
 
-        return $obj;
+        return $self;
     }
 }
