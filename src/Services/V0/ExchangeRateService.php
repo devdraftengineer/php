@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\ExchangeRateContract;
 use Devdraft\V0\ExchangeRate\ExchangeRateResponse;
@@ -96,7 +97,7 @@ final class ExchangeRateService implements ExchangeRateContract
         string $to,
         ?RequestOptions $requestOptions = null
     ): ExchangeRateResponse {
-        $params = ['from' => $from, 'to' => $to];
+        $params = Util::removeNulls(['from' => $from, 'to' => $to]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getExchangeRate(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0\Customers;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\Customers\LiquidationAddressesContract;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams\Chain;
@@ -70,25 +71,25 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
         ?string $returnAddress = null,
         ?RequestOptions $requestOptions = null,
     ): LiquidationAddressResponse {
-        $params = [
-            'address' => $address,
-            'chain' => $chain,
-            'currency' => $currency,
-            'bridgeWalletID' => $bridgeWalletID,
-            'customDeveloperFeePercent' => $customDeveloperFeePercent,
-            'destinationACHReference' => $destinationACHReference,
-            'destinationAddress' => $destinationAddress,
-            'destinationBlockchainMemo' => $destinationBlockchainMemo,
-            'destinationCurrency' => $destinationCurrency,
-            'destinationPaymentRail' => $destinationPaymentRail,
-            'destinationSepaReference' => $destinationSepaReference,
-            'destinationWireMessage' => $destinationWireMessage,
-            'externalAccountID' => $externalAccountID,
-            'prefundedAccountID' => $prefundedAccountID,
-            'returnAddress' => $returnAddress,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'address' => $address,
+                'chain' => $chain,
+                'currency' => $currency,
+                'bridgeWalletID' => $bridgeWalletID,
+                'customDeveloperFeePercent' => $customDeveloperFeePercent,
+                'destinationACHReference' => $destinationACHReference,
+                'destinationAddress' => $destinationAddress,
+                'destinationBlockchainMemo' => $destinationBlockchainMemo,
+                'destinationCurrency' => $destinationCurrency,
+                'destinationPaymentRail' => $destinationPaymentRail,
+                'destinationSepaReference' => $destinationSepaReference,
+                'destinationWireMessage' => $destinationWireMessage,
+                'externalAccountID' => $externalAccountID,
+                'prefundedAccountID' => $prefundedAccountID,
+                'returnAddress' => $returnAddress,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($customerID, params: $params, requestOptions: $requestOptions);
@@ -111,7 +112,7 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
         string $customerID,
         ?RequestOptions $requestOptions = null,
     ): LiquidationAddressResponse {
-        $params = ['customerID' => $customerID];
+        $params = Util::removeNulls(['customerID' => $customerID]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($liquidationAddressID, params: $params, requestOptions: $requestOptions);

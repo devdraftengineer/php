@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\PaymentLinksContract;
 use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\Currency;
@@ -79,30 +80,30 @@ final class PaymentLinksService implements PaymentLinksContract
         ?string $taxID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'allowMobilePayment' => $allowMobilePayment,
-            'allowQuantityAdjustment' => $allowQuantityAdjustment,
-            'collectAddress' => $collectAddress,
-            'collectTax' => $collectTax,
-            'currency' => $currency,
-            'linkType' => $linkType,
-            'title' => $title,
-            'url' => $url,
-            'amount' => $amount,
-            'coverImage' => $coverImage,
-            'customerID' => $customerID,
-            'customFields' => $customFields,
-            'description' => $description,
-            'expirationDate' => $expirationDate,
-            'isForAllProduct' => $isForAllProduct,
-            'limitPayments' => $limitPayments,
-            'maxPayments' => $maxPayments,
-            'paymentForID' => $paymentForID,
-            'paymentLinkProducts' => $paymentLinkProducts,
-            'taxID' => $taxID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'allowMobilePayment' => $allowMobilePayment,
+                'allowQuantityAdjustment' => $allowQuantityAdjustment,
+                'collectAddress' => $collectAddress,
+                'collectTax' => $collectTax,
+                'currency' => $currency,
+                'linkType' => $linkType,
+                'title' => $title,
+                'url' => $url,
+                'amount' => $amount,
+                'coverImage' => $coverImage,
+                'customerID' => $customerID,
+                'customFields' => $customFields,
+                'description' => $description,
+                'expirationDate' => $expirationDate,
+                'isForAllProduct' => $isForAllProduct,
+                'limitPayments' => $limitPayments,
+                'maxPayments' => $maxPayments,
+                'paymentForID' => $paymentForID,
+                'paymentLinkProducts' => $paymentLinkProducts,
+                'taxID' => $taxID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -163,9 +164,7 @@ final class PaymentLinksService implements PaymentLinksContract
         ?string $take = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['skip' => $skip, 'take' => $take];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['skip' => $skip, 'take' => $take]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

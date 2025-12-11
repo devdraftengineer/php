@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\CustomersContract;
 use Devdraft\Services\V0\Customers\LiquidationAddressesService;
@@ -85,16 +86,16 @@ final class CustomersService implements CustomersContract
         string|CustomerStatus|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'phoneNumber' => $phoneNumber,
-            'customerType' => $customerType,
-            'email' => $email,
-            'status' => $status,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'phoneNumber' => $phoneNumber,
+                'customerType' => $customerType,
+                'email' => $email,
+                'status' => $status,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -204,16 +205,16 @@ final class CustomersService implements CustomersContract
         string|CustomerStatus|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'customerType' => $customerType,
-            'email' => $email,
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'phoneNumber' => $phoneNumber,
-            'status' => $status,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'customerType' => $customerType,
+                'email' => $email,
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'phoneNumber' => $phoneNumber,
+                'status' => $status,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -282,15 +283,15 @@ final class CustomersService implements CustomersContract
         float $take = 10,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'email' => $email,
-            'name' => $name,
-            'skip' => $skip,
-            'status' => $status,
-            'take' => $take,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'email' => $email,
+                'name' => $name,
+                'skip' => $skip,
+                'status' => $status,
+                'take' => $take,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

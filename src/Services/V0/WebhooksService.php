@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\WebhooksContract;
 use Devdraft\V0\Webhooks\WebhookResponse;
@@ -46,15 +47,15 @@ final class WebhooksService implements WebhooksContract
         ?string $signingSecret = null,
         ?RequestOptions $requestOptions = null,
     ): WebhookResponse {
-        $params = [
-            'encrypted' => $encrypted,
-            'isActive' => $isActive,
-            'name' => $name,
-            'url' => $url,
-            'signingSecret' => $signingSecret,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'encrypted' => $encrypted,
+                'isActive' => $isActive,
+                'name' => $name,
+                'url' => $url,
+                'signingSecret' => $signingSecret,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -104,15 +105,15 @@ final class WebhooksService implements WebhooksContract
         ?string $url = null,
         ?RequestOptions $requestOptions = null,
     ): WebhookResponse {
-        $params = [
-            'encrypted' => $encrypted,
-            'isActive' => $isActive,
-            'name' => $name,
-            'signingSecret' => $signingSecret,
-            'url' => $url,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'encrypted' => $encrypted,
+                'isActive' => $isActive,
+                'name' => $name,
+                'signingSecret' => $signingSecret,
+                'url' => $url,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -137,9 +138,7 @@ final class WebhooksService implements WebhooksContract
         ?float $take = null,
         ?RequestOptions $requestOptions = null,
     ): array {
-        $params = ['skip' => $skip, 'take' => $take];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['skip' => $skip, 'take' => $take]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
