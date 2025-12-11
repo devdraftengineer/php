@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TransfersContract;
 use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams\DestinationPaymentRail;
@@ -52,18 +53,18 @@ final class TransfersService implements TransfersContract
         ?string $wireMessage = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'amount' => $amount,
-            'destinationCurrency' => $destinationCurrency,
-            'paymentRail' => $paymentRail,
-            'sourceCurrency' => $sourceCurrency,
-            'walletID' => $walletID,
-            'achReference' => $achReference,
-            'sepaReference' => $sepaReference,
-            'wireMessage' => $wireMessage,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'amount' => $amount,
+                'destinationCurrency' => $destinationCurrency,
+                'paymentRail' => $paymentRail,
+                'sourceCurrency' => $sourceCurrency,
+                'walletID' => $walletID,
+                'achReference' => $achReference,
+                'sepaReference' => $sepaReference,
+                'wireMessage' => $wireMessage,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createDirectBank(params: $params, requestOptions: $requestOptions);
@@ -90,12 +91,14 @@ final class TransfersService implements TransfersContract
         string $walletID,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'amount' => $amount,
-            'network' => $network,
-            'stableCoinCurrency' => $stableCoinCurrency,
-            'walletID' => $walletID,
-        ];
+        $params = Util::removeNulls(
+            [
+                'amount' => $amount,
+                'network' => $network,
+                'stableCoinCurrency' => $stableCoinCurrency,
+                'walletID' => $walletID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createDirectWallet(params: $params, requestOptions: $requestOptions);
@@ -138,22 +141,22 @@ final class TransfersService implements TransfersContract
         ?string $wireMessage = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'destinationCurrency' => $destinationCurrency,
-            'destinationPaymentRail' => $destinationPaymentRail,
-            'externalAccountID' => $externalAccountID,
-            'sourceCurrency' => $sourceCurrency,
-            'sourceWalletID' => $sourceWalletID,
-            'achReference' => $achReference,
-            'amount' => $amount,
-            'sepaReference' => $sepaReference,
-            'speiReference' => $speiReference,
-            'swiftCharges' => $swiftCharges,
-            'swiftReference' => $swiftReference,
-            'wireMessage' => $wireMessage,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'destinationCurrency' => $destinationCurrency,
+                'destinationPaymentRail' => $destinationPaymentRail,
+                'externalAccountID' => $externalAccountID,
+                'sourceCurrency' => $sourceCurrency,
+                'sourceWalletID' => $sourceWalletID,
+                'achReference' => $achReference,
+                'amount' => $amount,
+                'sepaReference' => $sepaReference,
+                'speiReference' => $speiReference,
+                'swiftCharges' => $swiftCharges,
+                'swiftReference' => $swiftReference,
+                'wireMessage' => $wireMessage,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createExternalBankTransfer(params: $params, requestOptions: $requestOptions);
@@ -184,16 +187,16 @@ final class TransfersService implements TransfersContract
         ?string $blockchainMemo = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'beneficiaryID' => $beneficiaryID,
-            'destinationCurrency' => $destinationCurrency,
-            'sourceCurrency' => $sourceCurrency,
-            'sourceWalletID' => $sourceWalletID,
-            'amount' => $amount,
-            'blockchainMemo' => $blockchainMemo,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'beneficiaryID' => $beneficiaryID,
+                'destinationCurrency' => $destinationCurrency,
+                'sourceCurrency' => $sourceCurrency,
+                'sourceWalletID' => $sourceWalletID,
+                'amount' => $amount,
+                'blockchainMemo' => $blockchainMemo,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createExternalStablecoinTransfer(params: $params, requestOptions: $requestOptions);
@@ -222,13 +225,15 @@ final class TransfersService implements TransfersContract
         string $walletID,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'amount' => $amount,
-            'destinationCurrency' => $destinationCurrency,
-            'sourceCurrency' => $sourceCurrency,
-            'sourceNetwork' => $sourceNetwork,
-            'walletID' => $walletID,
-        ];
+        $params = Util::removeNulls(
+            [
+                'amount' => $amount,
+                'destinationCurrency' => $destinationCurrency,
+                'sourceCurrency' => $sourceCurrency,
+                'sourceNetwork' => $sourceNetwork,
+                'walletID' => $walletID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createStablecoinConversion(params: $params, requestOptions: $requestOptions);

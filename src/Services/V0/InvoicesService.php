@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\InvoicesContract;
 use Devdraft\V0\Invoices\InvoiceCreateParams\Currency;
@@ -73,26 +74,26 @@ final class InvoicesService implements InvoicesContract
         ?string $taxID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'currency' => $currency,
-            'customerID' => $customerID,
-            'delivery' => $delivery,
-            'dueDate' => $dueDate,
-            'email' => $email,
-            'items' => $items,
-            'name' => $name,
-            'partialPayment' => $partialPayment,
-            'paymentLink' => $paymentLink,
-            'paymentMethods' => $paymentMethods,
-            'status' => $status,
-            'address' => $address,
-            'logo' => $logo,
-            'phoneNumber' => $phoneNumber,
-            'sendDate' => $sendDate,
-            'taxID' => $taxID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'currency' => $currency,
+                'customerID' => $customerID,
+                'delivery' => $delivery,
+                'dueDate' => $dueDate,
+                'email' => $email,
+                'items' => $items,
+                'name' => $name,
+                'partialPayment' => $partialPayment,
+                'paymentLink' => $paymentLink,
+                'paymentMethods' => $paymentMethods,
+                'status' => $status,
+                'address' => $address,
+                'logo' => $logo,
+                'phoneNumber' => $phoneNumber,
+                'sendDate' => $sendDate,
+                'taxID' => $taxID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -166,26 +167,26 @@ final class InvoicesService implements InvoicesContract
         ?string $taxID = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'currency' => $currency,
-            'customerID' => $customerID,
-            'delivery' => $delivery,
-            'dueDate' => $dueDate,
-            'email' => $email,
-            'items' => $items,
-            'name' => $name,
-            'partialPayment' => $partialPayment,
-            'paymentLink' => $paymentLink,
-            'paymentMethods' => $paymentMethods,
-            'status' => $status,
-            'address' => $address,
-            'logo' => $logo,
-            'phoneNumber' => $phoneNumber,
-            'sendDate' => $sendDate,
-            'taxID' => $taxID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'currency' => $currency,
+                'customerID' => $customerID,
+                'delivery' => $delivery,
+                'dueDate' => $dueDate,
+                'email' => $email,
+                'items' => $items,
+                'name' => $name,
+                'partialPayment' => $partialPayment,
+                'paymentLink' => $paymentLink,
+                'paymentMethods' => $paymentMethods,
+                'status' => $status,
+                'address' => $address,
+                'logo' => $logo,
+                'phoneNumber' => $phoneNumber,
+                'sendDate' => $sendDate,
+                'taxID' => $taxID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -208,9 +209,7 @@ final class InvoicesService implements InvoicesContract
         ?float $take = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['skip' => $skip, 'take' => $take];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['skip' => $skip, 'take' => $take]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

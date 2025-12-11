@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\PaymentIntentsContract;
 use Devdraft\V0\PaymentIntents\BridgePaymentRail;
@@ -118,28 +119,28 @@ final class PaymentIntentsService implements PaymentIntentsContract
         ?string $wireMessage = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'destinationCurrency' => $destinationCurrency,
-            'destinationNetwork' => $destinationNetwork,
-            'sourceCurrency' => $sourceCurrency,
-            'sourcePaymentRail' => $sourcePaymentRail,
-            'achReference' => $achReference,
-            'amount' => $amount,
-            'customerAddress' => $customerAddress,
-            'customerCountry' => $customerCountry,
-            'customerCountryISO' => $customerCountryISO,
-            'customerEmail' => $customerEmail,
-            'customerFirstName' => $customerFirstName,
-            'customerLastName' => $customerLastName,
-            'customerProvince' => $customerProvince,
-            'customerProvinceISO' => $customerProvinceISO,
-            'destinationAddress' => $destinationAddress,
-            'phoneNumber' => $phoneNumber,
-            'sepaReference' => $sepaReference,
-            'wireMessage' => $wireMessage,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'destinationCurrency' => $destinationCurrency,
+                'destinationNetwork' => $destinationNetwork,
+                'sourceCurrency' => $sourceCurrency,
+                'sourcePaymentRail' => $sourcePaymentRail,
+                'achReference' => $achReference,
+                'amount' => $amount,
+                'customerAddress' => $customerAddress,
+                'customerCountry' => $customerCountry,
+                'customerCountryISO' => $customerCountryISO,
+                'customerEmail' => $customerEmail,
+                'customerFirstName' => $customerFirstName,
+                'customerLastName' => $customerLastName,
+                'customerProvince' => $customerProvince,
+                'customerProvinceISO' => $customerProvinceISO,
+                'destinationAddress' => $destinationAddress,
+                'phoneNumber' => $phoneNumber,
+                'sepaReference' => $sepaReference,
+                'wireMessage' => $wireMessage,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createBank(params: $params, requestOptions: $requestOptions);
@@ -217,25 +218,25 @@ final class PaymentIntentsService implements PaymentIntentsContract
         ?string $phoneNumber = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'destinationNetwork' => $destinationNetwork,
-            'sourceCurrency' => $sourceCurrency,
-            'sourceNetwork' => $sourceNetwork,
-            'amount' => $amount,
-            'customerAddress' => $customerAddress,
-            'customerCountry' => $customerCountry,
-            'customerCountryISO' => $customerCountryISO,
-            'customerEmail' => $customerEmail,
-            'customerFirstName' => $customerFirstName,
-            'customerLastName' => $customerLastName,
-            'customerProvince' => $customerProvince,
-            'customerProvinceISO' => $customerProvinceISO,
-            'destinationAddress' => $destinationAddress,
-            'destinationCurrency' => $destinationCurrency,
-            'phoneNumber' => $phoneNumber,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'destinationNetwork' => $destinationNetwork,
+                'sourceCurrency' => $sourceCurrency,
+                'sourceNetwork' => $sourceNetwork,
+                'amount' => $amount,
+                'customerAddress' => $customerAddress,
+                'customerCountry' => $customerCountry,
+                'customerCountryISO' => $customerCountryISO,
+                'customerEmail' => $customerEmail,
+                'customerFirstName' => $customerFirstName,
+                'customerLastName' => $customerLastName,
+                'customerProvince' => $customerProvince,
+                'customerProvinceISO' => $customerProvinceISO,
+                'destinationAddress' => $destinationAddress,
+                'destinationCurrency' => $destinationCurrency,
+                'phoneNumber' => $phoneNumber,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createStable(params: $params, requestOptions: $requestOptions);

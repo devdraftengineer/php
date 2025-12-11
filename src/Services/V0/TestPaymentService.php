@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TestPaymentContract;
 use Devdraft\V0\TestPayment\PaymentResponse;
@@ -116,14 +117,14 @@ final class TestPaymentService implements TestPaymentContract
         ?string $customerID = null,
         ?RequestOptions $requestOptions = null,
     ): PaymentResponse {
-        $params = [
-            'amount' => $amount,
-            'currency' => $currency,
-            'description' => $description,
-            'customerID' => $customerID,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'amount' => $amount,
+                'currency' => $currency,
+                'description' => $description,
+                'customerID' => $customerID,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->process(params: $params, requestOptions: $requestOptions);

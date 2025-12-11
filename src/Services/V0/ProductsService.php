@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\ProductsContract;
 use Devdraft\V0\Products\ProductCreateParams\Currency;
@@ -90,22 +91,22 @@ final class ProductsService implements ProductsContract
         ?float $weight = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'description' => $description,
-            'name' => $name,
-            'price' => $price,
-            'currency' => $currency,
-            'images' => $images,
-            'productType' => $productType,
-            'quantity' => $quantity,
-            'status' => $status,
-            'stockCount' => $stockCount,
-            'type' => $type,
-            'unit' => $unit,
-            'weight' => $weight,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'description' => $description,
+                'name' => $name,
+                'price' => $price,
+                'currency' => $currency,
+                'images' => $images,
+                'productType' => $productType,
+                'quantity' => $quantity,
+                'status' => $status,
+                'stockCount' => $stockCount,
+                'type' => $type,
+                'unit' => $unit,
+                'weight' => $weight,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -214,22 +215,22 @@ final class ProductsService implements ProductsContract
         ?float $weight = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'currency' => $currency,
-            'description' => $description,
-            'images' => $images,
-            'name' => $name,
-            'price' => $price,
-            'productType' => $productType,
-            'quantity' => $quantity,
-            'status' => $status,
-            'stockCount' => $stockCount,
-            'type' => $type,
-            'unit' => $unit,
-            'weight' => $weight,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'currency' => $currency,
+                'description' => $description,
+                'images' => $images,
+                'name' => $name,
+                'price' => $price,
+                'productType' => $productType,
+                'quantity' => $quantity,
+                'status' => $status,
+                'stockCount' => $stockCount,
+                'type' => $type,
+                'unit' => $unit,
+                'weight' => $weight,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -285,9 +286,7 @@ final class ProductsService implements ProductsContract
         ?float $take = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = ['skip' => $skip, 'take' => $take];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['skip' => $skip, 'take' => $take]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

@@ -6,6 +6,7 @@ namespace Devdraft\Services\V0;
 
 use Devdraft\Client;
 use Devdraft\Core\Exceptions\APIException;
+use Devdraft\Core\Util;
 use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TaxesContract;
 use Devdraft\V0\Taxes\TaxNewResponse;
@@ -71,15 +72,15 @@ final class TaxesService implements TaxesContract
         ?string $description = null,
         ?RequestOptions $requestOptions = null,
     ): TaxNewResponse {
-        $params = [
-            'name' => $name,
-            'percentage' => $percentage,
-            'active' => $active,
-            'appIDs' => $appIDs,
-            'description' => $description,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'name' => $name,
+                'percentage' => $percentage,
+                'active' => $active,
+                'appIDs' => $appIDs,
+                'description' => $description,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -180,15 +181,15 @@ final class TaxesService implements TaxesContract
         ?float $percentage = null,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'active' => $active,
-            'appIDs' => $appIDs,
-            'description' => $description,
-            'name' => $name,
-            'percentage' => $percentage,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'active' => $active,
+                'appIDs' => $appIDs,
+                'description' => $description,
+                'name' => $name,
+                'percentage' => $percentage,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
@@ -245,11 +246,9 @@ final class TaxesService implements TaxesContract
         float $take = 10,
         ?RequestOptions $requestOptions = null,
     ): mixed {
-        $params = [
-            'active' => $active, 'name' => $name, 'skip' => $skip, 'take' => $take,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['active' => $active, 'name' => $name, 'skip' => $skip, 'take' => $take]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
