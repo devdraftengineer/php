@@ -13,7 +13,7 @@ use Devdraft\V0\Balance\AggregatedBalance\Currency;
 /**
  * @phpstan-type AggregatedBalanceShape = array{
  *   balances: list<list<mixed>>,
- *   currency: value-of<Currency>,
+ *   currency: Currency|value-of<Currency>,
  *   totalBalance: string,
  * }
  */

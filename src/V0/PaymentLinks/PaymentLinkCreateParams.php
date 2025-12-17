@@ -18,6 +18,8 @@ use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\PaymentLinkProduct;
  *
  * @see Devdraft\Services\V0\PaymentLinksService::create()
  *
+ * @phpstan-import-type PaymentLinkProductShape from \Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\PaymentLinkProduct
+ *
  * @phpstan-type PaymentLinkCreateParamsShape = array{
  *   allowMobilePayment: bool,
  *   allowQuantityAdjustment: bool,
@@ -27,20 +29,18 @@ use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\PaymentLinkProduct;
  *   linkType: LinkType|value-of<LinkType>,
  *   title: string,
  *   url: string,
- *   amount?: float,
- *   coverImage?: string,
- *   customerID?: string,
+ *   amount?: float|null,
+ *   coverImage?: string|null,
+ *   customerID?: string|null,
  *   customFields?: mixed,
- *   description?: string,
- *   expirationDate?: \DateTimeInterface,
- *   isForAllProduct?: bool,
- *   limitPayments?: bool,
- *   maxPayments?: float,
- *   paymentForID?: string,
- *   paymentLinkProducts?: list<PaymentLinkProduct|array{
- *     productID: string, quantity: int
- *   }>,
- *   taxID?: string,
+ *   description?: string|null,
+ *   expirationDate?: \DateTimeInterface|null,
+ *   isForAllProduct?: bool|null,
+ *   limitPayments?: bool|null,
+ *   maxPayments?: float|null,
+ *   paymentForID?: string|null,
+ *   paymentLinkProducts?: list<PaymentLinkProductShape>|null,
+ *   taxID?: string|null,
  * }
  */
 final class PaymentLinkCreateParams implements BaseModel
@@ -218,9 +218,7 @@ final class PaymentLinkCreateParams implements BaseModel
      *
      * @param LinkType|value-of<LinkType> $linkType
      * @param Currency|value-of<Currency> $currency
-     * @param list<PaymentLinkProduct|array{
-     *   productID: string, quantity: int
-     * }> $paymentLinkProducts
+     * @param list<PaymentLinkProductShape> $paymentLinkProducts
      */
     public static function with(
         LinkType|string $linkType,
@@ -477,9 +475,7 @@ final class PaymentLinkCreateParams implements BaseModel
     /**
      * Array of products in the payment link.
      *
-     * @param list<PaymentLinkProduct|array{
-     *   productID: string, quantity: int
-     * }> $paymentLinkProducts
+     * @param list<PaymentLinkProductShape> $paymentLinkProducts
      */
     public function withPaymentLinkProducts(array $paymentLinkProducts): self
     {

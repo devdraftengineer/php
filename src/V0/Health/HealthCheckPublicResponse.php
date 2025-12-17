@@ -11,7 +11,9 @@ use Devdraft\V0\Health\HealthCheckPublicResponse\Status;
 
 /**
  * @phpstan-type HealthCheckPublicResponseShape = array{
- *   status: value-of<Status>, timestamp: \DateTimeInterface, version: string
+ *   status: Status|value-of<Status>,
+ *   timestamp: \DateTimeInterface,
+ *   version: string,
  * }
  */
 final class HealthCheckPublicResponse implements BaseModel

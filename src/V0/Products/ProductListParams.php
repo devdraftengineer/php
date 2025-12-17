@@ -47,7 +47,9 @@ use Devdraft\Core\Contracts\BaseModel;
  *
  * @see Devdraft\Services\V0\ProductsService::list()
  *
- * @phpstan-type ProductListParamsShape = array{skip?: float, take?: float}
+ * @phpstan-type ProductListParamsShape = array{
+ *   skip?: float|null, take?: float|null
+ * }
  */
 final class ProductListParams implements BaseModel
 {

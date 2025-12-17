@@ -7,11 +7,14 @@ namespace Devdraft\V0\Balance;
 use Devdraft\Core\Attributes\Required;
 use Devdraft\Core\Concerns\SdkModel;
 use Devdraft\Core\Contracts\BaseModel;
-use Devdraft\V0\Balance\AggregatedBalance\Currency;
 
 /**
+ * @phpstan-import-type AggregatedBalanceShape from \Devdraft\V0\Balance\AggregatedBalance
+ *
  * @phpstan-type BalanceGetAllStablecoinBalancesResponseShape = array{
- *   eurc: AggregatedBalance, totalUsdValue: string, usdc: AggregatedBalance
+ *   eurc: AggregatedBalance|AggregatedBalanceShape,
+ *   totalUsdValue: string,
+ *   usdc: AggregatedBalance|AggregatedBalanceShape,
  * }
  */
 final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
@@ -66,16 +69,8 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregatedBalance|array{
-     *   balances: list<list<mixed>>,
-     *   currency: value-of<Currency>,
-     *   totalBalance: string,
-     * } $eurc
-     * @param AggregatedBalance|array{
-     *   balances: list<list<mixed>>,
-     *   currency: value-of<Currency>,
-     *   totalBalance: string,
-     * } $usdc
+     * @param AggregatedBalanceShape $eurc
+     * @param AggregatedBalanceShape $usdc
      */
     public static function with(
         AggregatedBalance|array $eurc,
@@ -94,11 +89,7 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
     /**
      * EURC balance aggregation.
      *
-     * @param AggregatedBalance|array{
-     *   balances: list<list<mixed>>,
-     *   currency: value-of<Currency>,
-     *   totalBalance: string,
-     * } $eurc
+     * @param AggregatedBalanceShape $eurc
      */
     public function withEurc(AggregatedBalance|array $eurc): self
     {
@@ -122,11 +113,7 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
     /**
      * USDC balance aggregation.
      *
-     * @param AggregatedBalance|array{
-     *   balances: list<list<mixed>>,
-     *   currency: value-of<Currency>,
-     *   totalBalance: string,
-     * } $usdc
+     * @param AggregatedBalanceShape $usdc
      */
     public function withUsdc(AggregatedBalance|array $usdc): self
     {

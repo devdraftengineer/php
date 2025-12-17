@@ -14,7 +14,9 @@ use Devdraft\Core\Contracts\BaseModel;
  *
  * @see Devdraft\Services\V0\WebhooksService::list()
  *
- * @phpstan-type WebhookListParamsShape = array{skip?: float, take?: float}
+ * @phpstan-type WebhookListParamsShape = array{
+ *   skip?: float|null, take?: float|null
+ * }
  */
 final class WebhookListParams implements BaseModel
 {

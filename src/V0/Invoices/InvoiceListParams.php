@@ -14,7 +14,9 @@ use Devdraft\Core\Contracts\BaseModel;
  *
  * @see Devdraft\Services\V0\InvoicesService::list()
  *
- * @phpstan-type InvoiceListParamsShape = array{skip?: float, take?: float}
+ * @phpstan-type InvoiceListParamsShape = array{
+ *   skip?: float|null, take?: float|null
+ * }
  */
 final class InvoiceListParams implements BaseModel
 {

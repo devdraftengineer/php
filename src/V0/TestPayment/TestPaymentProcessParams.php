@@ -68,7 +68,7 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\TestPaymentService::process()
  *
  * @phpstan-type TestPaymentProcessParamsShape = array{
- *   amount: float, currency: string, description: string, customerID?: string
+ *   amount: float, currency: string, description: string, customerID?: string|null
  * }
  */
 final class TestPaymentProcessParams implements BaseModel

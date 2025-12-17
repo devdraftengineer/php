@@ -48,9 +48,9 @@ use Devdraft\Core\Contracts\BaseModel;
  *   firstName: string,
  *   lastName: string,
  *   phoneNumber: string,
- *   customerType?: CustomerType|value-of<CustomerType>,
- *   email?: string,
- *   status?: CustomerStatus|value-of<CustomerStatus>,
+ *   customerType?: null|CustomerType|value-of<CustomerType>,
+ *   email?: string|null,
+ *   status?: null|CustomerStatus|value-of<CustomerStatus>,
  * }
  */
 final class CustomerCreateParams implements BaseModel

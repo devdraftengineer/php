@@ -20,8 +20,8 @@ use Devdraft\Core\Contracts\BaseModel;
  *   destinationCurrency: string,
  *   sourceCurrency: string,
  *   sourceWalletID: string,
- *   amount?: float,
- *   blockchainMemo?: string,
+ *   amount?: float|null,
+ *   blockchainMemo?: string|null,
  * }
  */
 final class TransferCreateExternalStablecoinTransferParams implements BaseModel

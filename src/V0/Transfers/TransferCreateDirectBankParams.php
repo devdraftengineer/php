@@ -21,9 +21,9 @@ use Devdraft\Core\Contracts\BaseModel;
  *   paymentRail: string,
  *   sourceCurrency: string,
  *   walletID: string,
- *   achReference?: string,
- *   sepaReference?: string,
- *   wireMessage?: string,
+ *   achReference?: string|null,
+ *   sepaReference?: string|null,
+ *   wireMessage?: string|null,
  * }
  */
 final class TransferCreateDirectBankParams implements BaseModel

@@ -13,9 +13,9 @@ use Devdraft\V0\Health\HealthCheckResponse\Status;
 /**
  * @phpstan-type HealthCheckResponseShape = array{
  *   authenticated: bool,
- *   database: value-of<Database>,
+ *   database: Database|value-of<Database>,
  *   message: string,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  *   timestamp: \DateTimeInterface,
  *   version: string,
  * }

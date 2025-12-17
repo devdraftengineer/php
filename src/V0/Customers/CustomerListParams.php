@@ -55,11 +55,11 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\CustomersService::list()
  *
  * @phpstan-type CustomerListParamsShape = array{
- *   email?: string,
- *   name?: string,
- *   skip?: float,
- *   status?: CustomerStatus|value-of<CustomerStatus>,
- *   take?: float,
+ *   email?: string|null,
+ *   name?: string|null,
+ *   skip?: float|null,
+ *   status?: null|CustomerStatus|value-of<CustomerStatus>,
+ *   take?: float|null,
  * }
  */
 final class CustomerListParams implements BaseModel

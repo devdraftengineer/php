@@ -42,11 +42,11 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\TaxesService::update()
  *
  * @phpstan-type TaxUpdateParamsShape = array{
- *   active?: bool,
- *   appIDs?: list<string>,
- *   description?: string,
- *   name?: string,
- *   percentage?: float,
+ *   active?: bool|null,
+ *   appIDs?: list<string>|null,
+ *   description?: string|null,
+ *   name?: string|null,
+ *   percentage?: float|null,
  * }
  */
 final class TaxUpdateParams implements BaseModel

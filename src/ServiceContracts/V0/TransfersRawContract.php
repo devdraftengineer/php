@@ -18,7 +18,7 @@ interface TransfersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TransferCreateDirectBankParams $params
+     * @param array<string,mixed>|TransferCreateDirectBankParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -32,7 +32,7 @@ interface TransfersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TransferCreateDirectWalletParams $params
+     * @param array<string,mixed>|TransferCreateDirectWalletParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -46,7 +46,7 @@ interface TransfersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TransferCreateExternalBankTransferParams $params
+     * @param array<string,mixed>|TransferCreateExternalBankTransferParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -60,7 +60,7 @@ interface TransfersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TransferCreateExternalStablecoinTransferParams $params
+     * @param array<string,mixed>|TransferCreateExternalStablecoinTransferParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -74,7 +74,7 @@ interface TransfersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TransferCreateStablecoinConversionParams $params
+     * @param array<string,mixed>|TransferCreateStablecoinConversionParams $params
      *
      * @return BaseResponse<mixed>
      *
