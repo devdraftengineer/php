@@ -43,12 +43,12 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\CustomersService::update()
  *
  * @phpstan-type CustomerUpdateParamsShape = array{
- *   customerType?: CustomerType|value-of<CustomerType>,
- *   email?: string,
- *   firstName?: string,
- *   lastName?: string,
- *   phoneNumber?: string,
- *   status?: CustomerStatus|value-of<CustomerStatus>,
+ *   customerType?: null|CustomerType|value-of<CustomerType>,
+ *   email?: string|null,
+ *   firstName?: string|null,
+ *   lastName?: string|null,
+ *   phoneNumber?: string|null,
+ *   status?: null|CustomerStatus|value-of<CustomerStatus>,
  * }
  */
 final class CustomerUpdateParams implements BaseModel

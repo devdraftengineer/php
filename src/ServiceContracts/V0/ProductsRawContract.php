@@ -16,7 +16,7 @@ interface ProductsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ProductCreateParams $params
+     * @param array<string,mixed>|ProductCreateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -45,7 +45,7 @@ interface ProductsRawContract
      * @api
      *
      * @param string $id Product ID
-     * @param array<mixed>|ProductUpdateParams $params
+     * @param array<string,mixed>|ProductUpdateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -60,7 +60,7 @@ interface ProductsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ProductListParams $params
+     * @param array<string,mixed>|ProductListParams $params
      *
      * @return BaseResponse<mixed>
      *

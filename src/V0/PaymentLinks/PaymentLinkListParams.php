@@ -14,7 +14,9 @@ use Devdraft\Core\Contracts\BaseModel;
  *
  * @see Devdraft\Services\V0\PaymentLinksService::list()
  *
- * @phpstan-type PaymentLinkListParamsShape = array{skip?: string, take?: string}
+ * @phpstan-type PaymentLinkListParamsShape = array{
+ *   skip?: string|null, take?: string|null
+ * }
  */
 final class PaymentLinkListParams implements BaseModel
 {

@@ -16,7 +16,7 @@ interface InvoicesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InvoiceCreateParams $params
+     * @param array<string,mixed>|InvoiceCreateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -45,7 +45,7 @@ interface InvoicesRawContract
      * @api
      *
      * @param string $id Invoice ID
-     * @param array<mixed>|InvoiceUpdateParams $params
+     * @param array<string,mixed>|InvoiceUpdateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -60,7 +60,7 @@ interface InvoicesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|InvoiceListParams $params
+     * @param array<string,mixed>|InvoiceListParams $params
      *
      * @return BaseResponse<mixed>
      *

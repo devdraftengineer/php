@@ -38,18 +38,18 @@ use Devdraft\V0\Products\ProductUpdateParams\Currency;
  * @see Devdraft\Services\V0\ProductsService::update()
  *
  * @phpstan-type ProductUpdateParamsShape = array{
- *   currency?: Currency|value-of<Currency>,
- *   description?: string,
- *   images?: list<string>,
- *   name?: string,
- *   price?: float,
- *   productType?: string,
- *   quantity?: float,
- *   status?: string,
- *   stockCount?: float,
- *   type?: string,
- *   unit?: string,
- *   weight?: float,
+ *   currency?: null|Currency|value-of<Currency>,
+ *   description?: string|null,
+ *   images?: list<string>|null,
+ *   name?: string|null,
+ *   price?: float|null,
+ *   productType?: string|null,
+ *   quantity?: float|null,
+ *   status?: string|null,
+ *   stockCount?: float|null,
+ *   type?: string|null,
+ *   unit?: string|null,
+ *   weight?: float|null,
  * }
  */
 final class ProductUpdateParams implements BaseModel

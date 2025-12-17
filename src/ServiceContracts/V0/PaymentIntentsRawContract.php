@@ -15,7 +15,7 @@ interface PaymentIntentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PaymentIntentCreateBankParams $params
+     * @param array<string,mixed>|PaymentIntentCreateBankParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -29,7 +29,7 @@ interface PaymentIntentsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PaymentIntentCreateStableParams $params
+     * @param array<string,mixed>|PaymentIntentCreateStableParams $params
      *
      * @return BaseResponse<mixed>
      *

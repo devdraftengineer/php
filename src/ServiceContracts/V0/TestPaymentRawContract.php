@@ -30,7 +30,7 @@ interface TestPaymentRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TestPaymentProcessParams $params
+     * @param array<string,mixed>|TestPaymentProcessParams $params
      *
      * @return BaseResponse<PaymentResponse>
      *

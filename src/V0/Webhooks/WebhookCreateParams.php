@@ -20,7 +20,7 @@ use Devdraft\Core\Contracts\BaseModel;
  *   isActive: bool,
  *   name: string,
  *   url: string,
- *   signingSecret?: string,
+ *   signingSecret?: string|null,
  * }
  */
 final class WebhookCreateParams implements BaseModel

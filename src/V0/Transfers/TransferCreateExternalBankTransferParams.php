@@ -22,13 +22,13 @@ use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams\DestinationPa
  *   externalAccountID: string,
  *   sourceCurrency: string,
  *   sourceWalletID: string,
- *   achReference?: string,
- *   amount?: float,
- *   sepaReference?: string,
- *   speiReference?: string,
- *   swiftCharges?: string,
- *   swiftReference?: string,
- *   wireMessage?: string,
+ *   achReference?: string|null,
+ *   amount?: float|null,
+ *   sepaReference?: string|null,
+ *   speiReference?: string|null,
+ *   swiftCharges?: string|null,
+ *   swiftReference?: string|null,
+ *   wireMessage?: string|null,
  * }
  */
 final class TransferCreateExternalBankTransferParams implements BaseModel

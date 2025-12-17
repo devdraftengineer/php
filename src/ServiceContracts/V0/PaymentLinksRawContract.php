@@ -15,7 +15,7 @@ interface PaymentLinksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PaymentLinkCreateParams $params
+     * @param array<string,mixed>|PaymentLinkCreateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -57,7 +57,7 @@ interface PaymentLinksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PaymentLinkListParams $params
+     * @param array<string,mixed>|PaymentLinkListParams $params
      *
      * @return BaseResponse<mixed>
      *

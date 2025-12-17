@@ -15,18 +15,20 @@ use Devdraft\V0\Invoices\CreateInvoice\PaymentMethod;
 use Devdraft\V0\Invoices\CreateInvoice\Status;
 
 /**
+ * @phpstan-import-type ItemShape from \Devdraft\V0\Invoices\CreateInvoice\Item
+ *
  * @phpstan-type CreateInvoiceShape = array{
- *   currency: value-of<Currency>,
+ *   currency: Currency|value-of<Currency>,
  *   customerID: string,
- *   delivery: value-of<Delivery>,
+ *   delivery: Delivery|value-of<Delivery>,
  *   dueDate: \DateTimeInterface,
  *   email: string,
- *   items: list<Item>,
+ *   items: list<ItemShape>,
  *   name: string,
  *   partialPayment: bool,
  *   paymentLink: bool,
- *   paymentMethods: list<value-of<PaymentMethod>>,
- *   status: value-of<Status>,
+ *   paymentMethods: list<PaymentMethod|value-of<PaymentMethod>>,
+ *   status: Status|value-of<Status>,
  *   address?: string|null,
  *   logo?: string|null,
  *   phoneNumber?: string|null,
@@ -194,7 +196,7 @@ final class CreateInvoice implements BaseModel
      *
      * @param Currency|value-of<Currency> $currency
      * @param Delivery|value-of<Delivery> $delivery
-     * @param list<Item|array{productID: string, quantity: float}> $items
+     * @param list<ItemShape> $items
      * @param list<PaymentMethod|value-of<PaymentMethod>> $paymentMethods
      * @param Status|value-of<Status> $status
      */
@@ -301,7 +303,7 @@ final class CreateInvoice implements BaseModel
     /**
      * Array of products in the invoice.
      *
-     * @param list<Item|array{productID: string, quantity: float}> $items
+     * @param list<ItemShape> $items
      */
     public function withItems(array $items): self
     {

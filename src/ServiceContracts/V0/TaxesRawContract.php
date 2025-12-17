@@ -17,7 +17,7 @@ interface TaxesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TaxCreateParams $params
+     * @param array<string,mixed>|TaxCreateParams $params
      *
      * @return BaseResponse<TaxNewResponse>
      *
@@ -46,7 +46,7 @@ interface TaxesRawContract
      * @api
      *
      * @param string $id Tax unique identifier (UUID)
-     * @param array<mixed>|TaxUpdateParams $params
+     * @param array<string,mixed>|TaxUpdateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -61,7 +61,7 @@ interface TaxesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|TaxListParams $params
+     * @param array<string,mixed>|TaxListParams $params
      *
      * @return BaseResponse<mixed>
      *

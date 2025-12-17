@@ -16,7 +16,7 @@ interface CustomersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CustomerCreateParams $params
+     * @param array<string,mixed>|CustomerCreateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -45,7 +45,7 @@ interface CustomersRawContract
      * @api
      *
      * @param string $id Customer unique identifier (UUID)
-     * @param array<mixed>|CustomerUpdateParams $params
+     * @param array<string,mixed>|CustomerUpdateParams $params
      *
      * @return BaseResponse<mixed>
      *
@@ -60,7 +60,7 @@ interface CustomersRawContract
     /**
      * @api
      *
-     * @param array<mixed>|CustomerListParams $params
+     * @param array<string,mixed>|CustomerListParams $params
      *
      * @return BaseResponse<mixed>
      *

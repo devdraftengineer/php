@@ -20,23 +20,25 @@ use Devdraft\V0\Invoices\InvoiceUpdateParams\Status;
  *
  * @see Devdraft\Services\V0\InvoicesService::update()
  *
+ * @phpstan-import-type ItemShape from \Devdraft\V0\Invoices\InvoiceUpdateParams\Item
+ *
  * @phpstan-type InvoiceUpdateParamsShape = array{
  *   currency: Currency|value-of<Currency>,
  *   customerID: string,
  *   delivery: Delivery|value-of<Delivery>,
  *   dueDate: \DateTimeInterface,
  *   email: string,
- *   items: list<Item|array{productID: string, quantity: float}>,
+ *   items: list<ItemShape>,
  *   name: string,
  *   partialPayment: bool,
  *   paymentLink: bool,
  *   paymentMethods: list<PaymentMethod|value-of<PaymentMethod>>,
  *   status: Status|value-of<Status>,
- *   address?: string,
- *   logo?: string,
- *   phoneNumber?: string,
- *   sendDate?: \DateTimeInterface,
- *   taxID?: string,
+ *   address?: string|null,
+ *   logo?: string|null,
+ *   phoneNumber?: string|null,
+ *   sendDate?: \DateTimeInterface|null,
+ *   taxID?: string|null,
  * }
  */
 final class InvoiceUpdateParams implements BaseModel
@@ -200,7 +202,7 @@ final class InvoiceUpdateParams implements BaseModel
      *
      * @param Currency|value-of<Currency> $currency
      * @param Delivery|value-of<Delivery> $delivery
-     * @param list<Item|array{productID: string, quantity: float}> $items
+     * @param list<ItemShape> $items
      * @param list<PaymentMethod|value-of<PaymentMethod>> $paymentMethods
      * @param Status|value-of<Status> $status
      */
@@ -307,7 +309,7 @@ final class InvoiceUpdateParams implements BaseModel
     /**
      * Array of products in the invoice.
      *
-     * @param list<Item|array{productID: string, quantity: float}> $items
+     * @param list<ItemShape> $items
      */
     public function withItems(array $items): self
     {

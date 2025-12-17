@@ -43,9 +43,9 @@ use Devdraft\Core\Contracts\BaseModel;
  * @phpstan-type TaxCreateParamsShape = array{
  *   name: string,
  *   percentage: float,
- *   active?: bool,
- *   appIDs?: list<string>,
- *   description?: string,
+ *   active?: bool|null,
+ *   appIDs?: list<string>|null,
+ *   description?: string|null,
  * }
  */
 final class TaxCreateParams implements BaseModel

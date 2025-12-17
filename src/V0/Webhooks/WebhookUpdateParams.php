@@ -15,11 +15,11 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\WebhooksService::update()
  *
  * @phpstan-type WebhookUpdateParamsShape = array{
- *   encrypted?: bool,
- *   isActive?: bool,
- *   name?: string,
- *   signingSecret?: string,
- *   url?: string,
+ *   encrypted?: bool|null,
+ *   isActive?: bool|null,
+ *   name?: string|null,
+ *   signingSecret?: string|null,
+ *   url?: string|null,
  * }
  */
 final class WebhookUpdateParams implements BaseModel

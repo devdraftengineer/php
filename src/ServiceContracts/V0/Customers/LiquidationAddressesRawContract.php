@@ -17,7 +17,7 @@ interface LiquidationAddressesRawContract
      * @api
      *
      * @param string $customerID Unique identifier for the customer
-     * @param array<mixed>|LiquidationAddressCreateParams $params
+     * @param array<string,mixed>|LiquidationAddressCreateParams $params
      *
      * @return BaseResponse<LiquidationAddressResponse>
      *
@@ -33,7 +33,7 @@ interface LiquidationAddressesRawContract
      * @api
      *
      * @param string $liquidationAddressID Unique identifier for the liquidation address
-     * @param array<mixed>|LiquidationAddressRetrieveParams $params
+     * @param array<string,mixed>|LiquidationAddressRetrieveParams $params
      *
      * @return BaseResponse<LiquidationAddressResponse>
      *

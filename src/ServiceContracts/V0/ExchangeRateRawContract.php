@@ -26,7 +26,7 @@ interface ExchangeRateRawContract
     /**
      * @api
      *
-     * @param array<mixed>|ExchangeRateGetExchangeRateParams $params
+     * @param array<string,mixed>|ExchangeRateGetExchangeRateParams $params
      *
      * @return BaseResponse<ExchangeRateResponse>
      *

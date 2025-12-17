@@ -45,7 +45,7 @@ use Devdraft\Core\Contracts\BaseModel;
  * @see Devdraft\Services\V0\TaxesService::list()
  *
  * @phpstan-type TaxListParamsShape = array{
- *   active?: bool, name?: string, skip?: float, take?: float
+ *   active?: bool|null, name?: string|null, skip?: float|null, take?: float|null
  * }
  */
 final class TaxListParams implements BaseModel
