@@ -110,7 +110,7 @@ final class TaxCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $appIDs
+     * @param list<string>|null $appIDs
      */
     public static function with(
         string $name,

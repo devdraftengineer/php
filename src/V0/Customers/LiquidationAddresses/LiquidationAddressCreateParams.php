@@ -190,8 +190,8 @@ final class LiquidationAddressCreateParams implements BaseModel
      *
      * @param Chain|value-of<Chain> $chain
      * @param Currency|value-of<Currency> $currency
-     * @param DestinationCurrency|value-of<DestinationCurrency> $destinationCurrency
-     * @param BridgePaymentRail|value-of<BridgePaymentRail> $destinationPaymentRail
+     * @param DestinationCurrency|value-of<DestinationCurrency>|null $destinationCurrency
+     * @param BridgePaymentRail|value-of<BridgePaymentRail>|null $destinationPaymentRail
      */
     public static function with(
         string $address,

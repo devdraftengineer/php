@@ -167,8 +167,8 @@ final class ProductCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Currency|value-of<Currency> $currency
-     * @param list<string> $images
+     * @param Currency|value-of<Currency>|null $currency
+     * @param list<string>|null $images
      */
     public static function with(
         string $description,

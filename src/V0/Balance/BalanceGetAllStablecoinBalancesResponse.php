@@ -69,8 +69,8 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregatedBalanceShape $eurc
-     * @param AggregatedBalanceShape $usdc
+     * @param AggregatedBalance|AggregatedBalanceShape $eurc
+     * @param AggregatedBalance|AggregatedBalanceShape $usdc
      */
     public static function with(
         AggregatedBalance|array $eurc,
@@ -89,7 +89,7 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
     /**
      * EURC balance aggregation.
      *
-     * @param AggregatedBalanceShape $eurc
+     * @param AggregatedBalance|AggregatedBalanceShape $eurc
      */
     public function withEurc(AggregatedBalance|array $eurc): self
     {
@@ -113,7 +113,7 @@ final class BalanceGetAllStablecoinBalancesResponse implements BaseModel
     /**
      * USDC balance aggregation.
      *
-     * @param AggregatedBalanceShape $usdc
+     * @param AggregatedBalance|AggregatedBalanceShape $usdc
      */
     public function withUsdc(AggregatedBalance|array $usdc): self
     {
