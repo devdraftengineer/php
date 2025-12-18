@@ -198,7 +198,7 @@ final class PaymentIntentCreateStableParams implements BaseModel
      * @param BridgePaymentRail|value-of<BridgePaymentRail> $destinationNetwork
      * @param StableCoinCurrency|value-of<StableCoinCurrency> $sourceCurrency
      * @param BridgePaymentRail|value-of<BridgePaymentRail> $sourceNetwork
-     * @param StableCoinCurrency|value-of<StableCoinCurrency> $destinationCurrency
+     * @param StableCoinCurrency|value-of<StableCoinCurrency>|null $destinationCurrency
      */
     public static function with(
         BridgePaymentRail|string $destinationNetwork,

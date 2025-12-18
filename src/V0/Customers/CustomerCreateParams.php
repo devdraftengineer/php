@@ -126,8 +126,8 @@ final class CustomerCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CustomerType|value-of<CustomerType> $customerType
-     * @param CustomerStatus|value-of<CustomerStatus> $status
+     * @param CustomerType|value-of<CustomerType>|null $customerType
+     * @param CustomerStatus|value-of<CustomerStatus>|null $status
      */
     public static function with(
         string $firstName,

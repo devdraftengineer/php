@@ -218,7 +218,7 @@ final class PaymentLinkCreateParams implements BaseModel
      *
      * @param LinkType|value-of<LinkType> $linkType
      * @param Currency|value-of<Currency> $currency
-     * @param list<PaymentLinkProductShape> $paymentLinkProducts
+     * @param list<PaymentLinkProductShape>|null $paymentLinkProducts
      */
     public static function with(
         LinkType|string $linkType,
