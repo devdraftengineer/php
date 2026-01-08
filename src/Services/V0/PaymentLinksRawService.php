@@ -12,8 +12,13 @@ use Devdraft\ServiceContracts\V0\PaymentLinksRawContract;
 use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams;
 use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\Currency;
 use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\LinkType;
+use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\PaymentLinkProduct;
 use Devdraft\V0\PaymentLinks\PaymentLinkListParams;
 
+/**
+ * @phpstan-import-type PaymentLinkProductShape from \Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\PaymentLinkProduct
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class PaymentLinksRawService implements PaymentLinksRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,8 +37,8 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      *   allowQuantityAdjustment: bool,
      *   collectAddress: bool,
      *   collectTax: bool,
-     *   currency: 'usdc'|'eurc'|Currency,
-     *   linkType: 'INVOICE'|'PRODUCT'|'COLLECTION'|'DONATION'|LinkType,
+     *   currency: Currency|value-of<Currency>,
+     *   linkType: LinkType|value-of<LinkType>,
      *   title: string,
      *   url: string,
      *   amount?: float,
@@ -41,14 +46,15 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      *   customerID?: string,
      *   customFields?: mixed,
      *   description?: string,
-     *   expirationDate?: string|\DateTimeInterface,
+     *   expirationDate?: \DateTimeInterface,
      *   isForAllProduct?: bool,
      *   limitPayments?: bool,
      *   maxPayments?: float,
      *   paymentForID?: string,
-     *   paymentLinkProducts?: list<array{productID: string, quantity: int}>,
+     *   paymentLinkProducts?: list<PaymentLinkProduct|PaymentLinkProductShape>,
      *   taxID?: string,
      * }|PaymentLinkCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -56,7 +62,7 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      */
     public function create(
         array|PaymentLinkCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PaymentLinkCreateParams::parseRequest(
             $params,
@@ -79,6 +85,7 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      * Get a payment link by ID
      *
      * @param string $id Payment Link ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -86,7 +93,7 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -103,6 +110,7 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      * Update a payment link
      *
      * @param string $id Payment Link ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -110,7 +118,7 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      */
     public function update(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -127,6 +135,7 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      * Get all payment links
      *
      * @param array{skip?: string, take?: string}|PaymentLinkListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -134,7 +143,7 @@ final class PaymentLinksRawService implements PaymentLinksRawContract
      */
     public function list(
         array|PaymentLinkListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PaymentLinkListParams::parseRequest(
             $params,

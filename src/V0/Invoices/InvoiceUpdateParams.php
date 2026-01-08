@@ -28,7 +28,7 @@ use Devdraft\V0\Invoices\InvoiceUpdateParams\Status;
  *   delivery: Delivery|value-of<Delivery>,
  *   dueDate: \DateTimeInterface,
  *   email: string,
- *   items: list<ItemShape>,
+ *   items: list<Item|ItemShape>,
  *   name: string,
  *   partialPayment: bool,
  *   paymentLink: bool,
@@ -202,7 +202,7 @@ final class InvoiceUpdateParams implements BaseModel
      *
      * @param Currency|value-of<Currency> $currency
      * @param Delivery|value-of<Delivery> $delivery
-     * @param list<ItemShape> $items
+     * @param list<Item|ItemShape> $items
      * @param list<PaymentMethod|value-of<PaymentMethod>> $paymentMethods
      * @param Status|value-of<Status> $status
      */
@@ -309,7 +309,7 @@ final class InvoiceUpdateParams implements BaseModel
     /**
      * Array of products in the invoice.
      *
-     * @param list<ItemShape> $items
+     * @param list<Item|ItemShape> $items
      */
     public function withItems(array $items): self
     {

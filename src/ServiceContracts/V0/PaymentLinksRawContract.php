@@ -10,12 +10,16 @@ use Devdraft\RequestOptions;
 use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams;
 use Devdraft\V0\PaymentLinks\PaymentLinkListParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 interface PaymentLinksRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PaymentLinkCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -23,13 +27,14 @@ interface PaymentLinksRawContract
      */
     public function create(
         array|PaymentLinkCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Payment Link ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -37,13 +42,14 @@ interface PaymentLinksRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Payment Link ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -51,13 +57,14 @@ interface PaymentLinksRawContract
      */
     public function update(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PaymentLinkListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -65,6 +72,6 @@ interface PaymentLinksRawContract
      */
     public function list(
         array|PaymentLinkListParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

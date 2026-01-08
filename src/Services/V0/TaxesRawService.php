@@ -14,6 +14,9 @@ use Devdraft\V0\Taxes\TaxListParams;
 use Devdraft\V0\Taxes\TaxNewResponse;
 use Devdraft\V0\Taxes\TaxUpdateParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class TaxesRawService implements TaxesRawContract
 {
     // @phpstan-ignore-next-line
@@ -59,6 +62,7 @@ final class TaxesRawService implements TaxesRawContract
      *   appIDs?: list<string>,
      *   description?: string,
      * }|TaxCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TaxNewResponse>
      *
@@ -66,7 +70,7 @@ final class TaxesRawService implements TaxesRawContract
      */
     public function create(
         array|TaxCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TaxCreateParams::parseRequest(
             $params,
@@ -113,6 +117,7 @@ final class TaxesRawService implements TaxesRawContract
      * ```
      *
      * @param string $id Tax unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -120,7 +125,7 @@ final class TaxesRawService implements TaxesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -171,6 +176,7 @@ final class TaxesRawService implements TaxesRawContract
      *   name?: string,
      *   percentage?: float,
      * }|TaxUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -179,7 +185,7 @@ final class TaxesRawService implements TaxesRawContract
     public function update(
         string $id,
         array|TaxUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TaxUpdateParams::parseRequest(
             $params,
@@ -234,6 +240,7 @@ final class TaxesRawService implements TaxesRawContract
      * @param array{
      *   active?: bool, name?: string, skip?: float, take?: float
      * }|TaxListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -241,7 +248,7 @@ final class TaxesRawService implements TaxesRawContract
      */
     public function list(
         array|TaxListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TaxListParams::parseRequest(
             $params,
@@ -278,6 +285,7 @@ final class TaxesRawService implements TaxesRawContract
      * This action cannot be undone. Consider deactivating the tax instead of deleting it if it has been used in transactions.
      *
      * @param string $id Tax unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -285,7 +293,7 @@ final class TaxesRawService implements TaxesRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -301,12 +309,14 @@ final class TaxesRawService implements TaxesRawContract
      *
      * This endpoint requires a tax ID in the URL path. Use DELETE /api/v0/taxes/{id} instead.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function deleteAll(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -322,12 +332,14 @@ final class TaxesRawService implements TaxesRawContract
      *
      * This endpoint requires a tax ID in the URL path. Use PUT /api/v0/taxes/{id} instead.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function updateAll(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

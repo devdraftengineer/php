@@ -14,6 +14,9 @@ use Devdraft\V0\Products\ProductCreateParams\Currency;
 use Devdraft\V0\Products\ProductListParams;
 use Devdraft\V0\Products\ProductUpdateParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class ProductsRawService implements ProductsRawContract
 {
     // @phpstan-ignore-next-line
@@ -61,7 +64,7 @@ final class ProductsRawService implements ProductsRawContract
      *   description: string,
      *   name: string,
      *   price: float,
-     *   currency?: 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY'|Currency,
+     *   currency?: Currency|value-of<Currency>,
      *   images?: list<string>,
      *   productType?: string,
      *   quantity?: float,
@@ -71,6 +74,7 @@ final class ProductsRawService implements ProductsRawContract
      *   unit?: string,
      *   weight?: float,
      * }|ProductCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -78,7 +82,7 @@ final class ProductsRawService implements ProductsRawContract
      */
     public function create(
         array|ProductCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ProductCreateParams::parseRequest(
             $params,
@@ -125,6 +129,7 @@ final class ProductsRawService implements ProductsRawContract
      * ```
      *
      * @param string $id Product ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -132,7 +137,7 @@ final class ProductsRawService implements ProductsRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -172,7 +177,7 @@ final class ProductsRawService implements ProductsRawContract
      *
      * @param string $id Product ID
      * @param array{
-     *   currency?: 'USD'|'EUR'|'GBP'|'CAD'|'AUD'|'JPY'|ProductUpdateParams\Currency,
+     *   currency?: ProductUpdateParams\Currency|value-of<ProductUpdateParams\Currency>,
      *   description?: string,
      *   images?: list<string>,
      *   name?: string,
@@ -185,6 +190,7 @@ final class ProductsRawService implements ProductsRawContract
      *   unit?: string,
      *   weight?: float,
      * }|ProductUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -193,7 +199,7 @@ final class ProductsRawService implements ProductsRawContract
     public function update(
         string $id,
         array|ProductUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ProductUpdateParams::parseRequest(
             $params,
@@ -250,6 +256,7 @@ final class ProductsRawService implements ProductsRawContract
      * ```
      *
      * @param array{skip?: float, take?: float}|ProductListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -257,7 +264,7 @@ final class ProductsRawService implements ProductsRawContract
      */
     public function list(
         array|ProductListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ProductListParams::parseRequest(
             $params,
@@ -292,6 +299,7 @@ final class ProductsRawService implements ProductsRawContract
      * - Associated data will be removed
      *
      * @param string $id Product ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -299,7 +307,7 @@ final class ProductsRawService implements ProductsRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -340,6 +348,7 @@ final class ProductsRawService implements ProductsRawContract
      * - Images are automatically optimized and resized
      *
      * @param string $id Product ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -347,7 +356,7 @@ final class ProductsRawService implements ProductsRawContract
      */
     public function uploadImages(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

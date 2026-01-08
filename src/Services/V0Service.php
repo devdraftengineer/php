@@ -21,6 +21,9 @@ use Devdraft\Services\V0\TestPaymentService;
 use Devdraft\Services\V0\TransfersService;
 use Devdraft\Services\V0\WebhooksService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class V0Service implements V0Contract
 {
     /**
@@ -113,10 +116,13 @@ final class V0Service implements V0Contract
      *
      * Get wallets for an app
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
-    public function getWallets(?RequestOptions $requestOptions = null): mixed
-    {
+    public function getWallets(
+        RequestOptions|array|null $requestOptions = null
+    ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getWallets(requestOptions: $requestOptions);
 

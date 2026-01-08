@@ -11,6 +11,9 @@ use Devdraft\ServiceContracts\V0\HealthContract;
 use Devdraft\V0\Health\HealthCheckPublicResponse;
 use Devdraft\V0\Health\HealthCheckResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class HealthService implements HealthContract
 {
     /**
@@ -31,10 +34,12 @@ final class HealthService implements HealthContract
      *
      * Authenticated health check endpoint
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function check(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): HealthCheckResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->check(requestOptions: $requestOptions);
@@ -47,10 +52,12 @@ final class HealthService implements HealthContract
      *
      * Public health check endpoint
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function checkPublic(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): HealthCheckPublicResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->checkPublic(requestOptions: $requestOptions);

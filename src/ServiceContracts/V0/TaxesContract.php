@@ -8,6 +8,9 @@ use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\V0\Taxes\TaxNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 interface TaxesContract
 {
     /**
@@ -18,6 +21,7 @@ interface TaxesContract
      * @param bool $active whether this tax is currently active and can be applied
      * @param list<string> $appIDs Array of app IDs where this tax should be available. If not provided, tax will be available for the current app.
      * @param string $description optional description explaining what this tax covers
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -27,19 +31,20 @@ interface TaxesContract
         bool $active = true,
         ?array $appIDs = null,
         ?string $description = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TaxNewResponse;
 
     /**
      * @api
      *
      * @param string $id Tax unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
@@ -51,6 +56,7 @@ interface TaxesContract
      * @param string $description Detailed description of what this tax covers
      * @param string $name Tax name for identification and display purposes
      * @param float $percentage Tax rate as a percentage (0-100)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -61,7 +67,7 @@ interface TaxesContract
         ?string $description = null,
         ?string $name = null,
         ?float $percentage = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
@@ -71,6 +77,7 @@ interface TaxesContract
      * @param string $name Filter taxes by name (partial match, case-insensitive)
      * @param float $skip Number of records to skip for pagination
      * @param float $take Number of records to return (max 100)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -79,32 +86,41 @@ interface TaxesContract
         ?string $name = null,
         float $skip = 0,
         float $take = 10,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
      * @param string $id Tax unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
-    public function deleteAll(?RequestOptions $requestOptions = null): mixed;
+    public function deleteAll(
+        RequestOptions|array|null $requestOptions = null
+    ): mixed;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
-    public function updateAll(?RequestOptions $requestOptions = null): mixed;
+    public function updateAll(
+        RequestOptions|array|null $requestOptions = null
+    ): mixed;
 }

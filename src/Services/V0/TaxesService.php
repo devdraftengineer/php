@@ -11,6 +11,9 @@ use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\TaxesContract;
 use Devdraft\V0\Taxes\TaxNewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class TaxesService implements TaxesContract
 {
     /**
@@ -61,6 +64,7 @@ final class TaxesService implements TaxesContract
      * @param bool $active whether this tax is currently active and can be applied
      * @param list<string> $appIDs Array of app IDs where this tax should be available. If not provided, tax will be available for the current app.
      * @param string $description optional description explaining what this tax covers
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -70,7 +74,7 @@ final class TaxesService implements TaxesContract
         bool $active = true,
         ?array $appIDs = null,
         ?string $description = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TaxNewResponse {
         $params = Util::removeNulls(
             [
@@ -118,12 +122,13 @@ final class TaxesService implements TaxesContract
      * ```
      *
      * @param string $id Tax unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -169,6 +174,7 @@ final class TaxesService implements TaxesContract
      * @param string $description Detailed description of what this tax covers
      * @param string $name Tax name for identification and display purposes
      * @param float $percentage Tax rate as a percentage (0-100)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -179,7 +185,7 @@ final class TaxesService implements TaxesContract
         ?string $description = null,
         ?string $name = null,
         ?float $percentage = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(
             [
@@ -236,6 +242,7 @@ final class TaxesService implements TaxesContract
      * @param string $name Filter taxes by name (partial match, case-insensitive)
      * @param float $skip Number of records to skip for pagination
      * @param float $take Number of records to return (max 100)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -244,7 +251,7 @@ final class TaxesService implements TaxesContract
         ?string $name = null,
         float $skip = 0,
         float $take = 10,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(
             ['active' => $active, 'name' => $name, 'skip' => $skip, 'take' => $take]
@@ -276,12 +283,13 @@ final class TaxesService implements TaxesContract
      * This action cannot be undone. Consider deactivating the tax instead of deleting it if it has been used in transactions.
      *
      * @param string $id Tax unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
@@ -294,10 +302,13 @@ final class TaxesService implements TaxesContract
      *
      * This endpoint requires a tax ID in the URL path. Use DELETE /api/v0/taxes/{id} instead.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
-    public function deleteAll(?RequestOptions $requestOptions = null): mixed
-    {
+    public function deleteAll(
+        RequestOptions|array|null $requestOptions = null
+    ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->deleteAll(requestOptions: $requestOptions);
 
@@ -309,10 +320,13 @@ final class TaxesService implements TaxesContract
      *
      * This endpoint requires a tax ID in the URL path. Use PUT /api/v0/taxes/{id} instead.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
-    public function updateAll(?RequestOptions $requestOptions = null): mixed
-    {
+    public function updateAll(
+        RequestOptions|array|null $requestOptions = null
+    ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->updateAll(requestOptions: $requestOptions);
 

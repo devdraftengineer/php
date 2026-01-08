@@ -11,6 +11,9 @@ use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\WebhooksContract;
 use Devdraft\V0\Webhooks\WebhookResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class WebhooksService implements WebhooksContract
 {
     /**
@@ -36,6 +39,7 @@ final class WebhooksService implements WebhooksContract
      * @param bool $encrypted Whether webhook payloads should be encrypted
      * @param bool $isActive Whether the webhook is active and will receive events
      * @param string $signingSecret Secret key used to sign webhook payloads for verification
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -45,7 +49,7 @@ final class WebhooksService implements WebhooksContract
         bool $encrypted = false,
         bool $isActive = true,
         ?string $signingSecret = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): WebhookResponse {
         $params = Util::removeNulls(
             [
@@ -69,12 +73,13 @@ final class WebhooksService implements WebhooksContract
      * Retrieves details for a specific webhook. Requires webhook:read scope.
      *
      * @param string $id Webhook unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WebhookResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -93,6 +98,7 @@ final class WebhooksService implements WebhooksContract
      * @param string $name Name of the webhook for identification purposes
      * @param string $signingSecret Secret key used to sign webhook payloads for verification
      * @param string $url URL where webhook events will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -103,7 +109,7 @@ final class WebhooksService implements WebhooksContract
         ?string $name = null,
         ?string $signingSecret = null,
         ?string $url = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): WebhookResponse {
         $params = Util::removeNulls(
             [
@@ -128,6 +134,7 @@ final class WebhooksService implements WebhooksContract
      *
      * @param float $skip Number of records to skip (default: 0)
      * @param float $take Number of records to return (default: 10)
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<WebhookResponse>
      *
@@ -136,7 +143,7 @@ final class WebhooksService implements WebhooksContract
     public function list(
         ?float $skip = null,
         ?float $take = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array {
         $params = Util::removeNulls(['skip' => $skip, 'take' => $take]);
 
@@ -152,12 +159,13 @@ final class WebhooksService implements WebhooksContract
      * Deletes a webhook configuration. Requires webhook:delete scope.
      *
      * @param string $id Webhook unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WebhookResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);

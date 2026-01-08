@@ -10,38 +10,47 @@ use Devdraft\RequestOptions;
 use Devdraft\V0\Balance\AggregatedBalance;
 use Devdraft\V0\Balance\BalanceGetAllStablecoinBalancesResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 interface BalanceRawContract
 {
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BalanceGetAllStablecoinBalancesResponse>
      *
      * @throws APIException
      */
     public function getAllStablecoinBalances(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AggregatedBalance>
      *
      * @throws APIException
      */
     public function getEurc(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
+     *
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AggregatedBalance>
      *
      * @throws APIException
      */
     public function getUsdc(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

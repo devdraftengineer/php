@@ -12,11 +12,17 @@ use Devdraft\ServiceContracts\V0\InvoicesRawContract;
 use Devdraft\V0\Invoices\InvoiceCreateParams;
 use Devdraft\V0\Invoices\InvoiceCreateParams\Currency;
 use Devdraft\V0\Invoices\InvoiceCreateParams\Delivery;
+use Devdraft\V0\Invoices\InvoiceCreateParams\Item;
 use Devdraft\V0\Invoices\InvoiceCreateParams\PaymentMethod;
 use Devdraft\V0\Invoices\InvoiceCreateParams\Status;
 use Devdraft\V0\Invoices\InvoiceListParams;
 use Devdraft\V0\Invoices\InvoiceUpdateParams;
 
+/**
+ * @phpstan-import-type ItemShape from \Devdraft\V0\Invoices\InvoiceCreateParams\Item
+ * @phpstan-import-type ItemShape from \Devdraft\V0\Invoices\InvoiceUpdateParams\Item as ItemShape1
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class InvoicesRawService implements InvoicesRawContract
 {
     // @phpstan-ignore-next-line
@@ -31,23 +37,24 @@ final class InvoicesRawService implements InvoicesRawContract
      * Create a new invoice
      *
      * @param array{
-     *   currency: 'usdc'|'eurc'|Currency,
+     *   currency: Currency|value-of<Currency>,
      *   customerID: string,
-     *   delivery: 'EMAIL'|'MANUALLY'|Delivery,
-     *   dueDate: string|\DateTimeInterface,
+     *   delivery: Delivery|value-of<Delivery>,
+     *   dueDate: \DateTimeInterface,
      *   email: string,
-     *   items: list<array{productID: string, quantity: float}>,
+     *   items: list<Item|ItemShape>,
      *   name: string,
      *   partialPayment: bool,
      *   paymentLink: bool,
-     *   paymentMethods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|PaymentMethod>,
-     *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|Status,
+     *   paymentMethods: list<PaymentMethod|value-of<PaymentMethod>>,
+     *   status: Status|value-of<Status>,
      *   address?: string,
      *   logo?: string,
      *   phoneNumber?: string,
-     *   sendDate?: string|\DateTimeInterface,
+     *   sendDate?: \DateTimeInterface,
      *   taxID?: string,
      * }|InvoiceCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -55,7 +62,7 @@ final class InvoicesRawService implements InvoicesRawContract
      */
     public function create(
         array|InvoiceCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InvoiceCreateParams::parseRequest(
             $params,
@@ -78,6 +85,7 @@ final class InvoicesRawService implements InvoicesRawContract
      * Get an invoice by ID
      *
      * @param string $id Invoice ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -85,7 +93,7 @@ final class InvoicesRawService implements InvoicesRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -103,23 +111,24 @@ final class InvoicesRawService implements InvoicesRawContract
      *
      * @param string $id Invoice ID
      * @param array{
-     *   currency: 'usdc'|'eurc'|InvoiceUpdateParams\Currency,
+     *   currency: InvoiceUpdateParams\Currency|value-of<InvoiceUpdateParams\Currency>,
      *   customerID: string,
-     *   delivery: 'EMAIL'|'MANUALLY'|InvoiceUpdateParams\Delivery,
-     *   dueDate: string|\DateTimeInterface,
+     *   delivery: InvoiceUpdateParams\Delivery|value-of<InvoiceUpdateParams\Delivery>,
+     *   dueDate: \DateTimeInterface,
      *   email: string,
-     *   items: list<array{productID: string, quantity: float}>,
+     *   items: list<InvoiceUpdateParams\Item|ItemShape1>,
      *   name: string,
      *   partialPayment: bool,
      *   paymentLink: bool,
-     *   paymentMethods: list<'ACH'|'BANK_TRANSFER'|'CREDIT_CARD'|'CASH'|'MOBILE_MONEY'|'CRYPTO'|InvoiceUpdateParams\PaymentMethod>,
-     *   status: 'DRAFT'|'OPEN'|'PASTDUE'|'PAID'|'PARTIALLYPAID'|InvoiceUpdateParams\Status,
+     *   paymentMethods: list<InvoiceUpdateParams\PaymentMethod|value-of<InvoiceUpdateParams\PaymentMethod>>,
+     *   status: InvoiceUpdateParams\Status|value-of<InvoiceUpdateParams\Status>,
      *   address?: string,
      *   logo?: string,
      *   phoneNumber?: string,
-     *   sendDate?: string|\DateTimeInterface,
+     *   sendDate?: \DateTimeInterface,
      *   taxID?: string,
      * }|InvoiceUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -128,7 +137,7 @@ final class InvoicesRawService implements InvoicesRawContract
     public function update(
         string $id,
         array|InvoiceUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InvoiceUpdateParams::parseRequest(
             $params,
@@ -151,6 +160,7 @@ final class InvoicesRawService implements InvoicesRawContract
      * Get all invoices
      *
      * @param array{skip?: float, take?: float}|InvoiceListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -158,7 +168,7 @@ final class InvoicesRawService implements InvoicesRawContract
      */
     public function list(
         array|InvoiceListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = InvoiceListParams::parseRequest(
             $params,

@@ -15,6 +15,9 @@ use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams\De
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressResponse;
 use Devdraft\V0\PaymentIntents\BridgePaymentRail;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class LiquidationAddressesService implements LiquidationAddressesContract
 {
     /**
@@ -35,41 +38,42 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      *
      * @param string $customerID Unique identifier for the customer
      * @param string $address The liquidation address on the blockchain
-     * @param 'ethereum'|'solana'|'polygon'|'avalanche_c_chain'|'base'|'arbitrum'|'optimism'|'stellar'|'tron'|Chain $chain The blockchain chain for the liquidation address
-     * @param 'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|Currency $currency The currency for the liquidation address
+     * @param Chain|value-of<Chain> $chain The blockchain chain for the liquidation address
+     * @param Currency|value-of<Currency> $currency The currency for the liquidation address
      * @param string $bridgeWalletID Bridge Wallet to send funds to
      * @param string $customDeveloperFeePercent Custom developer fee percentage (Base 100 percentage: 10.2% = "10.2")
      * @param string $destinationACHReference Reference for ACH transactions
      * @param string $destinationAddress Crypto wallet address for crypto transfers
      * @param string $destinationBlockchainMemo Memo for blockchain transactions
-     * @param 'usd'|'eur'|'mxn'|'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|DestinationCurrency $destinationCurrency Currency for sending funds
-     * @param 'ethereum'|'solana'|'polygon'|'avalanche_c_chain'|'base'|'arbitrum'|'optimism'|'stellar'|'tron'|'bridge_wallet'|'wire'|'ach'|'ach_push'|'ach_same_day'|'sepa'|'swift'|'spei'|BridgePaymentRail $destinationPaymentRail The blockchain network where the source currency resides. Determines gas fees and transaction speed.
+     * @param DestinationCurrency|value-of<DestinationCurrency> $destinationCurrency Currency for sending funds
+     * @param BridgePaymentRail|value-of<BridgePaymentRail> $destinationPaymentRail The blockchain network where the source currency resides. Determines gas fees and transaction speed.
      * @param string $destinationSepaReference Reference for SEPA transactions
      * @param string $destinationWireMessage Message for wire transfers
      * @param string $externalAccountID External bank account to send funds to
      * @param string $prefundedAccountID Developer's prefunded account id
      * @param string $returnAddress Address to return funds on failed transactions (Not supported on Stellar)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $customerID,
         string $address,
-        string|Chain $chain,
-        string|Currency $currency,
+        Chain|string $chain,
+        Currency|string $currency,
         ?string $bridgeWalletID = null,
         ?string $customDeveloperFeePercent = null,
         ?string $destinationACHReference = null,
         ?string $destinationAddress = null,
         ?string $destinationBlockchainMemo = null,
-        string|DestinationCurrency $destinationCurrency = 'usd',
-        string|BridgePaymentRail|null $destinationPaymentRail = null,
+        DestinationCurrency|string $destinationCurrency = 'usd',
+        BridgePaymentRail|string|null $destinationPaymentRail = null,
         ?string $destinationSepaReference = null,
         ?string $destinationWireMessage = null,
         ?string $externalAccountID = null,
         ?string $prefundedAccountID = null,
         ?string $returnAddress = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): LiquidationAddressResponse {
         $params = Util::removeNulls(
             [
@@ -104,13 +108,14 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      *
      * @param string $liquidationAddressID Unique identifier for the liquidation address
      * @param string $customerID Unique identifier for the customer
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $liquidationAddressID,
         string $customerID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): LiquidationAddressResponse {
         $params = Util::removeNulls(['customerID' => $customerID]);
 
@@ -126,6 +131,7 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      * Retrieve all liquidation addresses associated with a specific customer.
      *
      * @param string $customerID Unique identifier for the customer
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<LiquidationAddressResponse>
      *
@@ -133,7 +139,7 @@ final class LiquidationAddressesService implements LiquidationAddressesContract
      */
     public function list(
         string $customerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): array {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($customerID, requestOptions: $requestOptions);

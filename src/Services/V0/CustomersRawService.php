@@ -15,6 +15,9 @@ use Devdraft\V0\Customers\CustomerStatus;
 use Devdraft\V0\Customers\CustomerType;
 use Devdraft\V0\Customers\CustomerUpdateParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class CustomersRawService implements CustomersRawContract
 {
     // @phpstan-ignore-next-line
@@ -63,8 +66,9 @@ final class CustomersRawService implements CustomersRawContract
      *   phoneNumber: string,
      *   customerType?: value-of<CustomerType>,
      *   email?: string,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
+     *   status?: CustomerStatus|value-of<CustomerStatus>,
      * }|CustomerCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -72,7 +76,7 @@ final class CustomersRawService implements CustomersRawContract
      */
     public function create(
         array|CustomerCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CustomerCreateParams::parseRequest(
             $params,
@@ -125,6 +129,7 @@ final class CustomersRawService implements CustomersRawContract
      * ```
      *
      * @param string $id Customer unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -132,7 +137,7 @@ final class CustomersRawService implements CustomersRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -183,8 +188,9 @@ final class CustomersRawService implements CustomersRawContract
      *   firstName?: string,
      *   lastName?: string,
      *   phoneNumber?: string,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
+     *   status?: CustomerStatus|value-of<CustomerStatus>,
      * }|CustomerUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -193,7 +199,7 @@ final class CustomersRawService implements CustomersRawContract
     public function update(
         string $id,
         array|CustomerUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CustomerUpdateParams::parseRequest(
             $params,
@@ -259,9 +265,10 @@ final class CustomersRawService implements CustomersRawContract
      *   email?: string,
      *   name?: string,
      *   skip?: float,
-     *   status?: 'ACTIVE'|'BLACKLISTED'|'DEACTIVATED'|'DELETED'|CustomerStatus,
+     *   status?: CustomerStatus|value-of<CustomerStatus>,
      *   take?: float,
      * }|CustomerListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -269,7 +276,7 @@ final class CustomersRawService implements CustomersRawContract
      */
     public function list(
         array|CustomerListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = CustomerListParams::parseRequest(
             $params,

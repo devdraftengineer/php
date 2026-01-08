@@ -8,6 +8,9 @@ use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams\DestinationPaymentRail;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 interface TransfersContract
 {
     /**
@@ -21,6 +24,7 @@ interface TransfersContract
      * @param string $achReference ACH transfer reference
      * @param string $sepaReference SEPA transfer reference
      * @param string $wireMessage Wire transfer message
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -33,7 +37,7 @@ interface TransfersContract
         ?string $achReference = null,
         ?string $sepaReference = null,
         ?string $wireMessage = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
@@ -43,6 +47,7 @@ interface TransfersContract
      * @param string $network The network to use for the transfer
      * @param string $stableCoinCurrency The stablecoin currency to use
      * @param string $walletID The ID of the bridge wallet to transfer from
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -51,14 +56,14 @@ interface TransfersContract
         string $network,
         string $stableCoinCurrency,
         string $walletID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
      * @param string $destinationCurrency The destination currency
-     * @param 'ach'|'ach_push'|'ach_same_day'|'wire'|'sepa'|'swift'|'spei'|DestinationPaymentRail $destinationPaymentRail The destination payment rail (fiat payment method)
+     * @param DestinationPaymentRail|value-of<DestinationPaymentRail> $destinationPaymentRail The destination payment rail (fiat payment method)
      * @param string $externalAccountID The external account ID for the bank transfer
      * @param string $sourceCurrency The source currency
      * @param string $sourceWalletID The ID of the source bridge wallet
@@ -69,12 +74,13 @@ interface TransfersContract
      * @param string $swiftCharges SWIFT charges bearer (only for SWIFT transfers)
      * @param string $swiftReference SWIFT reference message (1-190 characters, only for SWIFT transfers)
      * @param string $wireMessage Wire transfer message (1-256 characters, only for wire transfers)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createExternalBankTransfer(
         string $destinationCurrency,
-        string|DestinationPaymentRail $destinationPaymentRail,
+        DestinationPaymentRail|string $destinationPaymentRail,
         string $externalAccountID,
         string $sourceCurrency,
         string $sourceWalletID,
@@ -85,7 +91,7 @@ interface TransfersContract
         ?string $swiftCharges = null,
         ?string $swiftReference = null,
         ?string $wireMessage = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
@@ -97,6 +103,7 @@ interface TransfersContract
      * @param string $sourceWalletID The ID of the source bridge wallet
      * @param float $amount The amount to transfer
      * @param string $blockchainMemo Blockchain memo for the transfer
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -107,7 +114,7 @@ interface TransfersContract
         string $sourceWalletID,
         ?float $amount = null,
         ?string $blockchainMemo = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
@@ -118,6 +125,7 @@ interface TransfersContract
      * @param string $sourceCurrency The source currency
      * @param string $sourceNetwork The source network
      * @param string $walletID The ID of the bridge wallet to use
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -127,6 +135,6 @@ interface TransfersContract
         string $sourceCurrency,
         string $sourceNetwork,
         string $walletID,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 }

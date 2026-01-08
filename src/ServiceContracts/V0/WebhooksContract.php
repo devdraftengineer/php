@@ -8,6 +8,9 @@ use Devdraft\Core\Exceptions\APIException;
 use Devdraft\RequestOptions;
 use Devdraft\V0\Webhooks\WebhookResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 interface WebhooksContract
 {
     /**
@@ -18,6 +21,7 @@ interface WebhooksContract
      * @param bool $encrypted Whether webhook payloads should be encrypted
      * @param bool $isActive Whether the webhook is active and will receive events
      * @param string $signingSecret Secret key used to sign webhook payloads for verification
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -27,19 +31,20 @@ interface WebhooksContract
         bool $encrypted = false,
         bool $isActive = true,
         ?string $signingSecret = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): WebhookResponse;
 
     /**
      * @api
      *
      * @param string $id Webhook unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WebhookResponse;
 
     /**
@@ -51,6 +56,7 @@ interface WebhooksContract
      * @param string $name Name of the webhook for identification purposes
      * @param string $signingSecret Secret key used to sign webhook payloads for verification
      * @param string $url URL where webhook events will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -61,7 +67,7 @@ interface WebhooksContract
         ?string $name = null,
         ?string $signingSecret = null,
         ?string $url = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): WebhookResponse;
 
     /**
@@ -69,6 +75,7 @@ interface WebhooksContract
      *
      * @param float $skip Number of records to skip (default: 0)
      * @param float $take Number of records to return (default: 10)
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<WebhookResponse>
      *
@@ -77,18 +84,19 @@ interface WebhooksContract
     public function list(
         ?float $skip = null,
         ?float $take = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 
     /**
      * @api
      *
      * @param string $id Webhook unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WebhookResponse;
 }

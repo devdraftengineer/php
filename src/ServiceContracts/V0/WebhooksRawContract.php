@@ -12,12 +12,16 @@ use Devdraft\V0\Webhooks\WebhookListParams;
 use Devdraft\V0\Webhooks\WebhookResponse;
 use Devdraft\V0\Webhooks\WebhookUpdateParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 interface WebhooksRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|WebhookCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookResponse>
      *
@@ -25,13 +29,14 @@ interface WebhooksRawContract
      */
     public function create(
         array|WebhookCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Webhook unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookResponse>
      *
@@ -39,7 +44,7 @@ interface WebhooksRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -47,6 +52,7 @@ interface WebhooksRawContract
      *
      * @param string $id Webhook unique identifier (UUID)
      * @param array<string,mixed>|WebhookUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookResponse>
      *
@@ -55,13 +61,14 @@ interface WebhooksRawContract
     public function update(
         string $id,
         array|WebhookUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|WebhookListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<WebhookResponse>>
      *
@@ -69,13 +76,14 @@ interface WebhooksRawContract
      */
     public function list(
         array|WebhookListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $id Webhook unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookResponse>
      *
@@ -83,6 +91,6 @@ interface WebhooksRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

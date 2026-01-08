@@ -13,6 +13,9 @@ use Devdraft\V0\PaymentIntents\BridgePaymentRail;
 use Devdraft\V0\PaymentIntents\PaymentIntentCreateBankParams\SourceCurrency;
 use Devdraft\V0\PaymentIntents\StableCoinCurrency;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class PaymentIntentsService implements PaymentIntentsContract
 {
     /**
@@ -77,10 +80,10 @@ final class PaymentIntentsService implements PaymentIntentsContract
      * ## Idempotency
      * Include an `idempotency-key` header with a unique UUID v4 to prevent duplicate payments. Subsequent requests with the same key will return the original response.
      *
-     * @param 'usdc'|'eurc'|StableCoinCurrency $destinationCurrency The stablecoin currency to convert FROM. This is the currency the customer will pay with.
-     * @param 'ethereum'|'solana'|'polygon'|'avalanche_c_chain'|'base'|'arbitrum'|'optimism'|'stellar'|'tron'|'bridge_wallet'|'wire'|'ach'|'ach_push'|'ach_same_day'|'sepa'|'swift'|'spei'|BridgePaymentRail $destinationNetwork The blockchain network where the source currency resides. Determines gas fees and transaction speed.
-     * @param 'ethereum'|'solana'|'polygon'|'avalanche_c_chain'|'base'|'arbitrum'|'optimism'|'stellar'|'tron'|'bridge_wallet'|'wire'|'ach'|'ach_push'|'ach_same_day'|'sepa'|'swift'|'spei'|BridgePaymentRail $sourcePaymentRail The blockchain network where the source currency resides. Determines gas fees and transaction speed.
-     * @param 'usd'|'eur'|'mxn'|SourceCurrency $sourceCurrency The fiat currency to convert FROM. Must match the currency of the source payment rail.
+     * @param StableCoinCurrency|value-of<StableCoinCurrency> $destinationCurrency The stablecoin currency to convert FROM. This is the currency the customer will pay with.
+     * @param BridgePaymentRail|value-of<BridgePaymentRail> $destinationNetwork The blockchain network where the source currency resides. Determines gas fees and transaction speed.
+     * @param BridgePaymentRail|value-of<BridgePaymentRail> $sourcePaymentRail The blockchain network where the source currency resides. Determines gas fees and transaction speed.
+     * @param SourceCurrency|value-of<SourceCurrency> $sourceCurrency The fiat currency to convert FROM. Must match the currency of the source payment rail.
      * @param string $achReference ACH reference (for ACH transfers)
      * @param string $amount Payment amount (optional for flexible amount)
      * @param string $customerAddress Customer address
@@ -95,14 +98,15 @@ final class PaymentIntentsService implements PaymentIntentsContract
      * @param string $phoneNumber Customer phone number
      * @param string $sepaReference SEPA reference (for SEPA transfers)
      * @param string $wireMessage Wire transfer message (for WIRE transfers)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createBank(
-        string|StableCoinCurrency $destinationCurrency,
-        string|BridgePaymentRail $destinationNetwork,
-        string|BridgePaymentRail $sourcePaymentRail,
-        string|SourceCurrency $sourceCurrency = 'usd',
+        StableCoinCurrency|string $destinationCurrency,
+        BridgePaymentRail|string $destinationNetwork,
+        BridgePaymentRail|string $sourcePaymentRail,
+        SourceCurrency|string $sourceCurrency = 'usd',
         ?string $achReference = null,
         ?string $amount = null,
         ?string $customerAddress = null,
@@ -117,7 +121,7 @@ final class PaymentIntentsService implements PaymentIntentsContract
         ?string $phoneNumber = null,
         ?string $sepaReference = null,
         ?string $wireMessage = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(
             [
@@ -182,9 +186,9 @@ final class PaymentIntentsService implements PaymentIntentsContract
      * ## Idempotency
      * Include an `idempotency-key` header with a unique UUID v4 to prevent duplicate payments. Subsequent requests with the same key will return the original response.
      *
-     * @param 'ethereum'|'solana'|'polygon'|'avalanche_c_chain'|'base'|'arbitrum'|'optimism'|'stellar'|'tron'|'bridge_wallet'|'wire'|'ach'|'ach_push'|'ach_same_day'|'sepa'|'swift'|'spei'|BridgePaymentRail $destinationNetwork The blockchain network where the source currency resides. Determines gas fees and transaction speed.
-     * @param 'usdc'|'eurc'|StableCoinCurrency $sourceCurrency The stablecoin currency to convert FROM. This is the currency the customer will pay with.
-     * @param 'ethereum'|'solana'|'polygon'|'avalanche_c_chain'|'base'|'arbitrum'|'optimism'|'stellar'|'tron'|'bridge_wallet'|'wire'|'ach'|'ach_push'|'ach_same_day'|'sepa'|'swift'|'spei'|BridgePaymentRail $sourceNetwork The blockchain network where the source currency resides. Determines gas fees and transaction speed.
+     * @param BridgePaymentRail|value-of<BridgePaymentRail> $destinationNetwork The blockchain network where the source currency resides. Determines gas fees and transaction speed.
+     * @param StableCoinCurrency|value-of<StableCoinCurrency> $sourceCurrency The stablecoin currency to convert FROM. This is the currency the customer will pay with.
+     * @param BridgePaymentRail|value-of<BridgePaymentRail> $sourceNetwork The blockchain network where the source currency resides. Determines gas fees and transaction speed.
      * @param string $amount Payment amount in the source currency. Omit for flexible amount payments where users specify the amount during checkout.
      * @param string $customerAddress Customer's full address. Required for compliance in certain jurisdictions and high-value transactions.
      * @param string $customerCountry Customer's country of residence. Used for compliance and tax reporting.
@@ -195,15 +199,16 @@ final class PaymentIntentsService implements PaymentIntentsContract
      * @param string $customerProvince Customer's state or province. Required for US and Canadian customers.
      * @param string $customerProvinceISO Customer's state or province ISO code. Used for automated tax calculations.
      * @param string $destinationAddress The wallet address where converted funds will be sent. Supports Ethereum (0x...) and Solana address formats.
-     * @param 'usdc'|'eurc'|StableCoinCurrency $destinationCurrency The stablecoin currency to convert FROM. This is the currency the customer will pay with.
+     * @param StableCoinCurrency|value-of<StableCoinCurrency> $destinationCurrency The stablecoin currency to convert FROM. This is the currency the customer will pay with.
      * @param string $phoneNumber Customer's phone number with country code. Used for SMS notifications and verification.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createStable(
-        string|BridgePaymentRail $destinationNetwork,
-        string|StableCoinCurrency $sourceCurrency,
-        string|BridgePaymentRail $sourceNetwork,
+        BridgePaymentRail|string $destinationNetwork,
+        StableCoinCurrency|string $sourceCurrency,
+        BridgePaymentRail|string $sourceNetwork,
         ?string $amount = null,
         ?string $customerAddress = null,
         ?string $customerCountry = null,
@@ -214,9 +219,9 @@ final class PaymentIntentsService implements PaymentIntentsContract
         ?string $customerProvince = null,
         ?string $customerProvinceISO = null,
         ?string $destinationAddress = null,
-        string|StableCoinCurrency|null $destinationCurrency = null,
+        StableCoinCurrency|string|null $destinationCurrency = null,
         ?string $phoneNumber = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
         $params = Util::removeNulls(
             [

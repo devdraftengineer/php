@@ -16,6 +16,9 @@ use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams\DestinationPa
 use Devdraft\V0\Transfers\TransferCreateExternalStablecoinTransferParams;
 use Devdraft\V0\Transfers\TransferCreateStablecoinConversionParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class TransfersRawService implements TransfersRawContract
 {
     // @phpstan-ignore-next-line
@@ -39,6 +42,7 @@ final class TransfersRawService implements TransfersRawContract
      *   sepaReference?: string,
      *   wireMessage?: string,
      * }|TransferCreateDirectBankParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -46,7 +50,7 @@ final class TransfersRawService implements TransfersRawContract
      */
     public function createDirectBank(
         array|TransferCreateDirectBankParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TransferCreateDirectBankParams::parseRequest(
             $params,
@@ -71,6 +75,7 @@ final class TransfersRawService implements TransfersRawContract
      * @param array{
      *   amount: float, network: string, stableCoinCurrency: string, walletID: string
      * }|TransferCreateDirectWalletParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -78,7 +83,7 @@ final class TransfersRawService implements TransfersRawContract
      */
     public function createDirectWallet(
         array|TransferCreateDirectWalletParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TransferCreateDirectWalletParams::parseRequest(
             $params,
@@ -102,7 +107,7 @@ final class TransfersRawService implements TransfersRawContract
      *
      * @param array{
      *   destinationCurrency: string,
-     *   destinationPaymentRail: 'ach'|'ach_push'|'ach_same_day'|'wire'|'sepa'|'swift'|'spei'|DestinationPaymentRail,
+     *   destinationPaymentRail: DestinationPaymentRail|value-of<DestinationPaymentRail>,
      *   externalAccountID: string,
      *   sourceCurrency: string,
      *   sourceWalletID: string,
@@ -114,6 +119,7 @@ final class TransfersRawService implements TransfersRawContract
      *   swiftReference?: string,
      *   wireMessage?: string,
      * }|TransferCreateExternalBankTransferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -121,7 +127,7 @@ final class TransfersRawService implements TransfersRawContract
      */
     public function createExternalBankTransfer(
         array|TransferCreateExternalBankTransferParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TransferCreateExternalBankTransferParams::parseRequest(
             $params,
@@ -151,6 +157,7 @@ final class TransfersRawService implements TransfersRawContract
      *   amount?: float,
      *   blockchainMemo?: string,
      * }|TransferCreateExternalStablecoinTransferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -158,7 +165,7 @@ final class TransfersRawService implements TransfersRawContract
      */
     public function createExternalStablecoinTransfer(
         array|TransferCreateExternalStablecoinTransferParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TransferCreateExternalStablecoinTransferParams::parseRequest(
             $params,
@@ -187,6 +194,7 @@ final class TransfersRawService implements TransfersRawContract
      *   sourceNetwork: string,
      *   walletID: string,
      * }|TransferCreateStablecoinConversionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -194,7 +202,7 @@ final class TransfersRawService implements TransfersRawContract
      */
     public function createStablecoinConversion(
         array|TransferCreateStablecoinConversionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TransferCreateStablecoinConversionParams::parseRequest(
             $params,
