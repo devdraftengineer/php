@@ -15,6 +15,9 @@ use Devdraft\V0\PaymentIntents\PaymentIntentCreateBankParams\SourceCurrency;
 use Devdraft\V0\PaymentIntents\PaymentIntentCreateStableParams;
 use Devdraft\V0\PaymentIntents\StableCoinCurrency;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class PaymentIntentsRawService implements PaymentIntentsRawContract
 {
     // @phpstan-ignore-next-line
@@ -73,9 +76,9 @@ final class PaymentIntentsRawService implements PaymentIntentsRawContract
      * Include an `idempotency-key` header with a unique UUID v4 to prevent duplicate payments. Subsequent requests with the same key will return the original response.
      *
      * @param array{
-     *   destinationCurrency: 'usdc'|'eurc'|StableCoinCurrency,
+     *   destinationCurrency: StableCoinCurrency|value-of<StableCoinCurrency>,
      *   destinationNetwork: value-of<BridgePaymentRail>,
-     *   sourceCurrency: 'usd'|'eur'|'mxn'|SourceCurrency,
+     *   sourceCurrency: SourceCurrency|value-of<SourceCurrency>,
      *   sourcePaymentRail: value-of<BridgePaymentRail>,
      *   achReference?: string,
      *   amount?: string,
@@ -92,6 +95,7 @@ final class PaymentIntentsRawService implements PaymentIntentsRawContract
      *   sepaReference?: string,
      *   wireMessage?: string,
      * }|PaymentIntentCreateBankParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -99,7 +103,7 @@ final class PaymentIntentsRawService implements PaymentIntentsRawContract
      */
     public function createBank(
         array|PaymentIntentCreateBankParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PaymentIntentCreateBankParams::parseRequest(
             $params,
@@ -152,7 +156,7 @@ final class PaymentIntentsRawService implements PaymentIntentsRawContract
      *
      * @param array{
      *   destinationNetwork: value-of<BridgePaymentRail>,
-     *   sourceCurrency: 'usdc'|'eurc'|StableCoinCurrency,
+     *   sourceCurrency: StableCoinCurrency|value-of<StableCoinCurrency>,
      *   sourceNetwork: value-of<BridgePaymentRail>,
      *   amount?: string,
      *   customerAddress?: string,
@@ -164,9 +168,10 @@ final class PaymentIntentsRawService implements PaymentIntentsRawContract
      *   customerProvince?: string,
      *   customerProvinceISO?: string,
      *   destinationAddress?: string,
-     *   destinationCurrency?: 'usdc'|'eurc'|StableCoinCurrency,
+     *   destinationCurrency?: StableCoinCurrency|value-of<StableCoinCurrency>,
      *   phoneNumber?: string,
      * }|PaymentIntentCreateStableParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -174,7 +179,7 @@ final class PaymentIntentsRawService implements PaymentIntentsRawContract
      */
     public function createStable(
         array|PaymentIntentCreateStableParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PaymentIntentCreateStableParams::parseRequest(
             $params,

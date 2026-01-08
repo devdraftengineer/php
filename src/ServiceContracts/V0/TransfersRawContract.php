@@ -13,12 +13,16 @@ use Devdraft\V0\Transfers\TransferCreateExternalBankTransferParams;
 use Devdraft\V0\Transfers\TransferCreateExternalStablecoinTransferParams;
 use Devdraft\V0\Transfers\TransferCreateStablecoinConversionParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 interface TransfersRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|TransferCreateDirectBankParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -26,13 +30,14 @@ interface TransfersRawContract
      */
     public function createDirectBank(
         array|TransferCreateDirectBankParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TransferCreateDirectWalletParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -40,13 +45,14 @@ interface TransfersRawContract
      */
     public function createDirectWallet(
         array|TransferCreateDirectWalletParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TransferCreateExternalBankTransferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -54,13 +60,14 @@ interface TransfersRawContract
      */
     public function createExternalBankTransfer(
         array|TransferCreateExternalBankTransferParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TransferCreateExternalStablecoinTransferParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -68,13 +75,14 @@ interface TransfersRawContract
      */
     public function createExternalStablecoinTransfer(
         array|TransferCreateExternalStablecoinTransferParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|TransferCreateStablecoinConversionParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
@@ -82,6 +90,6 @@ interface TransfersRawContract
      */
     public function createStablecoinConversion(
         array|TransferCreateStablecoinConversionParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

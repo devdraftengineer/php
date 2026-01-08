@@ -12,6 +12,9 @@ use Devdraft\ServiceContracts\V0\ExchangeRateRawContract;
 use Devdraft\V0\ExchangeRate\ExchangeRateGetExchangeRateParams;
 use Devdraft\V0\ExchangeRate\ExchangeRateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class ExchangeRateRawService implements ExchangeRateRawContract
 {
     // @phpstan-ignore-next-line
@@ -43,12 +46,14 @@ final class ExchangeRateRawService implements ExchangeRateRawContract
      *
      * The rates are updated in real-time and reflect current market conditions.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<ExchangeRateResponse>
      *
      * @throws APIException
      */
     public function getEurToUsd(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -87,6 +92,7 @@ final class ExchangeRateRawService implements ExchangeRateRawContract
      * All rates are provided with full market context including mid-market, buy, and sell rates.
      *
      * @param array{from: string, to: string}|ExchangeRateGetExchangeRateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ExchangeRateResponse>
      *
@@ -94,7 +100,7 @@ final class ExchangeRateRawService implements ExchangeRateRawContract
      */
     public function getExchangeRate(
         array|ExchangeRateGetExchangeRateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = ExchangeRateGetExchangeRateParams::parseRequest(
             $params,
@@ -134,12 +140,14 @@ final class ExchangeRateRawService implements ExchangeRateRawContract
      *
      * The rates are updated in real-time and reflect current market conditions.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<ExchangeRateResponse>
      *
      * @throws APIException
      */
     public function getUsdToEur(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

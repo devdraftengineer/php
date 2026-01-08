@@ -12,6 +12,9 @@ use Devdraft\ServiceContracts\V0\TestPaymentContract;
 use Devdraft\V0\TestPayment\PaymentResponse;
 use Devdraft\V0\TestPayment\TestPaymentRefundResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class TestPaymentService implements TestPaymentContract
 {
     /**
@@ -33,12 +36,13 @@ final class TestPaymentService implements TestPaymentContract
      * Get payment details by ID
      *
      * @param string $id Payment ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PaymentResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
@@ -107,6 +111,7 @@ final class TestPaymentService implements TestPaymentContract
      * @param string $currency The currency code
      * @param string $description Description of the payment
      * @param string $customerID Customer reference ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
@@ -115,7 +120,7 @@ final class TestPaymentService implements TestPaymentContract
         string $currency,
         string $description,
         ?string $customerID = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PaymentResponse {
         $params = Util::removeNulls(
             [
@@ -179,12 +184,13 @@ final class TestPaymentService implements TestPaymentContract
      * - Keys expire after 24 hours by default
      *
      * @param string $id Payment ID to refund
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function refund(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TestPaymentRefundResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->refund($id, requestOptions: $requestOptions);

@@ -39,7 +39,7 @@ use Devdraft\V0\PaymentLinks\PaymentLinkCreateParams\PaymentLinkProduct;
  *   limitPayments?: bool|null,
  *   maxPayments?: float|null,
  *   paymentForID?: string|null,
- *   paymentLinkProducts?: list<PaymentLinkProductShape>|null,
+ *   paymentLinkProducts?: list<PaymentLinkProduct|PaymentLinkProductShape>|null,
  *   taxID?: string|null,
  * }
  */
@@ -218,7 +218,7 @@ final class PaymentLinkCreateParams implements BaseModel
      *
      * @param LinkType|value-of<LinkType> $linkType
      * @param Currency|value-of<Currency> $currency
-     * @param list<PaymentLinkProductShape>|null $paymentLinkProducts
+     * @param list<PaymentLinkProduct|PaymentLinkProductShape>|null $paymentLinkProducts
      */
     public static function with(
         LinkType|string $linkType,
@@ -475,7 +475,7 @@ final class PaymentLinkCreateParams implements BaseModel
     /**
      * Array of products in the payment link.
      *
-     * @param list<PaymentLinkProductShape> $paymentLinkProducts
+     * @param list<PaymentLinkProduct|PaymentLinkProductShape> $paymentLinkProducts
      */
     public function withPaymentLinkProducts(array $paymentLinkProducts): self
     {

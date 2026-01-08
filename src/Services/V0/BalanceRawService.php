@@ -12,6 +12,9 @@ use Devdraft\ServiceContracts\V0\BalanceRawContract;
 use Devdraft\V0\Balance\AggregatedBalance;
 use Devdraft\V0\Balance\BalanceGetAllStablecoinBalancesResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class BalanceRawService implements BalanceRawContract
 {
     // @phpstan-ignore-next-line
@@ -41,12 +44,14 @@ final class BalanceRawService implements BalanceRawContract
      * The response includes separate aggregations for each currency plus a combined
      * USD value estimate, providing complete visibility into stablecoin holdings.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<BalanceGetAllStablecoinBalancesResponse>
      *
      * @throws APIException
      */
     public function getAllStablecoinBalances(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -77,12 +82,14 @@ final class BalanceRawService implements BalanceRawContract
      * The response includes both the aggregated total and detailed breakdown, enabling
      * comprehensive euro stablecoin balance management.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AggregatedBalance>
      *
      * @throws APIException
      */
     public function getEurc(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -113,12 +120,14 @@ final class BalanceRawService implements BalanceRawContract
      * The response includes both the aggregated total and detailed breakdown, allowing for
      * comprehensive balance tracking and wallet-specific analysis.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<AggregatedBalance>
      *
      * @throws APIException
      */
     public function getUsdc(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

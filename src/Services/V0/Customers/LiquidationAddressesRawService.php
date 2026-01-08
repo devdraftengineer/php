@@ -18,6 +18,9 @@ use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressResponse;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressRetrieveParams;
 use Devdraft\V0\PaymentIntents\BridgePaymentRail;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class LiquidationAddressesRawService implements LiquidationAddressesRawContract
 {
     // @phpstan-ignore-next-line
@@ -33,13 +36,13 @@ final class LiquidationAddressesRawService implements LiquidationAddressesRawCon
      * @param array{
      *   address: string,
      *   chain: value-of<Chain>,
-     *   currency: 'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|Currency,
+     *   currency: Currency|value-of<Currency>,
      *   bridgeWalletID?: string,
      *   customDeveloperFeePercent?: string,
      *   destinationACHReference?: string,
      *   destinationAddress?: string,
      *   destinationBlockchainMemo?: string,
-     *   destinationCurrency?: 'usd'|'eur'|'mxn'|'usdc'|'eurc'|'dai'|'pyusd'|'usdt'|DestinationCurrency,
+     *   destinationCurrency?: DestinationCurrency|value-of<DestinationCurrency>,
      *   destinationPaymentRail?: value-of<BridgePaymentRail>,
      *   destinationSepaReference?: string,
      *   destinationWireMessage?: string,
@@ -47,6 +50,7 @@ final class LiquidationAddressesRawService implements LiquidationAddressesRawCon
      *   prefundedAccountID?: string,
      *   returnAddress?: string,
      * }|LiquidationAddressCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LiquidationAddressResponse>
      *
@@ -55,7 +59,7 @@ final class LiquidationAddressesRawService implements LiquidationAddressesRawCon
     public function create(
         string $customerID,
         array|LiquidationAddressCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = LiquidationAddressCreateParams::parseRequest(
             $params,
@@ -79,6 +83,7 @@ final class LiquidationAddressesRawService implements LiquidationAddressesRawCon
      *
      * @param string $liquidationAddressID Unique identifier for the liquidation address
      * @param array{customerID: string}|LiquidationAddressRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LiquidationAddressResponse>
      *
@@ -87,7 +92,7 @@ final class LiquidationAddressesRawService implements LiquidationAddressesRawCon
     public function retrieve(
         string $liquidationAddressID,
         array|LiquidationAddressRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = LiquidationAddressRetrieveParams::parseRequest(
             $params,
@@ -115,6 +120,7 @@ final class LiquidationAddressesRawService implements LiquidationAddressesRawCon
      * Retrieve all liquidation addresses associated with a specific customer.
      *
      * @param string $customerID Unique identifier for the customer
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<LiquidationAddressResponse>>
      *
@@ -122,7 +128,7 @@ final class LiquidationAddressesRawService implements LiquidationAddressesRawCon
      */
     public function list(
         string $customerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

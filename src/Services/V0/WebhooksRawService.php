@@ -15,6 +15,9 @@ use Devdraft\V0\Webhooks\WebhookListParams;
 use Devdraft\V0\Webhooks\WebhookResponse;
 use Devdraft\V0\Webhooks\WebhookUpdateParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class WebhooksRawService implements WebhooksRawContract
 {
     // @phpstan-ignore-next-line
@@ -35,6 +38,7 @@ final class WebhooksRawService implements WebhooksRawContract
      *   url: string,
      *   signingSecret?: string,
      * }|WebhookCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookResponse>
      *
@@ -42,7 +46,7 @@ final class WebhooksRawService implements WebhooksRawContract
      */
     public function create(
         array|WebhookCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WebhookCreateParams::parseRequest(
             $params,
@@ -65,6 +69,7 @@ final class WebhooksRawService implements WebhooksRawContract
      * Retrieves details for a specific webhook. Requires webhook:read scope.
      *
      * @param string $id Webhook unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookResponse>
      *
@@ -72,7 +77,7 @@ final class WebhooksRawService implements WebhooksRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -96,6 +101,7 @@ final class WebhooksRawService implements WebhooksRawContract
      *   signingSecret?: string,
      *   url?: string,
      * }|WebhookUpdateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookResponse>
      *
@@ -104,7 +110,7 @@ final class WebhooksRawService implements WebhooksRawContract
     public function update(
         string $id,
         array|WebhookUpdateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WebhookUpdateParams::parseRequest(
             $params,
@@ -127,6 +133,7 @@ final class WebhooksRawService implements WebhooksRawContract
      * Retrieves a list of all webhooks for your application. Requires webhook:read scope.
      *
      * @param array{skip?: float, take?: float}|WebhookListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<WebhookResponse>>
      *
@@ -134,7 +141,7 @@ final class WebhooksRawService implements WebhooksRawContract
      */
     public function list(
         array|WebhookListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WebhookListParams::parseRequest(
             $params,
@@ -157,6 +164,7 @@ final class WebhooksRawService implements WebhooksRawContract
      * Deletes a webhook configuration. Requires webhook:delete scope.
      *
      * @param string $id Webhook unique identifier (UUID)
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookResponse>
      *
@@ -164,7 +172,7 @@ final class WebhooksRawService implements WebhooksRawContract
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

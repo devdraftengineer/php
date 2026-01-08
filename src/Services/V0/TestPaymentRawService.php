@@ -13,6 +13,9 @@ use Devdraft\V0\TestPayment\PaymentResponse;
 use Devdraft\V0\TestPayment\TestPaymentProcessParams;
 use Devdraft\V0\TestPayment\TestPaymentRefundResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class TestPaymentRawService implements TestPaymentRawContract
 {
     // @phpstan-ignore-next-line
@@ -27,6 +30,7 @@ final class TestPaymentRawService implements TestPaymentRawContract
      * Get payment details by ID
      *
      * @param string $id Payment ID
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PaymentResponse>
      *
@@ -34,7 +38,7 @@ final class TestPaymentRawService implements TestPaymentRawContract
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -105,6 +109,7 @@ final class TestPaymentRawService implements TestPaymentRawContract
      * @param array{
      *   amount: float, currency: string, description: string, customerID?: string
      * }|TestPaymentProcessParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PaymentResponse>
      *
@@ -112,7 +117,7 @@ final class TestPaymentRawService implements TestPaymentRawContract
      */
     public function process(
         array|TestPaymentProcessParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = TestPaymentProcessParams::parseRequest(
             $params,
@@ -176,6 +181,7 @@ final class TestPaymentRawService implements TestPaymentRawContract
      * - Keys expire after 24 hours by default
      *
      * @param string $id Payment ID to refund
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TestPaymentRefundResponse>
      *
@@ -183,7 +189,7 @@ final class TestPaymentRawService implements TestPaymentRawContract
      */
     public function refund(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

@@ -11,6 +11,9 @@ use Devdraft\RequestOptions;
 use Devdraft\ServiceContracts\V0\ExchangeRateContract;
 use Devdraft\V0\ExchangeRate\ExchangeRateResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class ExchangeRateService implements ExchangeRateContract
 {
     /**
@@ -49,10 +52,12 @@ final class ExchangeRateService implements ExchangeRateContract
      *
      * The rates are updated in real-time and reflect current market conditions.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getEurToUsd(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ExchangeRateResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getEurToUsd(requestOptions: $requestOptions);
@@ -89,13 +94,14 @@ final class ExchangeRateService implements ExchangeRateContract
      *
      * @param string $from Source currency code (e.g., usd)
      * @param string $to Target currency code (e.g., eur)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getExchangeRate(
         string $from,
         string $to,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ExchangeRateResponse {
         $params = Util::removeNulls(['from' => $from, 'to' => $to]);
 
@@ -128,10 +134,12 @@ final class ExchangeRateService implements ExchangeRateContract
      *
      * The rates are updated in real-time and reflect current market conditions.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getUsdToEur(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ExchangeRateResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getUsdToEur(requestOptions: $requestOptions);

@@ -11,8 +11,8 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 
 /**
- * @phpstan-import-type NormalizedRequest from \Devdraft\Core\BaseClient
  * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ * @phpstan-import-type NormalizedRequest from \Devdraft\Core\BaseClient
  */
 class Client extends BaseClient
 {

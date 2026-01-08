@@ -11,6 +11,9 @@ use Devdraft\ServiceContracts\V0\BalanceContract;
 use Devdraft\V0\Balance\AggregatedBalance;
 use Devdraft\V0\Balance\BalanceGetAllStablecoinBalancesResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 final class BalanceService implements BalanceContract
 {
     /**
@@ -47,10 +50,12 @@ final class BalanceService implements BalanceContract
      * The response includes separate aggregations for each currency plus a combined
      * USD value estimate, providing complete visibility into stablecoin holdings.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getAllStablecoinBalances(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BalanceGetAllStablecoinBalancesResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getAllStablecoinBalances(requestOptions: $requestOptions);
@@ -78,10 +83,12 @@ final class BalanceService implements BalanceContract
      * The response includes both the aggregated total and detailed breakdown, enabling
      * comprehensive euro stablecoin balance management.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getEurc(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AggregatedBalance {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getEurc(requestOptions: $requestOptions);
@@ -109,10 +116,12 @@ final class BalanceService implements BalanceContract
      * The response includes both the aggregated total and detailed breakdown, allowing for
      * comprehensive balance tracking and wallet-specific analysis.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getUsdc(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AggregatedBalance {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getUsdc(requestOptions: $requestOptions);

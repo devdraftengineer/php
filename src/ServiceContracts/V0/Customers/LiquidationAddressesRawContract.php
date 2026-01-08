@@ -11,6 +11,9 @@ use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressCreateParams;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressResponse;
 use Devdraft\V0\Customers\LiquidationAddresses\LiquidationAddressRetrieveParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Devdraft\RequestOptions
+ */
 interface LiquidationAddressesRawContract
 {
     /**
@@ -18,6 +21,7 @@ interface LiquidationAddressesRawContract
      *
      * @param string $customerID Unique identifier for the customer
      * @param array<string,mixed>|LiquidationAddressCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LiquidationAddressResponse>
      *
@@ -26,7 +30,7 @@ interface LiquidationAddressesRawContract
     public function create(
         string $customerID,
         array|LiquidationAddressCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
@@ -34,6 +38,7 @@ interface LiquidationAddressesRawContract
      *
      * @param string $liquidationAddressID Unique identifier for the liquidation address
      * @param array<string,mixed>|LiquidationAddressRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<LiquidationAddressResponse>
      *
@@ -42,13 +47,14 @@ interface LiquidationAddressesRawContract
     public function retrieve(
         string $liquidationAddressID,
         array|LiquidationAddressRetrieveParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param string $customerID Unique identifier for the customer
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<LiquidationAddressResponse>>
      *
@@ -56,6 +62,6 @@ interface LiquidationAddressesRawContract
      */
     public function list(
         string $customerID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }
